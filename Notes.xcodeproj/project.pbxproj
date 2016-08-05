@@ -11,6 +11,8 @@
 		6518751C1D53000F006C8D82 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6518751A1D53000F006C8D82 /* Main.storyboard */; };
 		6518751E1D53000F006C8D82 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6518751D1D53000F006C8D82 /* Assets.xcassets */; };
 		651875211D53000F006C8D82 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6518751F1D53000F006C8D82 /* LaunchScreen.storyboard */; };
+		651875291D53A354006C8D82 /* NotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651875281D53A354006C8D82 /* NotesTableViewController.swift */; };
+		65610CC81D54667A003E0882 /* NotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65610CC71D54667A003E0882 /* NotesTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		6518751D1D53000F006C8D82 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		651875201D53000F006C8D82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		651875221D53000F006C8D82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		651875281D53A354006C8D82 /* NotesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
+		65610CC71D54667A003E0882 /* NotesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,8 @@
 			children = (
 				651875161D53000F006C8D82 /* AppDelegate.swift */,
 				6518751A1D53000F006C8D82 /* Main.storyboard */,
+				65610CC71D54667A003E0882 /* NotesTableViewCell.swift */,
+				651875281D53A354006C8D82 /* NotesTableViewController.swift */,
 				6518751D1D53000F006C8D82 /* Assets.xcassets */,
 				6518751F1D53000F006C8D82 /* LaunchScreen.storyboard */,
 				651875221D53000F006C8D82 /* Info.plist */,
@@ -71,6 +77,7 @@
 				6518750F1D53000F006C8D82 /* Sources */,
 				651875101D53000F006C8D82 /* Frameworks */,
 				651875111D53000F006C8D82 /* Resources */,
+				65610CC61D5452DC003E0882 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -127,12 +134,30 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		65610CC61D5452DC003E0882 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "TAGS=\"TODO:|FIXME:\"\nERRORTAG=\"ERROR:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" -or -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$|($ERRORTAG).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\" | perl -p -e \"s/($ERRORTAG)/ error: \\$1/\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6518750F1D53000F006C8D82 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				651875171D53000F006C8D82 /* AppDelegate.swift in Sources */,
+				651875291D53A354006C8D82 /* NotesTableViewController.swift in Sources */,
+				65610CC81D54667A003E0882 /* NotesTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +307,7 @@
 				651875271D53000F006C8D82 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
