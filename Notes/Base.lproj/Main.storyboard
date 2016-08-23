@@ -96,13 +96,19 @@
                                 <action selector="cancelButtonDidTouch:" destination="WhK-6A-3pp" id="z62-sN-AAU"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="DDE-H7-ADX"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="DDE-H7-ADX">
+                            <connections>
+                                <segue destination="X5L-cV-xLb" kind="unwind" unwindAction="unwindToNotesTableViewController:" id="atB-lU-4FN"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="saveButton" destination="DDE-H7-ADX" id="GNZ-kP-i2R"/>
                         <outlet property="textView" destination="35N-cw-Li1" id="WS3-bq-2hA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Gl-83-vlQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="X5L-cV-xLb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3032" y="530"/>
         </scene>

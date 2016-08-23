@@ -17,6 +17,16 @@ class NotesTableViewController: UITableViewController {
     
     var notes: [Notes]!
     
+    // MARK: - IBAction Methods
+    
+    @IBAction func unwindToNotesTableViewController(sender: UIStoryboardSegue) {
+        if let validNotesViewController = sender.sourceViewController as? NotesViewController, note = validNotesViewController.note {
+            let newIndexPath = NSIndexPath(forRow: self.notes.count, inSection: 0)
+            self.notes.append(note)
+            self.tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: UITableViewRowAnimation.Bottom)
+        }
+    }
+    
     // MARK: - UIViewController Methods
 
     override func viewDidLoad() {
@@ -70,9 +80,7 @@ class NotesTableViewController: UITableViewController {
             // Delete the row from the data source
             self.notes.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }   
     }
 
     /*
