@@ -4,6 +4,11 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="AvenirNext.ttc">
+            <string>AvenirNext-Regular</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Notes Table View Controller-->
         <scene sceneID="fxW-kW-zTM">
@@ -50,6 +55,38 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HVa-14-kR3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1505" y="530"/>
+        </scene>
+        <!--Notes View Controller-->
+        <scene sceneID="WZk-PW-ccX">
+            <objects>
+                <viewController id="WhK-6A-3pp" customClass="NotesViewController" customModule="Notes" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HQ1-IH-oSk"/>
+                        <viewControllerLayoutGuide type="bottom" id="KjO-aP-uLR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="i1l-oM-3dD">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="35N-cw-Li1">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KjO-aP-uLR" firstAttribute="top" secondItem="35N-cw-Li1" secondAttribute="bottom" id="A70-EW-bHQ"/>
+                            <constraint firstItem="35N-cw-Li1" firstAttribute="leading" secondItem="i1l-oM-3dD" secondAttribute="leading" id="Ute-A7-654"/>
+                            <constraint firstItem="35N-cw-Li1" firstAttribute="top" secondItem="HQ1-IH-oSk" secondAttribute="bottom" id="j3p-Qo-Mcw"/>
+                            <constraint firstAttribute="trailing" secondItem="35N-cw-Li1" secondAttribute="trailing" id="yWL-4Q-sWJ"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Gl-83-vlQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2220" y="530"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dEf-0D-gLa">
