@@ -15,40 +15,52 @@ class NotesTableViewController: UITableViewController {
     
     // MARK: - Stored Properties
     
-    
+    var notes: [Notes]!
     
     // MARK: - UIViewController Methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        self.notes = [Notes]()
+        
+        self.loadSampleNotes()
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+    
+    // MARK: - Helper Methods
+    
+    func loadSampleNotes() {
+        guard let firstNote = Notes(entry: "I am the top most note in the app and I am very happy to be where I am right now.") else { return }
+        guard let secondNote = Notes(entry: "I may be the second note here but I am fighting my way up to be the first note in the app.") else { return }
+        guard let thirdNote = Notes(entry: "I am very grateful to be in the third position. One should be content with what they achieve.") else { return }
+        if var validNotes = self.notes {
+            validNotes += [firstNote, secondNote, thirdNote]
+            self.notes = validNotes
+        }
+    }
 
-    // MARK: - Table view data source
+    // MARK: - UITableViewDataSource Methods
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return self.notes.count
     }
 
-    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("NotesTableViewCell", forIndexPath: indexPath) as! NotesTableViewCell
 
-        // Configure the cell...
+        let note = self.notes[indexPath.row]
+        
+        cell.noteLabel.text = note.entry
 
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.

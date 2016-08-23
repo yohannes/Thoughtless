@@ -12,15 +12,15 @@ class Notes {
     
     // MARK: - Stored Properties
     
-    var note: String
+    var entry: String
     
     // MARK: - Initialization
     
-    init?(entry note: String) {
-        if note.isEmpty {
+    init?(entry input: String) {
+        if input.isEmpty {
             return nil
         }
         
-        self.note = note
+        self.entry = input
     }
 }
