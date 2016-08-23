@@ -10,7 +10,7 @@
         </mutableArray>
     </customFonts>
     <scenes>
-        <!--Notes Table View Controller-->
+        <!--My Notes-->
         <scene sceneID="fxW-kW-zTM">
             <objects>
                 <tableViewController id="HJf-zV-ObG" customClass="NotesTableViewController" customModule="Notes" customModuleProvider="target" sceneMemberID="viewController">
@@ -42,7 +42,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="noteLabel" destination="o4p-dn-tzR" id="gnR-yf-Hef"/>
-                                    <segue destination="WhK-6A-3pp" kind="show" id="2YD-uq-RH3"/>
+                                    <segue destination="9Kv-hq-KlY" kind="show" identifier="segueToNotesViewControllerFromCell" id="2YD-uq-RH3"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -51,13 +51,19 @@
                             <outlet property="delegate" destination="HJf-zV-ObG" id="jji-fM-xGb"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="EDG-hU-hLA"/>
+                    <navigationItem key="navigationItem" title="My Notes" id="EDG-hU-hLA">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Juj-uJ-AjX">
+                            <connections>
+                                <segue destination="9Kv-hq-KlY" kind="presentation" identifier="segueToNotesViewControllerFromAddButton" id="RfD-6n-6wB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HVa-14-kR3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1505" y="530"/>
+            <point key="canvasLocation" x="1454" y="530"/>
         </scene>
-        <!--Notes View Controller-->
+        <!--New Note-->
         <scene sceneID="WZk-PW-ccX">
             <objects>
                 <viewController id="WhK-6A-3pp" customClass="NotesViewController" customModule="Notes" customModuleProvider="target" sceneMemberID="viewController">
@@ -69,8 +75,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="35N-cw-Li1">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="35N-cw-Li1">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -84,10 +90,21 @@
                             <constraint firstAttribute="trailing" secondItem="35N-cw-Li1" secondAttribute="trailing" id="yWL-4Q-sWJ"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="New Note" id="ZeZ-GY-Msr">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="2IJ-D7-niU">
+                            <connections>
+                                <action selector="cancelButtonDidTouch:" destination="WhK-6A-3pp" id="z62-sN-AAU"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="DDE-H7-ADX"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="textView" destination="35N-cw-Li1" id="WS3-bq-2hA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Gl-83-vlQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2220" y="530"/>
+            <point key="canvasLocation" x="3032" y="530"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dEf-0D-gLa">
@@ -107,5 +124,26 @@
             </objects>
             <point key="canvasLocation" x="693" y="530"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="FFp-8Z-fYV">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9Kv-hq-KlY" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hd1-TF-CDY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="WhK-6A-3pp" kind="relationship" relationship="rootViewController" id="V5E-qJ-1hT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9G7-yg-R1h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2220" y="530"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="RfD-6n-6wB"/>
+    </inferredMetricsTieBreakers>
 </document>

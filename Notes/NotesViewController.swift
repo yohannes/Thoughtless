@@ -9,18 +9,29 @@
 import UIKit
 
 class NotesViewController: UIViewController {
+    
+    // MARK: - IBOutlet Properties
+    
+    @IBOutlet weak var textView: UITextView!
+    
+    // MARK: - IBAction Properties
+    
+    @IBAction func cancelButtonDidTouch(sender: UIBarButtonItem) {
+        self.textView.resignFirstResponder()
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func saveButtonDidTouch(sender: UIBarButtonItem) {
+        // TODO: impelement protocol to save whatever is in the textfield to the table view before dismissing view controller
+    }
+    
+    // MARK: - UIViewController Methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.textView.becomeFirstResponder()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 
     /*
     // MARK: - Navigation

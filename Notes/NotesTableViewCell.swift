@@ -10,7 +10,7 @@ import UIKit
 
 class NotesTableViewCell: UITableViewCell {
     
-    // MARK: IBOutlet Properties
+    // MARK: - IBOutlet Properties
     
     @IBOutlet weak var noteLabel: UILabel!
 
