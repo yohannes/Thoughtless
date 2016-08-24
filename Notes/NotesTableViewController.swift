@@ -6,7 +6,7 @@
 //  Copyright © 2016 Yohannes Wijaya. All rights reserved.
 //
 
-// TODO: Add Markdown Support
+// TODO: 1) Add Markdown Support. 2) delete by swiping. 4) launching the app will immediately present a new note for user to type in. 5) fix the text view height in notes view controller
 
 
 import UIKit
@@ -80,7 +80,7 @@ class NotesTableViewController: UITableViewController {
             // Delete the row from the data source
             self.notes.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        }   
+        }
     }
 
     /*
@@ -98,14 +98,18 @@ class NotesTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "segueToNotesViewControllerFromCell" {
+            guard let validNotesViewController = segue.destinationViewController as? NotesViewController,
+                selectedNoteCell = sender as? NotesTableViewCell,
+                selectedIndexPath = self.tableView.indexPathForCell(selectedNoteCell) else  { return }
+            let selectedNote = self.notes[selectedIndexPath.row]
+            validNotesViewController.note = selectedNote
+        }
+        else if segue.identifier == "segueToNotesViewControllerFromAddButton" {
+            print("adding new note")
+        }
     }
-    */
-
 }

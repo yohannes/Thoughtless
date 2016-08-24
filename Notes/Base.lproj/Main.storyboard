@@ -42,7 +42,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="noteLabel" destination="o4p-dn-tzR" id="gnR-yf-Hef"/>
-                                    <segue destination="9Kv-hq-KlY" kind="show" identifier="segueToNotesViewControllerFromCell" id="2YD-uq-RH3"/>
+                                    <segue destination="WhK-6A-3pp" kind="show" identifier="segueToNotesViewControllerFromCell" id="crw-Lv-jcW"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -146,10 +146,10 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9G7-yg-R1h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2220" y="530"/>
+            <point key="canvasLocation" x="2218" y="979"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="RfD-6n-6wB"/>
+        <segue reference="crw-Lv-jcW"/>
     </inferredMetricsTieBreakers>
 </document>

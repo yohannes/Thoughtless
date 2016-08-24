@@ -23,7 +23,14 @@ class NotesViewController: UIViewController {
     
     @IBAction func cancelButtonDidTouch(sender: UIBarButtonItem) {
         self.textView.resignFirstResponder()
-        self.dismissViewControllerAnimated(true, completion: nil)
+        
+        let isPresentingFromAddButton = self.presentingViewController is UINavigationController
+        if isPresentingFromAddButton {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        else {
+            self.navigationController?.popViewControllerAnimated(true)
+        }
     }
     
     // MARK: - UIViewController Methods
@@ -31,6 +38,7 @@ class NotesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.textView.text = self.note?.entry
         self.textView.becomeFirstResponder()
     }
     
