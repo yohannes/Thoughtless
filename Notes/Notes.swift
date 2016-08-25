@@ -8,11 +8,18 @@
 
 import Foundation
 
-class Notes {
+class Notes: NSObject, NSCoding {
     
     // MARK: - Stored Properties
     
+    struct PropertyKey {
+        static let entryKey = "entry"
+    }
+    
     var entry: String
+    
+    static let DocumentsDirectory = NSFileManager().URLsForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).first!
+    static let archiveURL = Notes.DocumentsDirectory.URLByAppendingPathComponent("notes")
     
     // MARK: - Initialization
     
@@ -22,5 +29,18 @@ class Notes {
         }
         
         self.entry = input
+        
+        super.init()
+    }
+    
+    // MARK: - NSCoding Methods
+    
+    required convenience init?(coder aDecoder: NSCoder) {
+        let entry = aDecoder.decodeObjectForKey(PropertyKey.entryKey) as! String
+        self.init(entry: entry)
+    }
+    
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(self.entry, forKey: PropertyKey.entryKey)
     }
 }

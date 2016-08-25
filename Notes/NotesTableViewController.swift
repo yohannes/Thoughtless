@@ -6,7 +6,7 @@
 //  Copyright © 2016 Yohannes Wijaya. All rights reserved.
 //
 
-// TODO: 1) Add Markdown Support. 2) delete by swiping. 4) launching the app will immediately present a new note for user to type in. 5) fix the text view height in notes view controller. 6) change font in text field to avenir next. 
+// TODO: 1) Add Markdown Support. 4) launching the app will immediately present a new note for user to type in. 5) fix the text view height in notes view controller. 6) change font in text field to avenir next.
 
 
 import UIKit
@@ -15,7 +15,7 @@ class NotesTableViewController: UITableViewController {
     
     // MARK: - Stored Properties
     
-    var notes: [Notes]!
+    var notes = [Notes]()
     
     // MARK: - IBAction Methods
     
@@ -30,18 +30,7 @@ class NotesTableViewController: UITableViewController {
             self.notes.append(validNote)
             self.tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: UITableViewRowAnimation.Bottom)
         }
-    }
-    
-    // MARK: - UIViewController Methods
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        self.notes = [Notes]()
-        
-        self.loadSampleNotes()
-
-        self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        self.saveNotes()
     }
     
     // MARK: - Helper Methods
@@ -50,11 +39,35 @@ class NotesTableViewController: UITableViewController {
         guard let firstNote = Notes(entry: "I am the top most note in the app and I am very happy to be where I am right now.") else { return }
         guard let secondNote = Notes(entry: "I may be the second note here but I am fighting my way up to be the first note in the app.") else { return }
         guard let thirdNote = Notes(entry: "I am very grateful to be in the third position. One should be content with what they achieve.") else { return }
-        if var validNotes = self.notes {
-            validNotes += [firstNote, secondNote, thirdNote]
-            self.notes = validNotes
-        }
+        self.notes += [firstNote, secondNote, thirdNote]
     }
+    
+    // MARK: - NSCoding Methods
+    
+    func saveNotes() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(self.notes, toFile: Notes.archiveURL.path!)
+        if !isSuccessfulSave { print("unable to save note...") }
+    }
+    
+    func loadNotes() -> [Notes]? {
+        return NSKeyedUnarchiver.unarchiveObjectWithFile(Notes.archiveURL.path!) as? [Notes]
+    }
+    
+    // MARK: - UIViewController Methods
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if let loadedNotes = self.loadNotes() {
+            self.notes = loadedNotes
+        }
+        else {
+            self.loadSampleNotes()
+        }
+        
+        self.navigationItem.leftBarButtonItem = self.editButtonItem()
+    }
+    
 
     // MARK: - UITableViewDataSource Methods
 
@@ -84,6 +97,7 @@ class NotesTableViewController: UITableViewController {
         if editingStyle == .Delete {
             // Delete the row from the data source
             self.notes.removeAtIndex(indexPath.row)
+            self.saveNotes()
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
     }
