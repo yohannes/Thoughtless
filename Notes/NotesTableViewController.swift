@@ -6,7 +6,7 @@
 //  Copyright © 2016 Yohannes Wijaya. All rights reserved.
 //
 
-// TODO: 1) Add Markdown Support. 4) launching the app will immediately present a new note for user to type in. 5) fix the text view height in notes view controller. 6) change font in text field to avenir next.
+// TODO: 1) Add Markdown Support. 4) launching the app will immediately present a new note for user to type in. 6) change font in text field to avenir next. 6) add icon. 
 
 
 import UIKit
