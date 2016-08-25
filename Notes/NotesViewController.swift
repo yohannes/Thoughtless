@@ -38,7 +38,10 @@ class NotesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.textView.text = self.note?.entry
+        if let validNote = self.note {
+            self.textView.text = validNote.entry
+        }
+        
         self.textView.becomeFirstResponder()
     }
     

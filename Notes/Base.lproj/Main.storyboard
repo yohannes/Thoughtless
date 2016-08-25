@@ -63,7 +63,7 @@
             </objects>
             <point key="canvasLocation" x="1454" y="530"/>
         </scene>
-        <!--New Note-->
+        <!--Notes View Controller-->
         <scene sceneID="WZk-PW-ccX">
             <objects>
                 <viewController id="WhK-6A-3pp" customClass="NotesViewController" customModule="Notes" customModuleProvider="target" sceneMemberID="viewController">
@@ -90,7 +90,7 @@
                             <constraint firstAttribute="trailing" secondItem="35N-cw-Li1" secondAttribute="trailing" id="yWL-4Q-sWJ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="New Note" id="ZeZ-GY-Msr">
+                    <navigationItem key="navigationItem" id="ZeZ-GY-Msr">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="2IJ-D7-niU">
                             <connections>
                                 <action selector="cancelButtonDidTouch:" destination="WhK-6A-3pp" id="z62-sN-AAU"/>

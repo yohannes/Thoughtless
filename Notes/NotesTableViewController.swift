@@ -6,7 +6,7 @@
 //  Copyright © 2016 Yohannes Wijaya. All rights reserved.
 //
 
-// TODO: 1) Add Markdown Support. 2) delete by swiping. 4) launching the app will immediately present a new note for user to type in. 5) fix the text view height in notes view controller
+// TODO: 1) Add Markdown Support. 2) delete by swiping. 4) launching the app will immediately present a new note for user to type in. 5) fix the text view height in notes view controller. 6) change font in text field to avenir next. 
 
 
 import UIKit
@@ -20,9 +20,14 @@ class NotesTableViewController: UITableViewController {
     // MARK: - IBAction Methods
     
     @IBAction func unwindToNotesTableViewController(sender: UIStoryboardSegue) {
-        if let validNotesViewController = sender.sourceViewController as? NotesViewController, note = validNotesViewController.note {
+        guard let validNotesViewController = sender.sourceViewController as? NotesViewController, validNote = validNotesViewController.note else { return }
+        if let selectedIndexPath = self.tableView.indexPathForSelectedRow {
+            self.notes[selectedIndexPath.row] = validNote
+            self.tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: UITableViewRowAnimation.None)
+        }
+        else {
             let newIndexPath = NSIndexPath(forRow: self.notes.count, inSection: 0)
-            self.notes.append(note)
+            self.notes.append(validNote)
             self.tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: UITableViewRowAnimation.Bottom)
         }
     }
