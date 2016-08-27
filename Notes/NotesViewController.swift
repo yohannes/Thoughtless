@@ -26,10 +26,10 @@ class NotesViewController: UIViewController {
         
         let isPresentingFromAddButton = self.presentingViewController is UINavigationController
         if isPresentingFromAddButton {
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
         else {
-            self.navigationController?.popViewControllerAnimated(true)
+            _ = self.navigationController?.popViewController(animated: true)
         }
     }
     
@@ -45,8 +45,8 @@ class NotesViewController: UIViewController {
         self.textView.becomeFirstResponder()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if sender === self.saveButton {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let validBarButtonItem = sender as? UIBarButtonItem, validBarButtonItem === self.saveButton {
             let entry = self.textView.text ?? ""
             self.note = Notes(entry: entry)
         }

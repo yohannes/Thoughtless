@@ -18,8 +18,8 @@ class Notes: NSObject, NSCoding {
     
     var entry: String
     
-    static let DocumentsDirectory = NSFileManager().URLsForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).first!
-    static let archiveURL = Notes.DocumentsDirectory.URLByAppendingPathComponent("notes")
+    static var DocumentsDirectory = FileManager.default.urls(for: FileManager.SearchPathDirectory.documentDirectory, in: FileManager.SearchPathDomainMask.userDomainMask).first!
+    static let archiveURL = Notes.DocumentsDirectory.appendingPathComponent("notes")
     
     // MARK: - Initialization
     
@@ -36,11 +36,11 @@ class Notes: NSObject, NSCoding {
     // MARK: - NSCoding Methods
     
     required convenience init?(coder aDecoder: NSCoder) {
-        let entry = aDecoder.decodeObjectForKey(PropertyKey.entryKey) as! String
+        let entry = aDecoder.decodeObject(forKey: PropertyKey.entryKey) as! String
         self.init(entry: entry)
     }
     
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.entry, forKey: PropertyKey.entryKey)
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.entry, forKey: PropertyKey.entryKey)
     }
 }

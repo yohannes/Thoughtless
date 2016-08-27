@@ -18,15 +18,15 @@ class NotesTableViewController: UITableViewController {
     // MARK: - IBAction Methods
     
     @IBAction func unwindToNotesTableViewController(sender: UIStoryboardSegue) {
-        guard let validNotesViewController = sender.sourceViewController as? NotesViewController, validNote = validNotesViewController.note else { return }
+        guard let validNotesViewController = sender.source as? NotesViewController, let validNote = validNotesViewController.note else { return }
         if let selectedIndexPath = self.tableView.indexPathForSelectedRow {
             self.notes[selectedIndexPath.row] = validNote
-            self.tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: UITableViewRowAnimation.None)
+            self.tableView.reloadRows(at: [selectedIndexPath], with: UITableViewRowAnimation.none)
         }
         else {
-            let newIndexPath = NSIndexPath(forRow: self.notes.count, inSection: 0)
+            let newIndexPath = IndexPath(row: self.notes.count, section: 0)
             self.notes.append(validNote)
-            self.tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: UITableViewRowAnimation.Bottom)
+            self.tableView.insertRows(at: [newIndexPath], with: .bottom)
         }
         self.saveNotes()
     }
@@ -43,12 +43,12 @@ class NotesTableViewController: UITableViewController {
     // MARK: - NSCoding Methods
     
     func saveNotes() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(self.notes, toFile: Notes.archiveURL.path!)
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(self.notes, toFile: Notes.archiveURL.path)
         if !isSuccessfulSave { print("unable to save note...") }
     }
     
     func loadNotes() -> [Notes]? {
-        return NSKeyedUnarchiver.unarchiveObjectWithFile(Notes.archiveURL.path!) as? [Notes]
+        return NSKeyedUnarchiver.unarchiveObject(withFile: Notes.archiveURL.path) as? [Notes]
     }
     
     // MARK: - UIViewController Methods
@@ -63,65 +63,50 @@ class NotesTableViewController: UITableViewController {
             self.loadSampleNotes()
         }
         
-        self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        self.navigationItem.leftBarButtonItem = self.editButtonItem
     }
     
 
     // MARK: - UITableViewDataSource Methods
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.notes.count
     }
-
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("NotesTableViewCell", forIndexPath: indexPath) as! NotesTableViewCell
-
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NotesTableViewCell", for: indexPath) as! NotesTableViewCell
+        
         let note = self.notes[indexPath.row]
         
         cell.noteLabel.text = note.entry
-
+        
         return cell
     }
 
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
             // Delete the row from the data source
-            self.notes.removeAtIndex(indexPath.row)
+            self.notes.remove(at: indexPath.row)
             self.saveNotes()
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     // MARK: - Navigation
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToNotesViewControllerFromCell" {
-            guard let validNotesViewController = segue.destinationViewController as? NotesViewController,
-                selectedNoteCell = sender as? NotesTableViewCell,
-                selectedIndexPath = self.tableView.indexPathForCell(selectedNoteCell) else  { return }
+            guard let validNotesViewController = segue.destination as? NotesViewController,
+                let selectedNoteCell = sender as? NotesTableViewCell,
+                let selectedIndexPath = self.tableView.indexPath(for: selectedNoteCell) else { return }
             let selectedNote = self.notes[selectedIndexPath.row]
             validNotesViewController.note = selectedNote
         }
