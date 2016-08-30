@@ -62,10 +62,7 @@ class NotesTableViewController: UITableViewController {
         else {
             self.loadSampleNotes()
         }
-        
-        self.navigationItem.leftBarButtonItem = self.editButtonItem
     }
-    
 
     // MARK: - UITableViewDataSource Methods
     
