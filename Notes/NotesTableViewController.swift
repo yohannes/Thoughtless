@@ -34,10 +34,9 @@ class NotesTableViewController: UITableViewController {
     // MARK: - Helper Methods
     
     func loadSampleNotes() {
-        guard let firstNote = Notes(entry: "I am the top most note in the app and I am very happy to be where I am right now.") else { return }
-        guard let secondNote = Notes(entry: "I may be the second note here but I am fighting my way up to be the first note in the app.") else { return }
-        guard let thirdNote = Notes(entry: "I am very grateful to be in the third position. One should be content with what they achieve.") else { return }
-        self.notes += [firstNote, secondNote, thirdNote]
+        guard let firstNote = Notes(entry: "Tap me to view this note.") else { return }
+        guard let secondNote = Notes(entry: "Swipe me to the left to delete.") else { return }
+        self.notes += [firstNote, secondNote]
     }
     
     // MARK: - NSCoding Methods
