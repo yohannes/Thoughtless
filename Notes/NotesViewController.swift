@@ -24,13 +24,16 @@ class NotesViewController: UIViewController {
   @IBAction func cancelButtonDidTouch(sender: UIBarButtonItem) {
     self.textView.resignFirstResponder()
     
-    // Check the type of an object. More: http://stackoverflow.com/a/33001534/2229062
+    // Check the type of an object #1. More: http://stackoverflow.com/a/25345480/2229062
+    print("I am of type: \(self.presentingViewController.self)")
+    
+    // Check the type of an object #2. More: http://stackoverflow.com/a/33001534/2229062
     if let unknown: AnyObject = self.presentingViewController {
       let reflection = Mirror(reflecting: unknown)
-      print(reflection.subjectType)
+      print("I am of type: \(reflection.subjectType)")
     }
     else {
-      print(type(of:self.presentingViewController))
+      print("I am of type: \(type(of:self.presentingViewController))")
     }
     
     let isPresentingFromAddButton = self.presentingViewController is UINavigationController
