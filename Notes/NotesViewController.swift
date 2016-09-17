@@ -16,7 +16,13 @@ class NotesViewController: UIViewController {
   
   // MARK: - IBOutlet Properties
   
-  @IBOutlet weak var textView: UITextView!
+  @IBOutlet weak var textView: UITextView! {
+    didSet {
+      if let validNote = self.note {
+        self.textView.text = validNote.entry
+      }
+    }
+  }
   @IBOutlet weak var saveButton: UIBarButtonItem!
   
   // MARK: - IBAction Properties
@@ -50,10 +56,6 @@ class NotesViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    if let validNote = self.note {
-      self.textView.text = validNote.entry
-    }
     
     self.textView.becomeFirstResponder()
   }
