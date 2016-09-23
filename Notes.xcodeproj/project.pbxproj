@@ -15,6 +15,12 @@
 		653518FF1D6BE9F400294A64 /* Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653518FE1D6BE9F400294A64 /* Notes.swift */; };
 		653519091D6BF72700294A64 /* NotesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653519081D6BF72700294A64 /* NotesTests.swift */; };
 		653519111D6BFB1100294A64 /* Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653518FE1D6BE9F400294A64 /* Notes.swift */; };
+		6541BF701D95406F00DF2A58 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6541BF6D1D95406F00DF2A58 /* Info.plist */; };
+		6541BF711D95406F00DF2A58 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6541BF6D1D95406F00DF2A58 /* Info.plist */; };
+		6541BF721D95406F00DF2A58 /* SwiftyMarkdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6541BF6F1D95406F00DF2A58 /* SwiftyMarkdown.swift */; };
+		6541BF731D95406F00DF2A58 /* SwiftyMarkdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6541BF6F1D95406F00DF2A58 /* SwiftyMarkdown.swift */; };
+		655F2C691D958EA400550C05 /* MarkdownNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655F2C681D958EA400550C05 /* MarkdownNotesViewController.swift */; };
+		655F2C6A1D958EA400550C05 /* MarkdownNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655F2C681D958EA400550C05 /* MarkdownNotesViewController.swift */; };
 		65610CC81D54667A003E0882 /* NotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65610CC71D54667A003E0882 /* NotesTableViewCell.swift */; };
 		65C6B3801D65913800310FF8 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C6B37F1D65913800310FF8 /* NotesViewController.swift */; };
 /* End PBXBuildFile section */
@@ -41,6 +47,10 @@
 		653519061D6BF72700294A64 /* NotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		653519081D6BF72700294A64 /* NotesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTests.swift; sourceTree = "<group>"; };
 		6535190A1D6BF72700294A64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6541BF6D1D95406F00DF2A58 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6541BF6E1D95406F00DF2A58 /* SwiftyMarkdown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyMarkdown.h; sourceTree = "<group>"; };
+		6541BF6F1D95406F00DF2A58 /* SwiftyMarkdown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyMarkdown.swift; sourceTree = "<group>"; };
+		655F2C681D958EA400550C05 /* MarkdownNotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownNotesViewController.swift; sourceTree = "<group>"; };
 		65610CC71D54667A003E0882 /* NotesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesTableViewCell.swift; sourceTree = "<group>"; };
 		65C6B37F1D65913800310FF8 /* NotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,10 +94,12 @@
 		651875151D53000F006C8D82 /* Notes */ = {
 			isa = PBXGroup;
 			children = (
+				6541BF6C1D95406F00DF2A58 /* SwiftyMarkdown */,
 				651875161D53000F006C8D82 /* AppDelegate.swift */,
 				6518751A1D53000F006C8D82 /* Main.storyboard */,
 				653518FE1D6BE9F400294A64 /* Notes.swift */,
 				65C6B37F1D65913800310FF8 /* NotesViewController.swift */,
+				655F2C681D958EA400550C05 /* MarkdownNotesViewController.swift */,
 				65610CC71D54667A003E0882 /* NotesTableViewCell.swift */,
 				651875281D53A354006C8D82 /* NotesTableViewController.swift */,
 				6518751D1D53000F006C8D82 /* Assets.xcassets */,
@@ -104,6 +116,16 @@
 				6535190A1D6BF72700294A64 /* Info.plist */,
 			);
 			path = NotesTests;
+			sourceTree = "<group>";
+		};
+		6541BF6C1D95406F00DF2A58 /* SwiftyMarkdown */ = {
+			isa = PBXGroup;
+			children = (
+				6541BF6D1D95406F00DF2A58 /* Info.plist */,
+				6541BF6E1D95406F00DF2A58 /* SwiftyMarkdown.h */,
+				6541BF6F1D95406F00DF2A58 /* SwiftyMarkdown.swift */,
+			);
+			path = SwiftyMarkdown;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,6 +213,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6541BF701D95406F00DF2A58 /* Info.plist in Resources */,
 				651875211D53000F006C8D82 /* LaunchScreen.storyboard in Resources */,
 				6518751E1D53000F006C8D82 /* Assets.xcassets in Resources */,
 				6518751C1D53000F006C8D82 /* Main.storyboard in Resources */,
@@ -201,6 +224,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6541BF711D95406F00DF2A58 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,9 +252,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				65C6B3801D65913800310FF8 /* NotesViewController.swift in Sources */,
+				655F2C691D958EA400550C05 /* MarkdownNotesViewController.swift in Sources */,
 				653518FF1D6BE9F400294A64 /* Notes.swift in Sources */,
 				651875171D53000F006C8D82 /* AppDelegate.swift in Sources */,
 				651875291D53A354006C8D82 /* NotesTableViewController.swift in Sources */,
+				6541BF721D95406F00DF2A58 /* SwiftyMarkdown.swift in Sources */,
 				65610CC81D54667A003E0882 /* NotesTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,6 +266,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				653519091D6BF72700294A64 /* NotesTests.swift in Sources */,
+				655F2C6A1D958EA400550C05 /* MarkdownNotesViewController.swift in Sources */,
+				6541BF731D95406F00DF2A58 /* SwiftyMarkdown.swift in Sources */,
 				653519111D6BFB1100294A64 /* Notes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

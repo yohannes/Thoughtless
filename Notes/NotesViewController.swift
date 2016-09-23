@@ -25,7 +25,7 @@ class NotesViewController: UIViewController {
   }
   @IBOutlet weak var saveButton: UIBarButtonItem!
   
-  // MARK: - IBAction Properties
+  // MARK: - IBAction Methods
   
   @IBAction func cancelButtonDidTouch(sender: UIBarButtonItem) {
     self.textView.resignFirstResponder()
@@ -51,6 +51,14 @@ class NotesViewController: UIViewController {
       _ = self.navigationController?.popViewController(animated: true)
     }
   }
+  
+  @IBAction func rightScreenEdgeSwipedIn(_ sender: UIScreenEdgePanGestureRecognizer) {
+    if sender.state == .ended {
+      self.performSegue(withIdentifier: "showSegueToMarkdownNotesViewController", sender: self)
+    }
+  }
+  
+  @IBAction func unwindToNotesViewController(sender: UIStoryboardSegue) {}
   
   // MARK: - UIViewController Methods
   

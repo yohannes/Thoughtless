@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11198.2" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="YYd-s9-v4p">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11521.1" systemVersion="15G1104" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="YYd-s9-v4p">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11517.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -24,7 +24,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eFl-IN-2dj" id="TOn-ES-APC">
-                                    <frame key="frameInset" width="375" height="65.5"/>
+                                    <frame key="frameInset" width="375" height="66"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o4p-dn-tzR">
@@ -77,8 +77,12 @@
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="35N-cw-Li1">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <gestureRecognizers/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="6DS-0I-Qtm" appends="YES" id="7ch-pl-Ucr"/>
+                                </connections>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -104,12 +108,54 @@
                     <connections>
                         <outlet property="saveButton" destination="DDE-H7-ADX" id="GNZ-kP-i2R"/>
                         <outlet property="textView" destination="35N-cw-Li1" id="WS3-bq-2hA"/>
+                        <segue destination="LjM-v2-obL" kind="show" identifier="showSegueToMarkdownNotesViewController" id="eL3-Of-O8F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Gl-83-vlQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="X5L-cV-xLb" userLabel="Exit" sceneMemberID="exit"/>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="6DS-0I-Qtm">
+                    <rectEdge key="edges" right="YES"/>
+                    <connections>
+                        <action selector="rightScreenEdgeSwipedIn:" destination="WhK-6A-3pp" id="wx2-Kg-cJX"/>
+                    </connections>
+                </screenEdgePanGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3031.1999999999998" y="529.38530734632684"/>
+        </scene>
+        <!--Markdown Notes View Controller-->
+        <scene sceneID="B5D-gh-1lx">
+            <objects>
+                <viewController id="LjM-v2-obL" customClass="MarkdownNotesViewController" customModule="Notes" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kSD-Kz-w3u"/>
+                        <viewControllerLayoutGuide type="bottom" id="uVh-45-dOo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="M5Y-lr-5H9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ow9-A5-XvX">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ow9-A5-XvX" firstAttribute="top" secondItem="M5Y-lr-5H9" secondAttribute="top" id="4do-9U-hDn"/>
+                            <constraint firstAttribute="trailing" secondItem="ow9-A5-XvX" secondAttribute="trailing" id="Wn9-K1-6z8"/>
+                            <constraint firstItem="ow9-A5-XvX" firstAttribute="leading" secondItem="M5Y-lr-5H9" secondAttribute="leading" id="eTx-tQ-hpQ"/>
+                            <constraint firstItem="uVh-45-dOo" firstAttribute="top" secondItem="ow9-A5-XvX" secondAttribute="bottom" id="omB-dH-u24"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <segue destination="hoe-Dd-2h6" kind="unwind" unwindAction="unwindToNotesViewControllerWithSender:" id="DHP-4g-pbN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IgS-fs-5DK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="hoe-Dd-2h6" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3861.5999999999999" y="528.48575712143929"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dEf-0D-gLa">
