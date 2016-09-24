@@ -21,6 +21,9 @@ class NotesViewController: UIViewController {
       if let validNote = self.note {
         self.textView.text = validNote.entry
       }
+      else {
+        self.textView.becomeFirstResponder()
+      }
     }
   }
   @IBOutlet weak var saveButton: UIBarButtonItem!
@@ -62,12 +65,6 @@ class NotesViewController: UIViewController {
   @IBAction func unwindToNotesViewController(_ sender: UIStoryboardSegue) {}
   
   // MARK: - UIViewController Methods
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    self.textView.becomeFirstResponder()
-  }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if let validBarButtonItem = sender as? UIBarButtonItem, validBarButtonItem === self.saveButton {

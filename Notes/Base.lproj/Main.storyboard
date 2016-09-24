@@ -101,7 +101,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="DDE-H7-ADX">
                             <connections>
-                                <segue destination="X5L-cV-xLb" kind="unwind" unwindAction="unwindToNotesTableViewControllerWithSender:" id="g9G-Tr-ZsK"/>
+                                <segue destination="X5L-cV-xLb" kind="unwind" identifier="unwindToNotesTableViewController" unwindAction="unwindToNotesTableViewControllerWithSender:" id="g9G-Tr-ZsK"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -149,7 +149,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="hoe-Dd-2h6" kind="unwind" unwindAction="unwindToNotesViewControllerWithSender:" id="DHP-4g-pbN"/>
+                        <segue destination="hoe-Dd-2h6" kind="unwind" identifier="unwindToNotesViewController" unwindAction="unwindToNotesViewControllerWithSender:" id="DHP-4g-pbN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IgS-fs-5DK" userLabel="First Responder" sceneMemberID="firstResponder"/>
