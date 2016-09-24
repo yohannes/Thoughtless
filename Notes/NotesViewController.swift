@@ -55,11 +55,15 @@ class NotesViewController: UIViewController {
     }
   }
   
-  @IBAction func rightScreenEdgeSwipedIn(_ sender: UIScreenEdgePanGestureRecognizer) {
+  @IBAction func SwipeLeftFromRightScreenEdgeGestureToShowMarkdown(_ sender: UIScreenEdgePanGestureRecognizer) {
     guard self.note != nil else { return }
     if sender.state == .ended {
       self.performSegue(withIdentifier: "showSegueToMarkdownNotesViewController", sender: self)
     }
+  }
+  
+  @IBAction func swipeDownGestureToDismissKeyboard(_ sender: UISwipeGestureRecognizer) {
+    self.textView.resignFirstResponder()
   }
   
   @IBAction func unwindToNotesViewController(_ sender: UIStoryboardSegue) {}

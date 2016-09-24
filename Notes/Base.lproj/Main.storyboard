@@ -24,7 +24,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eFl-IN-2dj" id="TOn-ES-APC">
-                                    <frame key="frameInset" width="375" height="66"/>
+                                    <frame key="frameInset" width="375" height="65"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o4p-dn-tzR">
@@ -82,6 +82,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="6DS-0I-Qtm" appends="YES" id="7ch-pl-Ucr"/>
+                                    <outletCollection property="gestureRecognizers" destination="2mU-4Z-SIO" appends="YES" id="rCD-FM-yXf"/>
                                 </connections>
                             </textView>
                         </subviews>
@@ -116,9 +117,14 @@
                 <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="6DS-0I-Qtm">
                     <rectEdge key="edges" right="YES"/>
                     <connections>
-                        <action selector="rightScreenEdgeSwipedIn:" destination="WhK-6A-3pp" id="wx2-Kg-cJX"/>
+                        <action selector="SwipeLeftFromRightScreenEdgeGestureToShowMarkdown:" destination="WhK-6A-3pp" id="gZI-4z-I1Y"/>
                     </connections>
                 </screenEdgePanGestureRecognizer>
+                <swipeGestureRecognizer direction="down" id="2mU-4Z-SIO">
+                    <connections>
+                        <action selector="swipeDownGestureToDismissKeyboard:" destination="WhK-6A-3pp" id="z8X-gf-pMj"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3031.1999999999998" y="529.38530734632684"/>
         </scene>
