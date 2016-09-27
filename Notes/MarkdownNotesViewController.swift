@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SafariServices
 
-class MarkdownNotesViewController: UIViewController {
+class MarkdownNotesViewController: UIViewController, UITextViewDelegate {
   
   // MARK: - Stored Properties
   
@@ -25,5 +26,21 @@ class MarkdownNotesViewController: UIViewController {
       markdownNote.h1.fontName = "AvenirNext-Bold"
       self.markdownNotesTextView.attributedText = markdownNote.attributedString()
     }
+  }
+  
+  // MARK: - UIViewController Methods
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    self.markdownNotesTextView.delegate = self
+  }
+  
+  // MARK: - UITextFieldDelegate Methods
+  
+  func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+    let safariViewController = SFSafariViewController(url: URL)
+    self.present(safariViewController, animated: true, completion: nil)
+    return false
   }
 }
