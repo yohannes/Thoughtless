@@ -10,12 +10,20 @@ import UIKit
 
 class MarkdownNotesViewController: UIViewController {
   
-  // MARK: - UIViewController Methods
+  // MARK: - Stored Properties
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    // Do any additional setup after loading the view.
+  var note: Notes?
+  
+  // MARK: - IBOutlet Properties
+  
+  @IBOutlet weak var markdownNotesTextView: UITextView! {
+    didSet {
+      guard let validNote = self.note else { return }
+      let markdownNote = SwiftyMarkdown(string: validNote.entry)
+      markdownNote.body.fontName = "AvenirNext-Regular"
+      markdownNote.h1.color = UIColor.red
+      markdownNote.h1.fontName = "AvenirNext-Bold"
+      self.markdownNotesTextView.attributedText = markdownNote.attributedString()
+    }
   }
-  
 }

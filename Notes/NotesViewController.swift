@@ -75,5 +75,9 @@ class NotesViewController: UIViewController {
       let entry = self.textView.text ?? ""
       self.note = Notes(entry: entry)
     }
+    else if segue.identifier == "showSegueToMarkdownNotesViewController" {
+      guard let validMarkdownNotesViewController = segue.destination as? MarkdownNotesViewController, let validNote = self.note else { return }
+      validMarkdownNotesViewController.note = validNote
+    }
   }
 }
