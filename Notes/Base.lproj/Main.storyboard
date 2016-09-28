@@ -85,12 +85,21 @@
                                     <outletCollection property="gestureRecognizers" destination="2mU-4Z-SIO" appends="YES" id="rCD-FM-yXf"/>
                                 </connections>
                             </textView>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dot" translatesAutoresizingMaskIntoConstraints="NO" id="eOW-JH-ZQs">
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="ESt-pd-X4o"/>
+                                    <constraint firstAttribute="width" constant="24" id="xo6-mg-53S"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="KjO-aP-uLR" firstAttribute="top" secondItem="35N-cw-Li1" secondAttribute="bottom" id="A70-EW-bHQ"/>
+                            <constraint firstAttribute="trailing" secondItem="eOW-JH-ZQs" secondAttribute="trailing" constant="-12" id="JYS-5m-gOP"/>
                             <constraint firstItem="35N-cw-Li1" firstAttribute="leading" secondItem="i1l-oM-3dD" secondAttribute="leading" id="Ute-A7-654"/>
                             <constraint firstItem="35N-cw-Li1" firstAttribute="top" secondItem="HQ1-IH-oSk" secondAttribute="bottom" constant="-64" id="j3p-Qo-Mcw"/>
+                            <constraint firstItem="eOW-JH-ZQs" firstAttribute="centerY" secondItem="i1l-oM-3dD" secondAttribute="centerY" id="khj-8E-fQy"/>
                             <constraint firstAttribute="trailing" secondItem="35N-cw-Li1" secondAttribute="trailing" id="yWL-4Q-sWJ"/>
                         </constraints>
                     </view>
@@ -107,6 +116,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="markdownDotImageView" destination="eOW-JH-ZQs" id="3m4-dn-9Lq"/>
                         <outlet property="saveButton" destination="DDE-H7-ADX" id="GNZ-kP-i2R"/>
                         <outlet property="textView" destination="35N-cw-Li1" id="WS3-bq-2hA"/>
                         <segue destination="LjM-v2-obL" kind="show" identifier="showSegueToMarkdownNotesViewController" id="eL3-Of-O8F"/>
@@ -202,6 +212,9 @@
             <point key="canvasLocation" x="2218" y="979"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="dot" width="500" height="500"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="crw-Lv-jcW"/>
     </inferredMetricsTieBreakers>

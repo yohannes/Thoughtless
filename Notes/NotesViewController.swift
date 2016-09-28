@@ -26,8 +26,11 @@ class NotesViewController: UIViewController {
       }
     }
   }
+  
   @IBOutlet weak var saveButton: UIBarButtonItem!
   
+  @IBOutlet weak var markdownDotImageView: UIImageView!
+
   // MARK: - IBAction Methods
   
   @IBAction func cancelButtonDidTouch(sender: UIBarButtonItem) {
@@ -79,5 +82,27 @@ class NotesViewController: UIViewController {
       guard let validMarkdownNotesViewController = segue.destination as? MarkdownNotesViewController, let validNote = self.note else { return }
       validMarkdownNotesViewController.note = validNote
     }
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    self.markdownDotImageView.isHidden = true
+    
+    let swipeDotLeftGestureToShowMarkdown = UISwipeGestureRecognizer(target: self, action: #selector(NotesViewController.respondToSwipeGestureForDot))
+    swipeDotLeftGestureToShowMarkdown.direction = .left
+    self.markdownDotImageView.addGestureRecognizer(swipeDotLeftGestureToShowMarkdown)
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(true)
+    
+    self.markdownDotImageView.isHidden = self.presentingViewController is UINavigationController ? true : false
+  }
+  
+  // MARK: - Helper Methods
+  
+  func respondToSwipeGestureForDot() {
+    self.performSegue(withIdentifier: "showSegueToMarkdownNotesViewController", sender: self)
   }
 }
