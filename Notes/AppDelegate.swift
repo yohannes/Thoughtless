@@ -27,7 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     guard let validRootViewController = self.window?.rootViewController,
       validRootViewController.childViewControllers.count <= 1,
       let validNavigationControllerEmbeddedInNotesViewController = validRootViewController.storyboard?.instantiateViewController(withIdentifier: "NavigationControllerEmbeddedInNotesViewController") as? UINavigationController else { return }
-    validRootViewController.present(validNavigationControllerEmbeddedInNotesViewController, animated: true, completion: nil)
+    DispatchQueue.main.async {
+      validRootViewController.present(validNavigationControllerEmbeddedInNotesViewController, animated: true, completion: nil)
+    }
   }
 }
 
