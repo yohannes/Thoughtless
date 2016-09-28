@@ -15,16 +15,18 @@ class MarkdownNotesViewController: UIViewController, UITextViewDelegate {
   
   var note: Notes?
   
+  enum HTTP: String {
+    case Secured = "https://", NonSecured = "http://"
+  }
+  
   // MARK: - IBOutlet Properties
   
   @IBOutlet weak var markdownNotesTextView: UITextView! {
     didSet {
       guard let validNote = self.note else { return }
-      let markdownNote = SwiftyMarkdown(string: validNote.entry)
-      markdownNote.body.fontName = "AvenirNext-Regular"
-      markdownNote.h1.color = UIColor.red
-      markdownNote.h1.fontName = "AvenirNext-Bold"
-      self.markdownNotesTextView.attributedText = markdownNote.attributedString()
+      guard let validAvenirFont = UIFont(name: "AvenirNext-Regular", size: 20) else { return }
+      let markdownParser = MarkdownParser(font: validAvenirFont, automaticLinkDetectionEnabled: true, customElements: [])
+      self.markdownNotesTextView.attributedText = markdownParser.parse(validNote.entry)
     }
   }
   
@@ -39,8 +41,29 @@ class MarkdownNotesViewController: UIViewController, UITextViewDelegate {
   // MARK: - UITextFieldDelegate Methods
   
   func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-    let safariViewController = SFSafariViewController(url: URL)
+    
+    guard self.canOpenThisURL(URL.absoluteString.lowercased()) else {
+      let alertController = UIAlertController(title: "Invalid URL Link", message: "Please double check your URL in the previous page", preferredStyle: .alert)
+      let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+      alertController.addAction(alertAction)
+      self.present(alertController, animated: true, completion: nil)
+      return false
+    }
+  
+    var copiedURL = URL
+    if copiedURL.absoluteString.lowercased().hasPrefix(HTTP.Secured.rawValue) == false && copiedURL.absoluteString.lowercased().hasPrefix(HTTP.NonSecured.rawValue) == false {
+      copiedURL = NSURL(string: HTTP.NonSecured.rawValue.appending(copiedURL.absoluteString)) as! URL
+    }
+    let safariViewController = SFSafariViewController(url: copiedURL)
     self.present(safariViewController, animated: true, completion: nil)
     return false
+  }
+  
+  // MARK: - Helper Methods
+  
+  private func canOpenThisURL(_ URLString: String) -> Bool {
+    let linkDetector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+    guard let matches = linkDetector?.numberOfMatches(in: URLString, options: [], range: NSRange(location: 0, length: URLString.utf16.count)) else { return false }
+    return matches > 0 ? true : false
   }
 }
