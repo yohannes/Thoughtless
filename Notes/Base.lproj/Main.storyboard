@@ -92,10 +92,29 @@
                                     <constraint firstAttribute="width" constant="24" id="xo6-mg-53S"/>
                                 </constraints>
                             </imageView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gUa-t2-oWD">
+                                <frame key="frameInset" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="ChO-vq-sRY"/>
+                                    <barButtonItem style="plain" id="Fv0-gL-6OL">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="40u-OU-Zs3">
+                                            <rect key="frame" x="97" y="7" width="180" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <state key="normal" title="Power Up Your Note!"/>
+                                            <connections>
+                                                <action selector="PowerUpYourNoteButtonDidTouch:" destination="WhK-6A-3pp" eventType="touchUpInside" id="4br-33-7kn"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Ake-1p-FVx"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="KjO-aP-uLR" firstAttribute="top" secondItem="35N-cw-Li1" secondAttribute="bottom" id="A70-EW-bHQ"/>
+                            <constraint firstItem="KjO-aP-uLR" firstAttribute="top" secondItem="35N-cw-Li1" secondAttribute="bottom" constant="44" id="A70-EW-bHQ"/>
                             <constraint firstAttribute="trailing" secondItem="eOW-JH-ZQs" secondAttribute="trailing" constant="-12" id="JYS-5m-gOP"/>
                             <constraint firstItem="35N-cw-Li1" firstAttribute="leading" secondItem="i1l-oM-3dD" secondAttribute="leading" id="Ute-A7-654"/>
                             <constraint firstItem="35N-cw-Li1" firstAttribute="top" secondItem="HQ1-IH-oSk" secondAttribute="bottom" constant="-64" id="j3p-Qo-Mcw"/>

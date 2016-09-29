@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class NotesViewController: UIViewController {
   
@@ -56,6 +57,12 @@ class NotesViewController: UIViewController {
       print("d) I am of type: \(type(of: self.presentingViewController))")
       _ = self.navigationController?.popViewController(animated: true)
     }
+  }
+  
+  @IBAction func PowerUpYourNoteButtonDidTouch(_ sender: UIButton) {
+    guard let validURL = URL(string: "http://commonmark.org/help/") else { return }
+    let safariViewController = SFSafariViewController(url: validURL)
+    self.present(safariViewController, animated: true, completion: nil)
   }
   
   @IBAction func SwipeLeftFromRightScreenEdgeGestureToShowMarkdown(_ sender: UIScreenEdgePanGestureRecognizer) {
