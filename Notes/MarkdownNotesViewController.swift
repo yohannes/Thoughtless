@@ -36,6 +36,8 @@ class MarkdownNotesViewController: UIViewController, UITextViewDelegate {
     super.viewDidLoad()
     
     self.markdownNotesTextView.delegate = self
+    
+    self.navigationItem.title = "Markdown"
   }
   
   // MARK: - UITextFieldDelegate Methods
