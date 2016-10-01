@@ -83,7 +83,9 @@ class NotesViewController: UIViewController {
     }
     alertController.addAction(notSaveAlertAction)
     alertController.addAction(saveAlertAction)
-    self.present(alertController, animated: true, completion: nil)
+    if self.presentedViewController == nil {
+      self.present(alertController, animated: true, completion: nil)
+    }
   }
   
   @IBAction func swipeDownGestureToDismissKeyboard(_ sender: UISwipeGestureRecognizer) {
