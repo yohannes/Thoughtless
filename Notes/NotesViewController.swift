@@ -72,6 +72,20 @@ class NotesViewController: UIViewController {
     }
   }
   
+  @IBAction func swipeRightFromLeftScreenEdgeGestureToCancelOrSave(_ sender: UIScreenEdgePanGestureRecognizer) {
+    self.textView.endEditing(true)
+    let alertController = UIAlertController(title: "Sorry For The Interruption", message: "Do you want to save or not save?", preferredStyle: .alert)
+    let notSaveAlertAction = UIAlertAction(title: "Don't Save", style: .cancel) { (_) in
+      let _ = self.navigationController?.popViewController(animated: true)
+    }
+    let saveAlertAction = UIAlertAction(title: "Save", style: .default) { (_) in
+      self.performSegue(withIdentifier: "unwindToNotesTableViewController", sender: self)
+    }
+    alertController.addAction(notSaveAlertAction)
+    alertController.addAction(saveAlertAction)
+    self.present(alertController, animated: true, completion: nil)
+  }
+  
   @IBAction func swipeDownGestureToDismissKeyboard(_ sender: UISwipeGestureRecognizer) {
     self.textView.resignFirstResponder()
   }
@@ -88,6 +102,10 @@ class NotesViewController: UIViewController {
     else if segue.identifier == "showSegueToMarkdownNotesViewController" {
       guard let validMarkdownNotesViewController = segue.destination as? MarkdownNotesViewController, let validNote = self.note else { return }
       validMarkdownNotesViewController.note = validNote
+    }
+    else if segue.identifier == "unwindToNotesTableViewController" {
+      let entry = self.textView.text ?? ""
+      self.note = Notes(entry: entry)
     }
   }
   

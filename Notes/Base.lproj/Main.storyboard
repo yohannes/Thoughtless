@@ -83,6 +83,7 @@
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="6DS-0I-Qtm" appends="YES" id="7ch-pl-Ucr"/>
                                     <outletCollection property="gestureRecognizers" destination="2mU-4Z-SIO" appends="YES" id="rCD-FM-yXf"/>
+                                    <outletCollection property="gestureRecognizers" destination="FNg-Kv-s1j" appends="YES" id="9FF-W9-F3c"/>
                                 </connections>
                             </textView>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dot" translatesAutoresizingMaskIntoConstraints="NO" id="eOW-JH-ZQs">
@@ -154,6 +155,12 @@
                         <action selector="swipeDownGestureToDismissKeyboard:" destination="WhK-6A-3pp" id="z8X-gf-pMj"/>
                     </connections>
                 </swipeGestureRecognizer>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="FNg-Kv-s1j">
+                    <rectEdge key="edges" left="YES"/>
+                    <connections>
+                        <action selector="swipeRightFromLeftScreenEdgeGestureToCancelOrSave:" destination="WhK-6A-3pp" id="dIs-Zj-gSP"/>
+                    </connections>
+                </screenEdgePanGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3031.1999999999998" y="529.38530734632684"/>
         </scene>
