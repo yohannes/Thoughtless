@@ -29,8 +29,6 @@ class NotesViewController: UIViewController {
   }
   
   @IBOutlet weak var saveButton: UIBarButtonItem!
-  
-  @IBOutlet weak var markdownDotImageView: UIImageView!
 
   // MARK: - IBAction Methods
   
@@ -59,13 +57,18 @@ class NotesViewController: UIViewController {
     }
   }
   
-  @IBAction func PowerUpYourNoteButtonDidTouch(_ sender: UIButton) {
+  @IBAction func powerUpYourNoteButtonDidTouch(_ sender: UIButton) {
     guard let validURL = URL(string: "http://commonmark.org/help/") else { return }
     let safariViewController = SFSafariViewController(url: validURL)
     self.present(safariViewController, animated: true, completion: nil)
   }
   
-  @IBAction func SwipeLeftFromRightScreenEdgeGestureToShowMarkdown(_ sender: UIScreenEdgePanGestureRecognizer) {
+  @IBAction func previewMarkdownButtonDidTouch(_ sender: UIButton) {
+    guard self.note != nil else { return }
+    self.performSegue(withIdentifier: "showSegueToMarkdownNotesViewController", sender: self)
+  }
+  
+  @IBAction func swipeLeftFromRightScreenEdgeGestureToShowMarkdown(_ sender: UIScreenEdgePanGestureRecognizer) {
     guard self.note != nil else { return }
     if sender.state == .ended {
       self.performSegue(withIdentifier: "showSegueToMarkdownNotesViewController", sender: self)
@@ -109,27 +112,5 @@ class NotesViewController: UIViewController {
       let entry = self.textView.text ?? ""
       self.note = Notes(entry: entry)
     }
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    self.markdownDotImageView.isHidden = true
-    
-    let swipeDotLeftGestureToShowMarkdown = UISwipeGestureRecognizer(target: self, action: #selector(NotesViewController.respondToSwipeGestureForDot))
-    swipeDotLeftGestureToShowMarkdown.direction = .left
-    self.markdownDotImageView.addGestureRecognizer(swipeDotLeftGestureToShowMarkdown)
-  }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(true)
-    
-    self.markdownDotImageView.isHidden = self.presentingViewController is UINavigationController ? true : false
-  }
-  
-  // MARK: - Helper Methods
-  
-  func respondToSwipeGestureForDot() {
-    self.performSegue(withIdentifier: "showSegueToMarkdownNotesViewController", sender: self)
   }
 }
