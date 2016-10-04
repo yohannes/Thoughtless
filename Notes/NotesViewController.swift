@@ -114,4 +114,14 @@ class NotesViewController: UIViewController {
       self.note = Notes(entry: entry)
     }
   }
+  
+  override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+    guard !textView.text.isEmpty else {
+      let alertController = UIAlertController(title: "Empty Note Detected", message: "You cannot save an empty note.", preferredStyle: .alert)
+      alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+      self.present(alertController, animated: true, completion: nil)
+      return false
+    }
+    return true
+  }
 }
