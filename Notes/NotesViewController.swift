@@ -23,6 +23,7 @@ class NotesViewController: UIViewController {
         self.textView.text = validNote.entry
       }
       else {
+        self.textView.sizeToFit()
         self.textView.becomeFirstResponder()
       }
     }
