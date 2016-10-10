@@ -58,7 +58,7 @@ class NotesViewController: UIViewController {
     }
   }
   
-  @IBAction func powerUpYourNoteButtonDidTouch(_ sender: UIButton) {
+  @IBAction func markdownUserGuideButtonDidTouch(_ sender: UIButton) {
     guard let validURL = URL(string: "http://commonmark.org/help/") else { return }
     let safariViewController = SFSafariViewController(url: validURL)
     self.present(safariViewController, animated: true, completion: nil)

@@ -34,8 +34,8 @@ class NotesTableViewController: UITableViewController {
   // MARK: - Helper Methods
   
   func loadSampleNotes() {
-    guard let firstNote = Notes(entry: "Tap me to view this note.") else { return }
-    guard let secondNote = Notes(entry: "Swipe me to the left to delete.") else { return }
+    guard let firstNote = Notes(entry: "Tap me to view this note.\n\nWhen you write word like **this** or *this* or even create a [link](http://apple.com), you just power up your note.\n\nTap 'Go!' to preview your enhanced note.\n\nTap 'How?' to learn more.") else { return }
+    guard let secondNote = Notes(entry: "Swipe me left or tap edit to delete.") else { return }
     self.notes += [firstNote, secondNote]
   }
   

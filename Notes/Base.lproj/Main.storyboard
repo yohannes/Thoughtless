@@ -97,7 +97,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <state key="normal" title="How?"/>
                                             <connections>
-                                                <action selector="powerUpYourNoteButtonDidTouch:" destination="WhK-6A-3pp" eventType="touchUpInside" id="zvH-zN-ONv"/>
+                                                <action selector="markdownUserGuideButtonDidTouch:" destination="WhK-6A-3pp" eventType="touchUpInside" id="PbW-gW-5TY"/>
                                             </connections>
                                         </button>
                                     </barButtonItem>
@@ -109,7 +109,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <state key="normal" title="Go!"/>
                                             <connections>
-                                                <action selector="previewMarkdownButtonDidTouch:" destination="WhK-6A-3pp" eventType="touchUpInside" id="24a-yd-1dT"/>
+                                                <action selector="previewMarkdownButtonDidTouch:" destination="WhK-6A-3pp" eventType="touchUpInside" id="JUe-83-jDT"/>
                                             </connections>
                                         </button>
                                     </barButtonItem>
