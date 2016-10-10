@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   // MARK: - UIApplicationDelegate Methods
   
   func applicationDidFinishLaunching(_ application: UIApplication) {
+    self.window?.backgroundColor = UIColor.white
     IQKeyboardManager.sharedManager().enable = true
   }
   
