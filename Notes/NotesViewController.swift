@@ -83,7 +83,7 @@ class NotesViewController: UIViewController {
       let _ = self.navigationController?.popViewController(animated: true)
     }
     let saveAlertAction = UIAlertAction(title: "Save", style: .default) { (_) in
-      self.performSegue(withIdentifier: "unwindToNotesTableViewController", sender: self)
+      let _ = self.shouldPerformSegue(withIdentifier: "unwindToNotesTableViewConroller", sender: self)
     }
     alertController.addAction(notSaveAlertAction)
     alertController.addAction(saveAlertAction)
@@ -118,7 +118,9 @@ class NotesViewController: UIViewController {
   override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
     guard !textView.text.isEmpty else {
       let alertController = UIAlertController(title: "Empty Note Detected", message: "You cannot save an empty note.", preferredStyle: .alert)
-      alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+      alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+        self.textView.becomeFirstResponder()
+      }))
       self.present(alertController, animated: true, completion: nil)
       return false
     }
