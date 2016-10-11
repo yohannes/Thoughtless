@@ -30,6 +30,7 @@ class NotesViewController: UIViewController {
   }
   
   @IBOutlet weak var saveButton: UIBarButtonItem!
+  @IBOutlet weak var cancelButton: UIBarButtonItem!
 
   // MARK: - IBAction Methods
   
@@ -80,7 +81,7 @@ class NotesViewController: UIViewController {
     self.textView.endEditing(true)
     let alertController = UIAlertController(title: "Sorry For The Interruption", message: "Do you want to save or not save?", preferredStyle: .alert)
     let notSaveAlertAction = UIAlertAction(title: "Don't Save", style: .cancel) { (_) in
-      let _ = self.navigationController?.popViewController(animated: true)
+      self.cancelButtonDidTouch(sender: self.cancelButton)
     }
     let saveAlertAction = UIAlertAction(title: "Save", style: .default) { (_) in
       let _ = self.shouldPerformSegue(withIdentifier: "unwindToNotesTableViewConroller", sender: self)
