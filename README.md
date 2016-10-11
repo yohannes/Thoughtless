@@ -8,4 +8,4 @@ Gif created with [GIPHY](http://giphy.com)
 
 3rd Party Libraries Used in this app:
 - [IQKeyboardManager](https://github.com/hackiftekhar/IQKeyboardManager) by [Mohd Iftekhar Qurashi](https://github.com/hackiftekhar)
-- [SwiftyMarkdown](https://github.com/SimonFairbairn/SwiftyMarkdown) by [Simon Fairbairn](https://github.com/SimonFairbairn)
+- [MarkdownKit](https://github.com/ivanbruel/MarkdownKit) by [Ivan Bruel](https://github.com/ivanbruel)
