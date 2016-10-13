@@ -16,8 +16,8 @@ class NotesViewController: UIViewController {
   var note: Notes?
   
   enum MarkdownSymbols: String {
-    case hash = "#", asterisk = "*", underscore = "_", greaterThan = ">", dash = "-", grave = "`"
-    static let count = [hash, asterisk, greaterThan, dash, grave]
+    case hash = "#", asterisk = "*", underscore = "_", greaterThan = ">", dash = "-", grave = "`", done = "done"
+    static let items = [hash, asterisk, underscore, greaterThan, dash, grave, done]
   }
   
   // MARK: - IBOutlet Properties
@@ -141,11 +141,11 @@ class NotesViewController: UIViewController {
     self.setupKeyboardToolBarWithBarButtonItems()
   }
   
-  // MARK: - Helper Methods
+  // MARK: - Local Methods
   
   func barButtonItemOnToolBarDidTouch(sender: UIBarButtonItem) {
     guard let validButtonTitle = sender.title else { return }
-    if sender.title == "Done" {
+    if sender.title == "done" {
       self.textView.endEditing(true)
     }
     else {
@@ -159,35 +159,22 @@ class NotesViewController: UIViewController {
     //    toolBar.tintColor = UIColor(red: 0, green: 118, blue: 255, alpha: 1)
     toolBar.barTintColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
     toolBar.tintColor = UIColor.black
+
+    var barButtonItems = [UIBarButtonItem]()
+    for (index, value) in MarkdownSymbols.items.enumerated() {
+      let barButtonItem = self.setupBarButtonItemWith(title: value.rawValue)
+      barButtonItems.append(barButtonItem)
+      if index < MarkdownSymbols.items.count - 1 {
+        barButtonItems.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
+      }
+    }
     
-    // TODO: - see if you can for loop all these repeated button item initializations
-//    let barButtonItems: [UIBarButtonItem]
-//    for _ in MarkdownSymbols.count {
-//      barButtonItems += UIBarButtonItem
-//    }
-    ///case hash = "#", asterisk = "*", underscore = "_" greaterThan = ">", dash = "-", grave = "`"
-    
-    let hashBarButtonItem = UIBarButtonItem(title: MarkdownSymbols.hash.rawValue, style: .plain, target: self, action: #selector(NotesViewController.barButtonItemOnToolBarDidTouch(sender:)))
-    let asteriskBarButtonItem = UIBarButtonItem(title: MarkdownSymbols.asterisk.rawValue, style: .plain, target: self, action: #selector(NotesViewController.barButtonItemOnToolBarDidTouch(sender:)))
-    let underscoreBarButtonItem = UIBarButtonItem(title: MarkdownSymbols.underscore.rawValue, style: .plain, target: self, action: #selector(NotesViewController.barButtonItemOnToolBarDidTouch(sender:)))
-    let greaterThanSignBarButtonItem = UIBarButtonItem(title: MarkdownSymbols.greaterThan.rawValue, style: .plain, target: self, action: #selector(NotesViewController.barButtonItemOnToolBarDidTouch(sender:)))
-    let dashBarButtonItem = UIBarButtonItem(title: MarkdownSymbols.dash.rawValue, style: .plain, target: self, action: #selector(NotesViewController.barButtonItemOnToolBarDidTouch(sender:)))
-    let graveBarButtonItem = UIBarButtonItem(title: MarkdownSymbols.grave.rawValue, style: .plain, target: self, action: #selector(NotesViewController.barButtonItemOnToolBarDidTouch(sender:)))
-    let doneBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(NotesViewController.barButtonItemOnToolBarDidTouch(sender:)))
-    let barButtonFlexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-    toolBar.items = [hashBarButtonItem,
-                     barButtonFlexibleSpace,
-                     asteriskBarButtonItem,
-                     barButtonFlexibleSpace,
-                     underscoreBarButtonItem,
-                     barButtonFlexibleSpace,
-                     greaterThanSignBarButtonItem,
-                     barButtonFlexibleSpace,
-                     dashBarButtonItem,
-                     barButtonFlexibleSpace,
-                     graveBarButtonItem,
-                     barButtonFlexibleSpace,
-                     doneBarButtonItem]
+    toolBar.items = barButtonItems
     self.textView.inputAccessoryView = toolBar
+  }
+  
+  fileprivate func setupBarButtonItemWith(title: String) -> UIBarButtonItem {
+    let barButtonItem = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(NotesViewController.barButtonItemOnToolBarDidTouch(sender:)))
+    return barButtonItem
   }
 }
