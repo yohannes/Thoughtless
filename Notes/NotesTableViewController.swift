@@ -36,7 +36,8 @@ class NotesTableViewController: UITableViewController {
   func loadSampleNotes() {
     guard let firstNote = Notes(entry: "Tap me to view this note.\n\nWhen you write word like **this** or *this* or even create a [link](http://apple.com), you just power up your note.\n\nTap 'Go!' to preview your enhanced note.\n\nTap 'How?' to learn more.") else { return }
     guard let secondNote = Notes(entry: "Swipe me left or tap edit to delete.") else { return }
-    self.notes += [firstNote, secondNote]
+    guard let thirdNote = Notes(entry: "Tap edit to move me or delete me.") else { return }
+    self.notes += [firstNote, secondNote, thirdNote]
   }
   
   // MARK: - NSCoding Methods
