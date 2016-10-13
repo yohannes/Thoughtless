@@ -98,6 +98,12 @@ class NotesTableViewController: UITableViewController {
     }
   }
   
+  override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    let noteTobeMoved = self.notes[sourceIndexPath.row]
+    self.notes.remove(at: sourceIndexPath.row)
+    self.notes.insert(noteTobeMoved, at: destinationIndexPath.row)
+  }
+  
   // MARK: - Navigation
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
