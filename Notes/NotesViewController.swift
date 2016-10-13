@@ -89,7 +89,7 @@ class NotesViewController: UIViewController {
       self.cancelButtonDidTouch(sender: self.cancelButton)
     }
     let saveAlertAction = UIAlertAction(title: "Save", style: .default) { (_) in
-      let _ = self.shouldPerformSegue(withIdentifier: "unwindToNotesTableViewConroller", sender: self)
+      let _ = self.shouldPerformSegue(withIdentifier: "unwindToNotesTableViewControllerFromNotesViewController", sender: self)
     }
     alertController.addAction(notSaveAlertAction)
     alertController.addAction(saveAlertAction)
@@ -102,8 +102,6 @@ class NotesViewController: UIViewController {
     self.textView.resignFirstResponder()
   }
   
-  @IBAction func unwindToNotesViewController(_ sender: UIStoryboardSegue) {}
-  
   // MARK: - UIViewController Methods
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -115,7 +113,7 @@ class NotesViewController: UIViewController {
       guard let validMarkdownNotesViewController = segue.destination as? MarkdownNotesViewController, let validNote = self.note else { return }
       validMarkdownNotesViewController.note = validNote
     }
-    else if segue.identifier == "unwindToNotesTableViewController" {
+    else if segue.identifier == "unwindToNotesTableViewControllerFromNotesViewController" {
       let entry = self.textView.text ?? ""
       self.note = Notes(entry: entry)
     }
@@ -130,7 +128,11 @@ class NotesViewController: UIViewController {
       self.present(alertController, animated: true, completion: nil)
       return false
     }
-    return true
+    if identifier == "unwindToNotesTableViewControllerFromNotesViewController" {
+      self.performSegue(withIdentifier: identifier, sender: self)
+      return true
+    }
+    else { return false }
   }
 
   override func viewDidLoad() {

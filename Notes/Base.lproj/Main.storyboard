@@ -139,7 +139,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="DDE-H7-ADX">
                             <connections>
-                                <segue destination="X5L-cV-xLb" kind="unwind" identifier="unwindToNotesTableViewController" unwindAction="unwindToNotesTableViewControllerWithSender:" id="g9G-Tr-ZsK"/>
+                                <segue destination="X5L-cV-xLb" kind="unwind" identifier="unwindToNotesTableViewControllerFromSaveButton" unwindAction="unwindToNotesTableViewControllerWithSender:" id="g9G-Tr-ZsK"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -148,6 +148,7 @@
                         <outlet property="saveButton" destination="DDE-H7-ADX" id="GNZ-kP-i2R"/>
                         <outlet property="textView" destination="35N-cw-Li1" id="WS3-bq-2hA"/>
                         <segue destination="LjM-v2-obL" kind="show" identifier="showSegueToMarkdownNotesViewController" id="eL3-Of-O8F"/>
+                        <segue destination="X5L-cV-xLb" kind="unwind" identifier="unwindToNotesTableViewControllerFromNotesViewController" unwindAction="unwindToNotesTableViewControllerWithSender:" id="Axm-ms-hAK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Gl-83-vlQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -201,11 +202,9 @@
                     </view>
                     <connections>
                         <outlet property="markdownNotesTextView" destination="ow9-A5-XvX" id="qg6-xg-oT8"/>
-                        <segue destination="hoe-Dd-2h6" kind="unwind" identifier="unwindToNotesViewController" unwindAction="unwindToNotesViewControllerWithSender:" id="DHP-4g-pbN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IgS-fs-5DK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="hoe-Dd-2h6" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3861.5999999999999" y="528.48575712143929"/>
         </scene>
