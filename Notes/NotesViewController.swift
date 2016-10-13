@@ -132,6 +132,10 @@ class NotesViewController: UIViewController {
       self.performSegue(withIdentifier: identifier, sender: self)
       return true
     }
+    else if identifier == "unwindToNotesTableViewControllerFromSaveBarButtonItem" {
+      self.textView.endEditing(true)
+      return true
+    }
     else { return false }
   }
 
@@ -162,7 +166,7 @@ class NotesViewController: UIViewController {
 
     var barButtonItems = [UIBarButtonItem]()
     for (index, value) in MarkdownSymbols.items.enumerated() {
-      let barButtonItem = self.setupBarButtonItemWith(title: value.rawValue)
+      let barButtonItem = self.setupBarButtonItemOnKeyboardToolbarWith(title: value.rawValue)
       barButtonItems.append(barButtonItem)
       if index < MarkdownSymbols.items.count - 1 {
         barButtonItems.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
@@ -173,7 +177,7 @@ class NotesViewController: UIViewController {
     self.textView.inputAccessoryView = toolBar
   }
   
-  fileprivate func setupBarButtonItemWith(title: String) -> UIBarButtonItem {
+  fileprivate func setupBarButtonItemOnKeyboardToolbarWith(title: String) -> UIBarButtonItem {
     let barButtonItem = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(NotesViewController.barButtonItemOnToolBarDidTouch(sender:)))
     return barButtonItem
   }

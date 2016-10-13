@@ -24,7 +24,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eFl-IN-2dj" id="TOn-ES-APC">
-                                    <frame key="frameInset" width="375" height="66"/>
+                                    <frame key="frameInset" width="375" height="65"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o4p-dn-tzR">
@@ -139,7 +139,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="DDE-H7-ADX">
                             <connections>
-                                <segue destination="X5L-cV-xLb" kind="unwind" identifier="unwindToNotesTableViewControllerFromSaveButton" unwindAction="unwindToNotesTableViewControllerWithSender:" id="g9G-Tr-ZsK"/>
+                                <segue destination="X5L-cV-xLb" kind="unwind" identifier="unwindToNotesTableViewControllerFromSaveBarButtonItem" unwindAction="unwindToNotesTableViewControllerWithSender:" id="g9G-Tr-ZsK"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
