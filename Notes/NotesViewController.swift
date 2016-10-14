@@ -160,10 +160,9 @@ class NotesViewController: UIViewController {
   fileprivate func setupKeyboardToolBarWithBarButtonItems() {
     let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
     toolBar.isTranslucent = false
-    //    toolBar.tintColor = UIColor(red: 0, green: 118, blue: 255, alpha: 1)
     toolBar.barTintColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
     toolBar.tintColor = UIColor.black
-
+    
     var barButtonItems = [UIBarButtonItem]()
     for (index, value) in MarkdownSymbols.items.enumerated() {
       let barButtonItem = self.setupBarButtonItemOnKeyboardToolbarWith(title: value.rawValue)
