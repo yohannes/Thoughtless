@@ -16,7 +16,7 @@ class NotesViewController: UIViewController {
   var note: Notes?
   
   enum MarkdownSymbols: String {
-    case hash = "#", asterisk = "*", underscore = "_", greaterThan = ">", dash = "-", grave = "`", done = "done"
+    case hash = "#", asterisk = "*", underscore = "_", greaterThan = ">", dash = "-", grave = "`", done = "⌨"
     static let items = [hash, asterisk, underscore, greaterThan, dash, grave, done]
   }
   
@@ -149,7 +149,7 @@ class NotesViewController: UIViewController {
   
   func barButtonItemOnToolBarDidTouch(sender: UIBarButtonItem) {
     guard let validButtonTitle = sender.title else { return }
-    if sender.title == "done" {
+    if sender.title == "⌨" {
       self.textView.endEditing(true)
     }
     else {
