@@ -32,7 +32,6 @@ open class MarkdownQuote: MarkdownLevelElement {
     self.color = color
   }
 
-
   open func formatText(_ attributedString: NSMutableAttributedString, range: NSRange, level: Int) {
     var string = (0..<level).reduce("") { (string: String, _: Int) -> String in
       return "\(string)\(separator)"

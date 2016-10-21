@@ -48,6 +48,7 @@ open class MarkdownHeader: MarkdownLevelElement {
     var attributes = self.attributes
     if let font = font {
       var actualLevel: CGFloat
+      
       if case 0 = level {
         actualLevel = CGFloat(level) + MarkdownHeadingElements.oneHash.rawValue
       }
@@ -72,15 +73,8 @@ open class MarkdownHeader: MarkdownLevelElement {
       else {
         actualLevel = MarkdownHeadingElements.fourHashes.rawValue
       }
-
+      
       let headerFontSize: CGFloat = font.pointSize + (actualLevel * CGFloat(fontIncrease))
-//      let headerFontSize: CGFloat = font.pointSize + (CGFloat(level) * CGFloat(fontIncrease))
-//      print("font.pointSize:\(font.pointSize)")
-//      print("trueLevel:\(actualLevel)")
-//      print("headerFontSize: \(headerFontSize)")
-//      print("level: \(level)")
-//      print("fontIncrease: \(fontIncrease)")
-//      print("***********************")
       attributes[NSFontAttributeName] = font.withSize(headerFontSize)
     }
     return attributes
