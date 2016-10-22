@@ -11,7 +11,7 @@
         </array>
     </customFonts>
     <scenes>
-        <!--My Notes-->
+        <!--Notes Table View Controller-->
         <scene sceneID="fxW-kW-zTM">
             <objects>
                 <tableViewController id="HJf-zV-ObG" customClass="NotesTableViewController" customModule="Notes" customModuleProvider="target" sceneMemberID="viewController">
@@ -24,7 +24,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eFl-IN-2dj" id="TOn-ES-APC">
-                                    <frame key="frameInset" width="375" height="65"/>
+                                    <frame key="frameInset" width="375" height="66"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o4p-dn-tzR">
@@ -51,7 +51,7 @@
                             <outlet property="delegate" destination="HJf-zV-ObG" id="jji-fM-xGb"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="My Notes" id="EDG-hU-hLA">
+                    <navigationItem key="navigationItem" id="EDG-hU-hLA">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Juj-uJ-AjX">
                             <connections>
                                 <segue destination="9Kv-hq-KlY" kind="presentation" identifier="segueToNotesViewControllerFromAddButton" id="RfD-6n-6wB"/>

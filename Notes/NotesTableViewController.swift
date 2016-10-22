@@ -66,6 +66,23 @@ class NotesTableViewController: UITableViewController {
     self.navigationItem.leftBarButtonItem = self.editButtonItem
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    self.navigationItem.title = "\(self.notes.count) Notes"
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "segueToNotesViewControllerFromCell" {
+      guard let validNotesViewController = segue.destination as? NotesViewController,
+        let selectedNoteCell = sender as? NotesTableViewCell,
+        let selectedIndexPath = self.tableView.indexPath(for: selectedNoteCell) else { return }
+      let selectedNote = self.notes[selectedIndexPath.row]
+      validNotesViewController.note = selectedNote
+    }
+    else if segue.identifier == "segueToNotesViewControllerFromAddButton" {
+      print("adding new note")
+    }
+  }
+  
   // MARK: - UITableViewDataSource Methods
   
   override func numberOfSections(in tableView: UITableView) -> Int {
@@ -96,6 +113,7 @@ class NotesTableViewController: UITableViewController {
       self.notes.remove(at: indexPath.row)
       self.saveNotes()
       tableView.deleteRows(at: [indexPath], with: .fade)
+      self.navigationItem.title = "\(self.notes.count) Notes"
     }
   }
   
@@ -103,20 +121,5 @@ class NotesTableViewController: UITableViewController {
     let noteTobeMoved = self.notes[sourceIndexPath.row]
     self.notes.remove(at: sourceIndexPath.row)
     self.notes.insert(noteTobeMoved, at: destinationIndexPath.row)
-  }
-  
-  // MARK: - Navigation
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == "segueToNotesViewControllerFromCell" {
-      guard let validNotesViewController = segue.destination as? NotesViewController,
-        let selectedNoteCell = sender as? NotesTableViewCell,
-        let selectedIndexPath = self.tableView.indexPath(for: selectedNoteCell) else { return }
-      let selectedNote = self.notes[selectedIndexPath.row]
-      validNotesViewController.note = selectedNote
-    }
-    else if segue.identifier == "segueToNotesViewControllerFromAddButton" {
-      print("adding new note")
-    }
   }
 }

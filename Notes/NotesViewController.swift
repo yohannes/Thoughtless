@@ -43,23 +43,23 @@ class NotesViewController: UIViewController {
     self.textView.resignFirstResponder()
     
     // Check the type of an object #1. More: http://stackoverflow.com/a/25345480/2229062
-    print("a) I am of type: \(self.presentingViewController.self)")
+//    print("a) I am of type: \(self.presentingViewController.self)")
     
     // Check the type of an object #2. More: http://stackoverflow.com/a/33001534/2229062
-    if let unknown: AnyObject = self.presentingViewController {
-      let reflection = Mirror(reflecting: unknown)
-      print("b) I am of type: \(reflection.subjectType)")
-    }
-    else {
-      print("c) I am of type: \(type(of:self.presentingViewController))")
-    }
+//    if let unknown: AnyObject = self.presentingViewController {
+//      let reflection = Mirror(reflecting: unknown)
+//      print("b) I am of type: \(reflection.subjectType)")
+//    }
+//    else {
+//      print("c) I am of type: \(type(of:self.presentingViewController))")
+//    }
     
     let isPresentingFromAddButton = self.presentingViewController is UINavigationController
     if isPresentingFromAddButton {
       self.dismiss(animated: true, completion: nil)
     }
     else {
-      print("d) I am of type: \(type(of: self.presentingViewController))")
+//      print("d) I am of type: \(type(of: self.presentingViewController))")
       _ = self.navigationController?.popViewController(animated: true)
     }
   }
