@@ -10,11 +10,7 @@ import UIKit
 
 open class MarkdownCode: MarkdownCommonElement {
 
-//  fileprivate static let regex = "(\\s+|^)(`+)(\\s*.*?[^`]\\s*)(\\1)(?!`)" // original
-  // "(\\s+|^)(\\*|_)(.+?)(\\2)" -> italic
-  // "(\\s+|^)(\\*\\*|__)(.+?)(\\2)" -> bold
-//  fileprivate static let regex = "(\\s+|^)(\\`\\`\\`|```)(.+?)(\\2)" // modified
-  fileprivate static let regex = "(\\s+|^)(\\`)(.+?)(\\2)"
+  fileprivate static let regex = "(\\s+|^)(\\`+)(.+?)(\\2)"
 
   open var font: UIFont?
   open var color: UIColor?
