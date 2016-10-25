@@ -91,6 +91,8 @@
 		65AF747C1D9B6C19009E1E1C /* MarkdownStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AF74551D9B6C19009E1E1C /* MarkdownStyle.swift */; };
 		65AF747D1D9B6C19009E1E1C /* MarkdownStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AF74551D9B6C19009E1E1C /* MarkdownStyle.swift */; };
 		65C6B3801D65913800310FF8 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C6B37F1D65913800310FF8 /* NotesViewController.swift */; };
+		65FE6E7F1DBFC81B00F11A8E /* CurrentDateAndTimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FE6E7E1DBFC81B00F11A8E /* CurrentDateAndTimeHelper.swift */; };
+		65FE6E801DBFC81B00F11A8E /* CurrentDateAndTimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FE6E7E1DBFC81B00F11A8E /* CurrentDateAndTimeHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -155,6 +157,7 @@
 		65AF74541D9B6C19009E1E1C /* MarkdownLinkElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownLinkElement.swift; sourceTree = "<group>"; };
 		65AF74551D9B6C19009E1E1C /* MarkdownStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownStyle.swift; sourceTree = "<group>"; };
 		65C6B37F1D65913800310FF8 /* NotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
+		65FE6E7E1DBFC81B00F11A8E /* CurrentDateAndTimeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentDateAndTimeHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +203,7 @@
 				65AF743C1D9B6C19009E1E1C /* MarkdownKit */,
 				651875161D53000F006C8D82 /* AppDelegate.swift */,
 				6518751A1D53000F006C8D82 /* Main.storyboard */,
+				65FE6E7E1DBFC81B00F11A8E /* CurrentDateAndTimeHelper.swift */,
 				653518FE1D6BE9F400294A64 /* Notes.swift */,
 				65C6B37F1D65913800310FF8 /* NotesViewController.swift */,
 				655F2C681D958EA400550C05 /* MarkdownNotesViewController.swift */,
@@ -509,6 +513,7 @@
 				65AF74601D9B6C19009E1E1C /* MarkdownBold.swift in Sources */,
 				65914A8E1D9A5F5100C2AE71 /* IQToolbar.swift in Sources */,
 				65AF74641D9B6C19009E1E1C /* MarkdownHeader.swift in Sources */,
+				65FE6E7F1DBFC81B00F11A8E /* CurrentDateAndTimeHelper.swift in Sources */,
 				65914A8A1D9A5F5100C2AE71 /* IQPreviousNextView.swift in Sources */,
 				65914A7C1D9A5F5100C2AE71 /* IQUIWindow+Hierarchy.swift in Sources */,
 				65610CC81D54667A003E0882 /* NotesTableViewCell.swift in Sources */,
@@ -524,6 +529,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65AF745D1D9B6C19009E1E1C /* MarkdownUnescaping.swift in Sources */,
+				65FE6E801DBFC81B00F11A8E /* CurrentDateAndTimeHelper.swift in Sources */,
 				65AF747B1D9B6C19009E1E1C /* MarkdownLinkElement.swift in Sources */,
 				65AF74771D9B6C19009E1E1C /* MarkdownElement.swift in Sources */,
 				65AF74631D9B6C19009E1E1C /* MarkdownCode.swift in Sources */,

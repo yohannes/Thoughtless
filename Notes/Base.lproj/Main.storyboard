@@ -51,6 +51,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="noteLabel" destination="o4p-dn-tzR" id="gnR-yf-Hef"/>
+                                    <outlet property="noteModificationTimeStampLabel" destination="hbh-7G-GT0" id="lbr-On-55I"/>
                                     <segue destination="WhK-6A-3pp" kind="show" identifier="segueToNotesViewControllerFromCell" id="crw-Lv-jcW"/>
                                 </connections>
                             </tableViewCell>

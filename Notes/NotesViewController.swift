@@ -107,7 +107,7 @@ class NotesViewController: UIViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if let validBarButtonItem = sender as? UIBarButtonItem, validBarButtonItem === self.saveButton {
       let entry = self.textView.text ?? ""
-      self.note = Notes(entry: entry)
+      self.note = Notes(entry: entry, dateOfCreation: CurrentDateAndTimeHelper.get())
     }
     else if segue.identifier == "showSegueToMarkdownNotesViewController" {
       guard let validMarkdownNotesViewController = segue.destination as? MarkdownNotesViewController, let validNote = self.note else { return }
@@ -115,7 +115,7 @@ class NotesViewController: UIViewController {
     }
     else if segue.identifier == "unwindToNotesTableViewControllerFromNotesViewController" {
       let entry = self.textView.text ?? ""
-      self.note = Notes(entry: entry)
+      self.note = Notes(entry: entry, dateOfCreation: CurrentDateAndTimeHelper.get())
     }
   }
   

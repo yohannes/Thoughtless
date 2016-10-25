@@ -13,4 +13,5 @@ class NotesTableViewCell: UITableViewCell {
   // MARK: - IBOutlet Properties
   
   @IBOutlet weak var noteLabel: UILabel!
+  @IBOutlet weak var noteModificationTimeStampLabel: UILabel!
 }
