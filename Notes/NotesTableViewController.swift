@@ -19,14 +19,15 @@ class NotesTableViewController: UITableViewController {
   
   @IBAction func unwindToNotesTableViewController(sender: UIStoryboardSegue) {
     guard let validNotesViewController = sender.source as? NotesViewController, let validNote = validNotesViewController.note else { return }
-    if let selectedIndexPath = self.tableView.indexPathForSelectedRow {
-      self.notes[selectedIndexPath.row] = validNote
-      self.tableView.reloadRows(at: [selectedIndexPath], with: UITableViewRowAnimation.none)
-    }
-    else {
+    if self.presentedViewController is UINavigationController {
       let newIndexPath = IndexPath(row: self.notes.count, section: 0)
       self.notes.append(validNote)
       self.tableView.insertRows(at: [newIndexPath], with: .bottom)
+    }
+    else {
+      guard let selectedIndexPath = self.tableView.indexPathForSelectedRow else { return }
+      self.notes[selectedIndexPath.row] = validNote
+      self.tableView.reloadRows(at: [selectedIndexPath], with: UITableViewRowAnimation.none)
     }
     self.saveNotes()
   }
