@@ -9,7 +9,7 @@
 import UIKit
 import SafariServices
 
-class MarkdownNotesViewController: UIViewController, UITextViewDelegate {
+class MarkdownNotesViewController: UIViewController {
   
   // MARK: - Stored Properties
   
@@ -40,8 +40,18 @@ class MarkdownNotesViewController: UIViewController, UITextViewDelegate {
     self.navigationItem.title = "Markdown"
   }
   
-  // MARK: - UITextFieldDelegate Methods
+  // MARK: - Helper Methods
   
+  func canOpenThisURL(_ URLString: String) -> Bool {
+    let linkDetector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+    guard let matches = linkDetector?.numberOfMatches(in: URLString, options: [], range: NSRange(location: 0, length: URLString.utf16.count)) else { return false }
+    return matches > 0 ? true : false
+  }
+}
+
+// MARK: - UITextFieldDelegate Definition
+
+extension MarkdownNotesViewController: UITextViewDelegate {
   func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
     
     guard self.canOpenThisURL(URL.absoluteString.lowercased()) else {
@@ -51,7 +61,7 @@ class MarkdownNotesViewController: UIViewController, UITextViewDelegate {
       self.present(alertController, animated: true, completion: nil)
       return false
     }
-  
+    
     var copiedURL = URL
     if copiedURL.absoluteString.lowercased().hasPrefix(HTTP.Secured.rawValue) == false && copiedURL.absoluteString.lowercased().hasPrefix(HTTP.NonSecured.rawValue) == false {
       copiedURL = NSURL(string: HTTP.NonSecured.rawValue.appending(copiedURL.absoluteString)) as! URL
@@ -59,13 +69,5 @@ class MarkdownNotesViewController: UIViewController, UITextViewDelegate {
     let safariViewController = SFSafariViewController(url: copiedURL)
     self.present(safariViewController, animated: true, completion: nil)
     return false
-  }
-  
-  // MARK: - Helper Methods
-  
-  private func canOpenThisURL(_ URLString: String) -> Bool {
-    let linkDetector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
-    guard let matches = linkDetector?.numberOfMatches(in: URLString, options: [], range: NSRange(location: 0, length: URLString.utf16.count)) else { return false }
-    return matches > 0 ? true : false
   }
 }

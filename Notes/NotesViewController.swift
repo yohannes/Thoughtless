@@ -15,6 +15,20 @@ class NotesViewController: UIViewController {
   
   var note: Notes?
   
+  let saveOrNotSaveAlertView: FCAlertView = {
+    let alertView = FCAlertView(type: .caution)
+    alertView.dismissOnOutsideTouch = true
+    alertView.hideDoneButton = true
+    return alertView
+  }()
+  
+  let emptyNoteDeterrentAlertview: FCAlertView = {
+    let alertView = FCAlertView(type: .warning)
+    alertView.dismissOnOutsideTouch = true
+    alertView.hideDoneButton = true
+    return alertView
+  }()
+  
   enum MarkdownSymbols: String {
     case hash = "#", asterisk = "*", underscore = "_", greaterThan = ">", dash = "-", grave = "`", done = "⌨"
     static let items = [hash, asterisk, underscore, greaterThan, dash, grave, done]
@@ -84,18 +98,13 @@ class NotesViewController: UIViewController {
   
   @IBAction func swipeRightFromLeftScreenEdgeGestureToCancelOrSave(_ sender: UIScreenEdgePanGestureRecognizer) {
     self.textView.endEditing(true)
-    let alertController = UIAlertController(title: "Sorry For The Interruption", message: "Do you want to save or not save?", preferredStyle: .alert)
-    let notSaveAlertAction = UIAlertAction(title: "Don't Save", style: .cancel) { (_) in
-      self.cancelButtonDidTouch(sender: self.cancelButton)
-    }
-    let saveAlertAction = UIAlertAction(title: "Save", style: .default) { (_) in
-      let _ = self.shouldPerformSegue(withIdentifier: "unwindToNotesTableViewControllerFromNotesViewController", sender: self)
-    }
-    alertController.addAction(notSaveAlertAction)
-    alertController.addAction(saveAlertAction)
-    if self.presentedViewController == nil {
-      self.present(alertController, animated: true, completion: nil)
-    }
+
+    saveOrNotSaveAlertView.showAlert(inView: self,
+                          withTitle: "Pardon the Interruption",
+                          withSubtitle: "Do you want to save or not save?",
+                          withCustomImage: nil,
+                          withDoneButtonTitle: nil,
+                          andButtons: ["Don't Save", "Save"])
   }
   
   @IBAction func swipeDownGestureToDismissKeyboard(_ sender: UISwipeGestureRecognizer) {
@@ -121,28 +130,28 @@ class NotesViewController: UIViewController {
   
   override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
     guard !textView.text.isEmpty else {
-      let alertController = UIAlertController(title: "Empty Note Detected", message: "You cannot save an empty note.", preferredStyle: .alert)
-      alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
-        self.textView.becomeFirstResponder()
-      }))
-      self.present(alertController, animated: true, completion: nil)
+      self.textView.endEditing(true)
+      emptyNoteDeterrentAlertview.showAlert(inView: self,
+                            withTitle: "Empty Note Detected",
+                            withSubtitle: "You aren't allowed to save an empty note.",
+                            withCustomImage: nil,
+                            withDoneButtonTitle: nil,
+                            andButtons: ["Understood"])
       return false
     }
     if identifier == "unwindToNotesTableViewControllerFromNotesViewController" {
       self.performSegue(withIdentifier: identifier, sender: self)
-      return true
     }
-    else if identifier == "unwindToNotesTableViewControllerFromSaveBarButtonItem" {
-      self.textView.endEditing(true)
-      return true
-    }
-    else { return false }
+    return true
   }
 
   override func viewDidLoad() {
     super.viewDidLoad()
     
     self.setupKeyboardToolBarWithBarButtonItems()
+    
+    self.saveOrNotSaveAlertView.delegate = self
+    self.emptyNoteDeterrentAlertview.delegate = self
   }
   
   // MARK: - Local Methods
@@ -179,5 +188,23 @@ class NotesViewController: UIViewController {
   fileprivate func setupBarButtonItemOnKeyboardToolbarWith(title: String) -> UIBarButtonItem {
     let barButtonItem = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(NotesViewController.barButtonItemOnToolBarDidTouch(sender:)))
     return barButtonItem
+  }
+}
+
+// MARK: - FCalertViewDelegate Definition
+
+extension NotesViewController: FCAlertViewDelegate {
+  
+  func alertView(_ alertView: FCAlertView, clickedButtonIndex index: Int, buttonTitle title: String) {
+    if title == "Save" {
+      self.textView.endEditing(true)
+      let _ = self.shouldPerformSegue(withIdentifier: "unwindToNotesTableViewControllerFromNotesViewController", sender: self)
+    }
+    else if title == "Don't Save" {
+      self.cancelButtonDidTouch(sender: self.cancelButton)
+    }
+    else if title == "Understood" {
+      self.textView.becomeFirstResponder()
+    }
   }
 }
