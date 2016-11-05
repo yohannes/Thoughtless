@@ -1,6 +1,6 @@
 # Notes
 
-### An iOS app that stores notes and lets user quickly jot down thoughts.
+### An iOS app that lets user quickly jot down thoughts with Markdown support .
 
 ![Notes GIF](http://i.giphy.com/l3vRcwRsKzTSfPpjG.gif)
 
