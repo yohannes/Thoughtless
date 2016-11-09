@@ -66,6 +66,8 @@
 		65914A911D9A5F5100C2AE71 /* IQUIView+IQKeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65914A6F1D9A5F5100C2AE71 /* IQUIView+IQKeyboardToolbar.swift */; };
 		65914A921D9A5F5100C2AE71 /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 65914A711D9A5F5100C2AE71 /* IQKeyboardManager.bundle */; };
 		65914A931D9A5F5100C2AE71 /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 65914A711D9A5F5100C2AE71 /* IQKeyboardManager.bundle */; };
+		65A0F7EF1DD2D3D100D6B7B8 /* SwiftHEXColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A0F7EE1DD2D3D100D6B7B8 /* SwiftHEXColors.swift */; };
+		65A0F7F01DD2D3D100D6B7B8 /* SwiftHEXColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A0F7EE1DD2D3D100D6B7B8 /* SwiftHEXColors.swift */; };
 		65AF74581D9B6C19009E1E1C /* MarkdownCodeEscaping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AF74411D9B6C19009E1E1C /* MarkdownCodeEscaping.swift */; };
 		65AF74591D9B6C19009E1E1C /* MarkdownCodeEscaping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AF74411D9B6C19009E1E1C /* MarkdownCodeEscaping.swift */; };
 		65AF745A1D9B6C19009E1E1C /* MarkdownEscaping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AF74421D9B6C19009E1E1C /* MarkdownEscaping.swift */; };
@@ -159,6 +161,7 @@
 		65914A6E1D9A5F5100C2AE71 /* IQToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IQToolbar.swift; sourceTree = "<group>"; };
 		65914A6F1D9A5F5100C2AE71 /* IQUIView+IQKeyboardToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQUIView+IQKeyboardToolbar.swift"; sourceTree = "<group>"; };
 		65914A711D9A5F5100C2AE71 /* IQKeyboardManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IQKeyboardManager.bundle; sourceTree = "<group>"; };
+		65A0F7EE1DD2D3D100D6B7B8 /* SwiftHEXColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftHEXColors.swift; sourceTree = "<group>"; };
 		65AF74411D9B6C19009E1E1C /* MarkdownCodeEscaping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownCodeEscaping.swift; sourceTree = "<group>"; };
 		65AF74421D9B6C19009E1E1C /* MarkdownEscaping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownEscaping.swift; sourceTree = "<group>"; };
 		65AF74431D9B6C19009E1E1C /* MarkdownUnescaping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownUnescaping.swift; sourceTree = "<group>"; };
@@ -239,6 +242,7 @@
 				6501C0301DC1F37B005DB2EC /* FCAlertView */,
 				65914A5A1D9A5F5100C2AE71 /* IQKeyboardManagerSwift */,
 				65AF743C1D9B6C19009E1E1C /* MarkdownKit */,
+				65A0F7EE1DD2D3D100D6B7B8 /* SwiftHEXColors.swift */,
 				651875161D53000F006C8D82 /* AppDelegate.swift */,
 				6518751A1D53000F006C8D82 /* Main.storyboard */,
 				65FE6E7E1DBFC81B00F11A8E /* CurrentDateAndTimeHelper.swift */,
@@ -570,6 +574,7 @@
 				65AF74701D9B6C19009E1E1C /* UIFont+Traits.swift in Sources */,
 				65914A741D9A5F5100C2AE71 /* IQUIScrollView+Additions.swift in Sources */,
 				65AF746A1D9B6C19009E1E1C /* MarkdownList.swift in Sources */,
+				65A0F7EF1DD2D3D100D6B7B8 /* SwiftHEXColors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -616,6 +621,7 @@
 				65914A751D9A5F5100C2AE71 /* IQUIScrollView+Additions.swift in Sources */,
 				65914A8B1D9A5F5100C2AE71 /* IQPreviousNextView.swift in Sources */,
 				65AF74711D9B6C19009E1E1C /* UIFont+Traits.swift in Sources */,
+				65A0F7F01DD2D3D100D6B7B8 /* SwiftHEXColors.swift in Sources */,
 				65AF74751D9B6C19009E1E1C /* MarkdownCommonElement.swift in Sources */,
 				65914A911D9A5F5100C2AE71 /* IQUIView+IQKeyboardToolbar.swift in Sources */,
 				65914A811D9A5F5100C2AE71 /* IQKeyboardManagerConstantsInternal.swift in Sources */,

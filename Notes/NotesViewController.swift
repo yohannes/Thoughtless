@@ -152,6 +152,8 @@ class NotesViewController: UIViewController {
     
     self.saveOrNotSaveAlertView.delegate = self
     self.emptyNoteDeterrentAlertview.delegate = self
+    
+    self.textView.textColor = UIColor(hexString: "#6F7B91")
   }
   
   // MARK: - Local Methods

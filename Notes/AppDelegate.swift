@@ -18,7 +18,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   // MARK: - UIApplicationDelegate Methods
   
   func applicationDidFinishLaunching(_ application: UIApplication) {
-    self.window?.backgroundColor = UIColor.white
+    UINavigationBar.appearance().barTintColor = UIColor(hex: 0x25282C)
+    UINavigationBar.appearance().tintColor = UIColor(hex: 0x488AC6)
+//    UINavigationBar.appearance().isTranslucent = false
+
+    UIToolbar.appearance().barTintColor = UIColor(hexString: "#25282C")
+    UIToolbar.appearance().tintColor = UIColor(hexString: "#488AC6")
+    UIToolbar.appearance().isTranslucent = false
+    
+    UILabel.appearance(whenContainedInInstancesOf: [NotesTableViewCell.self]).tintColor = UIColor(hex: 0x488AC6)
+    
+    UITableView.appearance().backgroundColor = UIColor(hex: 0x25282C)
+    UITableViewCell.appearance().backgroundColor = UIColor(hex: 0x25282C)
+    
+    UITextView.appearance().backgroundColor = UIColor(hex: 0x25282C)
+    
     IQKeyboardManager.sharedManager().enable = true
   }
   

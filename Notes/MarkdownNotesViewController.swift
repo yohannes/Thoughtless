@@ -36,6 +36,7 @@ class MarkdownNotesViewController: UIViewController {
     super.viewDidLoad()
     
     self.markdownNotesTextView.delegate = self
+    self.markdownNotesTextView.textColor = UIColor(hexString: "#6F7B91")
     
     self.navigationItem.title = "Markdown"
   }
