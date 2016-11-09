@@ -65,6 +65,8 @@ class NotesTableViewController: UITableViewController {
     }
     
     self.navigationItem.leftBarButtonItem = self.editButtonItem
+    
+    self.tableView.separatorStyle = .none
   }
   
   override func viewWillAppear(_ animated: Bool) {
