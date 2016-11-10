@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func applicationDidFinishLaunching(_ application: UIApplication) {
     UINavigationBar.appearance().barTintColor = UIColor(hex: 0x25282C)
     UINavigationBar.appearance().tintColor = UIColor(hex: 0x488AC6)
+    UINavigationBar.appearance().barStyle = .blackTranslucent
 //    UINavigationBar.appearance().isTranslucent = false
 
     UIToolbar.appearance().barTintColor = UIColor(hexString: "#25282C")
