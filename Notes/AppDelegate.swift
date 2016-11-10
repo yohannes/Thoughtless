@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UINavigationBar.appearance().barTintColor = UIColor(hex: 0x25282C)
     UINavigationBar.appearance().tintColor = UIColor(hex: 0x488AC6)
     UINavigationBar.appearance().barStyle = .blackTranslucent
-//    UINavigationBar.appearance().isTranslucent = false
+    UINavigationBar.appearance().isTranslucent = false
 
     UIToolbar.appearance().barTintColor = UIColor(hexString: "#25282C")
     UIToolbar.appearance().tintColor = UIColor(hexString: "#488AC6")
@@ -30,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UILabel.appearance(whenContainedInInstancesOf: [NotesTableViewCell.self]).tintColor = UIColor(hex: 0x488AC6)
     
     UITableView.appearance().backgroundColor = UIColor(hex: 0x25282C)
+    
     UITableViewCell.appearance().backgroundColor = UIColor(hex: 0x25282C)
     
     UITextView.appearance().backgroundColor = UIColor(hex: 0x25282C)

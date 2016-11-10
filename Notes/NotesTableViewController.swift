@@ -64,7 +64,7 @@ class NotesTableViewController: UITableViewController {
       self.loadSampleNotes()
     }
     
-    self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(hexString: "#488AC6")!]
+    self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(hexString: "#72889E")!]
     
     self.navigationItem.leftBarButtonItem = self.editButtonItem
     
