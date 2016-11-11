@@ -51,6 +51,8 @@ class NotesViewController: UIViewController {
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
+    @IBOutlet weak var powerUpYourNoteLabel: UILabel!
+    
     // MARK: - IBAction Methods
     
     @IBAction func cancelButtonDidTouch(sender: UIBarButtonItem) {
@@ -154,8 +156,9 @@ class NotesViewController: UIViewController {
         self.emptyNoteDeterrentAlertview.delegate = self
         
         self.textView.textColor = UIColor(hexString: "#6F7B91")
-        
         self.textView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
+        
+        self.powerUpYourNoteLabel.textColor = UIColor(hexString: "#72889E")
     }
     
     override func viewWillAppear(_ animated: Bool) {

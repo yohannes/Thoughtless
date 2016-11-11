@@ -27,8 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UIToolbar.appearance().tintColor = UIColor(hexString: "#488AC6")
     UIToolbar.appearance().isTranslucent = false
     
-    UILabel.appearance(whenContainedInInstancesOf: [NotesTableViewCell.self]).tintColor = UIColor(hex: 0x488AC6)
-    
     UITableView.appearance().backgroundColor = UIColor(hex: 0x25282C)
     
     UITableViewCell.appearance().backgroundColor = UIColor(hex: 0x25282C)
