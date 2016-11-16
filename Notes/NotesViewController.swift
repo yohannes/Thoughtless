@@ -88,13 +88,13 @@ class NotesViewController: UIViewController {
     
     @IBAction func previewMarkdownButtonDidTouch(_ sender: UIButton) {
         guard self.note != nil else { return }
-        self.performSegue(withIdentifier: "showSegueToMarkdownNotesViewController", sender: self)
+        self.performSegue(withIdentifier: NotesViewControllerSegue.showSegueToMarkdownNotesViewController.rawValue, sender: self)
     }
     
     @IBAction func swipeLeftFromRightScreenEdgeGestureToShowMarkdown(_ sender: UIScreenEdgePanGestureRecognizer) {
         guard self.note != nil else { return }
         if sender.state == .ended {
-            self.performSegue(withIdentifier: "showSegueToMarkdownNotesViewController", sender: self)
+            self.performSegue(withIdentifier: NotesViewControllerSegue.showSegueToMarkdownNotesViewController.rawValue, sender: self)
         }
     }
     
@@ -120,11 +120,11 @@ class NotesViewController: UIViewController {
             let entry = self.textView.text ?? ""
             self.note = Notes(entry: entry, dateOfCreation: CurrentDateAndTimeHelper.get())
         }
-        else if segue.identifier == "showSegueToMarkdownNotesViewController" {
+        else if segue.identifier == NotesViewControllerSegue.showSegueToMarkdownNotesViewController.rawValue {
             guard let validMarkdownNotesViewController = segue.destination as? MarkdownNotesViewController, let validNote = self.note else { return }
             validMarkdownNotesViewController.note = validNote
         }
-        else if segue.identifier == "unwindToNotesTableViewControllerFromNotesViewController" {
+        else if segue.identifier == NotesViewControllerSegue.unwindToNotesTableViewControllerFromNotesViewController.rawValue {
             let entry = self.textView.text ?? ""
             self.note = Notes(entry: entry, dateOfCreation: CurrentDateAndTimeHelper.get())
         }
@@ -141,7 +141,7 @@ class NotesViewController: UIViewController {
                                                   andButtons: ["Understood"])
             return false
         }
-        if identifier == "unwindToNotesTableViewControllerFromNotesViewController" {
+        if identifier == NotesViewControllerSegue.unwindToNotesTableViewControllerFromNotesViewController.rawValue {
             self.performSegue(withIdentifier: identifier, sender: self)
         }
         return true
@@ -211,7 +211,7 @@ extension NotesViewController: FCAlertViewDelegate {
     func alertView(_ alertView: FCAlertView, clickedButtonIndex index: Int, buttonTitle title: String) {
         if title == "Save" {
             self.textView.endEditing(true)
-            let _ = self.shouldPerformSegue(withIdentifier: "unwindToNotesTableViewControllerFromNotesViewController", sender: self)
+            let _ = self.shouldPerformSegue(withIdentifier: NotesViewControllerSegue.unwindToNotesTableViewControllerFromNotesViewController.rawValue, sender: self)
         }
         else if title == "Don't Save" {
             self.cancelButtonDidTouch(sender: self.cancelButton)
@@ -219,5 +219,14 @@ extension NotesViewController: FCAlertViewDelegate {
         else if title == "Understood" {
             self.textView.becomeFirstResponder()
         }
+    }
+}
+
+// MARK: - NotesViewController Extension
+
+extension NotesViewController {
+    enum NotesViewControllerSegue: String {
+        case showSegueToMarkdownNotesViewController
+        case unwindToNotesTableViewControllerFromNotesViewController
     }
 }

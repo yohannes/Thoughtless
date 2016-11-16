@@ -76,15 +76,20 @@ class NotesTableViewController: UITableViewController {
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == "segueToNotesViewControllerFromCell" {
-      guard let validNotesViewController = segue.destination as? NotesViewController,
-        let selectedNoteCell = sender as? NotesTableViewCell,
-        let selectedIndexPath = self.tableView.indexPath(for: selectedNoteCell) else { return }
-      let selectedNote = self.notes[selectedIndexPath.row]
-      validNotesViewController.note = selectedNote
+    guard let validSegueIdentifier = segue.identifier, let validSegueIdentifierCase = NotesTableViewControllerSegue(rawValue: validSegueIdentifier) else {
+        assertionFailure("Could not map segue identifier: \(segue.identifier)")
+        return
     }
-    else if segue.identifier == "segueToNotesViewControllerFromAddButton" {
-      print("adding new note")
+    
+    switch validSegueIdentifierCase {
+    case .segueToNotesViewControllerFromCell:
+        guard let validNotesViewController = segue.destination as? NotesViewController,
+            let selectedNoteCell = sender as? NotesTableViewCell,
+            let selectedIndexPath = self.tableView.indexPath(for: selectedNoteCell) else { return }
+        let selectedNote = self.notes[selectedIndexPath.row]
+        validNotesViewController.note = selectedNote
+    case .segueToNotesViewControllerFromAddButton:
+        print("adding new note")
     }
   }
   
@@ -128,4 +133,13 @@ class NotesTableViewController: UITableViewController {
     self.notes.remove(at: sourceIndexPath.row)
     self.notes.insert(noteTobeMoved, at: destinationIndexPath.row)
   }
+}
+
+// MARK: - NotesTableViewController Extension
+
+extension NotesTableViewController {
+    enum NotesTableViewControllerSegue: String {
+        case segueToNotesViewControllerFromCell
+        case segueToNotesViewControllerFromAddButton
+    }
 }
