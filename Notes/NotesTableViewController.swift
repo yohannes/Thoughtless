@@ -20,9 +20,9 @@ class NotesTableViewController: UITableViewController {
   @IBAction func unwindToNotesTableViewController(sender: UIStoryboardSegue) {
     guard let validNotesViewController = sender.source as? NotesViewController, let validNote = validNotesViewController.note else { return }
     if self.presentedViewController is UINavigationController {
-      let newIndexPath = IndexPath(row: self.notes.count, section: 0)
-      self.notes.append(validNote)
-      self.tableView.insertRows(at: [newIndexPath], with: .bottom)
+        let newIndexPath = IndexPath(row: 0, section: 0)
+        self.notes.insert(validNote, at: 0)
+        self.tableView.insertRows(at: [newIndexPath], with: .top)
     }
     else {
       guard let selectedIndexPath = self.tableView.indexPathForSelectedRow else { return }
