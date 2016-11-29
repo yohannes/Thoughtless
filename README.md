@@ -8,7 +8,7 @@
 
 ### An iOS app that lets user quickly jot down thoughts with Markdown support .
 
-![Notes GIF](http://i.giphy.com/l3vRcwRsKzTSfPpjG.gif)
+![Notes GIF](http://i.giphy.com/l3vR6z0uteGz9QUxi.gif)
 
 Gif created with [GIPHY](http://giphy.com)
 
