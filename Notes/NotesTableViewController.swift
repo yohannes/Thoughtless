@@ -25,9 +25,10 @@ class NotesTableViewController: UITableViewController {
         self.tableView.insertRows(at: [newIndexPath], with: .top)
     }
     else {
-      guard let selectedIndexPath = self.tableView.indexPathForSelectedRow else { return }
-      self.notes[selectedIndexPath.row] = validNote
-      self.tableView.reloadRows(at: [selectedIndexPath], with: UITableViewRowAnimation.none)
+      guard let selectedIndexPath = self.tableView.indexPathForSelectedRow, self.notes[selectedIndexPath.row].entry != validNote.entry else { return }
+      self.notes.remove(at: selectedIndexPath.row)
+      self.notes.insert(validNote, at: 0)
+      self.tableView.reloadData()
     }
     self.saveNotes()
   }
