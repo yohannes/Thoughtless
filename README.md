@@ -13,6 +13,7 @@
 Gif created with [GIPHY](http://giphy.com)
 
 3rd Party Libraries used in this app:
+- [AMScrollingNavbar](https://github.com/andreamazz/AMScrollingNavbar) by [Andrea Mazzini](https://github.com/andreamazz)
 - [IQKeyboardManager](https://github.com/hackiftekhar/IQKeyboardManager) by [Mohd Iftekhar Qurashi](https://github.com/hackiftekhar)
 - [FCAlertView](https://github.com/k9101/FCAlertView) by [Kris Penney](https://github.com/k9101)
 - [MarkdownKit](https://github.com/ivanbruel/MarkdownKit) by [Ivan Bruel](https://github.com/ivanbruel)
