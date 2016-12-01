@@ -30,7 +30,20 @@ class NotesViewController: UIViewController {
     }()
     
     enum MarkdownSymbols: String {
-        case hash = "#", asterisk = "*", underscore = "_", greaterThan = ">", dash = "-", grave = "`", done = "⌨"
+        case hash, asterisk, underscore, greaterThan, dash, grave, done
+        
+        var character: String {
+            switch self {
+            case .hash: return "#"
+            case .asterisk: return "*"
+            case .underscore: return "_"
+            case .greaterThan: return ">"
+            case .dash: return "-"
+            case .grave: return "`"
+            case .done: return "⌨"
+            }
+        }
+        
         static let items = [hash, asterisk, underscore, greaterThan, dash, grave, done]
     }
     
@@ -187,7 +200,7 @@ class NotesViewController: UIViewController {
         
         var barButtonItems = [UIBarButtonItem]()
         for (index, value) in MarkdownSymbols.items.enumerated() {
-            let barButtonItem = self.setupBarButtonItemOnKeyboardToolbarWith(title: value.rawValue)
+            let barButtonItem = self.setupBarButtonItemOnKeyboardToolbarWith(title: value.character)
             barButtonItems.append(barButtonItem)
             if index < MarkdownSymbols.items.count - 1 {
                 barButtonItems.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
