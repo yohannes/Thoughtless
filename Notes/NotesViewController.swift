@@ -29,6 +29,8 @@ class NotesViewController: UIViewController {
         return alertView
     }()
     
+    var scrollingNavigationController = ScrollingNavigationController()
+    
     enum MarkdownSymbols: String {
         case hash, asterisk, underscore, greaterThan, dash, grave, done
         
@@ -168,16 +170,30 @@ class NotesViewController: UIViewController {
         self.saveOrNotSaveAlertView.delegate = self
         self.emptyNoteDeterrentAlertview.delegate = self
         
+        self.textView.delegate = self
         self.textView.textColor = UIColor(hexString: "#6F7B91")
         self.textView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
         
         self.powerUpYourNoteLabel.textColor = UIColor(hexString: "#72889E")
+        
+        if let validScrollingNavigationController = self.navigationController as? ScrollingNavigationController {
+            validScrollingNavigationController.scrollingNavbarDelegate = self
+            self.scrollingNavigationController = validScrollingNavigationController
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         
         self.textView.setContentOffset(CGPoint(x:0, y: -64), animated: false)
+
+        self.scrollingNavigationController.followScrollView(self.textView, delay: 50)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.scrollingNavigationController.stopFollowingScrollView()
     }
     
     // MARK: - Local Methods
@@ -217,7 +233,7 @@ class NotesViewController: UIViewController {
     }
 }
 
-// MARK: - FCalertViewDelegate Definition
+// MARK: - FCAlertViewDelegate Protocol
 
 extension NotesViewController: FCAlertViewDelegate {
     
@@ -243,3 +259,16 @@ extension NotesViewController {
         case unwindToNotesTableViewControllerFromNotesViewController
     }
 }
+
+// MARK: - ScrollingNavigationControllerDelegate Protocol
+
+extension NotesViewController: ScrollingNavigationControllerDelegate {
+    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        self.scrollingNavigationController.showNavbar()
+        return true
+    }
+}
+
+// MARK: - UITextViewDelegate Protocol
+
+extension NotesViewController: UITextViewDelegate {}

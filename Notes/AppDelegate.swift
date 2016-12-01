@@ -18,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   // MARK: - UIApplicationDelegate Methods
   
   func applicationDidFinishLaunching(_ application: UIApplication) {
+    self.window?.backgroundColor = UIColor(hex: 0x25282C)
+    
     UINavigationBar.appearance().barTintColor = UIColor(hex: 0x25282C)
     UINavigationBar.appearance().tintColor = UIColor(hex: 0x488AC6)
     UINavigationBar.appearance().barStyle = .blackTranslucent

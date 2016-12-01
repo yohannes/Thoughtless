@@ -10,65 +10,93 @@ import UIKit
 import SafariServices
 
 class MarkdownNotesViewController: UIViewController {
-  
-  // MARK: - Stored Properties
-  
-  var note: Notes?
-  
-  enum HTTP: String {
-    case Secured = "https://", NonSecured = "http://"
-  }
-  
-  // MARK: - IBOutlet Properties
-  
-  @IBOutlet weak var markdownNotesTextView: UITextView! {
-    didSet {
-      guard let validNote = self.note else { return }
-      guard let validAvenirFont = UIFont(name: "AvenirNext-Regular", size: 20) else { return }
-      let markdownParser = MarkdownParser(font: validAvenirFont, automaticLinkDetectionEnabled: true, customElements: [])
-      self.markdownNotesTextView.attributedText = markdownParser.parse(validNote.entry)
+    
+    // MARK: - Stored Properties
+    
+    var note: Notes?
+    
+    enum HTTP: String {
+        case Secured = "https://", NonSecured = "http://"
     }
-  }
-  
-  // MARK: - UIViewController Methods
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
     
-    self.markdownNotesTextView.delegate = self
-    self.markdownNotesTextView.textColor = UIColor(hexString: "#6F7B91")
+    var scrollingNavigationController = ScrollingNavigationController()
     
-    self.navigationItem.title = "Markdown"
-  }
-  
-  // MARK: - Helper Methods
-  
-  func canOpenThisURL(_ URLString: String) -> Bool {
-    let linkDetector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
-    guard let matches = linkDetector?.numberOfMatches(in: URLString, options: [], range: NSRange(location: 0, length: URLString.utf16.count)) else { return false }
-    return matches > 0 ? true : false
-  }
+    // MARK: - IBOutlet Properties
+    
+    @IBOutlet weak var markdownNotesTextView: UITextView! {
+        didSet {
+            guard let validNote = self.note else { return }
+            guard let validAvenirFont = UIFont(name: "AvenirNext-Regular", size: 20) else { return }
+            let markdownParser = MarkdownParser(font: validAvenirFont, automaticLinkDetectionEnabled: true, customElements: [])
+            self.markdownNotesTextView.attributedText = markdownParser.parse(validNote.entry)
+        }
+    }
+    
+    // MARK: - UIViewController Methods
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.markdownNotesTextView.delegate = self
+        self.markdownNotesTextView.textColor = UIColor(hexString: "#6F7B91")
+        
+        self.navigationItem.title = "Markdown"
+        
+        if let validScrollingNavigationController = self.navigationController as? ScrollingNavigationController {
+            validScrollingNavigationController.scrollingNavbarDelegate = self
+            self.scrollingNavigationController = validScrollingNavigationController
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.scrollingNavigationController.followScrollView(self.markdownNotesTextView, delay: 50)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.scrollingNavigationController.stopFollowingScrollView()
+    }
+    
+    // MARK: - Helper Methods
+    
+    func canOpenThisURL(_ URLString: String) -> Bool {
+        let linkDetector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+        guard let matches = linkDetector?.numberOfMatches(in: URLString, options: [], range: NSRange(location: 0, length: URLString.utf16.count)) else { return false }
+        return matches > 0 ? true : false
+    }
 }
 
-// MARK: - UITextFieldDelegate Definition
+// MARK: - ScrollingNavigationControllerDelegate Methods
+
+extension MarkdownNotesViewController: ScrollingNavigationControllerDelegate {
+    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        self.scrollingNavigationController.showNavbar()
+        return true
+    }
+}
+
+// MARK: - UITextFieldDelegate Methods
 
 extension MarkdownNotesViewController: UITextViewDelegate {
-  func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-    
-    guard self.canOpenThisURL(URL.absoluteString.lowercased()) else {
-      let alertController = UIAlertController(title: "Invalid URL Link", message: "Please double check your URL in the previous page", preferredStyle: .alert)
-      let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-      alertController.addAction(alertAction)
-      self.present(alertController, animated: true, completion: nil)
-      return false
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        
+        guard self.canOpenThisURL(URL.absoluteString.lowercased()) else {
+            let alertController = UIAlertController(title: "Invalid URL Link", message: "Please double check your URL in the previous page", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(alertAction)
+            self.present(alertController, animated: true, completion: nil)
+            return false
+        }
+        
+        var copiedURL = URL
+        if copiedURL.absoluteString.lowercased().hasPrefix(HTTP.Secured.rawValue) == false && copiedURL.absoluteString.lowercased().hasPrefix(HTTP.NonSecured.rawValue) == false {
+            copiedURL = NSURL(string: HTTP.NonSecured.rawValue.appending(copiedURL.absoluteString)) as! URL
+        }
+        let safariViewController = SFSafariViewController(url: copiedURL)
+        self.present(safariViewController, animated: true, completion: nil)
+        return false
     }
-    
-    var copiedURL = URL
-    if copiedURL.absoluteString.lowercased().hasPrefix(HTTP.Secured.rawValue) == false && copiedURL.absoluteString.lowercased().hasPrefix(HTTP.NonSecured.rawValue) == false {
-      copiedURL = NSURL(string: HTTP.NonSecured.rawValue.appending(copiedURL.absoluteString)) as! URL
-    }
-    let safariViewController = SFSafariViewController(url: copiedURL)
-    self.present(safariViewController, animated: true, completion: nil)
-    return false
-  }
 }

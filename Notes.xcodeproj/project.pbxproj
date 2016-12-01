@@ -66,6 +66,12 @@
 		65914A911D9A5F5100C2AE71 /* IQUIView+IQKeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65914A6F1D9A5F5100C2AE71 /* IQUIView+IQKeyboardToolbar.swift */; };
 		65914A921D9A5F5100C2AE71 /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 65914A711D9A5F5100C2AE71 /* IQKeyboardManager.bundle */; };
 		65914A931D9A5F5100C2AE71 /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 65914A711D9A5F5100C2AE71 /* IQKeyboardManager.bundle */; };
+		659C35731DEFE254008A2EE3 /* ScrollingNavbar+Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659C35701DEFE254008A2EE3 /* ScrollingNavbar+Sizes.swift */; };
+		659C35741DEFE254008A2EE3 /* ScrollingNavbar+Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659C35701DEFE254008A2EE3 /* ScrollingNavbar+Sizes.swift */; };
+		659C35751DEFE254008A2EE3 /* ScrollingNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659C35711DEFE254008A2EE3 /* ScrollingNavigationController.swift */; };
+		659C35761DEFE254008A2EE3 /* ScrollingNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659C35711DEFE254008A2EE3 /* ScrollingNavigationController.swift */; };
+		659C35771DEFE254008A2EE3 /* ScrollingNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659C35721DEFE254008A2EE3 /* ScrollingNavigationViewController.swift */; };
+		659C35781DEFE254008A2EE3 /* ScrollingNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659C35721DEFE254008A2EE3 /* ScrollingNavigationViewController.swift */; };
 		65A0F7EF1DD2D3D100D6B7B8 /* SwiftHEXColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A0F7EE1DD2D3D100D6B7B8 /* SwiftHEXColors.swift */; };
 		65A0F7F01DD2D3D100D6B7B8 /* SwiftHEXColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A0F7EE1DD2D3D100D6B7B8 /* SwiftHEXColors.swift */; };
 		65AF74581D9B6C19009E1E1C /* MarkdownCodeEscaping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AF74411D9B6C19009E1E1C /* MarkdownCodeEscaping.swift */; };
@@ -161,6 +167,9 @@
 		65914A6E1D9A5F5100C2AE71 /* IQToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IQToolbar.swift; sourceTree = "<group>"; };
 		65914A6F1D9A5F5100C2AE71 /* IQUIView+IQKeyboardToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQUIView+IQKeyboardToolbar.swift"; sourceTree = "<group>"; };
 		65914A711D9A5F5100C2AE71 /* IQKeyboardManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IQKeyboardManager.bundle; sourceTree = "<group>"; };
+		659C35701DEFE254008A2EE3 /* ScrollingNavbar+Sizes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ScrollingNavbar+Sizes.swift"; sourceTree = "<group>"; };
+		659C35711DEFE254008A2EE3 /* ScrollingNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollingNavigationController.swift; sourceTree = "<group>"; };
+		659C35721DEFE254008A2EE3 /* ScrollingNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollingNavigationViewController.swift; sourceTree = "<group>"; };
 		65A0F7EE1DD2D3D100D6B7B8 /* SwiftHEXColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftHEXColors.swift; sourceTree = "<group>"; };
 		65AF74411D9B6C19009E1E1C /* MarkdownCodeEscaping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownCodeEscaping.swift; sourceTree = "<group>"; };
 		65AF74421D9B6C19009E1E1C /* MarkdownEscaping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownEscaping.swift; sourceTree = "<group>"; };
@@ -239,6 +248,7 @@
 		651875151D53000F006C8D82 /* Notes */ = {
 			isa = PBXGroup;
 			children = (
+				659C356F1DEFE254008A2EE3 /* AMScrollingNavbar */,
 				6501C0301DC1F37B005DB2EC /* FCAlertView */,
 				65914A5A1D9A5F5100C2AE71 /* IQKeyboardManagerSwift */,
 				65AF743C1D9B6C19009E1E1C /* MarkdownKit */,
@@ -330,6 +340,17 @@
 				65914A711D9A5F5100C2AE71 /* IQKeyboardManager.bundle */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		659C356F1DEFE254008A2EE3 /* AMScrollingNavbar */ = {
+			isa = PBXGroup;
+			children = (
+				659C35701DEFE254008A2EE3 /* ScrollingNavbar+Sizes.swift */,
+				659C35711DEFE254008A2EE3 /* ScrollingNavigationController.swift */,
+				659C35721DEFE254008A2EE3 /* ScrollingNavigationViewController.swift */,
+			);
+			name = AMScrollingNavbar;
+			path = Source;
 			sourceTree = "<group>";
 		};
 		65AF743C1D9B6C19009E1E1C /* MarkdownKit */ = {
@@ -533,8 +554,10 @@
 				65914A781D9A5F5100C2AE71 /* IQUIView+Hierarchy.swift in Sources */,
 				65AF745C1D9B6C19009E1E1C /* MarkdownUnescaping.swift in Sources */,
 				65AF745A1D9B6C19009E1E1C /* MarkdownEscaping.swift in Sources */,
+				659C35731DEFE254008A2EE3 /* ScrollingNavbar+Sizes.swift in Sources */,
 				65AF746E1D9B6C19009E1E1C /* String+UTF16.swift in Sources */,
 				65914A761D9A5F5100C2AE71 /* IQUITextFieldView+Additions.swift in Sources */,
+				659C35751DEFE254008A2EE3 /* ScrollingNavigationController.swift in Sources */,
 				65AF74661D9B6C19009E1E1C /* MarkdownItalic.swift in Sources */,
 				65C6B3801D65913800310FF8 /* NotesViewController.swift in Sources */,
 				65914A881D9A5F5100C2AE71 /* IQBarButtonItem.swift in Sources */,
@@ -572,6 +595,7 @@
 				65AF74681D9B6C19009E1E1C /* MarkdownLink.swift in Sources */,
 				6501C0411DC1F37B005DB2EC /* FCAlertView.swift in Sources */,
 				65AF74701D9B6C19009E1E1C /* UIFont+Traits.swift in Sources */,
+				659C35771DEFE254008A2EE3 /* ScrollingNavigationViewController.swift in Sources */,
 				65914A741D9A5F5100C2AE71 /* IQUIScrollView+Additions.swift in Sources */,
 				65AF746A1D9B6C19009E1E1C /* MarkdownList.swift in Sources */,
 				65A0F7EF1DD2D3D100D6B7B8 /* SwiftHEXColors.swift in Sources */,
@@ -583,8 +607,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				65AF745D1D9B6C19009E1E1C /* MarkdownUnescaping.swift in Sources */,
+				659C35761DEFE254008A2EE3 /* ScrollingNavigationController.swift in Sources */,
 				6501C0401DC1F37B005DB2EC /* Colors.swift in Sources */,
 				65FE6E801DBFC81B00F11A8E /* CurrentDateAndTimeHelper.swift in Sources */,
+				659C35781DEFE254008A2EE3 /* ScrollingNavigationViewController.swift in Sources */,
 				65AF747B1D9B6C19009E1E1C /* MarkdownLinkElement.swift in Sources */,
 				65AF74771D9B6C19009E1E1C /* MarkdownElement.swift in Sources */,
 				65AF74631D9B6C19009E1E1C /* MarkdownCode.swift in Sources */,
@@ -612,6 +638,7 @@
 				655F2C6A1D958EA400550C05 /* MarkdownNotesViewController.swift in Sources */,
 				65914A8D1D9A5F5100C2AE71 /* IQTitleBarButtonItem.swift in Sources */,
 				65AF746D1D9B6C19009E1E1C /* MarkdownQuote.swift in Sources */,
+				659C35741DEFE254008A2EE3 /* ScrollingNavbar+Sizes.swift in Sources */,
 				6501C0421DC1F37B005DB2EC /* FCAlertView.swift in Sources */,
 				65AF746B1D9B6C19009E1E1C /* MarkdownList.swift in Sources */,
 				65914A7D1D9A5F5100C2AE71 /* IQUIWindow+Hierarchy.swift in Sources */,
