@@ -1,0 +1,15 @@
+PODS:
+  - AMScrollingNavbar (3.0.0)
+  - IQKeyboardManagerSwift (4.0.7)
+
+DEPENDENCIES:
+  - AMScrollingNavbar (~> 3.0)
+  - IQKeyboardManagerSwift (~> 4.0)
+
+SPEC CHECKSUMS:
+  AMScrollingNavbar: aa894c559c80ffa917d0fdc40d8b42be7c6efe15
+  IQKeyboardManagerSwift: 58bbcf46b5cf9fd4ed625d28a60cb2fbae4ab0f4
+
+PODFILE CHECKSUM: 172129d8962d0c812539c23978eaf74968c1f8b9
+
+COCOAPODS: 1.1.1

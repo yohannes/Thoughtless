@@ -8,6 +8,7 @@
 
 import UIKit
 import SafariServices
+import AMScrollingNavbar
 
 class MarkdownNotesViewController: UIViewController {
     
