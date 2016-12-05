@@ -78,7 +78,8 @@ class NotesTableViewController: UITableViewController {
         
         self.navigationItem.leftBarButtonItem = self.editButtonItem
         
-        self.tableView.separatorStyle = .none
+        self.tableView.separatorColor = UIColor(red: 114/255, green: 136/255, blue: 158/255, alpha: 0.075)
+        self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
         
         self.deleteOrNotDeleteAlertView.delegate = self
     }
