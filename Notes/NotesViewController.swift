@@ -9,6 +9,7 @@
 import UIKit
 import SafariServices
 import AMScrollingNavbar
+import SwiftHEXColors
 
 class NotesViewController: UIViewController {
     

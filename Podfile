@@ -8,6 +8,7 @@ target 'Notes' do
   	# Pods for Notes
 	pod 'AMScrollingNavbar', '~> 3.0'
 	pod 'IQKeyboardManagerSwift', '~> 4.0'
+	pod 'SwiftHEXColors', '~> 1.1'
 
   	target 'NotesTests' do
     		inherit! :search_paths

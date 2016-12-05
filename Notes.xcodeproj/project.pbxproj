@@ -32,8 +32,6 @@
 		655F2C691D958EA400550C05 /* MarkdownNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655F2C681D958EA400550C05 /* MarkdownNotesViewController.swift */; };
 		655F2C6A1D958EA400550C05 /* MarkdownNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655F2C681D958EA400550C05 /* MarkdownNotesViewController.swift */; };
 		65610CC81D54667A003E0882 /* NotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65610CC71D54667A003E0882 /* NotesTableViewCell.swift */; };
-		65A0F7EF1DD2D3D100D6B7B8 /* SwiftHEXColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A0F7EE1DD2D3D100D6B7B8 /* SwiftHEXColors.swift */; };
-		65A0F7F01DD2D3D100D6B7B8 /* SwiftHEXColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A0F7EE1DD2D3D100D6B7B8 /* SwiftHEXColors.swift */; };
 		65AF74581D9B6C19009E1E1C /* MarkdownCodeEscaping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AF74411D9B6C19009E1E1C /* MarkdownCodeEscaping.swift */; };
 		65AF74591D9B6C19009E1E1C /* MarkdownCodeEscaping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AF74411D9B6C19009E1E1C /* MarkdownCodeEscaping.swift */; };
 		65AF745A1D9B6C19009E1E1C /* MarkdownEscaping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AF74421D9B6C19009E1E1C /* MarkdownEscaping.swift */; };
@@ -113,7 +111,6 @@
 		6535190A1D6BF72700294A64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		655F2C681D958EA400550C05 /* MarkdownNotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownNotesViewController.swift; sourceTree = "<group>"; };
 		65610CC71D54667A003E0882 /* NotesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesTableViewCell.swift; sourceTree = "<group>"; };
-		65A0F7EE1DD2D3D100D6B7B8 /* SwiftHEXColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftHEXColors.swift; sourceTree = "<group>"; };
 		65AF74411D9B6C19009E1E1C /* MarkdownCodeEscaping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownCodeEscaping.swift; sourceTree = "<group>"; };
 		65AF74421D9B6C19009E1E1C /* MarkdownEscaping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownEscaping.swift; sourceTree = "<group>"; };
 		65AF74431D9B6C19009E1E1C /* MarkdownUnescaping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownUnescaping.swift; sourceTree = "<group>"; };
@@ -221,7 +218,6 @@
 			children = (
 				6501C0301DC1F37B005DB2EC /* FCAlertView */,
 				65AF743C1D9B6C19009E1E1C /* MarkdownKit */,
-				65A0F7EE1DD2D3D100D6B7B8 /* SwiftHEXColors.swift */,
 				651875161D53000F006C8D82 /* AppDelegate.swift */,
 				6518751A1D53000F006C8D82 /* Main.storyboard */,
 				65FE6E7E1DBFC81B00F11A8E /* CurrentDateAndTimeHelper.swift */,
@@ -566,7 +562,6 @@
 				6501C0411DC1F37B005DB2EC /* FCAlertView.swift in Sources */,
 				65AF74701D9B6C19009E1E1C /* UIFont+Traits.swift in Sources */,
 				65AF746A1D9B6C19009E1E1C /* MarkdownList.swift in Sources */,
-				65A0F7EF1DD2D3D100D6B7B8 /* SwiftHEXColors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,7 +594,6 @@
 				65AF746B1D9B6C19009E1E1C /* MarkdownList.swift in Sources */,
 				653519111D6BFB1100294A64 /* Notes.swift in Sources */,
 				65AF74711D9B6C19009E1E1C /* UIFont+Traits.swift in Sources */,
-				65A0F7F01DD2D3D100D6B7B8 /* SwiftHEXColors.swift in Sources */,
 				65AF74751D9B6C19009E1E1C /* MarkdownCommonElement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
