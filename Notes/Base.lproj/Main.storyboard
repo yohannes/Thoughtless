@@ -233,7 +233,7 @@
         <!--Scrolling Navigation Controller-->
         <scene sceneID="dEf-0D-gLa">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YYd-s9-v4p" customClass="ScrollingNavigationController" customModule="Notes" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YYd-s9-v4p" customClass="ScrollingNavigationController" customModule="AMScrollingNavbar" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ko7-nI-sU7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
