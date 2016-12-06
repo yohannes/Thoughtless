@@ -17,6 +17,8 @@ class NotesViewController: UIViewController {
     
     var note: Notes?
     
+    var doesTextViewNeedToBeSaved: Bool!
+    
     let saveOrNotSaveAlertView: FCAlertView = {
         let alertView = FCAlertView(type: .caution)
         alertView.dismissOnOutsideTouch = true
@@ -87,13 +89,23 @@ class NotesViewController: UIViewController {
         //      print("c) I am of type: \(type(of:self.presentingViewController))")
         //    }
         
-        let isPresentingFromAddButton = self.presentingViewController is UINavigationController
-        if isPresentingFromAddButton {
-            self.dismiss(animated: true, completion: nil)
+        if self.doesTextViewNeedToBeSaved == true {
+            self.saveOrNotSaveAlertView.showAlert(inView: self,
+                                                  withTitle: "Unsaved Change Detected",
+                                                  withSubtitle: "Do you want to save or not save?",
+                                                  withCustomImage: nil,
+                                                  withDoneButtonTitle: nil,
+                                                  andButtons: ["Don't Save", "Save"])
         }
         else {
-            //      print("d) I am of type: \(type(of: self.presentingViewController))")
-            _ = self.navigationController?.popViewController(animated: true)
+            let isPresentingFromAddButton = self.presentingViewController is UINavigationController
+            if isPresentingFromAddButton {
+                self.dismiss(animated: true, completion: nil)
+            }
+            else {
+                //      print("d) I am of type: \(type(of: self.presentingViewController))")
+                _ = self.navigationController?.popViewController(animated: true)
+            }
         }
     }
     
@@ -118,7 +130,7 @@ class NotesViewController: UIViewController {
     @IBAction func swipeRightFromLeftScreenEdgeGestureToCancelOrSave(_ sender: UIScreenEdgePanGestureRecognizer) {
         self.textView.endEditing(true)
         
-        saveOrNotSaveAlertView.showAlert(inView: self,
+        self.saveOrNotSaveAlertView.showAlert(inView: self,
                                          withTitle: "Pardon the Interruption",
                                          withSubtitle: "Do you want to save or not save?",
                                          withCustomImage: nil,
@@ -150,7 +162,7 @@ class NotesViewController: UIViewController {
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         guard !textView.text.isEmpty else {
             self.textView.endEditing(true)
-            emptyNoteDeterrentAlertview.showAlert(inView: self,
+            self.emptyNoteDeterrentAlertview.showAlert(inView: self,
                                                   withTitle: "Empty Note Detected",
                                                   withSubtitle: "You aren't allowed to save an empty note.",
                                                   withCustomImage: nil,
@@ -158,6 +170,7 @@ class NotesViewController: UIViewController {
                                                   andButtons: ["Understood"])
             return false
         }
+  
         if identifier == NotesViewControllerSegue.unwindToNotesTableViewControllerFromNotesViewController.rawValue {
             self.performSegue(withIdentifier: identifier, sender: self)
         }
@@ -182,6 +195,8 @@ class NotesViewController: UIViewController {
             validScrollingNavigationController.scrollingNavbarDelegate = self
             self.scrollingNavigationController = validScrollingNavigationController
         }
+        
+        self.doesTextViewNeedToBeSaved = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -245,6 +260,7 @@ extension NotesViewController: FCAlertViewDelegate {
             let _ = self.shouldPerformSegue(withIdentifier: NotesViewControllerSegue.unwindToNotesTableViewControllerFromNotesViewController.rawValue, sender: self)
         }
         else if title == "Don't Save" {
+            self.doesTextViewNeedToBeSaved = false
             self.cancelButtonDidTouch(sender: self.cancelButton)
         }
         else if title == "Understood" {
@@ -273,4 +289,8 @@ extension NotesViewController: ScrollingNavigationControllerDelegate {
 
 // MARK: - UITextViewDelegate Protocol
 
-extension NotesViewController: UITextViewDelegate {}
+extension NotesViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        self.doesTextViewNeedToBeSaved = true
+    }
+}
