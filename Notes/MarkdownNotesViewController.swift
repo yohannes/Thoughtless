@@ -27,7 +27,7 @@ class MarkdownNotesViewController: UIViewController {
     @IBOutlet weak var markdownNotesTextView: UITextView! {
         didSet {
             guard let validNote = self.note else { return }
-            guard let validAvenirFont = UIFont(name: "AvenirNext-Regular", size: 20) else { return }
+            guard let validAvenirFont = UIFont(name: "AvenirNext-Regular", size: 18) else { return }
             let markdownParser = MarkdownParser(font: validAvenirFont, automaticLinkDetectionEnabled: true, customElements: [])
             self.markdownNotesTextView.attributedText = markdownParser.parse(validNote.entry)
         }

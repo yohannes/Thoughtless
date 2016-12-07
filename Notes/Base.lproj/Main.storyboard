@@ -33,7 +33,7 @@
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o4p-dn-tzR">
                                             <rect key="frame" x="8" y="8" width="359" height="55"/>
-                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -95,7 +95,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="6DS-0I-Qtm" appends="YES" id="7ch-pl-Ucr"/>
@@ -168,6 +168,7 @@
                         <outlet property="powerUpYourNoteLabel" destination="PS7-E7-gEa" id="foJ-Rp-AlT"/>
                         <outlet property="saveButton" destination="DDE-H7-ADX" id="GNZ-kP-i2R"/>
                         <outlet property="textView" destination="35N-cw-Li1" id="WS3-bq-2hA"/>
+                        <outlet property="toolbar" destination="gUa-t2-oWD" id="q6B-Im-fen"/>
                         <segue destination="LjM-v2-obL" kind="show" identifier="showSegueToMarkdownNotesViewController" id="eL3-Of-O8F"/>
                         <segue destination="X5L-cV-xLb" kind="unwind" identifier="unwindToNotesTableViewControllerFromNotesViewController" unwindAction="unwindToNotesTableViewControllerWithSender:" id="Axm-ms-hAK"/>
                     </connections>
@@ -209,7 +210,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ow9-A5-XvX">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>

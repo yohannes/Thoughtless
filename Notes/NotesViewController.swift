@@ -72,6 +72,8 @@ class NotesViewController: UIViewController {
     
     @IBOutlet weak var powerUpYourNoteLabel: UILabel!
     
+    @IBOutlet weak var toolbar: UIToolbar!
+    
     // MARK: - IBAction Methods
     
     @IBAction func cancelButtonDidTouch(sender: UIBarButtonItem) {
@@ -286,6 +288,32 @@ extension NotesViewController: ScrollingNavigationControllerDelegate {
         return true
     }
 }
+
+// MARK: - UIScrollViewDelegate Protocol
+
+//extension NotesViewController: UIScrollViewDelegate {
+//    
+//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+//        let newPosition = CGPoint(x: self.toolbar.frame.origin.x, y: self.toolbar.frame.origin.y + 64)
+//        let sameSize = CGSize(width: self.toolbar.frame.size.width, height: self.toolbar.frame.size.height)
+//        UIView.animate(withDuration: 0.1) {
+//            let newFrame = CGRect(x: newPosition.x, y: newPosition.y, width: sameSize.width, height: sameSize.height)
+//            self.toolbar.frame = newFrame
+//            self.powerUpYourNoteLabel.frame = newFrame
+//            self.textView.frame = CGRect(x: self.view.frame.origin.x, y: self.view.frame.origin.y, width: self.view.frame.size.width, height: self.view.frame.size.height)
+//        }
+//    }
+//    
+//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//        let newPosition = CGPoint(x: self.toolbar.frame.origin.x, y: self.toolbar.frame.origin.y - 64)
+//        let sameSize = CGSize(width: self.toolbar.frame.size.width, height: self.toolbar.frame.size.height)
+//        UIView.animate(withDuration: 0.1) {
+//            let newFrame = CGRect(x: newPosition.x, y: newPosition.y, width: sameSize.width, height: sameSize.height)
+//            self.toolbar.frame = newFrame
+//            self.powerUpYourNoteLabel.frame = newFrame
+//        }
+//    }
+//}
 
 // MARK: - UITextViewDelegate Protocol
 
