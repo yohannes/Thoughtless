@@ -8,7 +8,6 @@
 
 import UIKit
 import SafariServices
-import AMScrollingNavbar
 import SwiftHEXColors
 
 class NotesViewController: UIViewController {
@@ -34,8 +33,6 @@ class NotesViewController: UIViewController {
         alertView.hideDoneButton = true
         return alertView
     }()
-    
-    var scrollingNavigationController = ScrollingNavigationController()
     
     enum MarkdownSymbols: String {
         case hash, asterisk, underscore, greaterThan, dash, grave, done
@@ -137,11 +134,11 @@ class NotesViewController: UIViewController {
         self.textView.endEditing(true)
         
         self.saveOrNotSaveAlertView.showAlert(inView: self,
-                                         withTitle: "Pardon the Interruption",
-                                         withSubtitle: "Do you want to save or not save?",
-                                         withCustomImage: nil,
-                                         withDoneButtonTitle: nil,
-                                         andButtons: ["Don't Save", "Save"])
+                                              withTitle: "Pardon the Interruption",
+                                              withSubtitle: "Do you want to save or not save?",
+                                              withCustomImage: nil,
+                                              withDoneButtonTitle: nil,
+                                              andButtons: ["Don't Save", "Save"])
     }
     
     @IBAction func swipeDownGestureToDismissKeyboard(_ sender: UISwipeGestureRecognizer) {
@@ -169,14 +166,14 @@ class NotesViewController: UIViewController {
         guard !textView.text.isEmpty else {
             self.textView.endEditing(true)
             self.emptyNoteDeterrentAlertview.showAlert(inView: self,
-                                                  withTitle: "Empty Note Detected",
-                                                  withSubtitle: "You aren't allowed to save an empty note.",
-                                                  withCustomImage: nil,
-                                                  withDoneButtonTitle: nil,
-                                                  andButtons: ["Understood"])
+                                                       withTitle: "Empty Note Detected",
+                                                       withSubtitle: "You aren't allowed to save an empty note.",
+                                                       withCustomImage: nil,
+                                                       withDoneButtonTitle: nil,
+                                                       andButtons: ["Understood"])
             return false
         }
-  
+        
         if identifier == NotesViewControllerSegue.unwindToNotesTableViewControllerFromNotesViewController.rawValue {
             self.performSegue(withIdentifier: identifier, sender: self)
         }
@@ -199,11 +196,6 @@ class NotesViewController: UIViewController {
         
         self.powerUpYourNoteLabel.textColor = UIColor(hexString: "#72889E")
         
-        if let validScrollingNavigationController = self.navigationController as? ScrollingNavigationController {
-            validScrollingNavigationController.scrollingNavbarDelegate = self
-            self.scrollingNavigationController = validScrollingNavigationController
-        }
-        
         self.doesTextViewNeedToBeSaved = false
     }
     
@@ -211,14 +203,6 @@ class NotesViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.textView.setContentOffset(CGPoint(x:0, y: -64), animated: false)
-
-        self.scrollingNavigationController.followScrollView(self.textView, delay: 50)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        self.scrollingNavigationController.stopFollowingScrollView()
     }
     
     // MARK: - Local Methods
@@ -286,15 +270,6 @@ extension NotesViewController {
     }
 }
 
-// MARK: - ScrollingNavigationControllerDelegate Protocol
-
-extension NotesViewController: ScrollingNavigationControllerDelegate {
-    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
-        self.scrollingNavigationController.showNavbar()
-        return true
-    }
-}
-
 // MARK: - UIScrollViewDelegate Protocol
 
 extension NotesViewController: UIScrollViewDelegate {
@@ -307,12 +282,14 @@ extension NotesViewController: UIScrollViewDelegate {
         if scrollView.contentOffset.y > self.lastOffsetY {
             self.toolbar.isHidden = true
             self.powerUpYourNoteLabel.isHidden = true
+            self.navigationController?.navigationBar.isHidden = true
             
             self.bottomLayoutGuideTopToTextViewBottom.constant = 0
         }
         else {
             self.toolbar.isHidden = false
             self.powerUpYourNoteLabel.isHidden = false
+            self.navigationController?.navigationBar.isHidden = false
             
             self.bottomLayoutGuideTopToTextViewBottom.constant = 44
         }

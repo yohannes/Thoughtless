@@ -28,7 +28,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="97"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eFl-IN-2dj" id="TOn-ES-APC">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="97"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o4p-dn-tzR">
@@ -226,16 +226,17 @@
                     </view>
                     <connections>
                         <outlet property="markdownNotesTextView" destination="ow9-A5-XvX" id="qg6-xg-oT8"/>
+                        <outlet property="markdownNotesTextViewTopEqualSuperviewTop" destination="4do-9U-hDn" id="ymT-Fa-7Fc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IgS-fs-5DK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3861.5999999999999" y="528.48575712143929"/>
         </scene>
-        <!--Scrolling Navigation Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="dEf-0D-gLa">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YYd-s9-v4p" customClass="ScrollingNavigationController" customModule="AMScrollingNavbar" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YYd-s9-v4p" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ko7-nI-sU7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

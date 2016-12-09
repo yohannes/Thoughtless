@@ -8,7 +8,6 @@
 
 import UIKit
 import SafariServices
-import AMScrollingNavbar
 
 class MarkdownNotesViewController: UIViewController {
     
@@ -16,11 +15,11 @@ class MarkdownNotesViewController: UIViewController {
     
     var note: Notes?
     
+    var lastOffsetY: CGFloat = 0
+    
     enum HTTP: String {
         case Secured = "https://", NonSecured = "http://"
     }
-    
-    var scrollingNavigationController = ScrollingNavigationController()
     
     // MARK: - IBOutlet Properties
     
@@ -32,33 +31,19 @@ class MarkdownNotesViewController: UIViewController {
             self.markdownNotesTextView.attributedText = markdownParser.parse(validNote.entry)
         }
     }
+    @IBOutlet weak var markdownNotesTextViewTopEqualSuperviewTop: NSLayoutConstraint!
     
     // MARK: - UIViewController Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = UIColor(hex: 0x25282C)
+        
         self.markdownNotesTextView.delegate = self
         self.markdownNotesTextView.textColor = UIColor(hexString: "#6F7B91")
         
         self.navigationItem.title = "Markdown"
-        
-        if let validScrollingNavigationController = self.navigationController as? ScrollingNavigationController {
-            validScrollingNavigationController.scrollingNavbarDelegate = self
-            self.scrollingNavigationController = validScrollingNavigationController
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.scrollingNavigationController.followScrollView(self.markdownNotesTextView, delay: 50)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        self.scrollingNavigationController.stopFollowingScrollView()
     }
     
     // MARK: - Helper Methods
@@ -70,12 +55,23 @@ class MarkdownNotesViewController: UIViewController {
     }
 }
 
-// MARK: - ScrollingNavigationControllerDelegate Methods
+// MARK: - UIScrollViewDelegate Protocol
 
-extension MarkdownNotesViewController: ScrollingNavigationControllerDelegate {
-    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
-        self.scrollingNavigationController.showNavbar()
-        return true
+extension MarkdownNotesViewController: UIScrollViewDelegate {
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.lastOffsetY = scrollView.contentOffset.y
+    }
+    
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > self.lastOffsetY {
+            self.navigationController?.navigationBar.isHidden = true
+            self.markdownNotesTextViewTopEqualSuperviewTop.constant = -64
+        }
+        else {
+            self.navigationController?.navigationBar.isHidden = false
+            self.markdownNotesTextViewTopEqualSuperviewTop.constant = 0
+        }
     }
 }
 
