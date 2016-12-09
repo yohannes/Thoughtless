@@ -19,6 +19,8 @@ class NotesViewController: UIViewController {
     
     var doesTextViewNeedToBeSaved: Bool!
     
+    var lastOffsetY: CGFloat = 0
+    
     let saveOrNotSaveAlertView: FCAlertView = {
         let alertView = FCAlertView(type: .caution)
         alertView.dismissOnOutsideTouch = true
@@ -73,6 +75,8 @@ class NotesViewController: UIViewController {
     @IBOutlet weak var powerUpYourNoteLabel: UILabel!
     
     @IBOutlet weak var toolbar: UIToolbar!
+    
+    @IBOutlet weak var bottomLayoutGuideTopToTextViewBottom: NSLayoutConstraint!
     
     // MARK: - IBAction Methods
     
@@ -181,6 +185,8 @@ class NotesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = UIColor(hex: 0x25282C)
         
         self.setupKeyboardToolBarWithBarButtonItems()
         
@@ -291,29 +297,27 @@ extension NotesViewController: ScrollingNavigationControllerDelegate {
 
 // MARK: - UIScrollViewDelegate Protocol
 
-//extension NotesViewController: UIScrollViewDelegate {
-//    
-//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-//        let newPosition = CGPoint(x: self.toolbar.frame.origin.x, y: self.toolbar.frame.origin.y + 64)
-//        let sameSize = CGSize(width: self.toolbar.frame.size.width, height: self.toolbar.frame.size.height)
-//        UIView.animate(withDuration: 0.1) {
-//            let newFrame = CGRect(x: newPosition.x, y: newPosition.y, width: sameSize.width, height: sameSize.height)
-//            self.toolbar.frame = newFrame
-//            self.powerUpYourNoteLabel.frame = newFrame
-//            self.textView.frame = CGRect(x: self.view.frame.origin.x, y: self.view.frame.origin.y, width: self.view.frame.size.width, height: self.view.frame.size.height)
-//        }
-//    }
-//    
-//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-//        let newPosition = CGPoint(x: self.toolbar.frame.origin.x, y: self.toolbar.frame.origin.y - 64)
-//        let sameSize = CGSize(width: self.toolbar.frame.size.width, height: self.toolbar.frame.size.height)
-//        UIView.animate(withDuration: 0.1) {
-//            let newFrame = CGRect(x: newPosition.x, y: newPosition.y, width: sameSize.width, height: sameSize.height)
-//            self.toolbar.frame = newFrame
-//            self.powerUpYourNoteLabel.frame = newFrame
-//        }
-//    }
-//}
+extension NotesViewController: UIScrollViewDelegate {
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.lastOffsetY = scrollView.contentOffset.y
+    }
+    
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > self.lastOffsetY {
+            self.toolbar.isHidden = true
+            self.powerUpYourNoteLabel.isHidden = true
+            
+            self.bottomLayoutGuideTopToTextViewBottom.constant = 0
+        }
+        else {
+            self.toolbar.isHidden = false
+            self.powerUpYourNoteLabel.isHidden = false
+            
+            self.bottomLayoutGuideTopToTextViewBottom.constant = 44
+        }
+    }
+}
 
 // MARK: - UITextViewDelegate Protocol
 
