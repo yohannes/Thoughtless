@@ -143,7 +143,6 @@
                         <constraints>
                             <constraint firstItem="KjO-aP-uLR" firstAttribute="top" secondItem="35N-cw-Li1" secondAttribute="bottom" constant="44" id="A70-EW-bHQ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="PS7-E7-gEa" secondAttribute="trailing" constant="92" id="Ix0-gN-R6c"/>
-                            <constraint firstItem="PS7-E7-gEa" firstAttribute="top" secondItem="35N-cw-Li1" secondAttribute="bottom" constant="12" id="PcX-SB-Y6l"/>
                             <constraint firstItem="35N-cw-Li1" firstAttribute="leading" secondItem="i1l-oM-3dD" secondAttribute="leading" id="Ute-A7-654"/>
                             <constraint firstItem="35N-cw-Li1" firstAttribute="top" secondItem="HQ1-IH-oSk" secondAttribute="bottom" constant="-64" id="j3p-Qo-Mcw"/>
                             <constraint firstItem="PS7-E7-gEa" firstAttribute="leading" secondItem="i1l-oM-3dD" secondAttribute="leadingMargin" constant="91" id="tpV-aB-bAN"/>
