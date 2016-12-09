@@ -6,7 +6,6 @@ target 'Notes' do
   	use_frameworks!
 
   	# Pods for Notes
-	pod 'AMScrollingNavbar', '~> 3.0'
 	pod 'IQKeyboardManagerSwift', '~> 4.0'
 	pod 'SwiftHEXColors', '~> 1.1'
 

@@ -4,11 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>AMScrollingNavbar.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>IQKeyboardManagerSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,12 +27,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>4DC059E04CBA98AEDDB5C34E02D551E9</key>
+		<key>04CDA73A9FA00DFD2804116316174117</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5AFF97DB8111236918096653D0FBEEA4</key>
+		<key>4DC059E04CBA98AEDDB5C34E02D551E9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -47,12 +42,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9B7BEF22A2D2E5C2E4174836475BC47B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9D9B9909279128FCE4BA9C13CFAFAB2B</key>
+		<key>A8F6C706A9D2F4706513B5F91264B53A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

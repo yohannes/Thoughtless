@@ -1,18 +1,15 @@
 PODS:
-  - AMScrollingNavbar (3.0.0)
   - IQKeyboardManagerSwift (4.0.7)
   - SwiftHEXColors (1.1.0)
 
 DEPENDENCIES:
-  - AMScrollingNavbar (~> 3.0)
   - IQKeyboardManagerSwift (~> 4.0)
   - SwiftHEXColors (~> 1.1)
 
 SPEC CHECKSUMS:
-  AMScrollingNavbar: aa894c559c80ffa917d0fdc40d8b42be7c6efe15
   IQKeyboardManagerSwift: 58bbcf46b5cf9fd4ed625d28a60cb2fbae4ab0f4
   SwiftHEXColors: 8f7e364df7929e32cff9f9eeb044bb215167d6be
 
-PODFILE CHECKSUM: 31c3292ceab6c177011addf454317206db81d0a0
+PODFILE CHECKSUM: 8421fefe7e51fef39553096cbe11ba2fa9e7c9d2
 
 COCOAPODS: 1.1.1
