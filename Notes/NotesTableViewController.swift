@@ -45,7 +45,7 @@ class NotesTableViewController: UITableViewController {
     // MARK: - Helper Methods
     
     func loadSampleNotes() {
-        guard let firstNote = Notes(entry: "Hello Sunshine! Come & tap me first!\n👇👇👇\n\nYou can power up your note by writing your **words** _like_ `these`, create an [url link](http://apple.com), or even make a todo list:\n\n* Watch WWDC videos.\n* Write code.\n* Fetch my girlfriend for a ride.\n* Write code.\n\nTap *Go!* to preview your enhanced note.\n\nTap *How?* to learn more.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
+        guard let firstNote = Notes(entry: "Hello Sunshine! Come & tap me first!\n👇👇👇\n\nYou can power up your note by writing your words like **this** or _this_, create an [url link](http://apple.com), or even make a todo list:\n\n* Watch WWDC videos.\n* Write `code`.\n* Fetch my girlfriend for a ride.\n* Refactor `code`.\n\nOr even create quote:\n\n> A block of quote.\n\nTap *Go!* to preview your enhanced note.\n\nTap *How?* to learn more.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
         guard let secondNote = Notes(entry: "Swipe me left or tap edit to delete.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
         guard let thirdNote = Notes(entry: "Tap edit to move me or delete me.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
         self.notes += [firstNote, secondNote, thirdNote]
