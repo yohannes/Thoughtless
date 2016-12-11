@@ -23,7 +23,8 @@ open class FCAlertView: UIView {
   var alertViewContents: UIView?
   let circleLayer: CAShapeLayer = {
     let circle = CAShapeLayer()
-    circle.fillColor = UIColor.white.cgColor
+//    circle.fillColor = UIColor.white.cgColor
+    circle.fillColor = UIColor(hexString: "#488AC6")?.cgColor
     return circle
   }()
   
@@ -213,7 +214,8 @@ open class FCAlertView: UIView {
     let fillLayer = CAShapeLayer()
     fillLayer.path = rectPath.cgPath
     fillLayer.fillRule = kCAFillRuleEvenOdd
-    fillLayer.fillColor = UIColor.white.cgColor
+//    fillLayer.fillColor = UIColor.white.cgColor
+    fillLayer.fillColor = UIColor(hexString: "#488AC6")?.cgColor
     fillLayer.opacity = 1
     
     alertView!.layer.addSublayer(fillLayer)
@@ -397,7 +399,8 @@ open class FCAlertView: UIView {
       
     }else if(!hideAllButtons && numberOfButtons >= 2){
       let firstButton = UIButton(type: .system)
-      firstButton.backgroundColor = UIColor.white
+//      firstButton.backgroundColor = UIColor.white
+      firstButton.backgroundColor = UIColor(hexString: "#488AC6")
       
       if hideDoneButton {
         firstButton.frame = CGRect(x: 0,
@@ -421,7 +424,8 @@ open class FCAlertView: UIView {
       firstButton.tag = 0
       
       let secondButton = UIButton(type: .system)
-      secondButton.backgroundColor = UIColor.white
+//      secondButton.backgroundColor = UIColor.white
+        secondButton.backgroundColor = UIColor(hexString: "#488AC6")
       secondButton.setTitle(buttonTitles![1], for: UIControlState())
       secondButton.addTarget(self, action: #selector(handleButton(_:)), for: .touchUpInside)
 //      secondButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: UIFontWeightRegular)
@@ -439,7 +443,6 @@ open class FCAlertView: UIView {
       
       let secondSeparator = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
       secondSeparator.backgroundColor = UIColor(white: 100/255, alpha: 1)
-      
       let blurEffect = UIBlurEffect(style: .extraLight)
       
       let visualEffectView = UIVisualEffectView(effect: blurEffect)
