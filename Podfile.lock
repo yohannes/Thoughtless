@@ -1,5 +1,5 @@
 PODS:
-  - IQKeyboardManagerSwift (4.0.7)
+  - IQKeyboardManagerSwift (4.0.8)
   - SwiftHEXColors (1.1.0)
 
 DEPENDENCIES:
@@ -7,7 +7,7 @@ DEPENDENCIES:
   - SwiftHEXColors (~> 1.1)
 
 SPEC CHECKSUMS:
-  IQKeyboardManagerSwift: 58bbcf46b5cf9fd4ed625d28a60cb2fbae4ab0f4
+  IQKeyboardManagerSwift: c04bc9f68473823f825eb44d958fce98d921bead
   SwiftHEXColors: 8f7e364df7929e32cff9f9eeb044bb215167d6be
 
 PODFILE CHECKSUM: 8421fefe7e51fef39553096cbe11ba2fa9e7c9d2
