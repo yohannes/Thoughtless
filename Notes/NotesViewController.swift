@@ -205,7 +205,7 @@ class NotesViewController: UIViewController {
         self.textView.textColor = UIColor(hexString: "#6F7B91")
         self.textView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
         
-        self.powerUpYourNoteLabel.textColor = UIColor(hexString: "#72889E")
+        self.powerUpYourNoteLabel.textColor = UIColor(hexString: "#6F7B91")
         
         self.doesTextViewNeedToBeSaved = false
     }
