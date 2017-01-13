@@ -34,11 +34,21 @@ class NotesViewController: UIViewController {
         return alertView
     }()
     
+    enum Cursor: String {
+        case left, right
+        
+        var direction: Int {
+            if case .left = self { return -1 }
+            else { return 1 }
+        }
+    }
+    
     enum MarkdownSymbols: String {
-        case hash, asterisk, underscore, greaterThan, dash, grave, done
+        case moveLeft, hash, asterisk, underscore, greaterThan, dash, grave, done, moveRight
         
         var character: String {
             switch self {
+            case .moveLeft: return "⬅️️"
             case .hash: return "#"
             case .asterisk: return "*"
             case .underscore: return "_"
@@ -46,10 +56,11 @@ class NotesViewController: UIViewController {
             case .dash: return "-"
             case .grave: return "`"
             case .done: return "⌨"
+            case .moveRight: return "➡️️"
             }
         }
         
-        static let items = [hash, asterisk, underscore, greaterThan, dash, grave, done]
+        static let items = [ moveLeft, hash, asterisk, underscore, greaterThan, dash, grave, done, moveRight]
     }
     
     // MARK: - IBOutlet Properties
@@ -209,12 +220,15 @@ class NotesViewController: UIViewController {
     
     func barButtonItemOnToolBarDidTouch(sender: UIBarButtonItem) {
         guard let validButtonTitle = sender.title else { return }
-        if sender.title == "⌨" {
-            self.textView.endEditing(true)
-        }
-        else {
-            self.textView.insertText(validButtonTitle)
-        }
+        if case "➡️️" = validButtonTitle { self.moveCursor(.right) }
+        else if case "⬅️️" = validButtonTitle { self.moveCursor(.left) }
+        else if case "⌨" = validButtonTitle { self.textView.endEditing(true) }
+        else { self.textView.insertText(validButtonTitle) }
+    }
+    
+    fileprivate func moveCursor(_ cursor: Cursor) {
+        guard let selectedTextRange = self.textView.selectedTextRange, let newCursorPosition = textView.position(from: selectedTextRange.start, offset: cursor.direction) else { return }
+        textView.selectedTextRange = textView.textRange(from: newCursorPosition, to: newCursorPosition)
     }
     
     fileprivate func setupKeyboardToolBarWithBarButtonItems() {
