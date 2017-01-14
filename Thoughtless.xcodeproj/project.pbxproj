@@ -94,7 +94,7 @@
 		6501C0361DC1F37B005DB2EC /* FCAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCAlertView.swift; sourceTree = "<group>"; };
 		6501C0371DC1F37B005DB2EC /* FCAlertViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCAlertViewDelegate.swift; sourceTree = "<group>"; };
 		6501C0381DC1F37B005DB2EC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		651875131D53000F006C8D82 /* Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notes.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		651875131D53000F006C8D82 /* Thoughtless.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thoughtless.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		651875161D53000F006C8D82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6518751B1D53000F006C8D82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6518751D1D53000F006C8D82 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -102,7 +102,7 @@
 		651875221D53000F006C8D82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		651875281D53A354006C8D82 /* NotesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
 		653518FE1D6BE9F400294A64 /* Notes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notes.swift; sourceTree = "<group>"; };
-		653519061D6BF72700294A64 /* NotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		653519061D6BF72700294A64 /* ThoughtlessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThoughtlessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		653519081D6BF72700294A64 /* NotesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTests.swift; sourceTree = "<group>"; };
 		6535190A1D6BF72700294A64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		655F2C681D958EA400550C05 /* MarkdownNotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownNotesViewController.swift; sourceTree = "<group>"; };
@@ -166,7 +166,7 @@
 		6518750A1D53000F006C8D82 = {
 			isa = PBXGroup;
 			children = (
-				651875151D53000F006C8D82 /* Notes */,
+				651875151D53000F006C8D82 /* Thoughtless */,
 				653519071D6BF72700294A64 /* NotesTests */,
 				651875141D53000F006C8D82 /* Products */,
 			);
@@ -175,13 +175,13 @@
 		651875141D53000F006C8D82 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				651875131D53000F006C8D82 /* Notes.app */,
-				653519061D6BF72700294A64 /* NotesTests.xctest */,
+				651875131D53000F006C8D82 /* Thoughtless.app */,
+				653519061D6BF72700294A64 /* ThoughtlessTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		651875151D53000F006C8D82 /* Notes */ = {
+		651875151D53000F006C8D82 /* Thoughtless */ = {
 			isa = PBXGroup;
 			children = (
 				6501C0301DC1F37B005DB2EC /* FCAlertView */,
@@ -198,7 +198,7 @@
 				6518751F1D53000F006C8D82 /* LaunchScreen.storyboard */,
 				651875221D53000F006C8D82 /* Info.plist */,
 			);
-			path = Notes;
+			path = Thoughtless;
 			sourceTree = "<group>";
 		};
 		653519071D6BF72700294A64 /* NotesTests */ = {
@@ -279,9 +279,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		651875121D53000F006C8D82 /* Notes */ = {
+		651875121D53000F006C8D82 /* Thoughtless */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 651875251D53000F006C8D82 /* Build configuration list for PBXNativeTarget "Notes" */;
+			buildConfigurationList = 651875251D53000F006C8D82 /* Build configuration list for PBXNativeTarget "Thoughtless" */;
 			buildPhases = (
 				6518750F1D53000F006C8D82 /* Sources */,
 				651875101D53000F006C8D82 /* Frameworks */,
@@ -292,14 +292,14 @@
 			);
 			dependencies = (
 			);
-			name = Notes;
+			name = Thoughtless;
 			productName = Notes;
-			productReference = 651875131D53000F006C8D82 /* Notes.app */;
+			productReference = 651875131D53000F006C8D82 /* Thoughtless.app */;
 			productType = "com.apple.product-type.application";
 		};
-		653519051D6BF72700294A64 /* NotesTests */ = {
+		653519051D6BF72700294A64 /* ThoughtlessTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6535190D1D6BF72700294A64 /* Build configuration list for PBXNativeTarget "NotesTests" */;
+			buildConfigurationList = 6535190D1D6BF72700294A64 /* Build configuration list for PBXNativeTarget "ThoughtlessTests" */;
 			buildPhases = (
 				653519021D6BF72700294A64 /* Sources */,
 				653519031D6BF72700294A64 /* Frameworks */,
@@ -310,9 +310,9 @@
 			dependencies = (
 				6535190C1D6BF72700294A64 /* PBXTargetDependency */,
 			);
-			name = NotesTests;
+			name = ThoughtlessTests;
 			productName = NotesTests;
-			productReference = 653519061D6BF72700294A64 /* NotesTests.xctest */;
+			productReference = 653519061D6BF72700294A64 /* ThoughtlessTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -337,7 +337,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 6518750E1D53000F006C8D82 /* Build configuration list for PBXProject "Notes" */;
+			buildConfigurationList = 6518750E1D53000F006C8D82 /* Build configuration list for PBXProject "Thoughtless" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -350,8 +350,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				651875121D53000F006C8D82 /* Notes */,
-				653519051D6BF72700294A64 /* NotesTests */,
+				651875121D53000F006C8D82 /* Thoughtless */,
+				653519051D6BF72700294A64 /* ThoughtlessTests */,
 			);
 		};
 /* End PBXProject section */
@@ -475,7 +475,7 @@
 /* Begin PBXTargetDependency section */
 		6535190C1D6BF72700294A64 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 651875121D53000F006C8D82 /* Notes */;
+			target = 651875121D53000F006C8D82 /* Thoughtless */;
 			targetProxy = 6535190B1D6BF72700294A64 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -593,10 +593,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4Z5JKF2M6S;
-				INFOPLIST_FILE = Notes/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Thoughtless/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = self.fearless.Notes;
+				PRODUCT_BUNDLE_IDENTIFIER = org.corruptionofconformity.thoughtless;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -607,10 +607,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4Z5JKF2M6S;
-				INFOPLIST_FILE = Notes/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Thoughtless/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = self.fearless.Notes;
+				PRODUCT_BUNDLE_IDENTIFIER = org.corruptionofconformity.thoughtless;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -625,7 +625,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = self.fearless.NotesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Notes.app/Notes";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Thoughtless.app/Thoughtless";
 			};
 			name = Debug;
 		};
@@ -638,14 +638,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = self.fearless.NotesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Notes.app/Notes";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Thoughtless.app/Thoughtless";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6518750E1D53000F006C8D82 /* Build configuration list for PBXProject "Notes" */ = {
+		6518750E1D53000F006C8D82 /* Build configuration list for PBXProject "Thoughtless" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				651875231D53000F006C8D82 /* Debug */,
@@ -654,7 +654,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		651875251D53000F006C8D82 /* Build configuration list for PBXNativeTarget "Notes" */ = {
+		651875251D53000F006C8D82 /* Build configuration list for PBXNativeTarget "Thoughtless" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				651875261D53000F006C8D82 /* Debug */,
@@ -663,7 +663,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6535190D1D6BF72700294A64 /* Build configuration list for PBXNativeTarget "NotesTests" */ = {
+		6535190D1D6BF72700294A64 /* Build configuration list for PBXNativeTarget "ThoughtlessTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6535190E1D6BF72700294A64 /* Debug */,

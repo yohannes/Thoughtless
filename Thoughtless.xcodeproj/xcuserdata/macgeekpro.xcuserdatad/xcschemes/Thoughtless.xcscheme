@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "651875121D53000F006C8D82"
-               BuildableName = "Notes.app"
-               BlueprintName = "Notes"
-               ReferencedContainer = "container:Notes.xcodeproj">
+               BuildableName = "Thoughtless.app"
+               BlueprintName = "Thoughtless"
+               ReferencedContainer = "container:Thoughtless.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "653519051D6BF72700294A64"
-               BuildableName = "NotesTests.xctest"
-               BlueprintName = "NotesTests"
-               ReferencedContainer = "container:Notes.xcodeproj">
+               BuildableName = "ThoughtlessTests.xctest"
+               BlueprintName = "ThoughtlessTests"
+               ReferencedContainer = "container:Thoughtless.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "651875121D53000F006C8D82"
-            BuildableName = "Notes.app"
-            BlueprintName = "Notes"
-            ReferencedContainer = "container:Notes.xcodeproj">
+            BuildableName = "Thoughtless.app"
+            BlueprintName = "Thoughtless"
+            ReferencedContainer = "container:Thoughtless.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -66,9 +66,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "651875121D53000F006C8D82"
-            BuildableName = "Notes.app"
-            BlueprintName = "Notes"
-            ReferencedContainer = "container:Notes.xcodeproj">
+            BuildableName = "Thoughtless.app"
+            BlueprintName = "Thoughtless"
+            ReferencedContainer = "container:Thoughtless.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -85,9 +85,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "651875121D53000F006C8D82"
-            BuildableName = "Notes.app"
-            BlueprintName = "Notes"
-            ReferencedContainer = "container:Notes.xcodeproj">
+            BuildableName = "Thoughtless.app"
+            BlueprintName = "Thoughtless"
+            ReferencedContainer = "container:Thoughtless.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
