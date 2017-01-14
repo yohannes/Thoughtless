@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4388F56426EC8B11447B3235 /* Pods_ThoughtlessTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6FCDB1932489F7B1B7C5F0 /* Pods_ThoughtlessTests.framework */; };
+		53396DC9A4E555B9BA05906A /* Pods_Thoughtless.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BB04E8C1406F7203EED9DD6 /* Pods_Thoughtless.framework */; };
 		6501C0391DC1F37B005DB2EC /* alert-round.png in Resources */ = {isa = PBXBuildFile; fileRef = 6501C0311DC1F37B005DB2EC /* alert-round.png */; };
 		6501C03A1DC1F37B005DB2EC /* alert-round.png in Resources */ = {isa = PBXBuildFile; fileRef = 6501C0311DC1F37B005DB2EC /* alert-round.png */; };
 		6501C03B1DC1F37B005DB2EC /* checkmark-round.png in Resources */ = {isa = PBXBuildFile; fileRef = 6501C0321DC1F37B005DB2EC /* checkmark-round.png */; };
@@ -86,6 +88,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0D2ECF3488456280F71EEF26 /* Pods-Thoughtless.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thoughtless.release.xcconfig"; path = "Pods/Target Support Files/Pods-Thoughtless/Pods-Thoughtless.release.xcconfig"; sourceTree = "<group>"; };
+		2E9A19799D3B8D41650EE413 /* Pods-ThoughtlessTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThoughtlessTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThoughtlessTests/Pods-ThoughtlessTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5BB04E8C1406F7203EED9DD6 /* Pods_Thoughtless.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Thoughtless.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6501C0311DC1F37B005DB2EC /* alert-round.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-round.png"; sourceTree = "<group>"; };
 		6501C0321DC1F37B005DB2EC /* checkmark-round.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkmark-round.png"; sourceTree = "<group>"; };
 		6501C0331DC1F37B005DB2EC /* close-round.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close-round.png"; sourceTree = "<group>"; };
@@ -128,6 +133,9 @@
 		65AF74551D9B6C19009E1E1C /* MarkdownStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownStyle.swift; sourceTree = "<group>"; };
 		65C6B37F1D65913800310FF8 /* NotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
 		65FE6E7E1DBFC81B00F11A8E /* CurrentDateAndTimeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentDateAndTimeHelper.swift; sourceTree = "<group>"; };
+		738B997E1C8C519D4AD6C326 /* Pods-ThoughtlessTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThoughtlessTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThoughtlessTests/Pods-ThoughtlessTests.release.xcconfig"; sourceTree = "<group>"; };
+		CC1CDE91BCC2CC3320A8DEFE /* Pods-Thoughtless.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thoughtless.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Thoughtless/Pods-Thoughtless.debug.xcconfig"; sourceTree = "<group>"; };
+		EA6FCDB1932489F7B1B7C5F0 /* Pods_ThoughtlessTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ThoughtlessTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +143,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53396DC9A4E555B9BA05906A /* Pods_Thoughtless.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +151,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4388F56426EC8B11447B3235 /* Pods_ThoughtlessTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +179,8 @@
 				651875151D53000F006C8D82 /* Thoughtless */,
 				653519071D6BF72700294A64 /* NotesTests */,
 				651875141D53000F006C8D82 /* Products */,
+				98C14F7FBAAF594AB932E6B6 /* Pods */,
+				962007E01869D83914B5FE7C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -276,6 +288,26 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		962007E01869D83914B5FE7C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5BB04E8C1406F7203EED9DD6 /* Pods_Thoughtless.framework */,
+				EA6FCDB1932489F7B1B7C5F0 /* Pods_ThoughtlessTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		98C14F7FBAAF594AB932E6B6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CC1CDE91BCC2CC3320A8DEFE /* Pods-Thoughtless.debug.xcconfig */,
+				0D2ECF3488456280F71EEF26 /* Pods-Thoughtless.release.xcconfig */,
+				2E9A19799D3B8D41650EE413 /* Pods-ThoughtlessTests.debug.xcconfig */,
+				738B997E1C8C519D4AD6C326 /* Pods-ThoughtlessTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -283,10 +315,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 651875251D53000F006C8D82 /* Build configuration list for PBXNativeTarget "Thoughtless" */;
 			buildPhases = (
+				597431E61877C26EE753B97A /* [CP] Check Pods Manifest.lock */,
 				6518750F1D53000F006C8D82 /* Sources */,
 				651875101D53000F006C8D82 /* Frameworks */,
 				651875111D53000F006C8D82 /* Resources */,
 				65610CC61D5452DC003E0882 /* ShellScript */,
+				A850E8CB2A8D8AF467178093 /* [CP] Embed Pods Frameworks */,
+				FEF258C43006B5F692CD1CC2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -301,9 +336,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6535190D1D6BF72700294A64 /* Build configuration list for PBXNativeTarget "ThoughtlessTests" */;
 			buildPhases = (
+				5CC309CBF1B402781BB2D16C /* [CP] Check Pods Manifest.lock */,
 				653519021D6BF72700294A64 /* Sources */,
 				653519031D6BF72700294A64 /* Frameworks */,
 				653519041D6BF72700294A64 /* Resources */,
+				F6114808BAA3E64512823CDC /* [CP] Embed Pods Frameworks */,
+				72285E196EED67D3F794A3D2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -385,6 +423,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		597431E61877C26EE753B97A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5CC309CBF1B402781BB2D16C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		65610CC61D5452DC003E0882 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -397,6 +465,66 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "TAGS=\"TODO:|FIXME:\"\nERRORTAG=\"ERROR:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" -or -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$|($ERRORTAG).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\" | perl -p -e \"s/($ERRORTAG)/ error: \\$1/\"";
+		};
+		72285E196EED67D3F794A3D2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ThoughtlessTests/Pods-ThoughtlessTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A850E8CB2A8D8AF467178093 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Thoughtless/Pods-Thoughtless-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F6114808BAA3E64512823CDC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ThoughtlessTests/Pods-ThoughtlessTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FEF258C43006B5F692CD1CC2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Thoughtless/Pods-Thoughtless-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -590,6 +718,7 @@
 		};
 		651875261D53000F006C8D82 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CC1CDE91BCC2CC3320A8DEFE /* Pods-Thoughtless.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4Z5JKF2M6S;
@@ -604,6 +733,7 @@
 		};
 		651875271D53000F006C8D82 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D2ECF3488456280F71EEF26 /* Pods-Thoughtless.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4Z5JKF2M6S;
@@ -618,6 +748,7 @@
 		};
 		6535190E1D6BF72700294A64 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2E9A19799D3B8D41650EE413 /* Pods-ThoughtlessTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = NotesTests/Info.plist;
@@ -631,6 +762,7 @@
 		};
 		6535190F1D6BF72700294A64 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 738B997E1C8C519D4AD6C326 /* Pods-ThoughtlessTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = NotesTests/Info.plist;
