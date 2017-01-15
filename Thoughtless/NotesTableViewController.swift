@@ -51,6 +51,13 @@ class NotesTableViewController: UITableViewController {
         self.notes += [firstNote, secondNote, thirdNote]
     }
     
+    func displayShareSheet(from indexPath: IndexPath) {
+        let activityViewController = UIActivityViewController(activityItems: [self.notes[indexPath.row].entry], applicationActivities: nil)
+        self.present(activityViewController, animated: true) {
+            self.tableView.setEditing(false, animated: true)
+        }
+    }
+    
     // MARK: - NSCoding Methods
     
     func saveNotes() {
@@ -127,26 +134,38 @@ class NotesTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            self.indexPath = indexPath
-            self.deleteOrNotDeleteAlertView.showAlert(inView: self,
-                                                      withTitle: "Delete For Sure?",
-                                                      withSubtitle: "There is no way to recover it.",
-                                                      withCustomImage: nil,
-                                                      withDoneButtonTitle: nil,
-                                                      andButtons: [Delete.no.operation, Delete.yes.operation])
-        }
-    }
-    
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let noteTobeMoved = self.notes[sourceIndexPath.row]
         self.notes.remove(at: sourceIndexPath.row)
         self.notes.insert(noteTobeMoved, at: destinationIndexPath.row)
+    }
+    
+    // MARK: - UITableViewDelegate Methods
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let shareButton: UITableViewRowAction = {
+            let tableViewRowAction = UITableViewRowAction(style: .normal, title: "Share", handler: { (_, indexPath) in
+                self.displayShareSheet(from: indexPath)
+            })
+            tableViewRowAction.backgroundColor = UIColor(hexString: "#488AC6")
+            return tableViewRowAction
+        }()
+        
+        let deleteButton: UITableViewRowAction = {
+            let tableViewRowAction = UITableViewRowAction(style: .destructive, title: "Delete", handler: { (_, indexPath) in
+                self.indexPath = indexPath
+                self.deleteOrNotDeleteAlertView.showAlert(inView: self,
+                                                          withTitle: "Delete For Sure?",
+                                                          withSubtitle: "There is no way to recover it.",
+                                                          withCustomImage: nil,
+                                                          withDoneButtonTitle: nil,
+                                                          andButtons: [Delete.no.operation, Delete.yes.operation])
+            })
+            return tableViewRowAction
+        }()
+        
+        return [shareButton, deleteButton]
     }
 }
 
