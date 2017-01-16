@@ -360,7 +360,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Yohannes Wijaya";
 				TargetAttributes = {
 					651875121D53000F006C8D82 = {
@@ -720,6 +720,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CC1CDE91BCC2CC3320A8DEFE /* Pods-Thoughtless.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4Z5JKF2M6S;
 				INFOPLIST_FILE = "$(SRCROOT)/Thoughtless/Info.plist";
@@ -735,6 +736,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0D2ECF3488456280F71EEF26 /* Pods-Thoughtless.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4Z5JKF2M6S;
 				INFOPLIST_FILE = "$(SRCROOT)/Thoughtless/Info.plist";

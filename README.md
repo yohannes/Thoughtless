@@ -12,6 +12,16 @@
 
 Gif created with [GIPHY](http://giphy.com)
 
+### Installation Instructions
+
+1. Install [Xcode 8](https://developer.apple.com/xcode/)
+2. Download [Thoughtless source code](https://github.com/yoha/Thoughtless/releases/latest)
+3. Open `Thoughtless.xcworkspace` in Xcode
+4. Open Xcode's Preferences -> Accounts -> add your Apple ID
+5. In Xcode's project navigator, click Thoughtless on the very top and go to Targets list -> Thoughtless -> General -> Identity and add a word to the end of the entry in Bundle Identifier to make it unique. Also select your Apple ID in Signing -> Team
+6. Connect your iPhone or iPad and select it in Xcode's Product menu -> Destination
+7. Press CMD+R or Product -> Run to install Thoughtless
+
 3rd Party Libraries used in this app:
 - [IQKeyboardManager](https://github.com/hackiftekhar/IQKeyboardManager) by [Mohd Iftekhar Qurashi](https://github.com/hackiftekhar)
 - [FCAlertView](https://github.com/k9101/FCAlertView) by [Kris Penney](https://github.com/k9101)
