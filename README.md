@@ -22,6 +22,8 @@ Gif created with [GIPHY](http://giphy.com)
 6. Connect your iPhone or iPad and select it in Xcode's Product menu -> Destination
 7. Press CMD+R or Product -> Run to install Thoughtless
 
+---
+
 3rd Party Libraries used in this app:
 - [IQKeyboardManager](https://github.com/hackiftekhar/IQKeyboardManager) by [Mohd Iftekhar Qurashi](https://github.com/hackiftekhar)
 - [FCAlertView](https://github.com/k9101/FCAlertView) by [Kris Penney](https://github.com/k9101)
