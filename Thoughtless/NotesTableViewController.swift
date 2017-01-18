@@ -54,7 +54,7 @@ class NotesTableViewController: UITableViewController {
     func displayShareSheet(from indexPath: IndexPath) {
         let activityViewController = UIActivityViewController(activityItems: [self.notes[indexPath.row].entry], applicationActivities: nil)
         self.present(activityViewController, animated: true) {
-            self.tableView.setEditing(false, animated: true)
+            self.setEditing(false, animated: true)
         }
     }
     
@@ -181,7 +181,7 @@ extension NotesTableViewController: FCAlertViewDelegate {
             self.navigationItem.title = "\(self.notes.count) Notes"
         }
         else if title == Delete.no.operation {
-            self.tableView.setEditing(false, animated: true)
+            self.setEditing(false, animated: true)
         }
     }
 }
