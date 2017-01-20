@@ -208,12 +208,16 @@ class NotesViewController: UIViewController {
         self.powerUpYourNoteLabel.textColor = UIColor(hexString: "#6F7B91")
         
         self.doesTextViewNeedToBeSaved = false
+        
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(hexString: "#72889E")!]
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.textView.setContentOffset(CGPoint(x:0, y: -64), animated: false)
+        
+        self.updateWordsCount()
     }
     
     // MARK: - Local Methods
@@ -253,6 +257,11 @@ class NotesViewController: UIViewController {
     fileprivate func setupBarButtonItemOnKeyboardToolbarWith(title: String) -> UIBarButtonItem {
         let barButtonItem = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(NotesViewController.barButtonItemOnToolBarDidTouch(sender:)))
         return barButtonItem
+    }
+    
+    fileprivate func updateWordsCount() {
+        guard !self.textView.text.isEmpty else { return }
+        self.navigationItem.title = "\(self.textView.text.components(separatedBy: " ").count) words"
     }
 }
 
@@ -315,5 +324,7 @@ extension NotesViewController: UIScrollViewDelegate {
 extension NotesViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         self.doesTextViewNeedToBeSaved = true
+        
+        self.updateWordsCount()
     }
 }
