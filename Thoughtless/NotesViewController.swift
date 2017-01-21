@@ -260,8 +260,13 @@ class NotesViewController: UIViewController {
     }
     
     fileprivate func updateWordsCount() {
-        guard !self.textView.text.isEmpty else { return }
-        self.navigationItem.title = "\(self.textView.text.components(separatedBy: " ").count) words"
+        let trimmedString = self.textView.text.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression, range: nil).trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .whitespacesAndNewlines)
+        if trimmedString.count == 1 {
+            self.navigationItem.title = trimmedString.first!.characters.count > 1 ? "Word Count: \(trimmedString.count)" : ""
+        }
+        else {
+            self.navigationItem.title = "Word Count: \(trimmedString.count)"
+        }
     }
 }
 
