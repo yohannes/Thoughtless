@@ -1,6 +1,6 @@
 //
 //  MarkdownNotesViewController.swift
-//  Notes
+//  Thoughtless
 //
 //  Created by Yohannes Wijaya on 9/23/16.
 //  Copyright © 2016 Yohannes Wijaya. All rights reserved.
@@ -13,7 +13,7 @@ class MarkdownNotesViewController: UIViewController {
     
     // MARK: - Stored Properties
     
-    var note: Notes?
+    var note: Note?
     
     var lastOffsetY: CGFloat = 0
     

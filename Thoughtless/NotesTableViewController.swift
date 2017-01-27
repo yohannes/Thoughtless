@@ -1,6 +1,6 @@
 //
 //  NotesTableViewController.swift
-//  Notes
+//  Thoughtless
 //
 //  Created by Yohannes Wijaya on 8/4/16.
 //  Copyright © 2016 Yohannes Wijaya. All rights reserved.
@@ -13,7 +13,10 @@ class NotesTableViewController: UITableViewController {
     
     // MARK: - Stored Properties
     
-    var notes = [Notes]()
+    var notes = [Note]()
+    var metadataQuery = NSMetadataQuery()
+    var indexPath: IndexPath?
+    var entries = NSMutableArray()
     
     let deleteOrNotDeleteAlertView: FCAlertView = {
         let alertView = FCAlertView(type: .warning)
@@ -22,7 +25,10 @@ class NotesTableViewController: UITableViewController {
         return alertView
     }()
     
-    var indexPath: IndexPath?
+    let iCloudConfigurationNotDetected: FCAlertView = {
+        let alertView = FCAlertView(type: .warning)
+        return alertView
+    }()
     
     // MARK: - IBAction Methods
     
@@ -44,10 +50,24 @@ class NotesTableViewController: UITableViewController {
     
     // MARK: - Helper Methods
     
+    fileprivate func loadEntries() {
+        guard let iCloudContainerURL = FileManager.default.url(forUbiquityContainerIdentifier: nil) else {
+            self.iCloudConfigurationNotDetected.showAlert(inView: self,
+                                                          withTitle: "Unable to Access iCloud Account",
+                                                          withSubtitle: "Open Settings, iCloud, & sign in with your Apple ID.",
+                                                          withCustomImage: nil,
+                                                          withDoneButtonTitle: nil,
+                                                          andButtons: nil)
+        }
+        // TODO: - remove me
+        print(iCloudContainerURL.absoluteString)
+        self.metadataQuery.searchScopes = [NSMetadataQueryUbiquitousDocumentsScope]
+    }
+    
     func loadSampleNotes() {
-        guard let firstNote = Notes(entry: "Hello Sunshine! Come & tap me first!\n👇👇👇\n\nYou can power up your note by writing your words like **this** or _this_, create an [url link](http://apple.com), or even make a todo list:\n\n* Watch WWDC videos.\n* Write `code`.\n* Fetch my girlfriend for a ride.\n* Refactor `code`.\n\nOr even create quote:\n\n> A block of quote.\n\nTap *Go!* to preview your enhanced note.\n\nTap *How?* to learn more.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
-        guard let secondNote = Notes(entry: "Swipe me left or tap edit to delete.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
-        guard let thirdNote = Notes(entry: "Tap edit to move me or delete me.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
+        guard let firstNote = Note(entry: "Hello Sunshine! Come & tap me first!\n👇👇👇\n\nYou can power up your note by writing your words like **this** or _this_, create an [url link](http://apple.com), or even make a todo list:\n\n* Watch WWDC videos.\n* Write `code`.\n* Fetch my girlfriend for a ride.\n* Refactor `code`.\n\nOr even create quote:\n\n> A block of quote.\n\nTap *Go!* to preview your enhanced note.\n\nTap *How?* to learn more.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
+        guard let secondNote = Note(entry: "Swipe me left or tap edit to delete.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
+        guard let thirdNote = Note(entry: "Tap edit to move me or delete me.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
         self.notes += [firstNote, secondNote, thirdNote]
     }
     
@@ -61,11 +81,11 @@ class NotesTableViewController: UITableViewController {
     // MARK: - NSCoding Methods
     
     func saveNotes() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(self.notes, toFile: Notes.archiveURL.path)
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(self.notes, toFile: Note.archiveURL.path)
         if !isSuccessfulSave { print("unable to save note...") }
     }
     
-    func loadNotes() -> [Notes]? {
+    func loadNotes() -> [Note]? {
         return NSKeyedUnarchiver.unarchiveObject(withFile: Notes.archiveURL.path) as? [Notes]
     }
     
