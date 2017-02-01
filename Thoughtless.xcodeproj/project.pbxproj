@@ -72,8 +72,8 @@
 		65AF747B1D9B6C19009E1E1C /* MarkdownLinkElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AF74541D9B6C19009E1E1C /* MarkdownLinkElement.swift */; };
 		65AF747C1D9B6C19009E1E1C /* MarkdownStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AF74551D9B6C19009E1E1C /* MarkdownStyle.swift */; };
 		65AF747D1D9B6C19009E1E1C /* MarkdownStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AF74551D9B6C19009E1E1C /* MarkdownStyle.swift */; };
-		65B7DA811E3B2FF7006A1A87 /* NoteDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B7DA801E3B2FF7006A1A87 /* NoteDocument.swift */; };
-		65B7DA821E3B2FF7006A1A87 /* NoteDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B7DA801E3B2FF7006A1A87 /* NoteDocument.swift */; };
+		65B7DA811E3B2FF7006A1A87 /* NotesDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B7DA801E3B2FF7006A1A87 /* NotesDocument.swift */; };
+		65B7DA821E3B2FF7006A1A87 /* NotesDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B7DA801E3B2FF7006A1A87 /* NotesDocument.swift */; };
 		65C6B3801D65913800310FF8 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C6B37F1D65913800310FF8 /* NotesViewController.swift */; };
 		65FE6E7F1DBFC81B00F11A8E /* CurrentDateAndTimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FE6E7E1DBFC81B00F11A8E /* CurrentDateAndTimeHelper.swift */; };
 		65FE6E801DBFC81B00F11A8E /* CurrentDateAndTimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FE6E7E1DBFC81B00F11A8E /* CurrentDateAndTimeHelper.swift */; };
@@ -134,7 +134,7 @@
 		65AF74541D9B6C19009E1E1C /* MarkdownLinkElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownLinkElement.swift; sourceTree = "<group>"; };
 		65AF74551D9B6C19009E1E1C /* MarkdownStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownStyle.swift; sourceTree = "<group>"; };
 		65B7DA7F1E3B081C006A1A87 /* Thoughtless.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Thoughtless.entitlements; sourceTree = "<group>"; };
-		65B7DA801E3B2FF7006A1A87 /* NoteDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteDocument.swift; sourceTree = "<group>"; };
+		65B7DA801E3B2FF7006A1A87 /* NotesDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesDocument.swift; sourceTree = "<group>"; };
 		65C6B37F1D65913800310FF8 /* NotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
 		65FE6E7E1DBFC81B00F11A8E /* CurrentDateAndTimeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentDateAndTimeHelper.swift; sourceTree = "<group>"; };
 		738B997E1C8C519D4AD6C326 /* Pods-ThoughtlessTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThoughtlessTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThoughtlessTests/Pods-ThoughtlessTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -207,7 +207,7 @@
 				6518751A1D53000F006C8D82 /* Main.storyboard */,
 				65FE6E7E1DBFC81B00F11A8E /* CurrentDateAndTimeHelper.swift */,
 				653518FE1D6BE9F400294A64 /* Note.swift */,
-				65B7DA801E3B2FF7006A1A87 /* NoteDocument.swift */,
+				65B7DA801E3B2FF7006A1A87 /* NotesDocument.swift */,
 				65C6B37F1D65913800310FF8 /* NotesViewController.swift */,
 				655F2C681D958EA400550C05 /* MarkdownNotesViewController.swift */,
 				65610CC71D54667A003E0882 /* NotesTableViewCell.swift */,
@@ -570,7 +570,7 @@
 				65FE6E7F1DBFC81B00F11A8E /* CurrentDateAndTimeHelper.swift in Sources */,
 				65610CC81D54667A003E0882 /* NotesTableViewCell.swift in Sources */,
 				65AF74681D9B6C19009E1E1C /* MarkdownLink.swift in Sources */,
-				65B7DA811E3B2FF7006A1A87 /* NoteDocument.swift in Sources */,
+				65B7DA811E3B2FF7006A1A87 /* NotesDocument.swift in Sources */,
 				6501C0411DC1F37B005DB2EC /* FCAlertView.swift in Sources */,
 				65AF74701D9B6C19009E1E1C /* UIFont+Traits.swift in Sources */,
 				65AF746A1D9B6C19009E1E1C /* MarkdownList.swift in Sources */,
@@ -592,7 +592,7 @@
 				6501C0441DC1F37B005DB2EC /* FCAlertViewDelegate.swift in Sources */,
 				65AF74731D9B6C19009E1E1C /* MarkdownParser.swift in Sources */,
 				65AF746F1D9B6C19009E1E1C /* String+UTF16.swift in Sources */,
-				65B7DA821E3B2FF7006A1A87 /* NoteDocument.swift in Sources */,
+				65B7DA821E3B2FF7006A1A87 /* NotesDocument.swift in Sources */,
 				65AF74691D9B6C19009E1E1C /* MarkdownLink.swift in Sources */,
 				65AF745B1D9B6C19009E1E1C /* MarkdownEscaping.swift in Sources */,
 				65AF74671D9B6C19009E1E1C /* MarkdownItalic.swift in Sources */,

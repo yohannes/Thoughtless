@@ -62,14 +62,23 @@ class NotesTableViewController: UITableViewController {
         // TODO: - remove me
         print(iCloudContainerURL.absoluteString)
         self.metadataQuery.searchScopes = [NSMetadataQueryUbiquitousDocumentsScope]
+        self.metadataQuery.predicate = NSPredicate(format: "%K like '*'", NSMetadataItemFSNameKey)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(NotesTableViewController.metadataQueryDidFinishGathering(_:)),
+                                               name: .NSMetadataQueryDidFinishGathering,
+                                               object: self.metadataQuery)
+        
+        self.metadataQuery.enableUpdates()
+        self.metadataQuery.start()
     }
     
-    func loadSampleNotes() {
-        guard let firstNote = Note(entry: "Hello Sunshine! Come & tap me first!\n👇👇👇\n\nYou can power up your note by writing your words like **this** or _this_, create an [url link](http://apple.com), or even make a todo list:\n\n* Watch WWDC videos.\n* Write `code`.\n* Fetch my girlfriend for a ride.\n* Refactor `code`.\n\nOr even create quote:\n\n> A block of quote.\n\nTap *Go!* to preview your enhanced note.\n\nTap *How?* to learn more.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
-        guard let secondNote = Note(entry: "Swipe me left or tap edit to delete.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
-        guard let thirdNote = Note(entry: "Tap edit to move me or delete me.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
-        self.notes += [firstNote, secondNote, thirdNote]
-    }
+//    func loadSampleNotes() {
+//        guard let firstNote = Note(entry: "Hello Sunshine! Come & tap me first!\n👇👇👇\n\nYou can power up your note by writing your words like **this** or _this_, create an [url link](http://apple.com), or even make a todo list:\n\n* Watch WWDC videos.\n* Write `code`.\n* Fetch my girlfriend for a ride.\n* Refactor `code`.\n\nOr even create quote:\n\n> A block of quote.\n\nTap *Go!* to preview your enhanced note.\n\nTap *How?* to learn more.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
+//        guard let secondNote = Note(entry: "Swipe me left or tap edit to delete.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
+//        guard let thirdNote = Note(entry: "Tap edit to move me or delete me.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
+//        self.notes += [firstNote, secondNote, thirdNote]
+//    }
     
     func displayShareSheet(from indexPath: IndexPath) {
         let activityViewController = UIActivityViewController(activityItems: [self.notes[indexPath.row].entry], applicationActivities: nil)
@@ -78,16 +87,47 @@ class NotesTableViewController: UITableViewController {
         }
     }
     
+    func metadataQueryDidFinishGathering(_ notification: Notification) {
+        // TODO: - Remove me when done
+        print("Notification received")
+        
+        let metadataQuery: NSMetadataQuery = notification.object as! NSMetadataQuery
+        self.notes.removeAll()
+        
+        if metadataQuery.resultCount > 0 {
+            for metaDataItem in self.metadataQuery.results as! [NSMetadataItem] {
+                let documentURL = metaDataItem.value(forAttribute: NSMetadataItemURLKey) as! URL
+                let notesDocument = NotesDocument(fileURL: documentURL)
+                notesDocument.open(completionHandler: { (isSuccess: Bool) in
+                    if isSuccess {
+                        // TODO: - Remove me when done
+                        print("iCloud file opened: OK")
+                        
+                        self.notes = notesDocument.notes
+                        self.tableView.reloadData()
+                    }
+                })
+            }
+        }
+        else {
+            print("iCloud file opened: Failed")
+        }
+        
+        NotificationCenter.default.removeObserver(self,
+                                                  name: .NSMetadataQueryDidFinishGathering,
+                                                  object: self.metadataQuery)
+    }
+    
     // MARK: - NSCoding Methods
     
-    func saveNotes() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(self.notes, toFile: Note.archiveURL.path)
-        if !isSuccessfulSave { print("unable to save note...") }
-    }
+//    func saveNotes() {
+//        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(self.notes, toFile: Note.archiveURL.path)
+//        if !isSuccessfulSave { print("unable to save note...") }
+//    }
     
-    func loadNotes() -> [Note]? {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: Notes.archiveURL.path) as? [Notes]
-    }
+//    func loadNotes() -> [Note]? {
+//        return NSKeyedUnarchiver.unarchiveObject(withFile: Notes.archiveURL.path) as? [Notes]
+//    }
     
     // MARK: - UIViewController Methods
     
