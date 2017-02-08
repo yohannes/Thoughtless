@@ -8,6 +8,7 @@
 
 import UIKit
 import SafariServices
+import SwiftHEXColors
 
 class MarkdownNotesViewController: UIViewController {
     
@@ -90,7 +91,7 @@ extension MarkdownNotesViewController: UITextViewDelegate {
         
         var copiedURL = URL
         if copiedURL.absoluteString.lowercased().hasPrefix(HTTP.Secured.rawValue) == false && copiedURL.absoluteString.lowercased().hasPrefix(HTTP.NonSecured.rawValue) == false {
-            copiedURL = NSURL(string: HTTP.NonSecured.rawValue.appending(copiedURL.absoluteString)) as! URL
+            copiedURL = NSURL(string: HTTP.NonSecured.rawValue.appending(copiedURL.absoluteString))! as URL
         }
         let safariViewController = SFSafariViewController(url: copiedURL)
         self.present(safariViewController, animated: true, completion: nil)

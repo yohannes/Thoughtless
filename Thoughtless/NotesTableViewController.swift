@@ -13,10 +13,10 @@ class NotesTableViewController: UITableViewController {
     
     // MARK: - Stored Properties
     
-    var notes = [Note]()
+//    var notes = [Note]()
+    var noteDocuments = [NoteDocument]()
     var metadataQuery = NSMetadataQuery()
     var indexPath: IndexPath?
-    var entries = NSMutableArray()
     
     let deleteOrNotDeleteAlertView: FCAlertView = {
         let alertView = FCAlertView(type: .warning)
@@ -34,23 +34,34 @@ class NotesTableViewController: UITableViewController {
     
     @IBAction func unwindToNotesTableViewController(sender: UIStoryboardSegue) {
         guard let validNotesViewController = sender.source as? NotesViewController, let validNote = validNotesViewController.note else { return }
+//        if self.presentedViewController is UINavigationController {
+//            let newIndexPath = IndexPath(row: 0, section: 0)
+//            self.notes.insert(validNote, at: 0)
+//            self.tableView.insertRows(at: [newIndexPath], with: .top)
+//        }
+//        else {
+//            guard let selectedIndexPath = self.tableView.indexPathForSelectedRow, self.notes[selectedIndexPath.row].entry != validNote.entry else { return }
+//            self.notes.remove(at: selectedIndexPath.row)
+//            self.notes.insert(validNote, at: 0)
+//            self.tableView.reloadData()
+//        }
+//        self.saveNotes()
         if self.presentedViewController is UINavigationController {
             let newIndexPath = IndexPath(row: 0, section: 0)
-            self.notes.insert(validNote, at: 0)
-            self.tableView.insertRows(at: [newIndexPath], with: .top)
-        }
-        else {
-            guard let selectedIndexPath = self.tableView.indexPathForSelectedRow, self.notes[selectedIndexPath.row].entry != validNote.entry else { return }
-            self.notes.remove(at: selectedIndexPath.row)
-            self.notes.insert(validNote, at: 0)
+            self.save(validNote, at: newIndexPath)
             self.tableView.reloadData()
         }
-        self.saveNotes()
+        else {
+            guard let selectedIndexPath = self.tableView.indexPathForSelectedRow, self.noteDocuments[selectedIndexPath.row].note.entry != validNote.entry else { return }
+            self.deleteNote(at: selectedIndexPath)
+            self.save(validNote, at: IndexPath(row: 0, section: 0))
+            self.tableView.reloadData()
+        }
     }
     
     // MARK: - Helper Methods
     
-    fileprivate func loadEntries() {
+    fileprivate func loadNotes() {
         guard let iCloudContainerURL = FileManager.default.url(forUbiquityContainerIdentifier: nil) else {
             self.iCloudConfigurationNotDetected.showAlert(inView: self,
                                                           withTitle: "Unable to Access iCloud Account",
@@ -58,6 +69,7 @@ class NotesTableViewController: UITableViewController {
                                                           withCustomImage: nil,
                                                           withDoneButtonTitle: nil,
                                                           andButtons: nil)
+            return
         }
         // TODO: - remove me
         print(iCloudContainerURL.absoluteString)
@@ -80,9 +92,13 @@ class NotesTableViewController: UITableViewController {
 //        self.notes += [firstNote, secondNote, thirdNote]
 //    }
     
-    func displayShareSheet(from indexPath: IndexPath) {
-        let activityViewController = UIActivityViewController(activityItems: [self.notes[indexPath.row].entry], applicationActivities: nil)
-        self.present(activityViewController, animated: true) {
+    fileprivate func displayShareSheet(from indexPath: IndexPath) {
+//        let activityViewController = UIActivityViewController(activityItems: [self.notes[indexPath.row].entry], applicationActivities: nil)
+//        self.present(activityViewController, animated: true) {
+//            self.setEditing(false, animated: true)
+//        }
+        let activityViewController = UIActivityViewController(activityItems: [self.noteDocuments[indexPath.row].note.entry], applicationActivities: nil)
+        self.present(activityViewController, animated: true) { 
             self.setEditing(false, animated: true)
         }
     }
@@ -92,30 +108,71 @@ class NotesTableViewController: UITableViewController {
         print("Notification received")
         
         let metadataQuery: NSMetadataQuery = notification.object as! NSMetadataQuery
-        self.notes.removeAll()
+        metadataQuery.disableUpdates()
+        metadataQuery.stop()
+        
+        self.noteDocuments.removeAll()
         
         if metadataQuery.resultCount > 0 {
             for metaDataItem in self.metadataQuery.results as! [NSMetadataItem] {
                 let documentURL = metaDataItem.value(forAttribute: NSMetadataItemURLKey) as! URL
-                let notesDocument = NotesDocument(fileURL: documentURL)
-                notesDocument.open(completionHandler: { (isSuccess: Bool) in
+                let noteDocument = NoteDocument(fileURL: documentURL)
+                noteDocument.open(completionHandler: { [weak self] (isSuccess: Bool) in
+                    guard let weakSelf = self else { return }
                     if isSuccess {
                         // TODO: - Remove me when done
                         print("iCloud file opened: OK")
                         
-                        self.notes = notesDocument.notes
-                        self.tableView.reloadData()
+                        weakSelf.noteDocuments.append(noteDocument)
+                        weakSelf.tableView.reloadData()
+                    }
+                    else {
+                        // TODO: - Remove me when done
+                        print("iCloud file opened: Failed")
                     }
                 })
             }
-        }
-        else {
-            print("iCloud file opened: Failed")
         }
         
         NotificationCenter.default.removeObserver(self,
                                                   name: .NSMetadataQueryDidFinishGathering,
                                                   object: self.metadataQuery)
+    }
+    
+    fileprivate func save(_ note: Note, at indexPath: IndexPath) {
+        guard let iCloudContainerURL = FileManager.default.url(forUbiquityContainerIdentifier: nil) else {
+            self.iCloudConfigurationNotDetected.showAlert(inView: self,
+                                                          withTitle: "Unable to Access iCloud Account",
+                                                          withSubtitle: "Open Settings, iCloud, & sign in with your Apple ID.",
+                                                          withCustomImage: nil,
+                                                          withDoneButtonTitle: nil,
+                                                          andButtons: nil)
+            return
+        }
+        
+        // TODO: - remove me
+        print(iCloudContainerURL.absoluteString)
+        let documentsURL = iCloudContainerURL.appendingPathComponent("Documents")
+        let noteURL = documentsURL.appendingPathComponent("\(note.entry.components(separatedBy: NSCharacterSet.whitespaces).first!)-\(Date.timeIntervalSinceReferenceDate)")
+        let noteDocument = NoteDocument(fileURL: noteURL)
+        noteDocument.note = note
+        self.noteDocuments.insert(noteDocument, at: indexPath.row)
+        self.tableView.insertRows(at: [indexPath], with: .top)
+        noteDocument.save(to: noteURL, for: .forCreating) { (isSuccessfulSaved: Bool) in
+            isSuccessfulSaved ? print("Save to iCloud succeeded") : print("Save to iCloud failed")
+        }
+    }
+    
+    fileprivate func deleteNote(at indexPath: IndexPath) {
+        let noteDocument = self.noteDocuments[indexPath.row]
+        do {
+            try FileManager.default.removeItem(at: noteDocument.fileURL)
+        }
+        catch let error as NSError {
+            print("Error occurred deleting a document. Reason: \(error)")
+        }
+        self.noteDocuments.remove(at: indexPath.row)
+        self.tableView.deleteRows(at: [indexPath], with: .bottom)
     }
     
     // MARK: - NSCoding Methods
@@ -134,12 +191,14 @@ class NotesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let loadedNotes = self.loadNotes() {
-            self.notes = loadedNotes
-        }
-        else {
-            self.loadSampleNotes()
-        }
+//        if let loadedNotes = self.loadNotes() {
+//            self.notes = loadedNotes
+//        }
+//        else {
+//            self.loadSampleNotes()
+//        }
+        
+        self.loadNotes()
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(hexString: "#72889E")!]
         
@@ -152,12 +211,13 @@ class NotesTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationItem.title = "\(self.notes.count) Notes"
+//        self.navigationItem.title = "\(self.notes.count) Notes"
+        self.navigationItem.title = "\(self.noteDocuments.count) Notes"
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let validSegueIdentifier = segue.identifier, let validSegueIdentifierCase = NotesTableViewControllerSegue(rawValue: validSegueIdentifier) else {
-            assertionFailure("Could not map segue identifier: \(segue.identifier)")
+            assertionFailure("Could not map segue identifier: \(String(describing: segue.identifier))")
             return
         }
         
@@ -166,7 +226,8 @@ class NotesTableViewController: UITableViewController {
             guard let validNotesViewController = segue.destination as? NotesViewController,
                 let selectedNoteCell = sender as? NotesTableViewCell,
                 let selectedIndexPath = self.tableView.indexPath(for: selectedNoteCell) else { return }
-            let selectedNote = self.notes[selectedIndexPath.row]
+//            let selectedNote = self.notes[selectedIndexPath.row]
+            let selectedNote = self.noteDocuments[selectedIndexPath.row].note
             validNotesViewController.note = selectedNote
         case .segueToNotesViewControllerFromAddButton:
             print("adding new note")
@@ -180,24 +241,37 @@ class NotesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.notes.count
+//        return self.notes.count
+        return self.noteDocuments.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "NotesTableViewCell", for: indexPath) as! NotesTableViewCell
+//        
+//        let note = self.notes[indexPath.row]
+//        
+//        cell.noteLabel.text = note.entry
+//        cell.noteModificationTimeStampLabel.text = note.dateModificationTimeStamp
+//        
+//        return cell
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "NotesTableViewCell", for: indexPath) as! NotesTableViewCell
         
-        let note = self.notes[indexPath.row]
+        let noteDocument = self.noteDocuments[indexPath.row]
         
-        cell.noteLabel.text = note.entry
-        cell.noteModificationTimeStampLabel.text = note.dateModificationTimeStamp
-        
+        cell.noteLabel.text = noteDocument.note.entry
+        cell.noteModificationTimeStampLabel.text = noteDocument.note.dateModificationTimeStamp
         return cell
     }
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let noteTobeMoved = self.notes[sourceIndexPath.row]
-        self.notes.remove(at: sourceIndexPath.row)
-        self.notes.insert(noteTobeMoved, at: destinationIndexPath.row)
+//        let noteTobeMoved = self.notes[sourceIndexPath.row]
+//        self.notes.remove(at: sourceIndexPath.row)
+//        self.notes.insert(noteTobeMoved, at: destinationIndexPath.row)
+        
+        self.deleteNote(at: sourceIndexPath)
+        guard let noteToBeMoved = self.noteDocuments[sourceIndexPath.row].note else { return }
+        self.save(noteToBeMoved, at: destinationIndexPath)
     }
     
     // MARK: - UITableViewDelegate Methods
@@ -205,17 +279,19 @@ class NotesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let shareButton: UITableViewRowAction = {
-            let tableViewRowAction = UITableViewRowAction(style: .normal, title: "Share", handler: { (_, indexPath) in
-                self.displayShareSheet(from: indexPath)
+            let tableViewRowAction = UITableViewRowAction(style: .normal, title: "Share", handler: { [weak self] (_, indexPath) in
+                guard let weakSelf = self else { return }
+                weakSelf.displayShareSheet(from: indexPath)
             })
             tableViewRowAction.backgroundColor = UIColor(hexString: "#488AC6")
             return tableViewRowAction
         }()
         
         let deleteButton: UITableViewRowAction = {
-            let tableViewRowAction = UITableViewRowAction(style: .destructive, title: "Delete", handler: { (_, indexPath) in
-                self.indexPath = indexPath
-                self.deleteOrNotDeleteAlertView.showAlert(inView: self,
+            let tableViewRowAction = UITableViewRowAction(style: .destructive, title: "Delete", handler: { [weak self] (_, indexPath) in
+                guard let weakSelf = self else { return }
+                weakSelf.indexPath = indexPath
+                weakSelf.deleteOrNotDeleteAlertView.showAlert(inView: weakSelf,
                                                           withTitle: "Delete For Sure?",
                                                           withSubtitle: "There is no way to recover it.",
                                                           withCustomImage: nil,
@@ -235,10 +311,11 @@ extension NotesTableViewController: FCAlertViewDelegate {
     func alertView(_ alertView: FCAlertView, clickedButtonIndex index: Int, buttonTitle title: String) {
         guard let validIndexPath = self.indexPath else { return }
         if title == Delete.yes.operation {
-            self.notes.remove(at: validIndexPath.row)
-            self.saveNotes()
-            tableView.deleteRows(at: [validIndexPath], with: .fade)
-            self.navigationItem.title = "\(self.notes.count) Notes"
+//            self.notes.remove(at: validIndexPath.row)
+//            tableView.deleteRows(at: [validIndexPath], with: .fade)
+            self.deleteNote(at: validIndexPath)
+//            self.navigationItem.title = "\(self.notes.count) Notes"
+            self.navigationItem.title = "\(self.noteDocuments.count) Notes"
         }
         else if title == Delete.no.operation {
             self.setEditing(false, animated: true)

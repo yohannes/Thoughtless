@@ -20,8 +20,8 @@ class Note: NSObject, NSCoding {
     var entry: String
     var dateModificationTimeStamp: String
     
-    static var DocumentsDirectory = FileManager.default.urls(for: FileManager.SearchPathDirectory.documentDirectory, in: FileManager.SearchPathDomainMask.userDomainMask).first!
-    static let archiveURL = Note.DocumentsDirectory.appendingPathComponent("notes")
+//    static var DocumentsDirectory = FileManager.default.urls(for: FileManager.SearchPathDirectory.documentDirectory, in: FileManager.SearchPathDomainMask.userDomainMask).first!
+//    static let archiveURL = Note.DocumentsDirectory.appendingPathComponent("notes")
     
     // MARK: - Initialization
     
