@@ -72,7 +72,7 @@ class NotesTableViewController: UITableViewController {
             return
         }
         // TODO: - remove me
-        print(iCloudContainerURL.absoluteString)
+        print("iCloud container url: \(iCloudContainerURL.absoluteString)")
         self.metadataQuery.searchScopes = [NSMetadataQueryUbiquitousDocumentsScope]
         self.metadataQuery.predicate = NSPredicate(format: "%K like '*'", NSMetadataItemFSNameKey)
         
@@ -151,7 +151,7 @@ class NotesTableViewController: UITableViewController {
         }
         
         // TODO: - remove me
-        print(iCloudContainerURL.absoluteString)
+        print("iCloudContainerURL: \(iCloudContainerURL.absoluteString)")
         let documentsURL = iCloudContainerURL.appendingPathComponent("Documents")
         let noteURL = documentsURL.appendingPathComponent("\(note.entry.components(separatedBy: NSCharacterSet.whitespaces).first!)-\(Date.timeIntervalSinceReferenceDate)")
         let noteDocument = NoteDocument(fileURL: noteURL)
@@ -269,8 +269,8 @@ class NotesTableViewController: UITableViewController {
 //        self.notes.remove(at: sourceIndexPath.row)
 //        self.notes.insert(noteTobeMoved, at: destinationIndexPath.row)
         
-        self.deleteNote(at: sourceIndexPath)
         guard let noteToBeMoved = self.noteDocuments[sourceIndexPath.row].note else { return }
+        self.deleteNote(at: sourceIndexPath)
         self.save(noteToBeMoved, at: destinationIndexPath)
     }
     
