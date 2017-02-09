@@ -97,7 +97,7 @@ class NotesTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let validSegueIdentifier = segue.identifier, let validSegueIdentifierCase = NotesTableViewControllerSegue(rawValue: validSegueIdentifier) else {
-            assertionFailure("Could not map segue identifier: \(segue.identifier)")
+            assertionFailure("Could not map segue identifier: \(String(describing: segue.identifier))")
             return
         }
         
