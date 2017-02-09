@@ -69,8 +69,7 @@ class NotesTableViewController: UITableViewController {
                                                           andButtons: nil)
             return
         }
-        // TODO: - remove me
-        print("iCloud container url: \(iCloudContainerURL.absoluteString)")
+        print("iCloud Container URL: \(iCloudContainerURL)")
         self.metadataQuery.searchScopes = [NSMetadataQueryUbiquitousDocumentsScope]
         self.metadataQuery.predicate = NSPredicate(format: "%K like '*'", NSMetadataItemFSNameKey)
         
@@ -169,7 +168,7 @@ class NotesTableViewController: UITableViewController {
         self.noteDocuments.remove(at: indexPath.row)
         self.tableView.deleteRows(at: [indexPath], with: .bottom)
     }
-        
+    
     // MARK: - NSCoding Methods
     
 //    func saveNotes() {

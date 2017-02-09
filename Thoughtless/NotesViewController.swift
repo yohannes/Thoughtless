@@ -218,6 +218,8 @@ class NotesViewController: UIViewController {
         self.textView.setContentOffset(CGPoint(x:0, y: -64), animated: false)
         
         self.updateWordsCount()
+        
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     // MARK: - Local Methods
