@@ -79,6 +79,7 @@ extension MarkdownNotesViewController: UIScrollViewDelegate {
 // MARK: - UITextFieldDelegate Methods
 
 extension MarkdownNotesViewController: UITextViewDelegate {
+    @available(iOS 10.0, *)
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         
         guard self.canOpenThisURL(URL.absoluteString.lowercased()) else {

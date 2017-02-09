@@ -49,13 +49,11 @@ class NotesTableViewController: UITableViewController {
         if self.presentedViewController is UINavigationController {
             let newIndexPath = IndexPath(row: 0, section: 0)
             self.save(validNote, at: newIndexPath)
-            self.tableView.reloadData()
         }
         else {
             guard let selectedIndexPath = self.tableView.indexPathForSelectedRow, self.noteDocuments[selectedIndexPath.row].note.entry != validNote.entry else { return }
             self.deleteNote(at: selectedIndexPath)
             self.save(validNote, at: IndexPath(row: 0, section: 0))
-            self.tableView.reloadData()
         }
     }
     
@@ -104,9 +102,6 @@ class NotesTableViewController: UITableViewController {
     }
     
     func metadataQueryDidFinishGathering(_ notification: Notification) {
-        // TODO: - Remove me when done
-        print("Notification received")
-        
         let metadataQuery: NSMetadataQuery = notification.object as! NSMetadataQuery
         metadataQuery.disableUpdates()
         metadataQuery.stop()
@@ -120,18 +115,20 @@ class NotesTableViewController: UITableViewController {
                 noteDocument.open(completionHandler: { [weak self] (isSuccess: Bool) in
                     guard let weakSelf = self else { return }
                     if isSuccess {
-                        // TODO: - Remove me when done
-                        print("iCloud file opened: OK")
-                        
+                        print("Loading from iCloud succeeded.")
                         weakSelf.noteDocuments.append(noteDocument)
                         weakSelf.tableView.reloadData()
                     }
                     else {
-                        // TODO: - Remove me when done
-                        print("iCloud file opened: Failed")
+                        print("Loading from iCloud failed.")
                     }
                 })
             }
+        }
+        else {
+            guard let defaultNote = Note(entry: "Hello Sunshine! Come & tap me first!\n👇👇👇\n\nYou can power up your note by writing your words like **this** or _this_, create an [url link](http://apple.com), or even make a todo list:\n\n* Watch WWDC videos.\n* Write `code`.\n* Fetch my girlfriend for a ride.\n* Refactor `code`.\n\nOr even create quote:\n\n> A block of quote.\n\nTap *Go!* to preview your enhanced note.\n\nTap *How?* to learn more.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
+            let topIndexPath = IndexPath(row: 0, section: 0)
+            self.save(defaultNote, at: topIndexPath)
         }
         
         NotificationCenter.default.removeObserver(self,
@@ -149,17 +146,15 @@ class NotesTableViewController: UITableViewController {
                                                           andButtons: nil)
             return
         }
-        
-        // TODO: - remove me
-        print("iCloudContainerURL: \(iCloudContainerURL.absoluteString)")
         let documentsURL = iCloudContainerURL.appendingPathComponent("Documents")
         let noteURL = documentsURL.appendingPathComponent("\(note.entry.components(separatedBy: NSCharacterSet.whitespaces).first!)-\(Date.timeIntervalSinceReferenceDate)")
         let noteDocument = NoteDocument(fileURL: noteURL)
         noteDocument.note = note
         self.noteDocuments.insert(noteDocument, at: indexPath.row)
         self.tableView.insertRows(at: [indexPath], with: .top)
+        self.tableView.reloadData()
         noteDocument.save(to: noteURL, for: .forCreating) { (isSuccessfulSaved: Bool) in
-            isSuccessfulSaved ? print("Save to iCloud succeeded") : print("Save to iCloud failed")
+            isSuccessfulSaved ? print("Saving to iCloud succeeded.") : print("Saving to iCloud failed.")
         }
     }
     
@@ -174,7 +169,7 @@ class NotesTableViewController: UITableViewController {
         self.noteDocuments.remove(at: indexPath.row)
         self.tableView.deleteRows(at: [indexPath], with: .bottom)
     }
-    
+        
     // MARK: - NSCoding Methods
     
 //    func saveNotes() {
