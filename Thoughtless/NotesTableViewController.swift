@@ -206,7 +206,8 @@ class NotesTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
 //        self.navigationItem.title = "\(self.notes.count) Notes"
-        self.navigationItem.title = "\(self.noteDocuments.count) Notes"
+        let noteCount = self.noteDocuments.count
+        self.navigationItem.title = noteCount > 1 ? "\(noteCount) Notes" : "1 Note"
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -309,7 +310,8 @@ extension NotesTableViewController: FCAlertViewDelegate {
 //            tableView.deleteRows(at: [validIndexPath], with: .fade)
             self.deleteNote(at: validIndexPath)
 //            self.navigationItem.title = "\(self.notes.count) Notes"
-            self.navigationItem.title = "\(self.noteDocuments.count) Notes"
+            let noteCount = self.noteDocuments.count
+            self.navigationItem.title = noteCount > 1 ? "\(noteCount) Notes" : "1 Note"
         }
         else if title == Delete.no.operation {
             self.setEditing(false, animated: true)
