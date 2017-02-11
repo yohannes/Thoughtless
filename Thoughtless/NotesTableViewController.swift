@@ -59,6 +59,46 @@ class NotesTableViewController: UITableViewController {
     
     // MARK: - Helper Methods
     
+//    func loadSampleNotes() {
+//        guard let firstNote = Note(entry: "Hello Sunshine! Come & tap me first!\n👇👇👇\n\nYou can power up your note by writing your words like **this** or _this_, create an [url link](http://apple.com), or even make a todo list:\n\n* Watch WWDC videos.\n* Write `code`.\n* Fetch my girlfriend for a ride.\n* Refactor `code`.\n\nOr even create quote:\n\n> A block of quote.\n\nTap *Go!* to preview your enhanced note.\n\nTap *How?* to learn more.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
+//        guard let secondNote = Note(entry: "Swipe me left or tap edit to delete.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
+//        guard let thirdNote = Note(entry: "Tap edit to move me or delete me.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
+//        self.notes += [firstNote, secondNote, thirdNote]
+//    }
+    
+    fileprivate func deleteNote(at indexPath: IndexPath) {
+        //        let noteDocument = self.noteDocuments[indexPath.row]
+        //
+        //        let fileCoordinator = NSFileCoordinator(filePresenter: nil)
+        //        fileCoordinator.coordinate(writingItemAt: noteDocument.fileURL,
+        //                                   options: NSFileCoordinator.WritingOptions.forDeleting,
+        //                                   error: nil) { (_) in
+        //                                    try! FileManager.default.removeItem(at: noteDocument.fileURL)
+        //        }
+        
+        let noteDocument = self.noteDocuments[indexPath.row]
+        do {
+            try FileManager.default.removeItem(at: noteDocument.fileURL)
+        }
+        catch let error as NSError {
+            print("Error occurred deleting a document. Reason: \(error.localizedDescription)")
+        }
+        self.noteDocuments.remove(at: indexPath.row)
+        self.tableView.deleteRows(at: [indexPath], with: .bottom)
+        self.tableView.reloadData()
+    }
+    
+    fileprivate func displayShareSheet(from indexPath: IndexPath) {
+//        let activityViewController = UIActivityViewController(activityItems: [self.notes[indexPath.row].entry], applicationActivities: nil)
+//        self.present(activityViewController, animated: true) {
+//            self.setEditing(false, animated: true)
+//        }
+        let activityViewController = UIActivityViewController(activityItems: [self.noteDocuments[indexPath.row].note.entry], applicationActivities: nil)
+        self.present(activityViewController, animated: true) {
+            self.setEditing(false, animated: true)
+        }
+    }
+    
     fileprivate func loadNotes() {
         guard let iCloudContainerURL = FileManager.default.url(forUbiquityContainerIdentifier: nil) else {
             self.iCloudConfigurationNotDetected.showAlert(inView: self,
@@ -69,40 +109,34 @@ class NotesTableViewController: UITableViewController {
                                                           andButtons: nil)
             return
         }
-        print("iCloud Container URL: \(iCloudContainerURL)")
+        print("iCloudContainerURL: \(iCloudContainerURL)")
+        
         self.metadataQuery.searchScopes = [NSMetadataQueryUbiquitousDocumentsScope]
         self.metadataQuery.predicate = NSPredicate(format: "%K like '*'", NSMetadataItemFSNameKey)
         
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(NotesTableViewController.metadataQueryDidFinishGathering(_:)),
+                                               selector: #selector(NotesTableViewController.processMetadataQuery(_:)),
                                                name: .NSMetadataQueryDidFinishGathering,
                                                object: self.metadataQuery)
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(NotesTableViewController.processMetadataQuery(_:)),
+//                                               name: .NSMetadataQueryDidUpdate,
+//                                               object: self.metadataQuery)
         
-        self.metadataQuery.enableUpdates()
+//        self.metadataQuery.enableUpdates()
         self.metadataQuery.start()
     }
     
-//    func loadSampleNotes() {
-//        guard let firstNote = Note(entry: "Hello Sunshine! Come & tap me first!\n👇👇👇\n\nYou can power up your note by writing your words like **this** or _this_, create an [url link](http://apple.com), or even make a todo list:\n\n* Watch WWDC videos.\n* Write `code`.\n* Fetch my girlfriend for a ride.\n* Refactor `code`.\n\nOr even create quote:\n\n> A block of quote.\n\nTap *Go!* to preview your enhanced note.\n\nTap *How?* to learn more.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
-//        guard let secondNote = Note(entry: "Swipe me left or tap edit to delete.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
-//        guard let thirdNote = Note(entry: "Tap edit to move me or delete me.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
-//        self.notes += [firstNote, secondNote, thirdNote]
-//    }
-    
-    fileprivate func displayShareSheet(from indexPath: IndexPath) {
-//        let activityViewController = UIActivityViewController(activityItems: [self.notes[indexPath.row].entry], applicationActivities: nil)
-//        self.present(activityViewController, animated: true) {
-//            self.setEditing(false, animated: true)
-//        }
-        let activityViewController = UIActivityViewController(activityItems: [self.noteDocuments[indexPath.row].note.entry], applicationActivities: nil)
-        self.present(activityViewController, animated: true) { 
-            self.setEditing(false, animated: true)
-        }
-    }
-    
-    func metadataQueryDidFinishGathering(_ notification: Notification) {
+    func processMetadataQuery(_ notification: Notification) {
+        // TODO: remove me
+        print("notification: \(notification)")
         let metadataQuery: NSMetadataQuery = notification.object as! NSMetadataQuery
         metadataQuery.disableUpdates()
+        
+        NotificationCenter.default.removeObserver(self,
+                                                  name: .NSMetadataQueryDidFinishGathering,
+                                                  object: self.metadataQuery)
+        
         metadataQuery.stop()
         
         self.noteDocuments.removeAll()
@@ -129,10 +163,6 @@ class NotesTableViewController: UITableViewController {
             let topIndexPath = IndexPath(row: 0, section: 0)
             self.save(defaultNote, at: topIndexPath)
         }
-        
-        NotificationCenter.default.removeObserver(self,
-                                                  name: .NSMetadataQueryDidFinishGathering,
-                                                  object: self.metadataQuery)
     }
     
     fileprivate func save(_ note: Note, at indexPath: IndexPath) {
@@ -145,8 +175,8 @@ class NotesTableViewController: UITableViewController {
                                                           andButtons: nil)
             return
         }
-        let documentsURL = iCloudContainerURL.appendingPathComponent("Documents")
-        let noteURL = documentsURL.appendingPathComponent("\(note.entry.components(separatedBy: NSCharacterSet.whitespaces).first!)-\(Date.timeIntervalSinceReferenceDate)")
+        let documentsDirectoryURL = iCloudContainerURL.appendingPathComponent("Documents")
+        let noteURL = documentsDirectoryURL.appendingPathComponent("\(note.entry.components(separatedBy: NSCharacterSet.whitespaces).first!)-\(Date.timeIntervalSinceReferenceDate).txt")
         let noteDocument = NoteDocument(fileURL: noteURL)
         noteDocument.note = note
         self.noteDocuments.insert(noteDocument, at: indexPath.row)
@@ -156,19 +186,7 @@ class NotesTableViewController: UITableViewController {
             isSuccessfulSaved ? print("Saving to iCloud succeeded.") : print("Saving to iCloud failed.")
         }
     }
-    
-    fileprivate func deleteNote(at indexPath: IndexPath) {
-        let noteDocument = self.noteDocuments[indexPath.row]
-        do {
-            try FileManager.default.removeItem(at: noteDocument.fileURL)
-        }
-        catch let error as NSError {
-            print("Error occurred deleting a document. Reason: \(error)")
-        }
-        self.noteDocuments.remove(at: indexPath.row)
-        self.tableView.deleteRows(at: [indexPath], with: .bottom)
-    }
-    
+
     // MARK: - NSCoding Methods
     
 //    func saveNotes() {
@@ -191,7 +209,7 @@ class NotesTableViewController: UITableViewController {
 //        else {
 //            self.loadSampleNotes()
 //        }
-        
+
         self.loadNotes()
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(hexString: "#72889E")!]
