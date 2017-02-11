@@ -16,7 +16,9 @@ class NotesTableViewController: UITableViewController {
 //    var notes = [Note]()
     var noteDocuments = [NoteDocument]()
     var metadataQuery = NSMetadataQuery()
+    
     var indexPath: IndexPath?
+    var tableViewRefreshControl: UIRefreshControl!
     
     let deleteOrNotDeleteAlertView: FCAlertView = {
         let alertView = FCAlertView(type: .warning)
@@ -128,8 +130,6 @@ class NotesTableViewController: UITableViewController {
     }
     
     func processMetadataQuery(_ notification: Notification) {
-        // TODO: remove me
-        print("notification: \(notification)")
         let metadataQuery: NSMetadataQuery = notification.object as! NSMetadataQuery
         metadataQuery.disableUpdates()
         
@@ -149,8 +149,10 @@ class NotesTableViewController: UITableViewController {
                     guard let weakSelf = self else { return }
                     if isSuccess {
                         print("Loading from iCloud succeeded.")
-                        weakSelf.noteDocuments.append(noteDocument)
+                        weakSelf.noteDocuments.insert(noteDocument, at: 0)
+//                        weakSelf.noteDocuments.append(noteDocument)
                         weakSelf.tableView.reloadData()
+                        weakSelf.refreshNoteCount()
                     }
                     else {
                         print("Loading from iCloud failed.")
@@ -163,6 +165,18 @@ class NotesTableViewController: UITableViewController {
             let topIndexPath = IndexPath(row: 0, section: 0)
             self.save(defaultNote, at: topIndexPath)
         }
+    }
+    
+    func refreshNoteListing() {
+        print("Notes being refreshed")
+        self.loadNotes()
+        self.refreshNoteCount()
+        self.tableViewRefreshControl.endRefreshing()
+    }
+    
+    fileprivate func refreshNoteCount() {
+        let noteCount = self.noteDocuments.count
+        self.navigationItem.title = noteCount > 1 ? "\(noteCount) Notes" : "1 Note"
     }
     
     fileprivate func save(_ note: Note, at indexPath: IndexPath) {
@@ -220,12 +234,20 @@ class NotesTableViewController: UITableViewController {
         self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
         
         self.deleteOrNotDeleteAlertView.delegate = self
+        
+        self.tableViewRefreshControl = {
+            let refreshControl = UIRefreshControl()
+            refreshControl.tintColor = UIColor(hexString: "#488AC6")
+            refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh notes", attributes: [NSForegroundColorAttributeName: UIColor(hexString: "#488AC6")!])
+            refreshControl.addTarget(self, action: #selector(NotesTableViewController.refreshNoteListing), for: .valueChanged)
+            return refreshControl
+        }()
+        self.tableView.addSubview(self.tableViewRefreshControl)
     }
     
     override func viewWillAppear(_ animated: Bool) {
 //        self.navigationItem.title = "\(self.notes.count) Notes"
-        let noteCount = self.noteDocuments.count
-        self.navigationItem.title = noteCount > 1 ? "\(noteCount) Notes" : "1 Note"
+        self.refreshNoteCount()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -328,8 +350,7 @@ extension NotesTableViewController: FCAlertViewDelegate {
 //            tableView.deleteRows(at: [validIndexPath], with: .fade)
             self.deleteNote(at: validIndexPath)
 //            self.navigationItem.title = "\(self.notes.count) Notes"
-            let noteCount = self.noteDocuments.count
-            self.navigationItem.title = noteCount > 1 ? "\(noteCount) Notes" : "1 Note"
+            self.refreshNoteCount()
         }
         else if title == Delete.no.operation {
             self.setEditing(false, animated: true)
