@@ -14,6 +14,7 @@ class NotesTableViewController: UITableViewController {
     // MARK: - Stored Properties
     
 //    var notes = [Note]()
+    
     var noteDocuments = [NoteDocument]()
     var metadataQuery = NSMetadataQuery()
     
@@ -68,6 +69,11 @@ class NotesTableViewController: UITableViewController {
 //        self.notes += [firstNote, secondNote, thirdNote]
 //    }
     
+    fileprivate func compareNoteDocumentModificationDateBetween(_ lhs: NoteDocument, and rhs: NoteDocument) -> Bool {
+        guard let validLhsDate = lhs.fileModificationDate, let validRhsDate = rhs.fileModificationDate else { return false }
+        return validLhsDate > validRhsDate
+    }
+    
     fileprivate func deleteNote(at indexPath: IndexPath) {
         //        let noteDocument = self.noteDocuments[indexPath.row]
         //
@@ -101,8 +107,18 @@ class NotesTableViewController: UITableViewController {
         }
     }
     
+    fileprivate func loadDefaultNotes() {
+        guard let firstNote = Note(entry: "Tap me to learn about my superpower!\n👇👇👇\n\nYou can power up your note by writing your words like **this** or _this_, create an [url link](http://apple.com), or even make a todo list:\n\n* Watch WWDC videos.\n* Write `code`.\n* Fetch my girlfriend for a ride.\n* Refactor `code`.\n\nOr even create quote:\n\n> A block of quote.\n\nTap *Go!* to preview your enhanced note.\n\nTap *How?* to learn more.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
+        guard let secondNote = Note(entry: "Tap +, above right, to add a new note", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
+        guard let thirdNote = Note(entry: "Tap Edit, above left, to move me or delete me.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
+        guard let fourthNote = Note(entry: "Swipe me to the left for more options.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
+        for (index, note) in [firstNote, secondNote, thirdNote, fourthNote].enumerated() {
+            self.save(note, at: IndexPath(row: index, section: 0))
+        }
+    }
+    
     fileprivate func loadNotes() {
-        guard let iCloudContainerURL = FileManager.default.url(forUbiquityContainerIdentifier: nil) else {
+        guard let _ = FileManager.default.url(forUbiquityContainerIdentifier: nil) else {
             self.iCloudConfigurationNotDetected.showAlert(inView: self,
                                                           withTitle: "Unable to Access iCloud Account",
                                                           withSubtitle: "Open Settings, iCloud, & sign in with your Apple ID.",
@@ -111,46 +127,105 @@ class NotesTableViewController: UITableViewController {
                                                           andButtons: nil)
             return
         }
-        print("iCloudContainerURL: \(iCloudContainerURL)")
         
         self.metadataQuery.searchScopes = [NSMetadataQueryUbiquitousDocumentsScope]
         self.metadataQuery.predicate = NSPredicate(format: "%K like '*'", NSMetadataItemFSNameKey)
         
+        let sortDescriptorByRecentDateModified = NSSortDescriptor(key: NSMetadataItemFSContentChangeDateKey, ascending: false)
+        self.metadataQuery.sortDescriptors = [sortDescriptorByRecentDateModified]
+        
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(NotesTableViewController.processMetadataQuery(_:)),
+                                               selector: #selector(NotesTableViewController.processMetadataQueryDidFinishGathering(_:)),
                                                name: .NSMetadataQueryDidFinishGathering,
                                                object: self.metadataQuery)
-//        NotificationCenter.default.addObserver(self,
-//                                               selector: #selector(NotesTableViewController.processMetadataQuery(_:)),
-//                                               name: .NSMetadataQueryDidUpdate,
-//                                               object: self.metadataQuery)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(NotesTableViewController.processMetadataQueryDidUpdate(_:)),
+                                               name: .NSMetadataQueryDidUpdate,
+                                               object: self.metadataQuery)
         
-//        self.metadataQuery.enableUpdates()
-        self.metadataQuery.start()
+        DispatchQueue.main.async {
+            self.metadataQuery.start()
+        }
     }
     
-    func processMetadataQuery(_ notification: Notification) {
+    func processMetadataQueryDidFinishGathering(_ notification: Notification) {
+        print("metadataQueryDidFinishGathering called")
+        
         let metadataQuery: NSMetadataQuery = notification.object as! NSMetadataQuery
         metadataQuery.disableUpdates()
+        metadataQuery.stop()
         
         NotificationCenter.default.removeObserver(self,
                                                   name: .NSMetadataQueryDidFinishGathering,
-                                                  object: self.metadataQuery)
-        
-        metadataQuery.stop()
+                                                  object: metadataQuery)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: .NSMetadataQueryDidUpdate,
+                                                  object: metadataQuery)
         
         self.noteDocuments.removeAll()
         
         if metadataQuery.resultCount > 0 {
-            for metaDataItem in self.metadataQuery.results as! [NSMetadataItem] {
+            for metaDataItem in metadataQuery.results as! [NSMetadataItem] {
                 let documentURL = metaDataItem.value(forAttribute: NSMetadataItemURLKey) as! URL
                 let noteDocument = NoteDocument(fileURL: documentURL)
                 noteDocument.open(completionHandler: { [weak self] (isSuccess: Bool) in
                     guard let weakSelf = self else { return }
                     if isSuccess {
+                        // TODO: - Remove when done
+                        /*
+                        print("Loading notes from iCloud succeeded.")
+                        print("-----")
+                        print("fileName: \(noteDocument.localizedName)")
+                        print("fileType: \(noteDocument.fileType!)")
+                        print("dateModified: \(noteDocument.fileModificationDate!)")
+                        print("documentState: \(noteDocument.documentState)")
+                        print("-----")
+                        */
+                        weakSelf.noteDocuments.append(noteDocument)
+                        if weakSelf.noteDocuments.count == metadataQuery.resultCount {
+                            weakSelf.noteDocuments = weakSelf.noteDocuments.sorted(by: weakSelf.compareNoteDocumentModificationDateBetween)
+                        }
+                        weakSelf.tableView.reloadData()
+                        weakSelf.refreshNoteCount()
+                    }
+                    else {
+                        print("Loading notes from iCloud failed.")
+                    }
+                })
+            }
+        }
+        else { self.loadDefaultNotes() }
+    }
+    
+    func processMetadataQueryDidUpdate(_ notification: Notification) {
+        print("processMetadataQueryDidUpdate called")
+        
+        let metadataQuery: NSMetadataQuery = notification.object as! NSMetadataQuery
+        metadataQuery.disableUpdates()
+        
+        self.noteDocuments.removeAll()
+        
+        if metadataQuery.resultCount > 0 {
+            for metaDataItem in metadataQuery.results as! [NSMetadataItem] {
+                let documentURL = metaDataItem.value(forAttribute: NSMetadataItemURLKey) as! URL
+                let noteDocument = NoteDocument(fileURL: documentURL)
+                noteDocument.open(completionHandler: { [weak self] (isSuccess: Bool) in
+                    guard let weakSelf = self else { return }
+                    if isSuccess {
+                        // TODO: - Remove when done
+                        /*
                         print("Loading from iCloud succeeded.")
-                        weakSelf.noteDocuments.insert(noteDocument, at: 0)
-//                        weakSelf.noteDocuments.append(noteDocument)
+                        print("-----")
+                        print("fileName: \(noteDocument.localizedName)")
+                        print("fileType: \(noteDocument.fileType!)")
+                        print("dateModified: \(noteDocument.fileModificationDate!)")
+                        print("documentState: \(noteDocument.documentState)")
+                        print("-----")
+                        */
+                        weakSelf.noteDocuments.append(noteDocument)
+                        if weakSelf.noteDocuments.count == metadataQuery.resultCount {
+                            weakSelf.noteDocuments = weakSelf.noteDocuments.sorted(by: weakSelf.compareNoteDocumentModificationDateBetween)
+                        }
                         weakSelf.tableView.reloadData()
                         weakSelf.refreshNoteCount()
                     }
@@ -160,15 +235,11 @@ class NotesTableViewController: UITableViewController {
                 })
             }
         }
-        else {
-            guard let defaultNote = Note(entry: "Hello Sunshine! Come & tap me first!\n👇👇👇\n\nYou can power up your note by writing your words like **this** or _this_, create an [url link](http://apple.com), or even make a todo list:\n\n* Watch WWDC videos.\n* Write `code`.\n* Fetch my girlfriend for a ride.\n* Refactor `code`.\n\nOr even create quote:\n\n> A block of quote.\n\nTap *Go!* to preview your enhanced note.\n\nTap *How?* to learn more.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
-            let topIndexPath = IndexPath(row: 0, section: 0)
-            self.save(defaultNote, at: topIndexPath)
-        }
+        else { self.loadDefaultNotes() }
+        metadataQuery.enableUpdates()
     }
     
     func refreshNoteListing() {
-        print("Notes being refreshed")
         self.loadNotes()
         self.refreshNoteCount()
         self.tableViewRefreshControl.endRefreshing()
@@ -176,7 +247,7 @@ class NotesTableViewController: UITableViewController {
     
     fileprivate func refreshNoteCount() {
         let noteCount = self.noteDocuments.count
-        self.navigationItem.title = noteCount > 1 ? "\(noteCount) Notes" : "1 Note"
+        self.navigationItem.title = noteCount > 1 ? "\(noteCount) Notes" : "\(noteCount) Note"
     }
     
     fileprivate func save(_ note: Note, at indexPath: IndexPath) {
@@ -214,6 +285,12 @@ class NotesTableViewController: UITableViewController {
     
     // MARK: - UIViewController Methods
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.refreshNoteCount()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -246,9 +323,12 @@ class NotesTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
 //        self.navigationItem.title = "\(self.notes.count) Notes"
-        self.refreshNoteCount()
+        self.loadNotes()
     }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let validSegueIdentifier = segue.identifier, let validSegueIdentifierCase = NotesTableViewControllerSegue(rawValue: validSegueIdentifier) else {
