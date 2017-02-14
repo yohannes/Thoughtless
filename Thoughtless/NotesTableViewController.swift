@@ -96,6 +96,11 @@ class NotesTableViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
+    fileprivate func delayExecutionBySecond(_ delay: Int, for anonFunc: @escaping () -> Void) {
+        let when = DispatchTime.now() + .seconds(delay)
+        DispatchQueue.main.asyncAfter(deadline: when, execute: anonFunc)
+    }
+    
     fileprivate func displayShareSheet(from indexPath: IndexPath) {
 //        let activityViewController = UIActivityViewController(activityItems: [self.notes[indexPath.row].entry], applicationActivities: nil)
 //        self.present(activityViewController, animated: true) {
@@ -285,12 +290,6 @@ class NotesTableViewController: UITableViewController {
     
     // MARK: - UIViewController Methods
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        self.refreshNoteCount()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -322,14 +321,6 @@ class NotesTableViewController: UITableViewController {
         self.tableView.addSubview(self.tableViewRefreshControl)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-//        self.navigationItem.title = "\(self.notes.count) Notes"
-        self.loadNotes()
-    }
-    
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let validSegueIdentifier = segue.identifier, let validSegueIdentifierCase = NotesTableViewControllerSegue(rawValue: validSegueIdentifier) else {
             assertionFailure("Could not map segue identifier: \(String(describing: segue.identifier))")
@@ -347,6 +338,15 @@ class NotesTableViewController: UITableViewController {
         case .segueToNotesViewControllerFromAddButton:
             print("adding new note")
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.delayExecutionBySecond(4) {
+            self.loadNotes()
+        }
+        self.refreshNoteCount()
     }
     
     // MARK: - UITableViewDataSource Methods
