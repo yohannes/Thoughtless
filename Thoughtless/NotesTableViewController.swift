@@ -96,10 +96,10 @@ class NotesTableViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
-    fileprivate func delayExecutionBySecond(_ delay: Int, for anonFunc: @escaping () -> Void) {
-        let when = DispatchTime.now() + .seconds(delay)
-        DispatchQueue.main.asyncAfter(deadline: when, execute: anonFunc)
-    }
+//    fileprivate func delayExecutionBySecond(_ delay: Int, for anonFunc: @escaping () -> Void) {
+//        let when = DispatchTime.now() + .seconds(delay)
+//        DispatchQueue.main.asyncAfter(deadline: when, execute: anonFunc)
+//    }
     
     fileprivate func displayShareSheet(from indexPath: IndexPath) {
 //        let activityViewController = UIActivityViewController(activityItems: [self.notes[indexPath.row].entry], applicationActivities: nil)
@@ -269,11 +269,20 @@ class NotesTableViewController: UITableViewController {
         let noteURL = documentsDirectoryURL.appendingPathComponent("\(note.entry.components(separatedBy: NSCharacterSet.whitespaces).first!)-\(Date.timeIntervalSinceReferenceDate).txt")
         let noteDocument = NoteDocument(fileURL: noteURL)
         noteDocument.note = note
-        self.noteDocuments.insert(noteDocument, at: indexPath.row)
-        self.tableView.insertRows(at: [indexPath], with: .top)
-        self.tableView.reloadData()
-        noteDocument.save(to: noteURL, for: .forCreating) { (isSuccessfulSaved: Bool) in
-            isSuccessfulSaved ? print("Saving to iCloud succeeded.") : print("Saving to iCloud failed.")
+//        self.noteDocuments.insert(noteDocument, at: indexPath.row)
+//        self.tableView.insertRows(at: [indexPath], with: .top)
+//        self.tableView.reloadData()
+        noteDocument.save(to: noteURL, for: .forCreating) { [weak self] (isSuccessfulSaved: Bool) in
+            guard let weakSelf = self else { return }
+            if isSuccessfulSaved {
+                weakSelf.noteDocuments.insert(noteDocument, at: indexPath.row)
+                weakSelf.tableView.insertRows(at: [indexPath], with: .top)
+                weakSelf.tableView.reloadData()
+                print("Saving to iCloud & updating notes in table view succeeded.")
+            }
+            else {
+                print("Saving to iCloud & updating notes in table view failed.")
+            }
         }
     }
 
@@ -321,6 +330,12 @@ class NotesTableViewController: UITableViewController {
         self.tableView.addSubview(self.tableViewRefreshControl)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.refreshNoteCount()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let validSegueIdentifier = segue.identifier, let validSegueIdentifierCase = NotesTableViewControllerSegue(rawValue: validSegueIdentifier) else {
             assertionFailure("Could not map segue identifier: \(String(describing: segue.identifier))")
@@ -338,15 +353,6 @@ class NotesTableViewController: UITableViewController {
         case .segueToNotesViewControllerFromAddButton:
             print("adding new note")
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        self.delayExecutionBySecond(4) {
-            self.loadNotes()
-        }
-        self.refreshNoteCount()
     }
     
     // MARK: - UITableViewDataSource Methods
