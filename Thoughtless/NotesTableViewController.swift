@@ -75,16 +75,26 @@ class NotesTableViewController: UITableViewController {
     }
     
     fileprivate func deleteNote(at indexPath: IndexPath) {
-        //        let noteDocument = self.noteDocuments[indexPath.row]
-        //
-        //        let fileCoordinator = NSFileCoordinator(filePresenter: nil)
-        //        fileCoordinator.coordinate(writingItemAt: noteDocument.fileURL,
-        //                                   options: NSFileCoordinator.WritingOptions.forDeleting,
-        //                                   error: nil) { (_) in
-        //                                    try! FileManager.default.removeItem(at: noteDocument.fileURL)
-        //        }
-        
         let noteDocument = self.noteDocuments[indexPath.row]
+
+        // TODO: - Investigate why enclosing using NSFileCoordinator will hang the app
+//        let fileCoordinator = NSFileCoordinator(filePresenter: nil)
+//        fileCoordinator.coordinate(writingItemAt: noteDocument.fileURL,
+//                                   options: NSFileCoordinator.WritingOptions.forDeleting,
+//                                   error: nil) { [weak self] (_) in
+//                                    guard let weakSelf = self else { return }
+//                                    do {
+//                                        try FileManager.default.removeItem(at: noteDocument.fileURL)
+//                                        weakSelf.noteDocuments.remove(at: indexPath.row)
+//                                        weakSelf.tableView.deleteRows(at: [indexPath], with: .bottom)
+//                                        weakSelf.tableView.reloadData()
+//                                        print("delete ok")
+//                                    }
+//                                    catch let error as NSError {
+//                                        print("Error occured deleting a document. Reason: \(error.localizedDescription)")
+//                                    }
+//        }
+
         do {
             try FileManager.default.removeItem(at: noteDocument.fileURL)
         }
@@ -149,6 +159,7 @@ class NotesTableViewController: UITableViewController {
                                                object: self.metadataQuery)
         
         DispatchQueue.main.async {
+            self.metadataQuery.enableUpdates()
             self.metadataQuery.start()
         }
     }
