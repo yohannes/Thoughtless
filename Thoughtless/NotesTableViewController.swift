@@ -404,15 +404,15 @@ class NotesTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+//    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
 //        let noteTobeMoved = self.notes[sourceIndexPath.row]
 //        self.notes.remove(at: sourceIndexPath.row)
 //        self.notes.insert(noteTobeMoved, at: destinationIndexPath.row)
         
-        guard let noteToBeMoved = self.noteDocuments[sourceIndexPath.row].note else { return }
-        self.deleteNote(at: sourceIndexPath)
-        self.save(noteToBeMoved, at: destinationIndexPath)
-    }
+//        guard let noteToBeMoved = self.noteDocuments[sourceIndexPath.row].note else { return }
+//        self.deleteNote(at: sourceIndexPath)
+//        self.save(noteToBeMoved, at: destinationIndexPath)
+//    }
     
     // MARK: - UITableViewDelegate Methods
     
