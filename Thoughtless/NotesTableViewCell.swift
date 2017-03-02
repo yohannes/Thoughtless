@@ -1,6 +1,6 @@
 //
 //  NotesTableViewCell.swift
-//  Notes
+//  Thoughtless
 //
 //  Created by Yohannes Wijaya on 8/5/16.
 //  Copyright © 2016 Yohannes Wijaya. All rights reserved.

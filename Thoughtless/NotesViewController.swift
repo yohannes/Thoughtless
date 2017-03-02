@@ -1,6 +1,6 @@
 //
 //  NotesViewController.swift
-//  Notes
+//  Thoughtless
 //
 //  Created by Yohannes Wijaya on 8/18/16.
 //  Copyright © 2016 Yohannes Wijaya. All rights reserved.
@@ -14,7 +14,7 @@ class NotesViewController: UIViewController {
     
     // MARK: - Stored Properties
     
-    var note: Notes?
+    var note: Note?
     
     var doesTextViewNeedToBeSaved: Bool!
     
@@ -161,7 +161,7 @@ class NotesViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let validBarButtonItem = sender as? UIBarButtonItem, validBarButtonItem === self.saveButton {
             let entry = self.textView.text ?? ""
-            self.note = Notes(entry: entry, dateOfCreation: CurrentDateAndTimeHelper.get())
+            self.note = Note(entry: entry, dateOfCreation: CurrentDateAndTimeHelper.get())
         }
         else if segue.identifier == NotesViewControllerSegue.showSegueToMarkdownNotesViewController.rawValue {
             guard let validMarkdownNotesViewController = segue.destination as? MarkdownNotesViewController, let validNote = self.note else { return }
@@ -169,7 +169,7 @@ class NotesViewController: UIViewController {
         }
         else if segue.identifier == NotesViewControllerSegue.unwindToNotesTableViewControllerFromNotesViewController.rawValue {
             let entry = self.textView.text ?? ""
-            self.note = Notes(entry: entry, dateOfCreation: CurrentDateAndTimeHelper.get())
+            self.note = Note(entry: entry, dateOfCreation: CurrentDateAndTimeHelper.get())
         }
     }
     
@@ -218,6 +218,8 @@ class NotesViewController: UIViewController {
         self.textView.setContentOffset(CGPoint(x:0, y: -64), animated: false)
         
         self.updateWordsCount()
+        
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     // MARK: - Local Methods
