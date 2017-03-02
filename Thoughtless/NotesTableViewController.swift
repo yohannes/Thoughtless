@@ -15,7 +15,12 @@ class NotesTableViewController: UITableViewController {
     
 //    var notes = [Note]()
     
-    var noteDocuments = [NoteDocument]()
+    var noteDocuments = [NoteDocument]() {
+        didSet {
+            self.refreshNoteCount()
+//            self.tableView.reloadData()
+        }
+    }
     var metadataQuery = NSMetadataQuery()
     
     var indexPath: IndexPath?
@@ -37,6 +42,7 @@ class NotesTableViewController: UITableViewController {
     
     @IBAction func unwindToNotesTableViewController(sender: UIStoryboardSegue) {
         guard let validNotesViewController = sender.source as? NotesViewController, let validNote = validNotesViewController.note else { return }
+        let newIndexPath = IndexPath(row: 0, section: 0)
 //        if self.presentedViewController is UINavigationController {
 //            let newIndexPath = IndexPath(row: 0, section: 0)
 //            self.notes.insert(validNote, at: 0)
@@ -50,13 +56,18 @@ class NotesTableViewController: UITableViewController {
 //        }
 //        self.saveNotes()
         if self.presentedViewController is UINavigationController {
-            let newIndexPath = IndexPath(row: 0, section: 0)
-            self.save(validNote, at: newIndexPath)
+            self.delayExecutionBySecond(1, for: { [weak self] in
+                guard let weakSelf = self else { return }
+                weakSelf.save(validNote, at: newIndexPath)
+            })
         }
         else {
             guard let selectedIndexPath = self.tableView.indexPathForSelectedRow, self.noteDocuments[selectedIndexPath.row].note.entry != validNote.entry else { return }
-            self.deleteNote(at: selectedIndexPath)
-            self.save(validNote, at: IndexPath(row: 0, section: 0))
+            self.delayExecutionBySecond(1, for: { [weak self] in
+                guard let weakSelf = self else { return }
+                weakSelf.deleteNote(at: selectedIndexPath)
+                weakSelf.save(validNote, at: newIndexPath)
+            })
         }
     }
     
@@ -106,10 +117,10 @@ class NotesTableViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
-//    fileprivate func delayExecutionBySecond(_ delay: Int, for anonFunc: @escaping () -> Void) {
-//        let when = DispatchTime.now() + .seconds(delay)
-//        DispatchQueue.main.asyncAfter(deadline: when, execute: anonFunc)
-//    }
+    fileprivate func delayExecutionBySecond(_ delay: Int, for anonFunc: @escaping () -> Void) {
+        let when = DispatchTime.now() + .seconds(delay)
+        DispatchQueue.main.asyncAfter(deadline: when, execute: anonFunc)
+    }
     
     fileprivate func displayShareSheet(from indexPath: IndexPath) {
 //        let activityViewController = UIActivityViewController(activityItems: [self.notes[indexPath.row].entry], applicationActivities: nil)
@@ -202,7 +213,6 @@ class NotesTableViewController: UITableViewController {
                             weakSelf.noteDocuments = weakSelf.noteDocuments.sorted(by: weakSelf.compareNoteDocumentModificationDateBetween)
                         }
                         weakSelf.tableView.reloadData()
-                        weakSelf.refreshNoteCount()
                     }
                     else {
                         print("Loading notes from iCloud failed.")
@@ -211,6 +221,7 @@ class NotesTableViewController: UITableViewController {
             }
         }
         else { self.loadDefaultNotes() }
+        metadataQuery.enableUpdates()
     }
     
     func processMetadataQueryDidUpdate(_ notification: Notification) {
@@ -243,7 +254,6 @@ class NotesTableViewController: UITableViewController {
                             weakSelf.noteDocuments = weakSelf.noteDocuments.sorted(by: weakSelf.compareNoteDocumentModificationDateBetween)
                         }
                         weakSelf.tableView.reloadData()
-                        weakSelf.refreshNoteCount()
                     }
                     else {
                         print("Loading from iCloud failed.")
@@ -257,7 +267,6 @@ class NotesTableViewController: UITableViewController {
     
     func refreshNoteListing() {
         self.loadNotes()
-        self.refreshNoteCount()
         self.tableViewRefreshControl.endRefreshing()
     }
     
@@ -288,7 +297,6 @@ class NotesTableViewController: UITableViewController {
             if isSuccessfulSaved {
                 weakSelf.noteDocuments.insert(noteDocument, at: indexPath.row)
                 weakSelf.tableView.insertRows(at: [indexPath], with: .top)
-                weakSelf.tableView.reloadData()
                 print("Saving to iCloud & updating notes in table view succeeded.")
             }
             else {
@@ -344,7 +352,7 @@ class NotesTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.refreshNoteCount()
+        self.loadNotes()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -446,8 +454,6 @@ extension NotesTableViewController: FCAlertViewDelegate {
 //            self.notes.remove(at: validIndexPath.row)
 //            tableView.deleteRows(at: [validIndexPath], with: .fade)
             self.deleteNote(at: validIndexPath)
-//            self.navigationItem.title = "\(self.notes.count) Notes"
-            self.refreshNoteCount()
         }
         else if title == Delete.no.operation {
             self.setEditing(false, animated: true)
