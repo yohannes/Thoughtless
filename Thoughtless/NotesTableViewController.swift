@@ -12,13 +12,10 @@ import UIKit
 class NotesTableViewController: UITableViewController {
     
     // MARK: - Stored Properties
-    
-//    var notes = [Note]()
-    
+
     var noteDocuments = [NoteDocument]() {
         didSet {
             self.refreshNoteCount()
-//            self.tableView.reloadData()
         }
     }
     var metadataQuery = NSMetadataQuery()
@@ -43,18 +40,6 @@ class NotesTableViewController: UITableViewController {
     @IBAction func unwindToNotesTableViewController(sender: UIStoryboardSegue) {
         guard let validNotesViewController = sender.source as? NotesViewController, let validNote = validNotesViewController.note else { return }
         let newIndexPath = IndexPath(row: 0, section: 0)
-//        if self.presentedViewController is UINavigationController {
-//            let newIndexPath = IndexPath(row: 0, section: 0)
-//            self.notes.insert(validNote, at: 0)
-//            self.tableView.insertRows(at: [newIndexPath], with: .top)
-//        }
-//        else {
-//            guard let selectedIndexPath = self.tableView.indexPathForSelectedRow, self.notes[selectedIndexPath.row].entry != validNote.entry else { return }
-//            self.notes.remove(at: selectedIndexPath.row)
-//            self.notes.insert(validNote, at: 0)
-//            self.tableView.reloadData()
-//        }
-//        self.saveNotes()
         if self.presentedViewController is UINavigationController {
             self.delayExecutionBySecond(1, for: { [weak self] in
                 guard let weakSelf = self else { return }
@@ -72,13 +57,6 @@ class NotesTableViewController: UITableViewController {
     }
     
     // MARK: - Helper Methods
-    
-//    func loadSampleNotes() {
-//        guard let firstNote = Note(entry: "Hello Sunshine! Come & tap me first!\n👇👇👇\n\nYou can power up your note by writing your words like **this** or _this_, create an [url link](http://apple.com), or even make a todo list:\n\n* Watch WWDC videos.\n* Write `code`.\n* Fetch my girlfriend for a ride.\n* Refactor `code`.\n\nOr even create quote:\n\n> A block of quote.\n\nTap *Go!* to preview your enhanced note.\n\nTap *How?* to learn more.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
-//        guard let secondNote = Note(entry: "Swipe me left or tap edit to delete.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
-//        guard let thirdNote = Note(entry: "Tap edit to move me or delete me.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
-//        self.notes += [firstNote, secondNote, thirdNote]
-//    }
     
     fileprivate func compareNoteDocumentModificationDateBetween(_ lhs: NoteDocument, and rhs: NoteDocument) -> Bool {
         guard let validLhsDate = lhs.fileModificationDate, let validRhsDate = rhs.fileModificationDate else { return false }
@@ -113,7 +91,7 @@ class NotesTableViewController: UITableViewController {
             print("Error occurred deleting a document. Reason: \(error.localizedDescription)")
         }
         self.noteDocuments.remove(at: indexPath.row)
-        self.tableView.deleteRows(at: [indexPath], with: .bottom)
+        self.tableView.deleteRows(at: [indexPath], with: .fade)
         self.tableView.reloadData()
     }
     
@@ -123,10 +101,6 @@ class NotesTableViewController: UITableViewController {
     }
     
     fileprivate func displayShareSheet(from indexPath: IndexPath) {
-//        let activityViewController = UIActivityViewController(activityItems: [self.notes[indexPath.row].entry], applicationActivities: nil)
-//        self.present(activityViewController, animated: true) {
-//            self.setEditing(false, animated: true)
-//        }
         let activityViewController = UIActivityViewController(activityItems: [self.noteDocuments[indexPath.row].note.entry], applicationActivities: nil)
         self.present(activityViewController, animated: true) {
             self.setEditing(false, animated: true)
@@ -198,7 +172,6 @@ class NotesTableViewController: UITableViewController {
                 noteDocument.open(completionHandler: { [weak self] (isSuccess: Bool) in
                     guard let weakSelf = self else { return }
                     if isSuccess {
-                        // TODO: - Remove when done
                         /*
                         print("Loading notes from iCloud succeeded.")
                         print("-----")
@@ -239,7 +212,6 @@ class NotesTableViewController: UITableViewController {
                 noteDocument.open(completionHandler: { [weak self] (isSuccess: Bool) in
                     guard let weakSelf = self else { return }
                     if isSuccess {
-                        // TODO: - Remove when done
                         /*
                         print("Loading from iCloud succeeded.")
                         print("-----")
@@ -289,9 +261,6 @@ class NotesTableViewController: UITableViewController {
         let noteURL = documentsDirectoryURL.appendingPathComponent("\(note.entry.components(separatedBy: NSCharacterSet.whitespaces).first!)-\(Date.timeIntervalSinceReferenceDate).txt")
         let noteDocument = NoteDocument(fileURL: noteURL)
         noteDocument.note = note
-//        self.noteDocuments.insert(noteDocument, at: indexPath.row)
-//        self.tableView.insertRows(at: [indexPath], with: .top)
-//        self.tableView.reloadData()
         noteDocument.save(to: noteURL, for: .forCreating) { [weak self] (isSuccessfulSaved: Bool) in
             guard let weakSelf = self else { return }
             if isSuccessfulSaved {
@@ -304,29 +273,11 @@ class NotesTableViewController: UITableViewController {
             }
         }
     }
-
-    // MARK: - NSCoding Methods
-    
-//    func saveNotes() {
-//        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(self.notes, toFile: Note.archiveURL.path)
-//        if !isSuccessfulSave { print("unable to save note...") }
-//    }
-    
-//    func loadNotes() -> [Note]? {
-//        return NSKeyedUnarchiver.unarchiveObject(withFile: Notes.archiveURL.path) as? [Notes]
-//    }
     
     // MARK: - UIViewController Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        if let loadedNotes = self.loadNotes() {
-//            self.notes = loadedNotes
-//        }
-//        else {
-//            self.loadSampleNotes()
-//        }
 
         self.loadNotes()
         
@@ -366,7 +317,6 @@ class NotesTableViewController: UITableViewController {
             guard let validNotesViewController = segue.destination as? NotesViewController,
                 let selectedNoteCell = sender as? NotesTableViewCell,
                 let selectedIndexPath = self.tableView.indexPath(for: selectedNoteCell) else { return }
-//            let selectedNote = self.notes[selectedIndexPath.row]
             let selectedNote = self.noteDocuments[selectedIndexPath.row].note
             validNotesViewController.note = selectedNote
         case .segueToNotesViewControllerFromAddButton:
@@ -381,20 +331,10 @@ class NotesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return self.notes.count
         return self.noteDocuments.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "NotesTableViewCell", for: indexPath) as! NotesTableViewCell
-//        
-//        let note = self.notes[indexPath.row]
-//        
-//        cell.noteLabel.text = note.entry
-//        cell.noteModificationTimeStampLabel.text = note.dateModificationTimeStamp
-//        
-//        return cell
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "NotesTableViewCell", for: indexPath) as! NotesTableViewCell
         
         let noteDocument = self.noteDocuments[indexPath.row]
@@ -403,16 +343,6 @@ class NotesTableViewController: UITableViewController {
         cell.noteModificationTimeStampLabel.text = noteDocument.note.dateModificationTimeStamp
         return cell
     }
-    
-//    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-//        let noteTobeMoved = self.notes[sourceIndexPath.row]
-//        self.notes.remove(at: sourceIndexPath.row)
-//        self.notes.insert(noteTobeMoved, at: destinationIndexPath.row)
-        
-//        guard let noteToBeMoved = self.noteDocuments[sourceIndexPath.row].note else { return }
-//        self.deleteNote(at: sourceIndexPath)
-//        self.save(noteToBeMoved, at: destinationIndexPath)
-//    }
     
     // MARK: - UITableViewDelegate Methods
     
@@ -451,8 +381,6 @@ extension NotesTableViewController: FCAlertViewDelegate {
     func alertView(_ alertView: FCAlertView, clickedButtonIndex index: Int, buttonTitle title: String) {
         guard let validIndexPath = self.indexPath else { return }
         if title == Delete.yes.operation {
-//            self.notes.remove(at: validIndexPath.row)
-//            tableView.deleteRows(at: [validIndexPath], with: .fade)
             self.deleteNote(at: validIndexPath)
         }
         else if title == Delete.no.operation {
