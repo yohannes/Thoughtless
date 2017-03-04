@@ -277,7 +277,7 @@ class NotesTableViewController: UITableViewController {
 
         self.loadNotes()
         
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: ColorThemeHelper.forFont()]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: ColorThemeHelper.reederCream()]
         
         self.navigationItem.leftBarButtonItem = self.editButtonItem
         
@@ -288,8 +288,8 @@ class NotesTableViewController: UITableViewController {
         
         self.tableViewRefreshControl = {
             let refreshControl = UIRefreshControl()
-            refreshControl.tintColor = UIColor(hexString: "#488AC6")
-            refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh notes", attributes: [NSForegroundColorAttributeName: UIColor(hexString: "#488AC6")!])
+            refreshControl.tintColor = ColorThemeHelper.reederCream()
+            refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh notes", attributes: [NSForegroundColorAttributeName: ColorThemeHelper.reederCream()])
             refreshControl.addTarget(self, action: #selector(NotesTableViewController.refreshNoteListing), for: .valueChanged)
             return refreshControl
         }()

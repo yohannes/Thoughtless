@@ -24,6 +24,8 @@ class NotesViewController: UIViewController {
         let alertView = FCAlertView(type: .caution)
         alertView.dismissOnOutsideTouch = true
         alertView.hideDoneButton = true
+        alertView.titleColor = ColorThemeHelper.reederGray()
+        alertView.subTitleColor = ColorThemeHelper.reederGray()
         return alertView
     }()
     
@@ -31,6 +33,8 @@ class NotesViewController: UIViewController {
         let alertView = FCAlertView(type: .warning)
         alertView.dismissOnOutsideTouch = true
         alertView.hideDoneButton = true
+        alertView.titleColor = ColorThemeHelper.reederGray()
+        alertView.subTitleColor = ColorThemeHelper.reederGray()
         return alertView
     }()
     
@@ -194,7 +198,7 @@ class NotesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = ColorThemeHelper.forBackground()
+        self.view.backgroundColor = ColorThemeHelper.reederGray()
         
         self.setupKeyboardToolBarWithBarButtonItems()
         
@@ -202,14 +206,14 @@ class NotesViewController: UIViewController {
         self.emptyNoteDeterrentAlertview.delegate = self
         
         self.textView.delegate = self
-        self.textView.textColor = ColorThemeHelper.forFont()
+        self.textView.textColor = ColorThemeHelper.reederCream()
         self.textView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
         
-        self.powerUpYourNoteLabel.textColor = ColorThemeHelper.forFont()
+        self.powerUpYourNoteLabel.textColor = ColorThemeHelper.reederCream()
         
         self.doesTextViewNeedToBeSaved = false
         
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: ColorThemeHelper.forFont()]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: ColorThemeHelper.reederCream()]
     }
     
     override func viewWillAppear(_ animated: Bool) {

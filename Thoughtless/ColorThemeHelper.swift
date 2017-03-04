@@ -9,11 +9,11 @@
 import UIKit
 
 struct ColorThemeHelper {
-    static func forBackground() -> UIColor {
+    static func reederGray() -> UIColor {
         return UIColor(hex: 0x3A3A37)!
     }
     
-    static func forFont() -> UIColor {
+    static func reederCream() -> UIColor {
         return UIColor(hex: 0xE1E0D9)!
     }
 }
