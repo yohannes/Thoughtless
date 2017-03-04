@@ -150,8 +150,6 @@ class NotesTableViewController: UITableViewController {
     }
     
     func processMetadataQueryDidFinishGathering(_ notification: Notification) {
-        print("metadataQueryDidFinishGathering called")
-        
         let metadataQuery: NSMetadataQuery = notification.object as! NSMetadataQuery
         metadataQuery.disableUpdates()
         metadataQuery.stop()
@@ -198,8 +196,6 @@ class NotesTableViewController: UITableViewController {
     }
     
     func processMetadataQueryDidUpdate(_ notification: Notification) {
-        print("processMetadataQueryDidUpdate called")
-        
         let metadataQuery: NSMetadataQuery = notification.object as! NSMetadataQuery
         metadataQuery.disableUpdates()
         
@@ -281,7 +277,7 @@ class NotesTableViewController: UITableViewController {
 
         self.loadNotes()
         
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(hexString: "#72889E")!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: ColorThemeHelper.forFont()]
         
         self.navigationItem.leftBarButtonItem = self.editButtonItem
         

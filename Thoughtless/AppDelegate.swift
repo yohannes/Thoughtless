@@ -21,22 +21,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - UIApplicationDelegate Methods
     
     func applicationDidFinishLaunching(_ application: UIApplication) {
-        self.window?.backgroundColor = UIColor(hex: 0x25282C)
+        self.window?.backgroundColor = ColorThemeHelper.forBackground()
         
-        UINavigationBar.appearance().barTintColor = UIColor(hex: 0x25282C)
-        UINavigationBar.appearance().tintColor = UIColor(hex: 0x488AC6)
+        UINavigationBar.appearance().barTintColor = ColorThemeHelper.forBackground()
+        UINavigationBar.appearance().tintColor =  ColorThemeHelper.forFont()
+        
         UINavigationBar.appearance().barStyle = .blackTranslucent
         UINavigationBar.appearance().isTranslucent = false
         
-        UIToolbar.appearance().barTintColor = UIColor(hexString: "#25282C")
-        UIToolbar.appearance().tintColor = UIColor(hexString: "#488AC6")
+        UIToolbar.appearance().barTintColor = ColorThemeHelper.forBackground()
+        UIToolbar.appearance().tintColor =  ColorThemeHelper.forFont()
         UIToolbar.appearance().isTranslucent = false
         
-        UITableView.appearance().backgroundColor = UIColor(hex: 0x25282C)
+        UITableView.appearance().backgroundColor = ColorThemeHelper.forBackground()
+
+        UITableViewCell.appearance().backgroundColor = ColorThemeHelper.forBackground()
         
-        UITableViewCell.appearance().backgroundColor = UIColor(hex: 0x25282C)
-        
-        UITextView.appearance().backgroundColor = UIColor(hex: 0x25282C)
+        UITextView.appearance().backgroundColor = ColorThemeHelper.forBackground()
         
         IQKeyboardManager.sharedManager().enable = true
         

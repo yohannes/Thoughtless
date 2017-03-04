@@ -20,7 +20,7 @@ class NotesTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.noteLabel.textColor = UIColor(hexString: "#6F7B91")
-        self.noteModificationTimeStampLabel.textColor = UIColor(hexString: "#72889E")
+        self.noteLabel.textColor = ColorThemeHelper.forFont()
+        self.noteModificationTimeStampLabel.textColor = ColorThemeHelper.forFont()
     }
 }

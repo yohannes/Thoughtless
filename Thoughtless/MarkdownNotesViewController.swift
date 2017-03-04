@@ -39,10 +39,10 @@ class MarkdownNotesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor(hex: 0x25282C)
+        self.view.backgroundColor = ColorThemeHelper.forBackground()
         
         self.markdownNotesTextView.delegate = self
-        self.markdownNotesTextView.textColor = UIColor(hexString: "#6F7B91")
+        self.markdownNotesTextView.textColor = ColorThemeHelper.forFont()
         
         self.navigationItem.title = "Markdown"
     }

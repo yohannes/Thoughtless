@@ -194,7 +194,7 @@ class NotesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor(hex: 0x25282C)
+        self.view.backgroundColor = ColorThemeHelper.forBackground()
         
         self.setupKeyboardToolBarWithBarButtonItems()
         
@@ -202,14 +202,14 @@ class NotesViewController: UIViewController {
         self.emptyNoteDeterrentAlertview.delegate = self
         
         self.textView.delegate = self
-        self.textView.textColor = UIColor(hexString: "#6F7B91")
+        self.textView.textColor = ColorThemeHelper.forFont()
         self.textView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
         
-        self.powerUpYourNoteLabel.textColor = UIColor(hexString: "#6F7B91")
+        self.powerUpYourNoteLabel.textColor = ColorThemeHelper.forFont()
         
         self.doesTextViewNeedToBeSaved = false
         
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor(hexString: "#72889E")!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: ColorThemeHelper.forFont()]
     }
     
     override func viewWillAppear(_ animated: Bool) {
