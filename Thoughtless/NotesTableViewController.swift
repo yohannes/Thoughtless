@@ -41,14 +41,14 @@ class NotesTableViewController: UITableViewController {
         guard let validNotesViewController = sender.source as? NotesViewController, let validNote = validNotesViewController.note else { return }
         let newIndexPath = IndexPath(row: 0, section: 0)
         if self.presentedViewController is UINavigationController {
-            self.delayExecutionBySecond(1, for: { [weak self] in
+            self.delayExecutionByMilliseconds(1000, for: { [weak self] in
                 guard let weakSelf = self else { return }
                 weakSelf.save(validNote, at: newIndexPath)
             })
         }
         else {
             guard let selectedIndexPath = self.tableView.indexPathForSelectedRow, self.noteDocuments[selectedIndexPath.row].note.entry != validNote.entry else { return }
-            self.delayExecutionBySecond(1, for: { [weak self] in
+            self.delayExecutionByMilliseconds(1000, for: { [weak self] in
                 guard let weakSelf = self else { return }
                 weakSelf.deleteNote(at: selectedIndexPath)
                 weakSelf.save(validNote, at: newIndexPath)
@@ -95,8 +95,8 @@ class NotesTableViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
-    fileprivate func delayExecutionBySecond(_ delay: Int, for anonFunc: @escaping () -> Void) {
-        let when = DispatchTime.now() + .seconds(delay)
+    fileprivate func delayExecutionByMilliseconds(_ delay: Int, for anonFunc: @escaping () -> Void) {
+        let when = DispatchTime.now() + .milliseconds(delay)
         DispatchQueue.main.asyncAfter(deadline: when, execute: anonFunc)
     }
     
@@ -234,7 +234,9 @@ class NotesTableViewController: UITableViewController {
     }
     
     func refreshNoteListing() {
-        self.loadNotes()
+        self.delayExecutionByMilliseconds(375) {
+            self.loadNotes()
+        }
         self.tableViewRefreshControl.endRefreshing()
     }
     
