@@ -32,6 +32,8 @@ class NotesTableViewController: UITableViewController {
     
     let iCloudConfigurationNotDetected: FCAlertView = {
         let alertView = FCAlertView(type: .warning)
+        alertView.dismissOnOutsideTouch = true
+        alertView.hideDoneButton = true
         return alertView
     }()
     
@@ -121,10 +123,10 @@ class NotesTableViewController: UITableViewController {
         guard let _ = FileManager.default.url(forUbiquityContainerIdentifier: nil) else {
             self.iCloudConfigurationNotDetected.showAlert(inView: self,
                                                           withTitle: "Unable to Access iCloud Account",
-                                                          withSubtitle: "Open Settings, iCloud, & sign in with your Apple ID.",
+                                                          withSubtitle: "Go to iCloud Setting to Verify.",
                                                           withCustomImage: nil,
                                                           withDoneButtonTitle: nil,
-                                                          andButtons: nil)
+                                                          andButtons: ["Don't Verify", "Verify"])
             return
         }
         
@@ -249,10 +251,10 @@ class NotesTableViewController: UITableViewController {
         guard let iCloudContainerURL = FileManager.default.url(forUbiquityContainerIdentifier: nil) else {
             self.iCloudConfigurationNotDetected.showAlert(inView: self,
                                                           withTitle: "Unable to Access iCloud Account",
-                                                          withSubtitle: "Open Settings, iCloud, & sign in with your Apple ID.",
+                                                          withSubtitle: "Go to iCloud Setting to Verify.",
                                                           withCustomImage: nil,
                                                           withDoneButtonTitle: nil,
-                                                          andButtons: nil)
+                                                          andButtons: ["Don't Verify", "Verify"])
             return
         }
         let documentsDirectoryURL = iCloudContainerURL.appendingPathComponent("Documents")
@@ -383,6 +385,10 @@ extension NotesTableViewController: FCAlertViewDelegate {
         }
         else if title == Delete.no.operation {
             self.setEditing(false, animated: true)
+        }
+        else if title == "Verify" {
+            guard let iCloudSettingURL = URL(string: "App-Prefs:root=CASTLE") else { return }
+            UIApplication.shared.openURL(iCloudSettingURL)
         }
     }
 }

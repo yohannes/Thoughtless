@@ -2,18 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSUbiquitousContainers</key>
-	<dict>
-		<key>iCloud.org.corruptionofconformity.thoughtless</key>
-		<dict>
-			<key>NSUbiquitousContainerSupportedFolderLevels</key>
-			<string>Any</string>
-			<key>NSUbiquitousContainerName</key>
-			<string>Thoughtless</string>
-			<key>NSUbiquitousContainerIsDocumentScopePublic</key>
-			<true/>
-		</dict>
-	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -32,10 +20,33 @@
 	<string>10.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>App-Prefs</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>10</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSUbiquitousContainers</key>
+	<dict>
+		<key>iCloud.org.corruptionofconformity.thoughtless</key>
+		<dict>
+			<key>NSUbiquitousContainerIsDocumentScopePublic</key>
+			<true/>
+			<key>NSUbiquitousContainerName</key>
+			<string>Thoughtless</string>
+			<key>NSUbiquitousContainerSupportedFolderLevels</key>
+			<string>Any</string>
+		</dict>
+	</dict>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
