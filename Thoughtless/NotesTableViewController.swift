@@ -244,7 +244,15 @@ class NotesTableViewController: UITableViewController {
     
     fileprivate func refreshNoteCount() {
         let noteCount = self.noteDocuments.count
-        self.navigationItem.title = noteCount > 1 ? "\(noteCount) Notes" : "\(noteCount) Note"
+        if noteCount > 1 {
+            self.navigationItem.title = "\(noteCount) Notes"
+        }
+        else if noteCount > 0 {
+            self.navigationItem.title = "\(noteCount) Note"
+        }
+        else {
+            self.navigationItem.title = ""
+        }
     }
     
     fileprivate func save(_ note: Note, at indexPath: IndexPath) {
