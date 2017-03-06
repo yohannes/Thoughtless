@@ -9,15 +9,15 @@
 import UIKit
 
 struct ColorThemeHelper {
-    static func reederGray() -> UIColor {
-        return UIColor(hex: 0x4B4A47)!
+    static func reederGray(alpha value: Float = 1.0) -> UIColor {
+        return UIColor(hex: 0x4B4A47, alpha: value)!
     }
     
-    static func reederCream() -> UIColor {
-        return UIColor(hex: 0xE1E0D9)!
+    static func reederCream(alpha value: Float = 1.0) -> UIColor {
+        return UIColor(hex: 0xE1E0D9, alpha: value)!
     }
     
-    static func reederCharcoal() -> UIColor {
-        return UIColor(hexString: "#43423F")!
+    static func reederCharcoal(alpha value: Float = 1.0) -> UIColor {
+        return UIColor(hexString: "#43423F", alpha: value)!
     }
 }

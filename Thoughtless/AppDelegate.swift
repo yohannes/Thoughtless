@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().barTintColor = ColorThemeHelper.reederGray()
         UINavigationBar.appearance().tintColor =  ColorThemeHelper.reederCream()
         
-        UINavigationBar.appearance().barStyle = .blackTranslucent
+        UINavigationBar.appearance().barStyle = .black
         UINavigationBar.appearance().isTranslucent = false
         
         UIToolbar.appearance().barTintColor = ColorThemeHelper.reederGray()
