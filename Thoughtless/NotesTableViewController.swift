@@ -361,7 +361,7 @@ class NotesTableViewController: UITableViewController {
                 guard let weakSelf = self else { return }
                 weakSelf.displayShareSheet(from: indexPath)
             })
-            tableViewRowAction.backgroundColor = UIColor(hexString: "#488AC6")
+            tableViewRowAction.backgroundColor = ColorThemeHelper.reederCharcoal()
             return tableViewRowAction
         }()
         
@@ -376,10 +376,11 @@ class NotesTableViewController: UITableViewController {
                                                           withDoneButtonTitle: nil,
                                                           andButtons: [Delete.no.operation, Delete.yes.operation])
             })
+            tableViewRowAction.backgroundColor = ColorThemeHelper.reederMud()
             return tableViewRowAction
         }()
         
-        return [shareButton, deleteButton]
+        return [deleteButton, shareButton]
     }
 }
 

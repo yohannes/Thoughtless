@@ -18,6 +18,10 @@ struct ColorThemeHelper {
     }
     
     static func reederCharcoal(alpha value: Float = 1.0) -> UIColor {
-        return UIColor(hexString: "#43423F", alpha: value)!
+        return UIColor(hex: 0x43423F, alpha: value)!
+    }
+    
+    static func reederMud(alpha value: Float = 1.0) -> UIColor {
+        return UIColor(hex: 0x353535, alpha: value)!
     }
 }
