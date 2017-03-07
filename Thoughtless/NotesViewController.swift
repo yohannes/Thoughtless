@@ -148,12 +148,19 @@ class NotesViewController: UIViewController {
     @IBAction func swipeRightFromLeftScreenEdgeGestureToCancelOrSave(_ sender: UIScreenEdgePanGestureRecognizer) {
         self.textView.endEditing(true)
         
-        self.saveOrNotSaveAlertView.showAlert(inView: self,
-                                              withTitle: "Pardon the Interruption",
-                                              withSubtitle: "Do you want to save or not save?",
-                                              withCustomImage: nil,
-                                              withDoneButtonTitle: nil,
-                                              andButtons: ["Don't Save", "Save"])
+        if self.doesTextViewNeedToBeSaved == true {
+            self.saveOrNotSaveAlertView.showAlert(inView: self,
+                                                  withTitle: "Pardon the Interruption",
+                                                  withSubtitle: "Do you want to save or not save?",
+                                                  withCustomImage: nil,
+                                                  withDoneButtonTitle: nil,
+                                                  andButtons: ["Don't Save", "Save"])
+        }
+        else {
+            self.doesTextViewNeedToBeSaved = false
+            self.cancelButtonDidTouch(sender: self.cancelButton)
+        }
+        
     }
     
     @IBAction func swipeDownGestureToDismissKeyboard(_ sender: UISwipeGestureRecognizer) {
