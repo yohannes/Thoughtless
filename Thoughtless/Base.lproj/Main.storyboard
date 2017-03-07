@@ -233,10 +233,10 @@
             </objects>
             <point key="canvasLocation" x="3861.5999999999999" y="528.48575712143929"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Notes Navigation Controler-->
         <scene sceneID="dEf-0D-gLa">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YYd-s9-v4p" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YYd-s9-v4p" customClass="NotesNavigationControler" customModule="Thoughtless" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ko7-nI-sU7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -251,10 +251,10 @@
             </objects>
             <point key="canvasLocation" x="693" y="530"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Notes Navigation Controler-->
         <scene sceneID="FFp-8Z-fYV">
             <objects>
-                <navigationController storyboardIdentifier="NavigationControllerEmbeddedInNotesViewController" automaticallyAdjustsScrollViewInsets="NO" id="9Kv-hq-KlY" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationControllerEmbeddedInNotesViewController" automaticallyAdjustsScrollViewInsets="NO" id="9Kv-hq-KlY" customClass="NotesNavigationControler" customModule="Thoughtless" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hd1-TF-CDY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -271,6 +271,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="crw-Lv-jcW"/>
+        <segue reference="V5E-qJ-1hT"/>
     </inferredMetricsTieBreakers>
 </document>

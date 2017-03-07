@@ -23,6 +23,8 @@
 		6501C0441DC1F37B005DB2EC /* FCAlertViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6501C0371DC1F37B005DB2EC /* FCAlertViewDelegate.swift */; };
 		6501C0451DC1F37B005DB2EC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6501C0381DC1F37B005DB2EC /* Info.plist */; };
 		6501C0461DC1F37B005DB2EC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6501C0381DC1F37B005DB2EC /* Info.plist */; };
+		651584971E6EB59300DA58F9 /* NotesNavigationControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651584961E6EB59300DA58F9 /* NotesNavigationControler.swift */; };
+		651584981E6EB59300DA58F9 /* NotesNavigationControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651584961E6EB59300DA58F9 /* NotesNavigationControler.swift */; };
 		651875171D53000F006C8D82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651875161D53000F006C8D82 /* AppDelegate.swift */; };
 		6518751C1D53000F006C8D82 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6518751A1D53000F006C8D82 /* Main.storyboard */; };
 		6518751E1D53000F006C8D82 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6518751D1D53000F006C8D82 /* Assets.xcassets */; };
@@ -103,6 +105,7 @@
 		6501C0361DC1F37B005DB2EC /* FCAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCAlertView.swift; sourceTree = "<group>"; };
 		6501C0371DC1F37B005DB2EC /* FCAlertViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCAlertViewDelegate.swift; sourceTree = "<group>"; };
 		6501C0381DC1F37B005DB2EC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		651584961E6EB59300DA58F9 /* NotesNavigationControler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesNavigationControler.swift; sourceTree = "<group>"; };
 		651875131D53000F006C8D82 /* Thoughtless.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thoughtless.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		651875161D53000F006C8D82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6518751B1D53000F006C8D82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -208,6 +211,7 @@
 				65AF743C1D9B6C19009E1E1C /* MarkdownKit */,
 				651875161D53000F006C8D82 /* AppDelegate.swift */,
 				6518751A1D53000F006C8D82 /* Main.storyboard */,
+				651584961E6EB59300DA58F9 /* NotesNavigationControler.swift */,
 				65850F441E6AAAAE00555E40 /* ColorThemeHelper.swift */,
 				65FE6E7E1DBFC81B00F11A8E /* CurrentDateAndTimeHelper.swift */,
 				653518FE1D6BE9F400294A64 /* Note.swift */,
@@ -558,6 +562,7 @@
 				655F2C691D958EA400550C05 /* MarkdownNotesViewController.swift in Sources */,
 				65AF74781D9B6C19009E1E1C /* MarkdownLevelElement.swift in Sources */,
 				653518FF1D6BE9F400294A64 /* Note.swift in Sources */,
+				651584971E6EB59300DA58F9 /* NotesNavigationControler.swift in Sources */,
 				65AF74721D9B6C19009E1E1C /* MarkdownParser.swift in Sources */,
 				65AF74761D9B6C19009E1E1C /* MarkdownElement.swift in Sources */,
 				65AF745E1D9B6C19009E1E1C /* MarkdownAutomaticLink.swift in Sources */,
@@ -590,6 +595,7 @@
 				6501C0401DC1F37B005DB2EC /* Colors.swift in Sources */,
 				65FE6E801DBFC81B00F11A8E /* CurrentDateAndTimeHelper.swift in Sources */,
 				65AF747B1D9B6C19009E1E1C /* MarkdownLinkElement.swift in Sources */,
+				651584981E6EB59300DA58F9 /* NotesNavigationControler.swift in Sources */,
 				65AF74771D9B6C19009E1E1C /* MarkdownElement.swift in Sources */,
 				65AF74631D9B6C19009E1E1C /* MarkdownCode.swift in Sources */,
 				65AF74611D9B6C19009E1E1C /* MarkdownBold.swift in Sources */,

@@ -23,11 +23,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidFinishLaunching(_ application: UIApplication) {
         self.window?.backgroundColor = ColorThemeHelper.reederGray()
         
-        UINavigationBar.appearance().barTintColor = ColorThemeHelper.reederGray()
-        UINavigationBar.appearance().tintColor =  ColorThemeHelper.reederCream()
+        UINavigationBar.appearance(whenContainedInInstancesOf: [NotesNavigationControler.self]).barTintColor = ColorThemeHelper.reederGray()
+        UINavigationBar.appearance(whenContainedInInstancesOf: [NotesNavigationControler.self]).tintColor = ColorThemeHelper.reederCream()
         
-        UINavigationBar.appearance().barStyle = .black
-        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance(whenContainedInInstancesOf: [NotesNavigationControler.self]).barStyle = .black
+        UINavigationBar.appearance(whenContainedInInstancesOf: [NotesNavigationControler.self]).isTranslucent = false
         
         UIToolbar.appearance().barTintColor = ColorThemeHelper.reederGray()
         UIToolbar.appearance().tintColor =  ColorThemeHelper.reederCream()
@@ -35,12 +35,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UITableView.appearance().backgroundColor = ColorThemeHelper.reederGray()
 
-        UITableViewCell.appearance().backgroundColor = ColorThemeHelper.reederGray()
+        UITableViewCell.appearance(whenContainedInInstancesOf: [NotesNavigationControler.self]).backgroundColor = ColorThemeHelper.reederGray()
         
         UITextView.appearance().backgroundColor = ColorThemeHelper.reederGray()
         
         IQKeyboardManager.sharedManager().enable = true
-        
+
         // TODO: - Add logic to prepare app to use iCloud & handle changes in iCloud availability
         /***
         // Check for iCloud availability
