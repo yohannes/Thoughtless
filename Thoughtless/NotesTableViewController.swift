@@ -297,6 +297,7 @@ class NotesTableViewController: UITableViewController {
         self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
         
         self.deleteOrNotDeleteAlertView.delegate = self
+        self.iCloudConfigurationNotDetected.delegate = self
         
         self.tableViewRefreshControl = {
             let refreshControl = UIRefreshControl()
@@ -374,7 +375,7 @@ class NotesTableViewController: UITableViewController {
                                                           withSubtitle: "There is no way to recover it.",
                                                           withCustomImage: nil,
                                                           withDoneButtonTitle: nil,
-                                                          andButtons: [Delete.no.operation, Delete.yes.operation])
+                                                          andButtons: [Delete.no.note, Delete.yes.note])
             })
             tableViewRowAction.backgroundColor = ColorThemeHelper.reederMud()
             return tableViewRowAction
@@ -388,16 +389,19 @@ class NotesTableViewController: UITableViewController {
 
 extension NotesTableViewController: FCAlertViewDelegate {
     func alertView(_ alertView: FCAlertView, clickedButtonIndex index: Int, buttonTitle title: String) {
-        guard let validIndexPath = self.indexPath else { return }
-        if title == Delete.yes.operation {
+        if title == Delete.yes.note {
+            guard let validIndexPath = self.indexPath else { return }
             self.deleteNote(at: validIndexPath)
         }
-        else if title == Delete.no.operation {
+        else if title == Delete.no.note {
             self.setEditing(false, animated: true)
         }
-        else if title == "Verify" {
+        else if title == Verify.yes.iCloud {
             guard let iCloudSettingURL = URL(string: "App-Prefs:root=CASTLE") else { return }
             UIApplication.shared.openURL(iCloudSettingURL)
+        }
+        else if title == Verify.no.iCloud {
+            self.iCloudConfigurationNotDetected.dismissAlertView()
         }
     }
 }
@@ -413,10 +417,21 @@ extension NotesTableViewController {
     enum Delete {
         case yes, no
         
-        var operation: String {
+        var note: String {
             switch self {
             case .yes: return "Delete"
             case .no: return "Don't Delete"
+            }
+        }
+    }
+    
+    enum Verify {
+        case yes, no
+        
+        var iCloud: String {
+            switch self {
+            case .yes: return "Verify"
+            case .no: return "Don't Verify"
             }
         }
     }
