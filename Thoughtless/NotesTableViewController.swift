@@ -122,7 +122,7 @@ class NotesTableViewController: UITableViewController {
     fileprivate func loadNotes() {
         guard let _ = FileManager.default.url(forUbiquityContainerIdentifier: nil) else {
             self.iCloudConfigurationNotDetected.showAlert(inView: self,
-                                                          withTitle: "Unable to Access iCloud Account",
+                                                          withTitle: "iCloud Not Set",
                                                           withSubtitle: "Go to iCloud Setting to Verify.",
                                                           withCustomImage: nil,
                                                           withDoneButtonTitle: nil,
@@ -258,7 +258,7 @@ class NotesTableViewController: UITableViewController {
     fileprivate func save(_ note: Note, at indexPath: IndexPath) {
         guard let iCloudContainerURL = FileManager.default.url(forUbiquityContainerIdentifier: nil) else {
             self.iCloudConfigurationNotDetected.showAlert(inView: self,
-                                                          withTitle: "Unable to Access iCloud Account",
+                                                          withTitle: "iCloud Not Set",
                                                           withSubtitle: "Go to iCloud Setting to Verify.",
                                                           withCustomImage: nil,
                                                           withDoneButtonTitle: nil,

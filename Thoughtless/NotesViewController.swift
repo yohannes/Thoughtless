@@ -109,7 +109,7 @@ class NotesViewController: UIViewController {
         
         if self.doesTextViewNeedToBeSaved == true {
             self.saveOrNotSaveAlertView.showAlert(inView: self,
-                                                  withTitle: "Unsaved Change Detected",
+                                                  withTitle: "Unsaved Change",
                                                   withSubtitle: "Do you want to save or not save?",
                                                   withCustomImage: nil,
                                                   withDoneButtonTitle: nil,
@@ -150,7 +150,7 @@ class NotesViewController: UIViewController {
         
         if self.doesTextViewNeedToBeSaved == true {
             self.saveOrNotSaveAlertView.showAlert(inView: self,
-                                                  withTitle: "Pardon the Interruption",
+                                                  withTitle: "Unsaved Change",
                                                   withSubtitle: "Do you want to save or not save?",
                                                   withCustomImage: nil,
                                                   withDoneButtonTitle: nil,
@@ -188,7 +188,7 @@ class NotesViewController: UIViewController {
         guard !textView.text.isEmpty else {
             self.textView.endEditing(true)
             self.emptyNoteDeterrentAlertview.showAlert(inView: self,
-                                                       withTitle: "Empty Note Detected",
+                                                       withTitle: "Write Something",
                                                        withSubtitle: "You aren't allowed to save an empty note.",
                                                        withCustomImage: nil,
                                                        withDoneButtonTitle: nil,
