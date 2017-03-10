@@ -110,10 +110,10 @@ class NotesTableViewController: UITableViewController {
     }
     
     fileprivate func loadDefaultNotes() {
-        guard let firstNote = Note(entry: "Tap me to learn about my superpower!\n👇👇👇\n\nYou can power up your note by writing your words like **this** or _this_, create an [url link](http://apple.com), or even make a todo list:\n\n* Watch WWDC videos.\n* Write `code`.\n* Fetch my girlfriend for a ride.\n* Refactor `code`.\n\nOr even create quote:\n\n> A block of quote.\n\nTap *Go!* to preview your enhanced note.\n\nTap *How?* to learn more.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
-        guard let secondNote = Note(entry: "Tap +, above right, to add a new note", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
-        guard let thirdNote = Note(entry: "Tap Edit, above left, to move me or delete me.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
-        guard let fourthNote = Note(entry: "Swipe me to the left for more options.", dateOfCreation: CurrentDateAndTimeHelper.get()) else { return }
+        guard let firstNote = Note(entry: "Tap me to learn about my superpower!\n👇👇👇\n\nYou can power up your note by writing your words like **this** or _this_, create an [url link](http://apple.com), or even make a todo list:\n\n* Watch WWDC videos.\n* Write `code`.\n* Fetch my girlfriend for a ride.\n* Refactor `code`.\n\nOr even create quote:\n\n> A block of quote.\n\nTap *Go!* to preview your enhanced note.\n\nTap *How?* to learn more.", dateOfCreation: self.getCurrentDateAndTime()) else { return }
+        guard let secondNote = Note(entry: "Tap +, above right, to add a new note", dateOfCreation: self.getCurrentDateAndTime()) else { return }
+        guard let thirdNote = Note(entry: "Tap Edit, above left, to move me or delete me.", dateOfCreation: self.getCurrentDateAndTime()) else { return }
+        guard let fourthNote = Note(entry: "Swipe me to the left for more options.", dateOfCreation: self.getCurrentDateAndTime()) else { return }
         for (index, note) in [firstNote, secondNote, thirdNote, fourthNote].enumerated() {
             self.save(note, at: IndexPath(row: index, section: 0))
         }
@@ -384,6 +384,10 @@ class NotesTableViewController: UITableViewController {
         return [deleteButton, shareButton]
     }
 }
+
+// MARK: - CurrentDateAndTimeHelper Protocol
+
+extension NotesTableViewController: CurrentDateAndTimeHelper {}
 
 // MARK: - FCAlertViewDelegate Protocol
 

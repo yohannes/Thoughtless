@@ -172,7 +172,7 @@ class NotesViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let validBarButtonItem = sender as? UIBarButtonItem, validBarButtonItem === self.saveButton {
             let entry = self.textView.text ?? ""
-            self.note = Note(entry: entry, dateOfCreation: CurrentDateAndTimeHelper.get())
+            self.note = Note(entry: entry, dateOfCreation: self.getCurrentDateAndTime())
         }
         else if segue.identifier == NotesViewControllerSegue.showSegueToMarkdownNotesViewController.rawValue {
             guard let validMarkdownNotesViewController = segue.destination as? MarkdownNotesViewController, let validNote = self.note else { return }
@@ -180,7 +180,7 @@ class NotesViewController: UIViewController {
         }
         else if segue.identifier == NotesViewControllerSegue.unwindToNotesTableViewControllerFromNotesViewController.rawValue {
             let entry = self.textView.text ?? ""
-            self.note = Note(entry: entry, dateOfCreation: CurrentDateAndTimeHelper.get())
+            self.note = Note(entry: entry, dateOfCreation: self.getCurrentDateAndTime())
         }
     }
     
@@ -310,6 +310,10 @@ extension NotesViewController {
         case unwindToNotesTableViewControllerFromNotesViewController
     }
 }
+
+// MARK: - CurrentDateAndTimeHelper Protocol
+
+extension NotesViewController: CurrentDateAndTimeHelper {}
 
 // MARK: - UIScrollViewDelegate Protocol
 

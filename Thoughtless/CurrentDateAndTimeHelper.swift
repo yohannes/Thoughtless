@@ -8,8 +8,12 @@
 
 import Foundation
 
-class CurrentDateAndTimeHelper {
-  static func get() -> String {
-    return DateFormatter.localizedString(from: Date(), dateStyle: .long, timeStyle: .short)
-  }
+protocol CurrentDateAndTimeHelper {
+    func getCurrentDateAndTime() -> String
+}
+
+extension CurrentDateAndTimeHelper {
+    func getCurrentDateAndTime() -> String {
+        return DateFormatter.localizedString(from: Date(), dateStyle: .long, timeStyle: .short)
+    }
 }
