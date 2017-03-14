@@ -17,9 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     // Obtaining the iCloud token
-    var currentiCloudToken: (NSCoding, NSCopying, NSObjectProtocol)?
+//    var currentiCloudToken: (NSCoding, NSCopying, NSObjectProtocol)?
     
-    let iCloudTokenIdentifer = "org.corruptionofconformity.thoughtless.UbiquityIdentityToken"
+//    let iCloudTokenIdentifer = "org.corruptionofconformity.thoughtless.UbiquityIdentityToken"
     
     // MARK: - Helper Methods
     
@@ -54,37 +54,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.currentiCloudToken = FileManager.default.ubiquityIdentityToken as? (NSCoding, NSCopying, NSObjectProtocol)
         
+        self.validateConfiguration(from: <#T##UIViewController#>)
+        
         //  Archiving iCloud availability in the user defaults database
-        if let validCurrentiCloudToken = self.currentiCloudToken {
-            print("Valid iCloud Token found: \(validCurrentiCloudToken)")
-            let currentiCloudTokenData = NSKeyedArchiver.archivedData(withRootObject: validCurrentiCloudToken)
-            UserDefaults.standard.set(currentiCloudTokenData, forKey: self.iCloudTokenIdentifer)
-        }
-        else {
-            UserDefaults.standard.removeObject(forKey: self.iCloudTokenIdentifer)
-            
-            // Set up an alert controller without a view controller
-            let topWindow = UIWindow(frame: UIScreen.main.bounds)
-            topWindow.rootViewController = UIViewController()
-            topWindow.windowLevel = UIWindowLevelAlert + 1
-            
-            let iCloudUnsetAlertController = UIAlertController(title: "Missing iCloud Account",
-                                                    message: "Thoughtless requires iCloud to sync your notes.",
-                                                    preferredStyle: .alert)
-            let goToiCloudSettingAlertAction = UIAlertAction(title: "Set Up iCloud Now",
-                                                             style: .default,
-                                                             handler: { (_) in
-                                                                guard let iCloudSettingURL = URL(string: "App-Prefs:root=CASTLE") else { return }
-                                                                UIApplication.shared.openURL(iCloudSettingURL)
-                                                                topWindow.isHidden = true
-            })
-            iCloudUnsetAlertController.addAction(goToiCloudSettingAlertAction)
-            
-            topWindow.makeKeyAndVisible()
-            topWindow.rootViewController?.present(iCloudUnsetAlertController,
-                                                  animated: true,
-                                                  completion: nil)
-        }
+//        if let validCurrentiCloudToken = self.currentiCloudToken {
+//            print("Valid iCloud Token found: \(validCurrentiCloudToken)")
+//            let currentiCloudTokenData = NSKeyedArchiver.archivedData(withRootObject: validCurrentiCloudToken)
+//            UserDefaults.standard.set(currentiCloudTokenData, forKey: self.iCloudTokenIdentifer)
+//        }
+//        else {
+//            UserDefaults.standard.removeObject(forKey: self.iCloudTokenIdentifer)
+//            
+//            // Set up an alert controller without a view controller
+//            let topWindow = UIWindow(frame: UIScreen.main.bounds)
+//            topWindow.rootViewController = UIViewController()
+//            topWindow.windowLevel = UIWindowLevelAlert + 1
+//            
+//            let iCloudUnsetAlertController = UIAlertController(title: "Missing iCloud Account",
+//                                                    message: "Thoughtless requires iCloud to sync your notes.",
+//                                                    preferredStyle: .alert)
+//            let goToiCloudSettingAlertAction = UIAlertAction(title: "Set Up iCloud Now",
+//                                                             style: .default,
+//                                                             handler: { (_) in
+//                                                                guard let iCloudSettingURL = URL(string: "App-Prefs:root=CASTLE") else { return }
+//                                                                UIApplication.shared.openURL(iCloudSettingURL)
+//                                                                topWindow.isHidden = true
+//            })
+//            iCloudUnsetAlertController.addAction(goToiCloudSettingAlertAction)
+//            
+//            topWindow.makeKeyAndVisible()
+//            topWindow.rootViewController?.present(iCloudUnsetAlertController,
+//                                                  animated: true,
+//                                                  completion: nil)
+//        }
         
         // Registering for iCloud availability change notifications
         NotificationCenter.default.addObserver(self,
@@ -133,3 +135,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+extension AppDelegate: iCloudAccountConformance {
+    var currentToken = FileManager.default.ubiquityIdentityToken
+    var tokenIdentifier = "org.corruptionofconformity.thoughtless.UbiquityIdentityToken"
+}

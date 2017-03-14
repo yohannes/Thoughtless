@@ -36,6 +36,8 @@
 		655F2C691D958EA400550C05 /* MarkdownNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655F2C681D958EA400550C05 /* MarkdownNotesViewController.swift */; };
 		655F2C6A1D958EA400550C05 /* MarkdownNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655F2C681D958EA400550C05 /* MarkdownNotesViewController.swift */; };
 		65610CC81D54667A003E0882 /* NotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65610CC71D54667A003E0882 /* NotesTableViewCell.swift */; };
+		6584CB8F1E77F84000B7A7DD /* iCloudAccountConformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6584CB8E1E77F84000B7A7DD /* iCloudAccountConformance.swift */; };
+		6584CB901E77F84000B7A7DD /* iCloudAccountConformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6584CB8E1E77F84000B7A7DD /* iCloudAccountConformance.swift */; };
 		65850F451E6AAAAE00555E40 /* ColorThemeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65850F441E6AAAAE00555E40 /* ColorThemeHelper.swift */; };
 		65850F461E6AAAAE00555E40 /* ColorThemeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65850F441E6AAAAE00555E40 /* ColorThemeHelper.swift */; };
 		65AF74581D9B6C19009E1E1C /* MarkdownCodeEscaping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AF74411D9B6C19009E1E1C /* MarkdownCodeEscaping.swift */; };
@@ -119,6 +121,7 @@
 		6535190A1D6BF72700294A64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		655F2C681D958EA400550C05 /* MarkdownNotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownNotesViewController.swift; sourceTree = "<group>"; };
 		65610CC71D54667A003E0882 /* NotesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesTableViewCell.swift; sourceTree = "<group>"; };
+		6584CB8E1E77F84000B7A7DD /* iCloudAccountConformance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iCloudAccountConformance.swift; sourceTree = "<group>"; };
 		65850F441E6AAAAE00555E40 /* ColorThemeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorThemeHelper.swift; sourceTree = "<group>"; };
 		65AF74411D9B6C19009E1E1C /* MarkdownCodeEscaping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownCodeEscaping.swift; sourceTree = "<group>"; };
 		65AF74421D9B6C19009E1E1C /* MarkdownEscaping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownEscaping.swift; sourceTree = "<group>"; };
@@ -214,6 +217,7 @@
 				651584961E6EB59300DA58F9 /* NotesNavigationControler.swift */,
 				65850F441E6AAAAE00555E40 /* ColorThemeHelper.swift */,
 				65FE6E7E1DBFC81B00F11A8E /* CurrentDateAndTimeHelper.swift */,
+				6584CB8E1E77F84000B7A7DD /* iCloudAccountConformance.swift */,
 				653518FE1D6BE9F400294A64 /* Note.swift */,
 				65B7DA801E3B2FF7006A1A87 /* NoteDocument.swift */,
 				65C6B37F1D65913800310FF8 /* NotesViewController.swift */,
@@ -560,6 +564,7 @@
 				65C6B3801D65913800310FF8 /* NotesViewController.swift in Sources */,
 				65AF74741D9B6C19009E1E1C /* MarkdownCommonElement.swift in Sources */,
 				655F2C691D958EA400550C05 /* MarkdownNotesViewController.swift in Sources */,
+				6584CB8F1E77F84000B7A7DD /* iCloudAccountConformance.swift in Sources */,
 				65AF74781D9B6C19009E1E1C /* MarkdownLevelElement.swift in Sources */,
 				653518FF1D6BE9F400294A64 /* Note.swift in Sources */,
 				651584971E6EB59300DA58F9 /* NotesNavigationControler.swift in Sources */,
@@ -608,6 +613,7 @@
 				65AF74691D9B6C19009E1E1C /* MarkdownLink.swift in Sources */,
 				65AF745B1D9B6C19009E1E1C /* MarkdownEscaping.swift in Sources */,
 				65AF74671D9B6C19009E1E1C /* MarkdownItalic.swift in Sources */,
+				6584CB901E77F84000B7A7DD /* iCloudAccountConformance.swift in Sources */,
 				65AF745F1D9B6C19009E1E1C /* MarkdownAutomaticLink.swift in Sources */,
 				653519091D6BF72700294A64 /* NotesTests.swift in Sources */,
 				65AF74791D9B6C19009E1E1C /* MarkdownLevelElement.swift in Sources */,
