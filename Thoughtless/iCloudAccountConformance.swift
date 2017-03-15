@@ -9,17 +9,17 @@
 import UIKit
 
 protocol iCloudAccountConformance {
-    var currentToken: (NSCoding, NSCopying, NSObjectProtocol)? { get }
+    var currentToken: (NSCoding & NSCopying & NSObjectProtocol)? { get set }
     var tokenIdentifier: String { get }
     
     func validateConfiguration(from: UIViewController)
-//    func iCloudAccountAvailabilityHasChanged()
+    func iCloudAccountAvailabilityHasChanged()
 }
 
 extension iCloudAccountConformance {
-//    func icloudAccountAvailabilityHasChanged() {
-//        print("iCloud account has changed. Old:\(String(describing: currentToken)). New: \(String(describing: FileManager.default.ubiquityIdentityToken))")
-//    }
+    func iCloudAccountAvailabilityHasChanged() {
+        print("iCloud account has changed. Old:\(String(describing: currentToken)). New: \(String(describing: FileManager.default.ubiquityIdentityToken))")
+    }
     
     func validateConfiguration(from viewController: UIViewController) {
         if let validCurrentToken = currentToken {
@@ -54,7 +54,7 @@ extension iCloudAccountConformance {
         
         // Registering for iCloud availability change notifications
 //        NotificationCenter.default.addObserver(viewController,
-//                                               selector: #selector(AppDelegate.iCloudAccountAvailabilityHasChanged),
+//                                               selector: #selector(viewController.iCloudAccountAvailabilityHasChanged)
 //                                               name: .NSUbiquityIdentityDidChange,
 //                                               object: nil)
     }

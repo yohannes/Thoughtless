@@ -23,6 +23,9 @@ class NotesTableViewController: UITableViewController {
     var indexPath: IndexPath?
     var tableViewRefreshControl: UIRefreshControl!
     
+    var currentToken = FileManager.default.ubiquityIdentityToken
+    var tokenIdentifier = "org.corruptionofconformity.thoughtless.UbiquityIdentityToken"
+    
     let deleteOrNotDeleteAlertView: FCAlertView = {
         let alertView = FCAlertView(type: .warning)
         alertView.dismissOnOutsideTouch = true
@@ -32,7 +35,7 @@ class NotesTableViewController: UITableViewController {
     
     let iCloudConfigurationNotDetected: FCAlertView = {
         let alertView = FCAlertView(type: .warning)
-        alertView.dismissOnOutsideTouch = true
+        alertView.dismissOnOutsideTouch = false
         alertView.hideDoneButton = true
         return alertView
     }()
@@ -119,16 +122,8 @@ class NotesTableViewController: UITableViewController {
         }
     }
     
-    fileprivate func loadNotes() {
-        guard let _ = FileManager.default.url(forUbiquityContainerIdentifier: nil) else {
-            self.iCloudConfigurationNotDetected.showAlert(inView: self,
-                                                          withTitle: "iCloud Not Set",
-                                                          withSubtitle: "Go to iCloud Setting to Verify.",
-                                                          withCustomImage: nil,
-                                                          withDoneButtonTitle: nil,
-                                                          andButtons: ["Don't Verify", "Verify"])
-            return
-        }
+    func loadNotes() {
+        guard let _ = self.verifyiCloudAccount() else { return }
         
         self.metadataQuery.searchScopes = [NSMetadataQueryUbiquitousDocumentsScope]
         self.metadataQuery.predicate = NSPredicate(format: "%K like '*'", NSMetadataItemFSNameKey)
@@ -256,15 +251,7 @@ class NotesTableViewController: UITableViewController {
     }
     
     fileprivate func save(_ note: Note, at indexPath: IndexPath) {
-        guard let iCloudContainerURL = FileManager.default.url(forUbiquityContainerIdentifier: nil) else {
-            self.iCloudConfigurationNotDetected.showAlert(inView: self,
-                                                          withTitle: "iCloud Not Set",
-                                                          withSubtitle: "Go to iCloud Setting to Verify.",
-                                                          withCustomImage: nil,
-                                                          withDoneButtonTitle: nil,
-                                                          andButtons: ["Don't Verify", "Verify"])
-            return
-        }
+        guard let iCloudContainerURL = self.verifyiCloudAccount() else { return }
         let documentsDirectoryURL = iCloudContainerURL.appendingPathComponent("Documents")
         let noteURL = documentsDirectoryURL.appendingPathComponent("\(note.entry.components(separatedBy: NSCharacterSet.whitespaces).first!)-\(Date.timeIntervalSinceReferenceDate).txt")
         let noteDocument = NoteDocument(fileURL: noteURL)
@@ -282,13 +269,33 @@ class NotesTableViewController: UITableViewController {
         }
     }
     
+    fileprivate func verifyiCloudAccount() -> URL? {
+        guard let iCloudContainerURL = FileManager.default.url(forUbiquityContainerIdentifier: nil) else {
+            let iCloudConfigurationAlertController = UIAlertController(title: "Missing iCloud Account",
+                                                                       message: "Thoughtless requires iCloud to sync your notes. Also ensure iCloud Drive is turned on.",
+                                                                       preferredStyle: .alert)
+            let iCloudConfigurationAlertAction = UIAlertAction(title: "Verify",
+                                                                style: .default,
+                                                                handler: { (_) in
+                                                                    guard let iCloudSettingURL = URL(string: "App-Prefs:root=CASTLE") else { return }
+                                                                    UIApplication.shared.openURL(iCloudSettingURL)
+            })
+            iCloudConfigurationAlertController.addAction(iCloudConfigurationAlertAction)
+            self.present(iCloudConfigurationAlertController, animated: true, completion: nil)
+            return nil
+        }
+        return iCloudContainerURL
+    }
+    
+    func test() {
+        print("testing")
+    }
+    
     // MARK: - UIViewController Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.loadNotes()
-        
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: ColorThemeHelper.reederCream()]
         
         self.navigationItem.leftBarButtonItem = self.editButtonItem
@@ -307,11 +314,11 @@ class NotesTableViewController: UITableViewController {
             return refreshControl
         }()
         self.tableView.addSubview(self.tableViewRefreshControl)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(NotesTableViewController.loadNotes),
+                                               name: NSNotification.Name.UIApplicationWillEnterForeground,
+                                               object: nil)
         self.loadNotes()
     }
     
