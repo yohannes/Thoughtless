@@ -25,6 +25,7 @@ class NotesTableViewController: UITableViewController {
     
     var currentToken = FileManager.default.ubiquityIdentityToken
     var tokenIdentifier = "org.corruptionofconformity.thoughtless.UbiquityIdentityToken"
+    let iCloudEnabledKey = "iCloudEnabled"
     
     let deleteOrNotDeleteAlertView: FCAlertView = {
         let alertView = FCAlertView(type: .warning)
@@ -252,6 +253,8 @@ class NotesTableViewController: UITableViewController {
     
     fileprivate func save(_ note: Note, at indexPath: IndexPath) {
         guard let iCloudContainerURL = self.verifyiCloudAccount() else { return }
+//        guard let iCloudContainerURL = FileManager.default.url(forUbiquityContainerIdentifier: nil) else { return }
+        
         let documentsDirectoryURL = iCloudContainerURL.appendingPathComponent("Documents")
         let noteURL = documentsDirectoryURL.appendingPathComponent("\(note.entry.components(separatedBy: NSCharacterSet.whitespaces).first!)-\(Date.timeIntervalSinceReferenceDate).txt")
         let noteDocument = NoteDocument(fileURL: noteURL)
@@ -269,7 +272,10 @@ class NotesTableViewController: UITableViewController {
         }
     }
     
-    fileprivate func verifyiCloudAccount() -> URL? {
+    func verifyiCloudAccount() -> URL? {
+        let isiCloudEnabled = UserDefaults.standard.bool(forKey: self.iCloudEnabledKey)
+        if isiCloudEnabled == false { return nil }
+        
         guard let iCloudContainerURL = FileManager.default.url(forUbiquityContainerIdentifier: nil) else {
             let iCloudConfigurationAlertController = UIAlertController(title: "Missing iCloud Account",
                                                                        message: "Thoughtless requires iCloud to sync your notes. Also ensure iCloud Drive is turned on.",
@@ -284,11 +290,8 @@ class NotesTableViewController: UITableViewController {
             self.present(iCloudConfigurationAlertController, animated: true, completion: nil)
             return nil
         }
+        
         return iCloudContainerURL
-    }
-    
-    func test() {
-        print("testing")
     }
     
     // MARK: - UIViewController Methods
@@ -316,7 +319,7 @@ class NotesTableViewController: UITableViewController {
         self.tableView.addSubview(self.tableViewRefreshControl)
 
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(NotesTableViewController.loadNotes),
+                                               selector: #selector(NotesTableViewController.verifyiCloudAccount),
                                                name: NSNotification.Name.UIApplicationWillEnterForeground,
                                                object: nil)
         self.loadNotes()
