@@ -189,7 +189,12 @@ class NotesTableViewController: UITableViewController {
                 })
             }
         }
-        else { self.loadDefaultNotes() }
+        else {
+            self.delayExecutionByMilliseconds(1000, for: { [weak self] in
+                guard let weakSelf = self else { return }
+                weakSelf.loadDefaultNotes()
+            })
+        }
         metadataQuery.enableUpdates()
     }
     
@@ -227,7 +232,12 @@ class NotesTableViewController: UITableViewController {
                 })
             }
         }
-        else { self.loadDefaultNotes() }
+        else {
+            self.delayExecutionByMilliseconds(1000, for: { [weak self] in
+                guard let weakSelf = self else { return }
+                weakSelf.loadDefaultNotes()
+            })
+        }
         metadataQuery.enableUpdates()
     }
     
