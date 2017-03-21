@@ -8,6 +8,7 @@
 
 import UIKit
 
+// TODO: - Remove this protocol since logic is in AppDelegate?
 protocol iCloudAccountConformance {
     var currentToken: (NSCoding & NSCopying & NSObjectProtocol)? { get set }
     var tokenIdentifier: String { get }

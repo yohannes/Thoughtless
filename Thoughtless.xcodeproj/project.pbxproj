@@ -9,20 +9,6 @@
 /* Begin PBXBuildFile section */
 		4388F56426EC8B11447B3235 /* Pods_ThoughtlessTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6FCDB1932489F7B1B7C5F0 /* Pods_ThoughtlessTests.framework */; };
 		53396DC9A4E555B9BA05906A /* Pods_Thoughtless.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BB04E8C1406F7203EED9DD6 /* Pods_Thoughtless.framework */; };
-		6501C0391DC1F37B005DB2EC /* alert-round.png in Resources */ = {isa = PBXBuildFile; fileRef = 6501C0311DC1F37B005DB2EC /* alert-round.png */; };
-		6501C03A1DC1F37B005DB2EC /* alert-round.png in Resources */ = {isa = PBXBuildFile; fileRef = 6501C0311DC1F37B005DB2EC /* alert-round.png */; };
-		6501C03B1DC1F37B005DB2EC /* checkmark-round.png in Resources */ = {isa = PBXBuildFile; fileRef = 6501C0321DC1F37B005DB2EC /* checkmark-round.png */; };
-		6501C03C1DC1F37B005DB2EC /* checkmark-round.png in Resources */ = {isa = PBXBuildFile; fileRef = 6501C0321DC1F37B005DB2EC /* checkmark-round.png */; };
-		6501C03D1DC1F37B005DB2EC /* close-round.png in Resources */ = {isa = PBXBuildFile; fileRef = 6501C0331DC1F37B005DB2EC /* close-round.png */; };
-		6501C03E1DC1F37B005DB2EC /* close-round.png in Resources */ = {isa = PBXBuildFile; fileRef = 6501C0331DC1F37B005DB2EC /* close-round.png */; };
-		6501C03F1DC1F37B005DB2EC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6501C0341DC1F37B005DB2EC /* Colors.swift */; };
-		6501C0401DC1F37B005DB2EC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6501C0341DC1F37B005DB2EC /* Colors.swift */; };
-		6501C0411DC1F37B005DB2EC /* FCAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6501C0361DC1F37B005DB2EC /* FCAlertView.swift */; };
-		6501C0421DC1F37B005DB2EC /* FCAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6501C0361DC1F37B005DB2EC /* FCAlertView.swift */; };
-		6501C0431DC1F37B005DB2EC /* FCAlertViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6501C0371DC1F37B005DB2EC /* FCAlertViewDelegate.swift */; };
-		6501C0441DC1F37B005DB2EC /* FCAlertViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6501C0371DC1F37B005DB2EC /* FCAlertViewDelegate.swift */; };
-		6501C0451DC1F37B005DB2EC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6501C0381DC1F37B005DB2EC /* Info.plist */; };
-		6501C0461DC1F37B005DB2EC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6501C0381DC1F37B005DB2EC /* Info.plist */; };
 		651584971E6EB59300DA58F9 /* NotesNavigationControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651584961E6EB59300DA58F9 /* NotesNavigationControler.swift */; };
 		651584981E6EB59300DA58F9 /* NotesNavigationControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651584961E6EB59300DA58F9 /* NotesNavigationControler.swift */; };
 		651875171D53000F006C8D82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651875161D53000F006C8D82 /* AppDelegate.swift */; };
@@ -99,14 +85,6 @@
 		0D2ECF3488456280F71EEF26 /* Pods-Thoughtless.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thoughtless.release.xcconfig"; path = "Pods/Target Support Files/Pods-Thoughtless/Pods-Thoughtless.release.xcconfig"; sourceTree = "<group>"; };
 		2E9A19799D3B8D41650EE413 /* Pods-ThoughtlessTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThoughtlessTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThoughtlessTests/Pods-ThoughtlessTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5BB04E8C1406F7203EED9DD6 /* Pods_Thoughtless.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Thoughtless.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6501C0311DC1F37B005DB2EC /* alert-round.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-round.png"; sourceTree = "<group>"; };
-		6501C0321DC1F37B005DB2EC /* checkmark-round.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkmark-round.png"; sourceTree = "<group>"; };
-		6501C0331DC1F37B005DB2EC /* close-round.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close-round.png"; sourceTree = "<group>"; };
-		6501C0341DC1F37B005DB2EC /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		6501C0351DC1F37B005DB2EC /* FCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCAlertView.h; sourceTree = "<group>"; };
-		6501C0361DC1F37B005DB2EC /* FCAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCAlertView.swift; sourceTree = "<group>"; };
-		6501C0371DC1F37B005DB2EC /* FCAlertViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCAlertViewDelegate.swift; sourceTree = "<group>"; };
-		6501C0381DC1F37B005DB2EC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		651584961E6EB59300DA58F9 /* NotesNavigationControler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesNavigationControler.swift; sourceTree = "<group>"; };
 		651875131D53000F006C8D82 /* Thoughtless.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thoughtless.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		651875161D53000F006C8D82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -171,21 +149,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6501C0301DC1F37B005DB2EC /* FCAlertView */ = {
-			isa = PBXGroup;
-			children = (
-				6501C0311DC1F37B005DB2EC /* alert-round.png */,
-				6501C0321DC1F37B005DB2EC /* checkmark-round.png */,
-				6501C0331DC1F37B005DB2EC /* close-round.png */,
-				6501C0341DC1F37B005DB2EC /* Colors.swift */,
-				6501C0351DC1F37B005DB2EC /* FCAlertView.h */,
-				6501C0361DC1F37B005DB2EC /* FCAlertView.swift */,
-				6501C0371DC1F37B005DB2EC /* FCAlertViewDelegate.swift */,
-				6501C0381DC1F37B005DB2EC /* Info.plist */,
-			);
-			path = FCAlertView;
-			sourceTree = "<group>";
-		};
 		6518750A1D53000F006C8D82 = {
 			isa = PBXGroup;
 			children = (
@@ -210,7 +173,6 @@
 			isa = PBXGroup;
 			children = (
 				65B7DA7F1E3B081C006A1A87 /* Thoughtless.entitlements */,
-				6501C0301DC1F37B005DB2EC /* FCAlertView */,
 				65AF743C1D9B6C19009E1E1C /* MarkdownKit */,
 				651875161D53000F006C8D82 /* AppDelegate.swift */,
 				6518751A1D53000F006C8D82 /* Main.storyboard */,
@@ -422,13 +384,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6501C0451DC1F37B005DB2EC /* Info.plist in Resources */,
 				651875211D53000F006C8D82 /* LaunchScreen.storyboard in Resources */,
-				6501C03B1DC1F37B005DB2EC /* checkmark-round.png in Resources */,
 				6518751E1D53000F006C8D82 /* Assets.xcassets in Resources */,
 				6518751C1D53000F006C8D82 /* Main.storyboard in Resources */,
-				6501C0391DC1F37B005DB2EC /* alert-round.png in Resources */,
-				6501C03D1DC1F37B005DB2EC /* close-round.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,10 +394,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6501C03E1DC1F37B005DB2EC /* close-round.png in Resources */,
-				6501C03A1DC1F37B005DB2EC /* alert-round.png in Resources */,
-				6501C0461DC1F37B005DB2EC /* Info.plist in Resources */,
-				6501C03C1DC1F37B005DB2EC /* checkmark-round.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,7 +510,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6501C0431DC1F37B005DB2EC /* FCAlertViewDelegate.swift in Sources */,
 				65AF745C1D9B6C19009E1E1C /* MarkdownUnescaping.swift in Sources */,
 				65AF745A1D9B6C19009E1E1C /* MarkdownEscaping.swift in Sources */,
 				65AF746E1D9B6C19009E1E1C /* String+UTF16.swift in Sources */,
@@ -579,14 +532,12 @@
 				651875291D53A354006C8D82 /* NotesTableViewController.swift in Sources */,
 				65AF74621D9B6C19009E1E1C /* MarkdownCode.swift in Sources */,
 				65850F451E6AAAAE00555E40 /* ColorThemeHelper.swift in Sources */,
-				6501C03F1DC1F37B005DB2EC /* Colors.swift in Sources */,
 				65AF74601D9B6C19009E1E1C /* MarkdownBold.swift in Sources */,
 				65AF74641D9B6C19009E1E1C /* MarkdownHeader.swift in Sources */,
 				65FE6E7F1DBFC81B00F11A8E /* CurrentDateAndTimeHelper.swift in Sources */,
 				65610CC81D54667A003E0882 /* NotesTableViewCell.swift in Sources */,
 				65AF74681D9B6C19009E1E1C /* MarkdownLink.swift in Sources */,
 				65B7DA811E3B2FF7006A1A87 /* NoteDocument.swift in Sources */,
-				6501C0411DC1F37B005DB2EC /* FCAlertView.swift in Sources */,
 				65AF74701D9B6C19009E1E1C /* UIFont+Traits.swift in Sources */,
 				65AF746A1D9B6C19009E1E1C /* MarkdownList.swift in Sources */,
 			);
@@ -597,7 +548,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				65AF745D1D9B6C19009E1E1C /* MarkdownUnescaping.swift in Sources */,
-				6501C0401DC1F37B005DB2EC /* Colors.swift in Sources */,
 				65FE6E801DBFC81B00F11A8E /* CurrentDateAndTimeHelper.swift in Sources */,
 				65AF747B1D9B6C19009E1E1C /* MarkdownLinkElement.swift in Sources */,
 				651584981E6EB59300DA58F9 /* NotesNavigationControler.swift in Sources */,
@@ -606,7 +556,6 @@
 				65AF74611D9B6C19009E1E1C /* MarkdownBold.swift in Sources */,
 				65850F461E6AAAAE00555E40 /* ColorThemeHelper.swift in Sources */,
 				65AF74651D9B6C19009E1E1C /* MarkdownHeader.swift in Sources */,
-				6501C0441DC1F37B005DB2EC /* FCAlertViewDelegate.swift in Sources */,
 				65AF74731D9B6C19009E1E1C /* MarkdownParser.swift in Sources */,
 				65AF746F1D9B6C19009E1E1C /* String+UTF16.swift in Sources */,
 				65B7DA821E3B2FF7006A1A87 /* NoteDocument.swift in Sources */,
@@ -621,7 +570,6 @@
 				65AF74591D9B6C19009E1E1C /* MarkdownCodeEscaping.swift in Sources */,
 				655F2C6A1D958EA400550C05 /* MarkdownNotesViewController.swift in Sources */,
 				65AF746D1D9B6C19009E1E1C /* MarkdownQuote.swift in Sources */,
-				6501C0421DC1F37B005DB2EC /* FCAlertView.swift in Sources */,
 				65AF746B1D9B6C19009E1E1C /* MarkdownList.swift in Sources */,
 				653519111D6BFB1100294A64 /* Note.swift in Sources */,
 				65AF74711D9B6C19009E1E1C /* UIFont+Traits.swift in Sources */,

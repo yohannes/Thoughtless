@@ -20,24 +20,6 @@ class NotesViewController: UIViewController {
     
     var lastOffsetY: CGFloat = 0
     
-    let saveOrNotSaveAlertView: FCAlertView = {
-        let alertView = FCAlertView(type: .caution)
-        alertView.dismissOnOutsideTouch = true
-        alertView.hideDoneButton = true
-        alertView.titleColor = ColorThemeHelper.reederGray()
-        alertView.subTitleColor = ColorThemeHelper.reederGray()
-        return alertView
-    }()
-    
-    let emptyNoteDeterrentAlertview: FCAlertView = {
-        let alertView = FCAlertView(type: .warning)
-        alertView.dismissOnOutsideTouch = true
-        alertView.hideDoneButton = true
-        alertView.titleColor = ColorThemeHelper.reederGray()
-        alertView.subTitleColor = ColorThemeHelper.reederGray()
-        return alertView
-    }()
-    
     enum Cursor: String {
         case left, right
         
@@ -90,6 +72,7 @@ class NotesViewController: UIViewController {
     
     @IBOutlet weak var bottomLayoutGuideTopToTextViewBottom: NSLayoutConstraint!
     
+    
     // MARK: - IBAction Methods
     
     @IBAction func cancelButtonDidTouch(sender: UIBarButtonItem) {
@@ -108,12 +91,7 @@ class NotesViewController: UIViewController {
         //    }
         
         if self.doesTextViewNeedToBeSaved == true {
-            self.saveOrNotSaveAlertView.showAlert(inView: self,
-                                                  withTitle: "Unsaved Change",
-                                                  withSubtitle: "Do you want to save or not save?",
-                                                  withCustomImage: nil,
-                                                  withDoneButtonTitle: nil,
-                                                  andButtons: ["Don't Save", "Save"])
+            self.presentShouldSaveAlertController()
         }
         else {
             let isPresentingFromAddButton = self.presentingViewController is UINavigationController
@@ -121,7 +99,6 @@ class NotesViewController: UIViewController {
                 self.dismiss(animated: true, completion: nil)
             }
             else {
-                //      print("d) I am of type: \(type(of: self.presentingViewController))")
                 _ = self.navigationController?.popViewController(animated: true)
             }
         }
@@ -149,12 +126,7 @@ class NotesViewController: UIViewController {
         self.textView.endEditing(true)
         
         if self.doesTextViewNeedToBeSaved == true {
-            self.saveOrNotSaveAlertView.showAlert(inView: self,
-                                                  withTitle: "Unsaved Change",
-                                                  withSubtitle: "Do you want to save or not save?",
-                                                  withCustomImage: nil,
-                                                  withDoneButtonTitle: nil,
-                                                  andButtons: ["Don't Save", "Save"])
+            self.presentShouldSaveAlertController()
         }
         else {
             self.doesTextViewNeedToBeSaved = false
@@ -187,12 +159,17 @@ class NotesViewController: UIViewController {
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         guard !textView.text.isEmpty else {
             self.textView.endEditing(true)
-            self.emptyNoteDeterrentAlertview.showAlert(inView: self,
-                                                       withTitle: "Write Something",
-                                                       withSubtitle: "You aren't allowed to save an empty note.",
-                                                       withCustomImage: nil,
-                                                       withDoneButtonTitle: nil,
-                                                       andButtons: ["Understood"])
+            
+            let emptyNoteDeterrentAlertController = UIAlertController(title: NSLocalizedString("Write Something", comment: ""),
+                                                                      message: NSLocalizedString("You aren't allowed to save an empty note.", comment: ""),
+                                                                      preferredStyle: .alert)
+            let understoodAlertAction = UIAlertAction(title: NSLocalizedString("Understood", comment: ""), style: .default, handler: { [weak self] (_) in
+                guard let weakSelf = self else { return }
+                weakSelf.textView.becomeFirstResponder()
+            })
+            emptyNoteDeterrentAlertController.addAction(understoodAlertAction)
+            self.present(emptyNoteDeterrentAlertController, animated: true, completion: nil)
+            
             return false
         }
         
@@ -208,9 +185,6 @@ class NotesViewController: UIViewController {
         self.view.backgroundColor = ColorThemeHelper.reederGray()
         
         self.setupKeyboardToolBarWithBarButtonItems()
-        
-        self.saveOrNotSaveAlertView.delegate = self
-        self.emptyNoteDeterrentAlertview.delegate = self
         
         self.textView.delegate = self
         self.textView.textColor = ColorThemeHelper.reederCream()
@@ -248,6 +222,26 @@ class NotesViewController: UIViewController {
         textView.selectedTextRange = textView.textRange(from: newCursorPosition, to: newCursorPosition)
     }
     
+    fileprivate func presentShouldSaveAlertController() {
+        let shouldSaveAlertController = UIAlertController(title: NSLocalizedString("Unsaved Change", comment: ""),
+                                                          message: NSLocalizedString("Do you want to save or not save?", comment: ""),
+                                                          preferredStyle: .alert)
+        let saveAlertAction = UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default, handler: { [weak self] (_) in
+            guard let weakSelf = self else { return }
+            weakSelf.textView.endEditing(true)
+            let _ = weakSelf.shouldPerformSegue(withIdentifier: NotesViewControllerSegue.unwindToNotesTableViewControllerFromNotesViewController.rawValue, sender: weakSelf)
+            
+        })
+        let dontSaveAlertAction = UIAlertAction(title: NSLocalizedString("Don't Save", comment: ""), style: .cancel, handler: { [weak self] (_) in
+            guard let weakSelf = self else { return }
+            weakSelf.doesTextViewNeedToBeSaved = false
+            weakSelf.cancelButtonDidTouch(sender: weakSelf.cancelButton)
+        })
+        shouldSaveAlertController.addAction(saveAlertAction)
+        shouldSaveAlertController.addAction(dontSaveAlertAction)
+        self.present(shouldSaveAlertController, animated: true, completion: nil)
+    }
+    
     fileprivate func setupKeyboardToolBarWithBarButtonItems() {
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
         toolBar.isTranslucent = false
@@ -279,25 +273,6 @@ class NotesViewController: UIViewController {
         }
         else {
             self.navigationItem.title = "Word Count: \(trimmedString.count)"
-        }
-    }
-}
-
-// MARK: - FCAlertViewDelegate Protocol
-
-extension NotesViewController: FCAlertViewDelegate {
-    
-    func alertView(_ alertView: FCAlertView, clickedButtonIndex index: Int, buttonTitle title: String) {
-        if title == "Save" {
-            self.textView.endEditing(true)
-            let _ = self.shouldPerformSegue(withIdentifier: NotesViewControllerSegue.unwindToNotesTableViewControllerFromNotesViewController.rawValue, sender: self)
-        }
-        else if title == "Don't Save" {
-            self.doesTextViewNeedToBeSaved = false
-            self.cancelButtonDidTouch(sender: self.cancelButton)
-        }
-        else if title == "Understood" {
-            self.textView.becomeFirstResponder()
         }
     }
 }

@@ -20,26 +20,11 @@ class NotesTableViewController: UITableViewController {
     }
     var metadataQuery = NSMetadataQuery()
     
-    var indexPath: IndexPath?
     var tableViewRefreshControl: UIRefreshControl!
     
     var currentToken = FileManager.default.ubiquityIdentityToken
     var tokenIdentifier = "org.corruptionofconformity.thoughtless.UbiquityIdentityToken"
     let iCloudEnabledKey = "iCloudEnabled"
-    
-    let deleteOrNotDeleteAlertView: FCAlertView = {
-        let alertView = FCAlertView(type: .warning)
-        alertView.dismissOnOutsideTouch = true
-        alertView.hideDoneButton = true
-        return alertView
-    }()
-    
-    let iCloudConfigurationNotDetected: FCAlertView = {
-        let alertView = FCAlertView(type: .warning)
-        alertView.dismissOnOutsideTouch = false
-        alertView.hideDoneButton = true
-        return alertView
-    }()
     
     // MARK: - IBAction Methods
     
@@ -287,10 +272,10 @@ class NotesTableViewController: UITableViewController {
         if isiCloudEnabled == false { return nil }
         
         guard let iCloudContainerURL = FileManager.default.url(forUbiquityContainerIdentifier: nil) else {
-            let iCloudConfigurationAlertController = UIAlertController(title: "Missing iCloud Account",
-                                                                       message: "Thoughtless requires iCloud to sync your notes. Also ensure iCloud Drive is turned on.",
+            let iCloudConfigurationAlertController = UIAlertController(title: NSLocalizedString("Missing iCloud Account", comment: ""),
+                                                                       message: NSLocalizedString("Thoughtless requires iCloud to sync your notes. Also ensure iCloud Drive is turned on.", comment: ""),
                                                                        preferredStyle: .alert)
-            let iCloudConfigurationAlertAction = UIAlertAction(title: "Verify",
+            let iCloudConfigurationAlertAction = UIAlertAction(title: NSLocalizedString("Verify", comment: ""),
                                                                 style: .default,
                                                                 handler: { (_) in
                                                                     guard let iCloudSettingURL = URL(string: "App-Prefs:root=CASTLE") else { return }
@@ -315,9 +300,6 @@ class NotesTableViewController: UITableViewController {
         
         self.tableView.separatorColor = ColorThemeHelper.reederCream(alpha: 0.05)
         self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
-        
-        self.deleteOrNotDeleteAlertView.delegate = self
-        self.iCloudConfigurationNotDetected.delegate = self
         
         self.tableViewRefreshControl = {
             let refreshControl = UIRefreshControl()
@@ -378,7 +360,7 @@ class NotesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let shareButton: UITableViewRowAction = {
-            let tableViewRowAction = UITableViewRowAction(style: .normal, title: "Share", handler: { [weak self] (_, indexPath) in
+            let tableViewRowAction = UITableViewRowAction(style: .normal, title: NSLocalizedString("Share", comment: ""), handler: { [weak self] (_, indexPath) in
                 guard let weakSelf = self else { return }
                 weakSelf.displayShareSheet(from: indexPath)
             })
@@ -387,15 +369,22 @@ class NotesTableViewController: UITableViewController {
         }()
         
         let deleteButton: UITableViewRowAction = {
-            let tableViewRowAction = UITableViewRowAction(style: .destructive, title: "Delete", handler: { [weak self] (_, indexPath) in
+            let tableViewRowAction = UITableViewRowAction(style: .destructive, title: NSLocalizedString("Delete", comment: ""), handler: { [weak self] (_, indexPath) in
                 guard let weakSelf = self else { return }
-                weakSelf.indexPath = indexPath
-                weakSelf.deleteOrNotDeleteAlertView.showAlert(inView: weakSelf,
-                                                          withTitle: "Delete For Sure?",
-                                                          withSubtitle: "There is no way to recover it.",
-                                                          withCustomImage: nil,
-                                                          withDoneButtonTitle: nil,
-                                                          andButtons: [Delete.no.note, Delete.yes.note])
+                
+                let shouldDeleteAlertController = UIAlertController(title: NSLocalizedString("Delete For Sure?", comment: ""),
+                                                                    message: NSLocalizedString("There is no way to recover it.", comment: ""),
+                                                                    preferredStyle: .alert)
+                let deleteAlertAction = UIAlertAction(title: Delete.yes.note, style: .destructive, handler: { (_) in
+                    weakSelf.deleteNote(at: indexPath)
+                })
+                let dontDeleteAlertAction = UIAlertAction(title: Delete.no.note, style: .cancel, handler: { (_) in
+                    weakSelf.setEditing(false, animated: true)
+                })
+                shouldDeleteAlertController.addAction(deleteAlertAction)
+                shouldDeleteAlertController.addAction(dontDeleteAlertAction)
+                weakSelf.present(shouldDeleteAlertController, animated: true, completion: nil)
+                
             })
             tableViewRowAction.backgroundColor = ColorThemeHelper.reederMud()
             return tableViewRowAction
@@ -408,27 +397,6 @@ class NotesTableViewController: UITableViewController {
 // MARK: - CurrentDateAndTimeHelper Protocol
 
 extension NotesTableViewController: CurrentDateAndTimeHelper {}
-
-// MARK: - FCAlertViewDelegate Protocol
-
-extension NotesTableViewController: FCAlertViewDelegate {
-    func alertView(_ alertView: FCAlertView, clickedButtonIndex index: Int, buttonTitle title: String) {
-        if title == Delete.yes.note {
-            guard let validIndexPath = self.indexPath else { return }
-            self.deleteNote(at: validIndexPath)
-        }
-        else if title == Delete.no.note {
-            self.setEditing(false, animated: true)
-        }
-        else if title == Verify.yes.iCloud {
-            guard let iCloudSettingURL = URL(string: "App-Prefs:root=CASTLE") else { return }
-            UIApplication.shared.openURL(iCloudSettingURL)
-        }
-        else if title == Verify.no.iCloud {
-            self.iCloudConfigurationNotDetected.dismissAlertView()
-        }
-    }
-}
 
 // MARK: - NotesTableViewController Extension
 
@@ -443,8 +411,8 @@ extension NotesTableViewController {
         
         var note: String {
             switch self {
-            case .yes: return "Delete"
-            case .no: return "Don't Delete"
+            case .yes: return NSLocalizedString("Delete", comment: "")
+            case .no: return NSLocalizedString("Don't Delete", comment: "")
             }
         }
     }
@@ -454,8 +422,8 @@ extension NotesTableViewController {
         
         var iCloud: String {
             switch self {
-            case .yes: return "Verify"
-            case .no: return "Don't Verify"
+            case .yes: return NSLocalizedString("Verify", comment: "")
+            case .no: return NSLocalizedString("Don't Verify", comment: "")
             }
         }
     }

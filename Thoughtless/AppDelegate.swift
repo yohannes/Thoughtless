@@ -18,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let iCloudEnabledKey = "iCloudEnabled"
     let hasLaunchedWithiCloudBeforeKey = "hasLaunchedWithiCloudBefore"
+    let storeIniCloudKey = "Store in iCloud"
+    let storeOnlyInThisDeviceKey = "Store only in this device"
     
     let ubiquityIdentityToken = "org.corruptionofconformity.thoughtless.UbiquityIdentityToken"
     let currentiCloudToken = FileManager.default.ubiquityIdentityToken
@@ -66,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 topWindow.windowLevel = UIWindowLevelAlert + 1
                 
                 let storageChoiceAlertController = UIAlertController(title: NSLocalizedString("Choose Storage Option", comment: ""),
-                                                                     message: NSLocalizedString("Should notes be stored in iCloud & available on all your devices?", comment: ""),
+                                                                     message: NSLocalizedString("Should notes be stored in iCloud & available in all of your devices?", comment: ""),
                                                                      preferredStyle: .alert)
                 let iCloudChoiceAlertAction = UIAlertAction(title: NSLocalizedString("Store in iCloud", comment: ""),
                                                             style: .default,
