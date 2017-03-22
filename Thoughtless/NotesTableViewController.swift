@@ -109,8 +109,6 @@ class NotesTableViewController: UITableViewController {
     }
     
     func loadNotes() {
-        guard let _ = self.verifyiCloudAccount() else { return }
-        
         self.metadataQuery.searchScopes = [NSMetadataQueryUbiquitousDocumentsScope]
         self.metadataQuery.predicate = NSPredicate(format: "%K like '*'", NSMetadataItemFSNameKey)
         
@@ -247,9 +245,7 @@ class NotesTableViewController: UITableViewController {
     }
     
     fileprivate func save(_ note: Note, at indexPath: IndexPath) {
-        guard let iCloudContainerURL = self.verifyiCloudAccount() else { return }
-//        guard let iCloudContainerURL = FileManager.default.url(forUbiquityContainerIdentifier: nil) else { return }
-        
+        guard let iCloudContainerURL = FileManager.default.url(forUbiquityContainerIdentifier: nil) else { return }
         let documentsDirectoryURL = iCloudContainerURL.appendingPathComponent("Documents")
         let noteURL = documentsDirectoryURL.appendingPathComponent("\(note.entry.components(separatedBy: NSCharacterSet.whitespaces).first!)-\(Date.timeIntervalSinceReferenceDate).txt")
         let noteDocument = NoteDocument(fileURL: noteURL)
@@ -267,15 +263,14 @@ class NotesTableViewController: UITableViewController {
         }
     }
     
-    func verifyiCloudAccount() -> URL? {
-        let isiCloudEnabled = UserDefaults.standard.bool(forKey: self.iCloudEnabledKey)
-        if isiCloudEnabled == false { return nil }
+    func verifyiCloudAccount() {
+        guard UserDefaults.standard.bool(forKey: self.iCloudEnabledKey) == true else { return }
         
-        guard let iCloudContainerURL = FileManager.default.url(forUbiquityContainerIdentifier: nil) else {
-            let iCloudConfigurationAlertController = UIAlertController(title: NSLocalizedString("Missing iCloud Account", comment: ""),
-                                                                       message: NSLocalizedString("Thoughtless requires iCloud to sync your notes. Also ensure iCloud Drive is turned on.", comment: ""),
+        guard let _ = FileManager.default.url(forUbiquityContainerIdentifier: nil) else {
+            let iCloudConfigurationAlertController = UIAlertController(title: NSLocalizedString("Misconfigured iCloud Account", comment: ""),
+                                                                       message: NSLocalizedString("You have set Thoughtless to sync your notes via iCloud. Ensure you sign in to iCloud & iCloud Drive is turned on.", comment: ""),
                                                                        preferredStyle: .alert)
-            let iCloudConfigurationAlertAction = UIAlertAction(title: NSLocalizedString("Verify", comment: ""),
+            let iCloudConfigurationAlertAction = UIAlertAction(title: NSLocalizedString("Verify iCloud Account", comment: ""),
                                                                 style: .default,
                                                                 handler: { (_) in
                                                                     guard let iCloudSettingURL = URL(string: "App-Prefs:root=CASTLE") else { return }
@@ -283,10 +278,9 @@ class NotesTableViewController: UITableViewController {
             })
             iCloudConfigurationAlertController.addAction(iCloudConfigurationAlertAction)
             self.present(iCloudConfigurationAlertController, animated: true, completion: nil)
-            return nil
+            return
         }
-        
-        return iCloudContainerURL
+        self.loadNotes()
     }
     
     // MARK: - UIViewController Methods
@@ -314,6 +308,7 @@ class NotesTableViewController: UITableViewController {
                                                selector: #selector(NotesTableViewController.verifyiCloudAccount),
                                                name: NSNotification.Name.UIApplicationWillEnterForeground,
                                                object: nil)
+
         self.loadNotes()
     }
     
