@@ -22,8 +22,7 @@ class NotesTableViewController: UITableViewController {
     
     var tableViewRefreshControl: UIRefreshControl!
     
-    var currentToken = FileManager.default.ubiquityIdentityToken
-    var tokenIdentifier = "org.corruptionofconformity.thoughtless.UbiquityIdentityToken"
+    var ubiquityIdentityToken = "org.corruptionofconformity.thoughtless.UbiquityIdentityToken"
     let iCloudEnabledKey = "iCloudEnabled"
     
     // MARK: - IBAction Methods
@@ -95,6 +94,15 @@ class NotesTableViewController: UITableViewController {
         let activityViewController = UIActivityViewController(activityItems: [self.noteDocuments[indexPath.row].note.entry], applicationActivities: nil)
         self.present(activityViewController, animated: true) {
             self.setEditing(false, animated: true)
+        }
+    }
+    
+    func iCloudAccountAvailabilityHasChanged() {
+        print("iCloud account availability has changed. [NotesTableViewController]")
+        guard let archivediCloudTokenData = UserDefaults.standard.data(forKey: self.ubiquityIdentityToken), let archivediCloudTokenRaw = NSKeyedUnarchiver.unarchiveObject(with: archivediCloudTokenData) as? (NSCoding & NSCopying & NSObjectProtocol) else { return }
+        if !archivediCloudTokenRaw.isEqual(FileManager.default.ubiquityIdentityToken) {
+            // Update iCloud token & rescan docs.
+            print("Different iCloud account detected.")
         }
     }
     
@@ -308,8 +316,11 @@ class NotesTableViewController: UITableViewController {
                                                selector: #selector(NotesTableViewController.verifyiCloudAccount),
                                                name: NSNotification.Name.UIApplicationWillEnterForeground,
                                                object: nil)
-
-        self.loadNotes()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(NotesTableViewController.iCloudAccountAvailabilityHasChanged),
+                                               name: NSNotification.Name.NSUbiquityIdentityDidChange,
+                                               object: nil)
+        self.verifyiCloudAccount()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

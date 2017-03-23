@@ -27,7 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Helper Methods
     
     func iCloudAccountAvailabilityHasChanged() {
-        print("iCloud account availability has changed.")
+        print("iCloud account availability has changed. [AppDelegate]")
+        guard let archivediCloudTokenData = UserDefaults.standard.data(forKey: self.ubiquityIdentityToken), let archivediCloudTokenRaw = NSKeyedUnarchiver.unarchiveObject(with: archivediCloudTokenData) as? (NSCoding & NSCopying & NSObjectProtocol) else { return }
+        if !archivediCloudTokenRaw.isEqual(FileManager.default.ubiquityIdentityToken) {
+            // Update iCloud token & rescan docs
+            print("Different iCloud account detected.")
+        }
     }
     
     // MARK: - UIApplicationDelegate Methods
@@ -74,7 +79,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                             style: .default,
                                                             handler: { (_) in
                                                                 UserDefaults.standard.set(true, forKey: self.iCloudEnabledKey)
-                                                                // TODO: - reload data in iCloud and present to table view
+                                                                if let notesTableViewController = self.window?.rootViewController?.childViewControllers.first as? NotesTableViewController {
+                                                                    notesTableViewController.verifyiCloudAccount()
+                                                                }
                 })
                 let localChoiceAlertAction = UIAlertAction(title: NSLocalizedString("Store only in this device", comment: ""),
                                                            style: .cancel,
