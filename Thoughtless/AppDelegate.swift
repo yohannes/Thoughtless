@@ -103,6 +103,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.removeObject(forKey: self.ubiquityIdentityToken)
         }
         
+        UserDefaults.standard.synchronize()
+        
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(AppDelegate.iCloudAccountAvailabilityHasChanged),
                                                name: NSNotification.Name.NSUbiquityIdentityDidChange,

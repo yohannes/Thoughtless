@@ -112,13 +112,13 @@ class NotesViewController: UIViewController {
     
     @IBAction func previewMarkdownButtonDidTouch(_ sender: UIButton) {
         guard self.note != nil else { return }
-        self.performSegue(withIdentifier: NotesViewControllerSegue.showSegueToMarkdownNotesViewController.rawValue, sender: self)
+        self.performSegue(withIdentifier: NotesViewControllerSegue.showSegueToMarkdownNotesWebViewController.rawValue, sender: self)
     }
     
     @IBAction func swipeLeftFromRightScreenEdgeGestureToShowMarkdown(_ sender: UIScreenEdgePanGestureRecognizer) {
         guard self.note != nil else { return }
         if sender.state == .ended {
-            self.performSegue(withIdentifier: NotesViewControllerSegue.showSegueToMarkdownNotesViewController.rawValue, sender: self)
+            self.performSegue(withIdentifier: NotesViewControllerSegue.showSegueToMarkdownNotesWebViewController.rawValue, sender: self)
         }
     }
     
@@ -146,9 +146,9 @@ class NotesViewController: UIViewController {
             let entry = self.textView.text ?? ""
             self.note = Note(entry: entry, dateOfCreation: self.getCurrentDateAndTime())
         }
-        else if segue.identifier == NotesViewControllerSegue.showSegueToMarkdownNotesViewController.rawValue {
-            guard let validMarkdownNotesViewController = segue.destination as? MarkdownNotesViewController, let validNote = self.note else { return }
-            validMarkdownNotesViewController.note = validNote
+        else if segue.identifier == NotesViewControllerSegue.showSegueToMarkdownNotesWebViewController.rawValue {
+            guard let validMarkdownNotesWebViewController = segue.destination as? MarkdownNotesWebViewController, let validNote = self.note else { return }
+            validMarkdownNotesWebViewController.note = validNote
         }
         else if segue.identifier == NotesViewControllerSegue.unwindToNotesTableViewControllerFromNotesViewController.rawValue {
             let entry = self.textView.text ?? ""
@@ -282,6 +282,7 @@ class NotesViewController: UIViewController {
 extension NotesViewController {
     enum NotesViewControllerSegue: String {
         case showSegueToMarkdownNotesViewController
+        case showSegueToMarkdownNotesWebViewController
         case unwindToNotesTableViewControllerFromNotesViewController
     }
 }
