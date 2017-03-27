@@ -46,6 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance(whenContainedInInstancesOf: [NotesNavigationControler.self]).barStyle = .black
         UINavigationBar.appearance(whenContainedInInstancesOf: [NotesNavigationControler.self]).isTranslucent = false
         
+        UIScrollView.appearance().indicatorStyle = .white
+        
         UIToolbar.appearance().barTintColor = ColorThemeHelper.reederGray()
         UIToolbar.appearance().tintColor =  ColorThemeHelper.reederCream()
         UIToolbar.appearance().isTranslucent = false
