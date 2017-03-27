@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0830"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "499A535F14DC8C0D0B24B99163C534E8"
+               BlueprintIdentifier = "EBFEA28EBD9A51691EB37F07CF804468"
                BuildableName = "Pods_Thoughtless.framework"
                BlueprintName = "Pods-Thoughtless"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "499A535F14DC8C0D0B24B99163C534E8"
+            BlueprintIdentifier = "EBFEA28EBD9A51691EB37F07CF804468"
             BuildableName = "Pods_Thoughtless.framework"
             BlueprintName = "Pods-Thoughtless"
             ReferencedContainer = "container:Pods.xcodeproj">

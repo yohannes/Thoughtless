@@ -1,15 +1,18 @@
 PODS:
+  - HidingNavigationBar (1.0.0)
   - IQKeyboardManagerSwift (4.0.8)
   - SwiftHEXColors (1.1.0)
 
 DEPENDENCIES:
+  - HidingNavigationBar (~> 1.0)
   - IQKeyboardManagerSwift (~> 4.0.8)
   - SwiftHEXColors (~> 1.1)
 
 SPEC CHECKSUMS:
+  HidingNavigationBar: 170dd21df8e89c465c01f047d4306778d1ce304c
   IQKeyboardManagerSwift: c04bc9f68473823f825eb44d958fce98d921bead
   SwiftHEXColors: 8f7e364df7929e32cff9f9eeb044bb215167d6be
 
-PODFILE CHECKSUM: 8a3213f993d3237243a1a655ad3dbc628dcd40c8
+PODFILE CHECKSUM: 82620d20fe304c46aa2e0936c8919d860ba6ec18
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.0

@@ -8,6 +8,7 @@ target 'Thoughtless' do
   	# Pods for Notes
 	pod 'IQKeyboardManagerSwift', '~> 4.0.8'
 	pod 'SwiftHEXColors', '~> 1.1'
+	pod 'HidingNavigationBar', '~> 1.0'
 
   	target 'ThoughtlessTests' do
     		inherit! :search_paths

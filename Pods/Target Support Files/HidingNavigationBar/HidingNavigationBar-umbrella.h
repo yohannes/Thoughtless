@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_ThoughtlessTestsVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_ThoughtlessTestsVersionString[];
+FOUNDATION_EXPORT double HidingNavigationBarVersionNumber;
+FOUNDATION_EXPORT const unsigned char HidingNavigationBarVersionString[];
 

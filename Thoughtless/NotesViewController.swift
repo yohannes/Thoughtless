@@ -9,6 +9,7 @@
 import UIKit
 import SafariServices
 import SwiftHEXColors
+import HidingNavigationBar
 
 class NotesViewController: UIViewController {
     
@@ -18,7 +19,7 @@ class NotesViewController: UIViewController {
     
     var doesTextViewNeedToBeSaved: Bool!
     
-    var lastOffsetY: CGFloat = 0
+    var hidingNavigationBarManager: HidingNavigationBarManager?
     
     enum Cursor: String {
         case left, right
@@ -66,12 +67,7 @@ class NotesViewController: UIViewController {
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
-    @IBOutlet weak var powerUpYourNoteLabel: UILabel!
-    
     @IBOutlet weak var toolbar: UIToolbar!
-    
-    @IBOutlet weak var bottomLayoutGuideTopToTextViewBottom: NSLayoutConstraint!
-    
     
     // MARK: - IBAction Methods
     
@@ -190,21 +186,28 @@ class NotesViewController: UIViewController {
         self.textView.textColor = ColorThemeHelper.reederCream()
         self.textView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
         
-        self.powerUpYourNoteLabel.textColor = ColorThemeHelper.reederCream()
-        
         self.doesTextViewNeedToBeSaved = false
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: ColorThemeHelper.reederCream()]
+        
+        self.hidingNavigationBarManager = HidingNavigationBarManager(viewController: self, scrollView: self.textView)
+        self.hidingNavigationBarManager?.manageBottomBar(self.toolbar)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.textView.setContentOffset(CGPoint(x:0, y: -64), animated: false)
+        self.hidingNavigationBarManager?.viewWillAppear(animated)
         
         self.updateWordsCount()
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.hidingNavigationBarManager?.viewWillDisappear(animated)
     }
     
     // MARK: - Local Methods
@@ -295,25 +298,9 @@ extension NotesViewController: CurrentDateAndTimeHelper {}
 
 extension NotesViewController: UIScrollViewDelegate {
     
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        self.lastOffsetY = scrollView.contentOffset.y
-    }
-    
-    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y > self.lastOffsetY {
-            self.toolbar.isHidden = true
-            self.powerUpYourNoteLabel.isHidden = true
-            self.navigationController?.navigationBar.isHidden = true
-            
-            self.bottomLayoutGuideTopToTextViewBottom.constant = 0
-        }
-        else {
-            self.toolbar.isHidden = false
-            self.powerUpYourNoteLabel.isHidden = false
-            self.navigationController?.navigationBar.isHidden = false
-            
-            self.bottomLayoutGuideTopToTextViewBottom.constant = 44
-        }
+    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        self.hidingNavigationBarManager?.shouldScrollToTop()
+        return true
     }
 }
 

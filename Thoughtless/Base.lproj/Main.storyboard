@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12072"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -92,7 +91,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="35N-cw-Li1">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
@@ -109,10 +108,10 @@
                                 <items>
                                     <barButtonItem style="plain" id="gru-JX-oGh">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Muy-2X-Reb">
-                                            <rect key="frame" x="16" y="7" width="46" height="30"/>
+                                            <rect key="frame" x="16" y="7" width="85" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <state key="normal" title="How?"/>
+                                            <state key="normal" title="Markdown"/>
                                             <connections>
                                                 <action selector="markdownUserGuideButtonDidTouch:" destination="WhK-6A-3pp" eventType="touchUpInside" id="PbW-gW-5TY"/>
                                             </connections>
@@ -121,10 +120,10 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="yD8-sY-S1J"/>
                                     <barButtonItem style="plain" id="FWy-lz-iu7">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wFX-HH-Hxd">
-                                            <rect key="frame" x="313" y="7" width="46" height="30"/>
+                                            <rect key="frame" x="294" y="7" width="65" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <state key="normal" title="Go!"/>
+                                            <state key="normal" title="Preview"/>
                                             <connections>
                                                 <action selector="previewMarkdownButtonDidTouch:" destination="WhK-6A-3pp" eventType="touchUpInside" id="JUe-83-jDT"/>
                                             </connections>
@@ -132,22 +131,12 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Power Up Your Note" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PS7-E7-gEa">
-                                <rect key="frame" x="107" y="635" width="160" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="KjO-aP-uLR" firstAttribute="top" secondItem="35N-cw-Li1" secondAttribute="bottom" constant="44" id="A70-EW-bHQ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="PS7-E7-gEa" secondAttribute="trailing" constant="92" id="Ix0-gN-R6c"/>
+                            <constraint firstItem="KjO-aP-uLR" firstAttribute="top" secondItem="35N-cw-Li1" secondAttribute="bottom" id="A70-EW-bHQ"/>
                             <constraint firstItem="35N-cw-Li1" firstAttribute="leading" secondItem="i1l-oM-3dD" secondAttribute="leading" id="Ute-A7-654"/>
                             <constraint firstItem="35N-cw-Li1" firstAttribute="top" secondItem="HQ1-IH-oSk" secondAttribute="bottom" constant="-64" id="j3p-Qo-Mcw"/>
-                            <constraint firstItem="PS7-E7-gEa" firstAttribute="leading" secondItem="i1l-oM-3dD" secondAttribute="leadingMargin" constant="91" id="tpV-aB-bAN"/>
-                            <constraint firstItem="KjO-aP-uLR" firstAttribute="top" secondItem="PS7-E7-gEa" secondAttribute="bottom" constant="11" id="wc3-M6-e0j"/>
-                            <constraint firstItem="PS7-E7-gEa" firstAttribute="top" secondItem="35N-cw-Li1" secondAttribute="bottom" constant="12" id="xhZ-Zb-y0V"/>
                             <constraint firstAttribute="trailing" secondItem="35N-cw-Li1" secondAttribute="trailing" id="yWL-4Q-sWJ"/>
                         </constraints>
                     </view>
@@ -164,9 +153,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="bottomLayoutGuideTopToTextViewBottom" destination="A70-EW-bHQ" id="9qk-fC-aox"/>
                         <outlet property="cancelButton" destination="2IJ-D7-niU" id="Y4s-OY-Mz7"/>
-                        <outlet property="powerUpYourNoteLabel" destination="PS7-E7-gEa" id="foJ-Rp-AlT"/>
                         <outlet property="saveButton" destination="DDE-H7-ADX" id="GNZ-kP-i2R"/>
                         <outlet property="textView" destination="35N-cw-Li1" id="WS3-bq-2hA"/>
                         <outlet property="toolbar" destination="gUa-t2-oWD" id="q6B-Im-fen"/>
