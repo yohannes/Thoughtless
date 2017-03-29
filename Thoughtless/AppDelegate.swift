@@ -90,6 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                            handler: { (_) in
                                                                 UserDefaults.standard.set(false, forKey: self.iCloudEnabledKey)
                 })
+                localChoiceAlertAction.isEnabled = false
                 storageChoiceAlertController.addAction(iCloudChoiceAlertAction)
                 storageChoiceAlertController.addAction(localChoiceAlertAction)
                 

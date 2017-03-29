@@ -261,6 +261,9 @@ class NotesTableViewController: UITableViewController {
         noteDocument.save(to: noteURL, for: .forCreating) { [weak self] (isSuccessfulSaved: Bool) in
             guard let weakSelf = self else { return }
             if isSuccessfulSaved {
+                // TODO: - Remove When done.
+                print("weakSelf.noteducments: \(weakSelf.noteDocuments.self)")
+                print("weakSelf.tableView:\(weakSelf.tableView.self)")
                 weakSelf.noteDocuments.insert(noteDocument, at: indexPath.row)
                 weakSelf.tableView.insertRows(at: [indexPath], with: .top)
                 print("Saving to iCloud & updating notes in table view succeeded.")
