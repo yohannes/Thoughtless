@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftHEXColors
 
 struct ColorThemeHelper {
     static func reederGray(alpha value: Float = 1.0) -> UIColor {

@@ -107,7 +107,7 @@ class NotesTableViewController: UITableViewController {
     }
     
     fileprivate func loadDefaultNotes() {
-        guard let firstNote = Note(entry: "Tap me to learn about my superpower!\n\nPower up your note by writing your words like **this**, *this*, or ~~this~~.\nCreate an [url link](http://apple.com).\nMake a todo list:\n\n* Watch WWDC videos.\n* Write `code`.\n* Fetch my girlfriend for a ride.\n* Refactor `code`.\n\nCreate a block of quotes:\n\n> A block of quote.\n> Another block of quote.\n> Yet another block of quote.\n\nOr a bunch of codes too:\n\n```\nlet title = 'coolnote'\nprint('this is a \\(title)')\n```\n\nTap *Go!* to preview your enhanced note.\n\nTap *How?* to learn more.", dateOfCreation: self.getCurrentDateAndTime()) else { return }
+        guard let firstNote = Note(entry: "Tap me to learn about my superpower!\n\nPower up your note by writing your words like **this**, *this*, or ~~this~~.\nCreate an [url link](http://apple.com).\nMake a todo list:\n\n* Send my girlfriend home.\n* Watch WWDC videos.\n* Write `code`.\n\n1. Refactor `code`.\n2. Build codebase.\n3. Chill while waiting for build to finish.\n\nCreate a block of quotes:\n\n> A block of quote.\n> Another block of quote.\n> Yet another block of quote.\n\nOr a bunch of codes too:\n\n```\nlet appTitle = 'Thoughtless'\nprint('This app is called \\(appTitle)')\n```\n\nTap *Preview* to see your enhanced note.\n\nTap *Markdown* to access tutorial.", dateOfCreation: self.getCurrentDateAndTime()) else { return }
         guard let secondNote = Note(entry: "Tap +, above right, to add a new note", dateOfCreation: self.getCurrentDateAndTime()) else { return }
         guard let thirdNote = Note(entry: "Tap Edit, above left, to move me or delete me.", dateOfCreation: self.getCurrentDateAndTime()) else { return }
         guard let fourthNote = Note(entry: "Swipe me to the left for more options.", dateOfCreation: self.getCurrentDateAndTime()) else { return }
@@ -261,9 +261,6 @@ class NotesTableViewController: UITableViewController {
         noteDocument.save(to: noteURL, for: .forCreating) { [weak self] (isSuccessfulSaved: Bool) in
             guard let weakSelf = self else { return }
             if isSuccessfulSaved {
-                // TODO: - Remove When done.
-                print("weakSelf.noteducments: \(weakSelf.noteDocuments.self)")
-                print("weakSelf.tableView:\(weakSelf.tableView.self)")
                 weakSelf.noteDocuments.insert(noteDocument, at: indexPath.row)
                 weakSelf.tableView.insertRows(at: [indexPath], with: .top)
                 print("Saving to iCloud & updating notes in table view succeeded.")

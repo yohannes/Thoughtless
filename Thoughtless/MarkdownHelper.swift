@@ -93,8 +93,10 @@ struct MarkdownHelper {
         md = parseCodeBlock(md)
         md = parseCodeInline(md)
         md = parseHorizontalRule(md)
-        md = parseUnorderedLists(md)
-        md = parseOrderedLists(md)
+        md = parseUnorderedListsTypeAsterix(md)
+        md = parseUnorderedListsTypeDash(md)
+        md = parseOrderedListsWithFullStop(md)
+        md = parseOrderedListsWithRightBracket(md)
         md = parseBlockquotes(md)
         md = parseYoutubeVideos(md)
         md = parseParagraphs(md)
@@ -115,11 +117,17 @@ struct MarkdownHelper {
     }
     
     func parseBold(_ md: String) -> String {
-        return md.matchAndReplace("\\*\\*(.*?)\\*\\*", "<b>$1</b>")
+        var mx = md
+        mx = mx.matchAndReplace("\\*\\*(.*?)\\*\\*", "<b>$1</b>")
+        mx = mx.matchAndReplace("\\_\\_(.*?)\\_\\_", "<b>$1</b>")
+        return mx
     }
     
     func parseItalic(_ md: String) -> String {
-        return md.matchAndReplace("\\*(.*?)\\*", "<i>$1</i>")
+        var mx = md
+        mx = mx.matchAndReplace("\\*(.*?)\\*", "<i>$1</i>")
+        mx = mx.matchAndReplace("\\_(.*?)\\_", "<i>$1</i>")
+        return mx
     }
     
     func parseDeleted(_ md: String) -> String {
@@ -135,37 +143,45 @@ struct MarkdownHelper {
     
     func parseLinks(_ md: String) -> String {
         var mx = md
-        mx = mx.matchAndReplace("\\[(.*?)\\]\\((.*?)\\)", "<a href=\"$2\">$1</a>")
-        mx = mx.matchAndReplace("\\[http(.*?)\\]", "<a href=\"http$1\">http$1</a>")
-        mx = mx.matchAndReplace("(^|\\s)http(.*?)(\\s|\\.\\s|\\.$|,|$)", "$1<a href=\"http$2\">http$2</a>$3 ", options: [.anchorsMatchLines])
+        mx = mx.matchAndReplace("\\[(.*?)\\]\\((.*?)\\)", "<a href=\"$2\" style=\"color: #0088cc\">$1</a>")
+        mx = mx.matchAndReplace("\\[http(.*?)\\]", "<a href=\"http$1\" style=\"color: #0088cc\">http$1</a>")
+        mx = mx.matchAndReplace("(^|\\s)http(.*?)(\\s|\\.\\s|\\.$|,|$)", "$1<a href=\"http$2\" style=\"color: #0088cc\">http$2</a>$3 ", options: [.anchorsMatchLines])
         return mx
     }
     
     func parseCodeBlock(_ md: String) -> String {
-        return md.matchAndReplace("```(.*?)```", "<pre>$1</pre>", options: [.dotMatchesLineSeparators])
+        return md.matchAndReplace("```(.*?)```", "<pre style=\"padding: 12px; background-color:#43423F;\">$1</pre>", options: [.dotMatchesLineSeparators])
 //        return parseBlock(md, format: "^\\s{4}", blockEnclose: ("<pre>", "</pre>"))
     }
     
     func parseCodeInline(_ md: String) -> String {
-        return md.matchAndReplace("`(.*?)`", "<code>$1</code>")
+        return md.matchAndReplace("`(.*?)`", "<code style=\"padding: 12px; background-color:#43423F;\">$1</code>")
     }
     
     func parseHorizontalRule(_ md: String) -> String {
         return md.matchAndReplace("---", "<hr>")
     }
     
-    func parseUnorderedLists(_ md: String) -> String {
+    func parseUnorderedListsTypeAsterix(_ md: String) -> String {
         return parseBlock(md, format: "^\\*", blockEnclose: ("<ul>", "</ul>"), lineEnclose: ("<li>", "</li>"))
     }
     
-    func parseOrderedLists(_ md: String) -> String {
-        return parseBlock(md, format: "^\\d+[\\.|-]", blockEnclose: ("<ol>", "</ol>"), lineEnclose: ("<li>", "</li>"))
+    func parseUnorderedListsTypeDash(_ md: String) -> String {
+        return parseBlock(md, format: "^\\-", blockEnclose: ("<ul>", "</ul>"), lineEnclose: ("<li>", "</li>"))
+    }
+    
+    func parseOrderedListsWithFullStop(_ md: String) -> String {
+        return parseBlock(md, format: "^\\d+[\\.|-]", blockEnclose: ("<ol style=\"margin: 0px 0px 0px 25px\">", "</ol>"), lineEnclose: ("<li>", "</li>"))
+    }
+    
+    func parseOrderedListsWithRightBracket(_ md: String) -> String {
+        return parseBlock(md, format: "^\\d+[\\)|-]", blockEnclose: ("<ol style=\"margin: 0px 0px 0px 25px\">", "</ol>"), lineEnclose: ("<li>", "</li>"))
     }
     
     func parseBlockquotes(_ md: String) -> String {
         var mx = md
-        mx = parseBlock(mx, format: "^>", blockEnclose: ("<blockquote>", "</blockquote>"))
-        mx = parseBlock(mx, format: "^:", blockEnclose: ("<blockquote>", "</blockquote>"))
+        mx = parseBlock(mx, format: "^>", blockEnclose: ("<blockquote style=\"color: #A7A2A9;\">", "</blockquote>"))
+        mx = parseBlock(mx, format: "^:", blockEnclose: ("<blockquote>style=\"color: #A7A2A9;\">", "</blockquote>"))
         return mx
     }
     
