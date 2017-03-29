@@ -25,6 +25,7 @@ Gif created with [GIPHY](http://giphy.com)
 ---
 
 3rd Party Libraries used in this app:
+- [HidingNavigationBar](https://github.com/tristanhimmelman/HidingNavigationBar) by [Tristan Himmelman](https://github.com/tristanhimmelman)
 - [IQKeyboardManager](https://github.com/hackiftekhar/IQKeyboardManager) by [Mohd Iftekhar Qurashi](https://github.com/hackiftekhar)
 - [SwiftHEXColors](https://github.com/thii/SwiftHEXColors) by [Thi](https://github.com/thii)
 
