@@ -31,7 +31,7 @@ class NotesViewController: UIViewController {
     }
     
     enum MarkdownSymbols: String {
-        case moveLeft, hash, asterisk, underscore, greaterThan, dash, grave, done, moveRight
+        case moveLeft, hash, asterisk, underscore, greaterThan, dash, grave, strikeThrough, done, moveRight
         
         var character: String {
             switch self {
@@ -42,12 +42,13 @@ class NotesViewController: UIViewController {
             case .greaterThan: return ">"
             case .dash: return "-"
             case .grave: return "`"
+            case .strikeThrough: return "~"
             case .done: return "⌨"
             case .moveRight: return "➡️️"
             }
         }
         
-        static let items = [ moveLeft, hash, asterisk, underscore, greaterThan, dash, grave, done, moveRight]
+        static let items = [moveLeft, hash, asterisk, underscore, greaterThan, dash, grave, strikeThrough, done, moveRight]
     }
     
     // MARK: - IBOutlet Properties

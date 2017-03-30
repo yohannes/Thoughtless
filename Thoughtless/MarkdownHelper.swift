@@ -180,8 +180,8 @@ struct MarkdownHelper {
     
     func parseBlockquotes(_ md: String) -> String {
         var mx = md
-        mx = parseBlock(mx, format: "^>", blockEnclose: ("<blockquote style=\"color: #A7A2A9;\">", "</blockquote>"))
-        mx = parseBlock(mx, format: "^:", blockEnclose: ("<blockquote>style=\"color: #A7A2A9;\">", "</blockquote>"))
+        mx = parseBlock(mx, format: "^>", blockEnclose: ("<blockquote style=\"color: #A7A2A9;\"><b>", "</b></blockquote>"))
+        mx = parseBlock(mx, format: "^:", blockEnclose: ("<blockquote>style=\"color: #A7A2A9;\"><b>", "</b></blockquote>"))
         return mx
     }
     
