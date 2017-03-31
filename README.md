@@ -8,9 +8,13 @@
 
 ### An iOS app that lets user quickly jot down thoughts with Markdown support.
 
-![Thoughtless GIF](http://i.giphy.com/l3vR6z0uteGz9QUxi.gif)
+![NotesTableViewController](http://i.imgur.com/4Jl1GSm.png)
+![NonEmptyNotesViewController](http://i.imgur.com/5E7sIWN.png)
+![MarkdownNotesWebViewController](http://i.imgur.com/T7jQVHS.png)
 
-Gif created with [GIPHY](http://giphy.com)
+![MarkdownUserGuide](http://i.imgur.com/NuSyO4G.png)
+![EditNotesTableViewController](http://i.imgur.com/QdbzzXb.png)
+![EmptyNotesViewController](http://i.imgur.com/xkJV4Qm.png)
 
 ### Installation Instructions
 
