@@ -97,6 +97,7 @@ struct MarkdownHelper {
         md = parseUnorderedListsTypeDash(md)
         md = parseOrderedListsWithFullStop(md)
         md = parseOrderedListsWithRightBracket(md)
+        md = parseCheckbox(md)
         md = parseBlockquotes(md)
         md = parseYoutubeVideos(md)
         md = parseParagraphs(md)
@@ -171,17 +172,23 @@ struct MarkdownHelper {
     }
     
     func parseOrderedListsWithFullStop(_ md: String) -> String {
-        return parseBlock(md, format: "^\\d+[\\.|-]", blockEnclose: ("<ol style=\"margin: 0px 0px 0px 25px\">", "</ol>"), lineEnclose: ("<li>", "</li>"))
+        return parseBlock(md, format: "^\\d+[\\.|-]", blockEnclose: ("<ol style=\"margin-left: 25px\">", "</ol>"), lineEnclose: ("<li>", "</li>"))
     }
     
     func parseOrderedListsWithRightBracket(_ md: String) -> String {
-        return parseBlock(md, format: "^\\d+[\\)|-]", blockEnclose: ("<ol style=\"margin: 0px 0px 0px 25px\">", "</ol>"), lineEnclose: ("<li>", "</li>"))
+        return parseBlock(md, format: "^\\d+[\\)|-]", blockEnclose: ("<ol style=\"margin-left: 25px\">", "</ol>"), lineEnclose: ("<li>", "</li>"))
+    }
+    
+    func parseCheckbox(_ md: String) -> String {
+        let abc = parseBlock(md, format: "^\\%+", blockEnclose: ("<ul style=\"list-style: none;\">", "</ul>"), lineEnclose: ("<li><input type=\"checkbox\" style=\"zoom:2; margin-right: 8px\">", "</li>"))
+        print(abc)
+        return abc
     }
     
     func parseBlockquotes(_ md: String) -> String {
         var mx = md
         mx = parseBlock(mx, format: "^>", blockEnclose: ("<blockquote style=\"color: #A7A2A9; border-left: 5px solid #A7A2A9; padding-left: 19px\"><b>", "</b></blockquote>"))
-        mx = parseBlock(mx, format: "^:", blockEnclose: ("<blockquote>style=\"color: #A7A2A9; border-left: 5px solid #A7A2A9; padding-left: 19px\"><b>", "</b></blockquote>"))
+        mx = parseBlock(mx, format: "^:", blockEnclose: ("<blockquote style=\"color: #A7A2A9; border-left: 5px solid #A7A2A9; padding-left: 19px\"><b>", "</b></blockquote>"))
         return mx
     }
     
