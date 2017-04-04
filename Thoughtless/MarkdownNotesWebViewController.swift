@@ -41,13 +41,14 @@ class MarkdownNotesWebViewController: UIViewController {
         
         self.webView = WKWebView(frame: self.view.bounds, configuration: configuration)
         self.webView?.scrollView.backgroundColor = ColorThemeHelper.reederGray()
-        self.view = self.webView
         
         guard let validNote = self.note else { return }
         let textAsHTML = MarkdownHelper().parse(validNote.entry)
         self.webView?.loadHTMLString(textAsHTML, baseURL: nil)
         
         self.webView?.scrollView.delegate = self
+        self.view = self.webView
+        
         self.hidingNavigationBarManager = HidingNavigationBarManager(viewController: self, scrollView: self.webView!.scrollView)
     }
     
@@ -69,4 +70,10 @@ extension MarkdownNotesWebViewController: UIScrollViewDelegate {
         self.hidingNavigationBarManager?.shouldScrollToTop()
         return true
     }
+    
+    func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
+        scrollView.pinchGestureRecognizer?.isEnabled = false
+    }
 }
+
+
