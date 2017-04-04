@@ -168,7 +168,7 @@ struct MarkdownHelper {
     }
     
     func parseUnorderedListsTypeDash(_ md: String) -> String {
-        return parseBlock(md, format: "^\\-", blockEnclose: ("<ul>", "</ul>"), lineEnclose: ("<li>", "</li>"))
+        return parseBlock(md, format: "^\\-\\s(?!\\[)", blockEnclose: ("<ul>", "</ul>"), lineEnclose: ("<li>", "</li>"))
     }
     
     func parseOrderedListsWithFullStop(_ md: String) -> String {
@@ -180,9 +180,7 @@ struct MarkdownHelper {
     }
     
     func parseCheckbox(_ md: String) -> String {
-        let abc = parseBlock(md, format: "^\\%+", blockEnclose: ("<ul style=\"list-style: none;\">", "</ul>"), lineEnclose: ("<li><input type=\"checkbox\" style=\"zoom:2; margin-right: 8px\">", "</li>"))
-        print(abc)
-        return abc
+        return parseBlock(md, format: "^\\-\\s\\[\\s\\]", blockEnclose: ("<ul style=\"list-style: none;\">", "</ul>"), lineEnclose: ("<li><input type=\"checkbox\" style=\"zoom:2; margin-right: 8px; background-color: #43423F\">", "</li>"))
     }
     
     func parseBlockquotes(_ md: String) -> String {
