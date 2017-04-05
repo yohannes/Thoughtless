@@ -9,8 +9,8 @@
 ### An iOS app that lets user quickly jot down thoughts with Markdown support.
 
 ![NotesTableViewController](http://i.imgur.com/BliY0G1.png)
-![NonEmptyNotesViewController](http://i.imgur.com/8cGnNag.png)
-![MarkdownNotesWebViewController](http://i.imgur.com/sykUp0T.png)
+![NonEmptyNotesViewController](http://i.imgur.com/LCvJwXl.png)
+![MarkdownNotesWebViewController](http://i.imgur.com/OuSR9Nk.png)
 
 ![MarkdownUserGuide](http://i.imgur.com/hFi0Xgl.png)
 ![EditNotesTableViewController](http://i.imgur.com/2btswPw.png)
