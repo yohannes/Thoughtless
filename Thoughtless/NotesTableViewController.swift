@@ -25,6 +25,8 @@ class NotesTableViewController: UITableViewController {
     var ubiquityIdentityToken = "org.corruptionofconformity.thoughtless.UbiquityIdentityToken"
     let iCloudEnabledKey = "iCloudEnabled"
     
+    let searchController = UISearchController(searchResultsController: nil)
+    
     // MARK: - IBAction Methods
     
     @IBAction func unwindToNotesTableViewController(sender: UIStoryboardSegue) {
@@ -95,6 +97,12 @@ class NotesTableViewController: UITableViewController {
         self.present(activityViewController, animated: true) {
             self.setEditing(false, animated: true)
         }
+    }
+    
+    fileprivate func dismissSearchBar() {
+        self.searchController.searchBar.resignFirstResponder()
+        self.tableView.setContentOffset(CGPoint(x: 0, y: (self.tableView.tableHeaderView?.frame.size.height)!),
+                                        animated: true)
     }
     
     func iCloudAccountAvailabilityHasChanged() {
@@ -321,9 +329,28 @@ class NotesTableViewController: UITableViewController {
                                                name: NSNotification.Name.NSUbiquityIdentityDidChange,
                                                object: nil)
         self.verifyiCloudAccount()
+        
+//        self.searchController.searchResultsUpdater = self
+        self.searchController.hidesNavigationBarDuringPresentation = false
+        self.searchController.dimsBackgroundDuringPresentation = false
+        self.searchController.searchBar.placeholder = NSLocalizedString("Search", comment: "")
+        self.searchController.searchBar.delegate = self
+        self.definesPresentationContext = true
+        self.tableView.tableHeaderView = self.searchController.searchBar
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.searchController.searchBar.resignFirstResponder()
+        self.tableView.setContentOffset(CGPoint(x: 0, y: (self.tableView.tableHeaderView?.frame.size.height)!),
+                                        animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        self.searchController.isActive = false
+        self.dismissSearchBar()
+        
         guard let validSegueIdentifier = segue.identifier, let validSegueIdentifierCase = NotesTableViewControllerSegue(rawValue: validSegueIdentifier) else {
             assertionFailure("Could not map segue identifier: \(String(describing: segue.identifier))")
             return
@@ -432,5 +459,13 @@ extension NotesTableViewController {
             case .no: return NSLocalizedString("Don't Verify", comment: "")
             }
         }
+    }
+}
+
+// MARK: - UISearchBarDelegate Protocol 
+
+extension NotesTableViewController: UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.dismissSearchBar()
     }
 }
