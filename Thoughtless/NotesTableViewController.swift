@@ -279,6 +279,26 @@ class NotesTableViewController: UITableViewController {
         }
     }
     
+    fileprivate func setupSearchBar() {
+        //        self.searchController.searchResultsUpdater = self
+        self.searchController.hidesNavigationBarDuringPresentation = false
+        self.searchController.dimsBackgroundDuringPresentation = false
+        
+        self.searchController.searchBar.placeholder = NSLocalizedString("Search My Notes", comment: "")
+        self.searchController.searchBar.searchBarStyle = .minimal
+        guard let textFieldWithinSearchBar = self.searchController.searchBar.value(forKey: "searchField") as? UITextField else { return }
+        textFieldWithinSearchBar.borderStyle = .none
+        textFieldWithinSearchBar.backgroundColor = ColorThemeHelper.reederCharcoal()
+        textFieldWithinSearchBar.layer.cornerRadius = 6.0
+        textFieldWithinSearchBar.layer.masksToBounds = true
+        textFieldWithinSearchBar.textColor = ColorThemeHelper.reederCream()
+        self.searchController.searchBar.tintColor = ColorThemeHelper.reederCream()
+        self.searchController.searchBar.delegate = self
+        
+        self.definesPresentationContext = true
+        self.tableView.tableHeaderView = self.searchController.searchBar
+    }
+    
     func verifyiCloudAccount() {
         guard UserDefaults.standard.bool(forKey: self.iCloudEnabledKey) == true else { return }
         
@@ -310,6 +330,7 @@ class NotesTableViewController: UITableViewController {
         
         self.tableView.separatorColor = ColorThemeHelper.reederCream(alpha: 0.05)
         self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
+        self.tableView.backgroundView = UIView()
         
         self.tableViewRefreshControl = {
             let refreshControl = UIRefreshControl()
@@ -330,13 +351,7 @@ class NotesTableViewController: UITableViewController {
                                                object: nil)
         self.verifyiCloudAccount()
         
-//        self.searchController.searchResultsUpdater = self
-        self.searchController.hidesNavigationBarDuringPresentation = false
-        self.searchController.dimsBackgroundDuringPresentation = false
-        self.searchController.searchBar.placeholder = NSLocalizedString("Search", comment: "")
-        self.searchController.searchBar.delegate = self
-        self.definesPresentationContext = true
-        self.tableView.tableHeaderView = self.searchController.searchBar
+        self.setupSearchBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
