@@ -18,6 +18,8 @@ class NotesTableViewController: UITableViewController {
             self.refreshNoteCount()
         }
     }
+    var filteredNoteDocuments = [NoteDocument]()
+    
     var metadataQuery = NSMetadataQuery()
     
     var tableViewRefreshControl: UIRefreshControl!
@@ -103,6 +105,13 @@ class NotesTableViewController: UITableViewController {
         self.searchController.searchBar.resignFirstResponder()
         self.tableView.setContentOffset(CGPoint(x: 0, y: (self.tableView.tableHeaderView?.frame.size.height)!),
                                         animated: true)
+    }
+    
+    fileprivate func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+        self.filteredNoteDocuments = self.noteDocuments.filter { (noteDocument: NoteDocument) -> Bool in
+            return noteDocument.note.entry.lowercased().contains(searchText.lowercased())
+        }
+        self.tableView.reloadData()
     }
     
     func iCloudAccountAvailabilityHasChanged() {
@@ -280,7 +289,7 @@ class NotesTableViewController: UITableViewController {
     }
     
     fileprivate func setupSearchBar() {
-        //        self.searchController.searchResultsUpdater = self
+        self.searchController.searchResultsUpdater = self
         self.searchController.hidesNavigationBarDuringPresentation = false
         self.searchController.dimsBackgroundDuringPresentation = false
         
@@ -362,10 +371,13 @@ class NotesTableViewController: UITableViewController {
                                         animated: true)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        self.searchController.isActive = false
-        self.dismissSearchBar()
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         
+        self.searchController.isActive = false
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let validSegueIdentifier = segue.identifier, let validSegueIdentifierCase = NotesTableViewControllerSegue(rawValue: validSegueIdentifier) else {
             assertionFailure("Could not map segue identifier: \(String(describing: segue.identifier))")
             return
@@ -376,7 +388,7 @@ class NotesTableViewController: UITableViewController {
             guard let validNotesViewController = segue.destination as? NotesViewController,
                 let selectedNoteCell = sender as? NotesTableViewCell,
                 let selectedIndexPath = self.tableView.indexPath(for: selectedNoteCell) else { return }
-            let selectedNote = self.noteDocuments[selectedIndexPath.row].note
+            let selectedNote = self.searchController.isActive && self.searchController.searchBar.text != "" ? self.filteredNoteDocuments[selectedIndexPath.row].note : self.noteDocuments[selectedIndexPath.row].note
             validNotesViewController.note = selectedNote
         case .segueToNotesViewControllerFromAddButton:
             print("adding new note")
@@ -390,13 +402,13 @@ class NotesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.noteDocuments.count
+        return self.searchController.isActive && self.searchController.searchBar.text != "" ? self.filteredNoteDocuments.count : self.noteDocuments.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NotesTableViewCell", for: indexPath) as! NotesTableViewCell
         
-        let noteDocument = self.noteDocuments[indexPath.row]
+        let noteDocument = self.searchController.isActive && self.searchController.searchBar.text != "" ? self.filteredNoteDocuments[indexPath.row] : self.noteDocuments[indexPath.row]
         
         cell.noteLabel.text = noteDocument.note.entry
         cell.noteModificationTimeStampLabel.text = noteDocument.note.dateModificationTimeStamp
@@ -482,5 +494,14 @@ extension NotesTableViewController {
 extension NotesTableViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         self.dismissSearchBar()
+    }
+}
+
+// MARK: - UISearchResultUpdating Protocol
+
+extension NotesTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchBarText = searchController.searchBar.text else { return }
+        self.filterContentForSearchText(searchBarText)
     }
 }
