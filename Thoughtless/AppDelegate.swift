@@ -56,7 +56,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         UITableViewCell.appearance(whenContainedInInstancesOf: [NotesNavigationControler.self]).backgroundColor = ColorThemeHelper.reederGray()
         
+        UITextField.appearance().tintColor = ColorThemeHelper.reederCream()
+        
         UITextView.appearance().backgroundColor = ColorThemeHelper.reederGray()
+        UITextView.appearance().tintColor = ColorThemeHelper.reederCream()
         
         IQKeyboardManager.sharedManager().enable = true
         
