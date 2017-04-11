@@ -29,6 +29,7 @@
 ---
 
 3rd Party Libraries used in this app:
+- [CFAlertViewController](https://github.com/Codigami/CFAlertViewController) by [Crowdfire](https://github.com/Codigami)
 - [HidingNavigationBar](https://github.com/tristanhimmelman/HidingNavigationBar) by [Tristan Himmelman](https://github.com/tristanhimmelman)
 - [IQKeyboardManager](https://github.com/hackiftekhar/IQKeyboardManager) by [Mohd Iftekhar Qurashi](https://github.com/hackiftekhar)
 - [SwiftHEXColors](https://github.com/thii/SwiftHEXColors) by [Thi](https://github.com/thii)
