@@ -178,7 +178,7 @@ class NotesViewController: UIViewController {
             let understoodAlertViewAction = CFAlertAction.action(title: "UNDERSTOOD",
                                                                  style: .Default,
                                                                  alignment: .right,
-                                                                 backgroundColor: ColorThemeHelper.reederCharcoal(),
+                                                                 backgroundColor: ColorThemeHelper.reederGray(),
                                                                  textColor: ColorThemeHelper.reederCream(),
                                                                  handler: { [weak self] (_) in
                                                                     guard let weakSelf = self else { return }
@@ -264,10 +264,10 @@ class NotesViewController: UIViewController {
         }
         
         let dontSaveAlertViewAction = CFAlertAction.action(title: NSLocalizedString("DON'T SAVE", comment: ""),
-                                                           style: .Cancel,
+                                                           style: .Destructive,
                                                            alignment: .justified,
                                                            backgroundColor: UIColor.red,
-                                                           textColor: UIColor.red) { [weak self] (_) in
+                                                           textColor: ColorThemeHelper.reederCream()) { [weak self] (_) in
                                                             guard let weakSelf = self else { return }
                                                             weakSelf.doesTextViewNeedToBeSaved = false
                                                             weakSelf.cancelButtonDidTouch(sender: weakSelf.cancelButton)

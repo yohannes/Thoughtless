@@ -8,6 +8,7 @@
 
 
 import UIKit
+import CFAlertViewController
 
 class NotesTableViewController: UITableViewController {
     
@@ -312,17 +313,28 @@ class NotesTableViewController: UITableViewController {
         guard UserDefaults.standard.bool(forKey: self.iCloudEnabledKey) == true else { return }
         
         guard let _ = FileManager.default.url(forUbiquityContainerIdentifier: nil) else {
-            let iCloudConfigurationAlertController = UIAlertController(title: NSLocalizedString("Misconfigured iCloud Account", comment: ""),
-                                                                       message: NSLocalizedString("You have set Thoughtless to sync your notes via iCloud. Ensure you sign in to iCloud & iCloud Drive is turned on.", comment: ""),
-                                                                       preferredStyle: .alert)
-            let iCloudConfigurationAlertAction = UIAlertAction(title: NSLocalizedString("Verify iCloud Account", comment: ""),
-                                                                style: .default,
-                                                                handler: { (_) in
-                                                                    guard let iCloudSettingURL = URL(string: "App-Prefs:root=CASTLE") else { return }
-                                                                    UIApplication.shared.openURL(iCloudSettingURL)
+            let iCloudConfigurationAlertViewController = CFAlertViewController.alertController(title: NSLocalizedString("Misconfigured iCloud Account", comment: ""),
+                                                                                               message: NSLocalizedString("You have set Thoughtless to sync your notes via iCloud. ENsure you sign in to iCloud & iCloud Drive is turned on.", comment: ""),
+                                                                                               textAlignment: .center,
+                                                                                               preferredStyle: .actionSheet,
+                                                                                               didDismissAlertHandler: nil)
+            let verifyiCloudConfigurationAlertViewAction = CFAlertAction.action(title: NSLocalizedString(Verify.yes.iCloud, comment: ""),
+                                                                          style: .Default,
+                                                                          alignment: .justified,
+                                                                          backgroundColor: ColorThemeHelper.reederCharcoal(),
+                                                                          textColor: ColorThemeHelper.reederCream(), handler: { (_) in
+                                                                            guard let iCloudSettingURL = URL(string: "App-Prefs:root=CASTLE") else { return }
+                                                                            UIApplication.shared.openURL(iCloudSettingURL)
             })
-            iCloudConfigurationAlertController.addAction(iCloudConfigurationAlertAction)
-            self.present(iCloudConfigurationAlertController, animated: true, completion: nil)
+            let dontVerifyiCloudConfigurationAlertViewAction = CFAlertAction.action(title: NSLocalizedString(Verify.no.iCloud, comment: ""),
+                                                                                style: .Default,
+                                                                                alignment: .justified,
+                                                                                backgroundColor: ColorThemeHelper.reederGray(),
+                                                                                textColor: ColorThemeHelper.reederCream(), handler: nil)
+            iCloudConfigurationAlertViewController.shouldDismissOnBackgroundTap = false
+            iCloudConfigurationAlertViewController.addAction(verifyiCloudConfigurationAlertViewAction)
+            iCloudConfigurationAlertViewController.addAction(dontVerifyiCloudConfigurationAlertViewAction)
+            self.present(iCloudConfigurationAlertViewController, animated: true, completion: nil)
             return
         }
         self.loadNotes()
@@ -431,19 +443,32 @@ class NotesTableViewController: UITableViewController {
         let deleteButton: UITableViewRowAction = {
             let tableViewRowAction = UITableViewRowAction(style: .destructive, title: NSLocalizedString("Delete", comment: ""), handler: { [weak self] (_, indexPath) in
                 guard let weakSelf = self else { return }
-                
-                let shouldDeleteAlertController = UIAlertController(title: NSLocalizedString("Delete For Sure?", comment: ""),
-                                                                    message: NSLocalizedString("There is no way to recover it.", comment: ""),
-                                                                    preferredStyle: .alert)
-                let deleteAlertAction = UIAlertAction(title: Delete.yes.note, style: .destructive, handler: { (_) in
-                    weakSelf.deleteNote(at: indexPath)
+                let shouldDeleteAlertViewController = CFAlertViewController.alertController(title: NSLocalizedString("Delete For Sure?",
+                                                                                                                     comment: ""),
+                                                                                            message: NSLocalizedString("There is no way to recover it!", comment: ""),
+                                                                                            textAlignment: .center,
+                                                                                            preferredStyle: .actionSheet,
+                                                                                            didDismissAlertHandler: nil)
+                let deleteAlertViewAction = CFAlertAction.action(title: NSLocalizedString(Delete.yes.note, comment: ""),
+                                                                 style: .Destructive,
+                                                                 alignment: .justified,
+                                                                 backgroundColor: UIColor.red,
+                                                                 textColor: ColorThemeHelper.reederCream(),
+                                                                 handler: { (_) in
+                                                                    weakSelf.deleteNote(at: indexPath)
                 })
-                let dontDeleteAlertAction = UIAlertAction(title: Delete.no.note, style: .cancel, handler: { (_) in
-                    weakSelf.setEditing(false, animated: true)
+                let dontDeleteAlertViewAction = CFAlertAction.action(title: NSLocalizedString(Delete.no.note, comment: ""),
+                                                                     style: .Default,
+                                                                     alignment: .justified,
+                                                                     backgroundColor: ColorThemeHelper.reederCharcoal(),
+                                                                     textColor: ColorThemeHelper.reederCream(),
+                                                                     handler: { (_) in
+                                                                        weakSelf.setEditing(false, animated: true)
                 })
-                shouldDeleteAlertController.addAction(deleteAlertAction)
-                shouldDeleteAlertController.addAction(dontDeleteAlertAction)
-                weakSelf.present(shouldDeleteAlertController, animated: true, completion: nil)
+                shouldDeleteAlertViewController.shouldDismissOnBackgroundTap = false
+                shouldDeleteAlertViewController.addAction(deleteAlertViewAction)
+                shouldDeleteAlertViewController.addAction(dontDeleteAlertViewAction)
+                weakSelf.present(shouldDeleteAlertViewController, animated: true, completion: nil)
                 
             })
             tableViewRowAction.backgroundColor = ColorThemeHelper.reederMud()
@@ -471,8 +496,8 @@ extension NotesTableViewController {
         
         var note: String {
             switch self {
-            case .yes: return NSLocalizedString("Delete", comment: "")
-            case .no: return NSLocalizedString("Don't Delete", comment: "")
+            case .yes: return NSLocalizedString("DELETE", comment: "")
+            case .no: return NSLocalizedString("DON'T DELETE", comment: "")
             }
         }
     }
@@ -482,8 +507,8 @@ extension NotesTableViewController {
         
         var iCloud: String {
             switch self {
-            case .yes: return NSLocalizedString("Verify", comment: "")
-            case .no: return NSLocalizedString("Don't Verify", comment: "")
+            case .yes: return NSLocalizedString("VERIFY", comment: "")
+            case .no: return NSLocalizedString("DON'T VERIFY", comment: "")
             }
         }
     }
