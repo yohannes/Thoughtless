@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '386972EA3AAC0D95FAEC3F96CC61E7E1'
+               BlueprintIdentifier = '6E9284208A2746FBA1E6DD492C5AF37B'
                BlueprintName = 'SwiftHEXColors'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'SwiftHEXColors.framework'>

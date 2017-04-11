@@ -1,0 +1,6 @@
+framework module CFAlertViewController {
+  umbrella header "CFAlertViewController-umbrella.h"
+
+  export *
+  module * { export * }
+}

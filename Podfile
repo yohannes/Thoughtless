@@ -5,10 +5,11 @@ target 'Thoughtless' do
   	# Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   	use_frameworks!
 
-  	# Pods for Notes
-	pod 'IQKeyboardManagerSwift', '~> 4.0.8'
-	pod 'SwiftHEXColors', '~> 1.1'
-	pod 'HidingNavigationBar', '~> 1.0'
+  	# Pods for Thoughtless
+	pod 'IQKeyboardManagerSwift'
+	pod 'SwiftHEXColors'
+	pod 'HidingNavigationBar'
+	pod 'CFAlertViewController'
 
   	target 'ThoughtlessTests' do
     		inherit! :search_paths
