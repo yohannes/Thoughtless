@@ -10,6 +10,7 @@ import UIKit
 import SafariServices
 import SwiftHEXColors
 import HidingNavigationBar
+import CFAlertViewController
 
 class NotesViewController: UIViewController {
     
@@ -159,15 +160,33 @@ class NotesViewController: UIViewController {
         guard !textView.text.isEmpty else {
             self.textView.endEditing(true)
             
-            let emptyNoteDeterrentAlertController = UIAlertController(title: NSLocalizedString("Write Something", comment: ""),
-                                                                      message: NSLocalizedString("You aren't allowed to save an empty note.", comment: ""),
-                                                                      preferredStyle: .alert)
-            let understoodAlertAction = UIAlertAction(title: NSLocalizedString("Understood", comment: ""), style: .default, handler: { [weak self] (_) in
-                guard let weakSelf = self else { return }
-                weakSelf.textView.becomeFirstResponder()
+//            let emptyNoteDeterrentAlertController = UIAlertController(title: NSLocalizedString("Write Something", comment: ""),
+//                                                                      message: NSLocalizedString("You aren't allowed to save an empty note.", comment: ""),
+//                                                                      preferredStyle: .alert)
+//            let understoodAlertAction = UIAlertAction(title: NSLocalizedString("Understood", comment: ""), style: .default, handler: { [weak self] (_) in
+//                guard let weakSelf = self else { return }
+//                weakSelf.textView.becomeFirstResponder()
+//            })
+//            emptyNoteDeterrentAlertController.addAction(understoodAlertAction)
+//            self.present(emptyNoteDeterrentAlertController, animated: true, completion: nil)
+            
+            let emptyNoteDeterrentAlertViewController = CFAlertViewController.alertController(title: NSLocalizedString("Write Something", comment: ""),
+                                                                                              message: NSLocalizedString("You aren't allowed to save an empty note.", comment: ""),
+                                                                                              textAlignment: .left,
+                                                                                              preferredStyle: .alert,
+                                                                                              didDismissAlertHandler: nil)
+            let understoodAlertViewAction = CFAlertAction.action(title: "UNDERSTOOD",
+                                                                 style: .Default,
+                                                                 alignment: .right,
+                                                                 backgroundColor: ColorThemeHelper.reederCharcoal(),
+                                                                 textColor: ColorThemeHelper.reederCream(),
+                                                                 handler: { [weak self] (_) in
+                                                                    guard let weakSelf = self else { return }
+                                                                    weakSelf.textView.becomeFirstResponder()
             })
-            emptyNoteDeterrentAlertController.addAction(understoodAlertAction)
-            self.present(emptyNoteDeterrentAlertController, animated: true, completion: nil)
+            emptyNoteDeterrentAlertViewController.shouldDismissOnBackgroundTap = false
+            emptyNoteDeterrentAlertViewController.addAction(understoodAlertViewAction)
+            self.present(emptyNoteDeterrentAlertViewController, animated: true, completion: nil)
             
             return false
         }
@@ -229,23 +248,35 @@ class NotesViewController: UIViewController {
     }
     
     fileprivate func presentShouldSaveAlertController() {
-        let shouldSaveAlertController = UIAlertController(title: NSLocalizedString("Unsaved Change", comment: ""),
-                                                          message: NSLocalizedString("Do you want to save or not save?", comment: ""),
-                                                          preferredStyle: .alert)
-        let saveAlertAction = UIAlertAction(title: NSLocalizedString("Save", comment: ""), style: .default, handler: { [weak self] (_) in
-            guard let weakSelf = self else { return }
-            weakSelf.textView.endEditing(true)
-            let _ = weakSelf.shouldPerformSegue(withIdentifier: NotesViewControllerSegue.unwindToNotesTableViewControllerFromNotesViewController.rawValue, sender: weakSelf)
-            
-        })
-        let dontSaveAlertAction = UIAlertAction(title: NSLocalizedString("Don't Save", comment: ""), style: .cancel, handler: { [weak self] (_) in
-            guard let weakSelf = self else { return }
-            weakSelf.doesTextViewNeedToBeSaved = false
-            weakSelf.cancelButtonDidTouch(sender: weakSelf.cancelButton)
-        })
-        shouldSaveAlertController.addAction(saveAlertAction)
-        shouldSaveAlertController.addAction(dontSaveAlertAction)
-        self.present(shouldSaveAlertController, animated: true, completion: nil)
+        let shouldSaveAlertViewController = CFAlertViewController.alertController(title: NSLocalizedString("Unsaved Change", comment: ""),
+                                                                                  message: NSLocalizedString("Do you want to save or not save?", comment: ""),
+                                                                                  textAlignment: .center,
+                                                                                  preferredStyle: .actionSheet,
+                                                                                  didDismissAlertHandler: nil)
+        let saveAlertViewAction = CFAlertAction.action(title: NSLocalizedString("SAVE", comment: ""),
+                                                       style: .Default,
+                                                       alignment: .justified,
+                                                       backgroundColor: ColorThemeHelper.reederGray(),
+                                                       textColor: ColorThemeHelper.reederCream()) { [weak self] (_) in
+                                                        guard let weakSelf = self else { return }
+                                                        weakSelf.textView.endEditing(true)
+                                                        let _ = weakSelf.shouldPerformSegue(withIdentifier: NotesViewControllerSegue.unwindToNotesTableViewControllerFromNotesViewController.rawValue, sender: weakSelf)
+        }
+        
+        let dontSaveAlertViewAction = CFAlertAction.action(title: NSLocalizedString("DON'T SAVE", comment: ""),
+                                                           style: .Cancel,
+                                                           alignment: .justified,
+                                                           backgroundColor: UIColor.red,
+                                                           textColor: UIColor.red) { [weak self] (_) in
+                                                            guard let weakSelf = self else { return }
+                                                            weakSelf.doesTextViewNeedToBeSaved = false
+                                                            weakSelf.cancelButtonDidTouch(sender: weakSelf.cancelButton)
+        }
+        shouldSaveAlertViewController.shouldDismissOnBackgroundTap = false
+        shouldSaveAlertViewController.addAction(saveAlertViewAction)
+        shouldSaveAlertViewController.addAction(dontSaveAlertViewAction)
+        self.present(shouldSaveAlertViewController, animated: true, completion: nil)
+
     }
     
     fileprivate func setupKeyboardToolBarWithBarButtonItems() {
