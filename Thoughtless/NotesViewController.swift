@@ -159,17 +159,7 @@ class NotesViewController: UIViewController {
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         guard !textView.text.isEmpty else {
             self.textView.endEditing(true)
-            
-//            let emptyNoteDeterrentAlertController = UIAlertController(title: NSLocalizedString("Write Something", comment: ""),
-//                                                                      message: NSLocalizedString("You aren't allowed to save an empty note.", comment: ""),
-//                                                                      preferredStyle: .alert)
-//            let understoodAlertAction = UIAlertAction(title: NSLocalizedString("Understood", comment: ""), style: .default, handler: { [weak self] (_) in
-//                guard let weakSelf = self else { return }
-//                weakSelf.textView.becomeFirstResponder()
-//            })
-//            emptyNoteDeterrentAlertController.addAction(understoodAlertAction)
-//            self.present(emptyNoteDeterrentAlertController, animated: true, completion: nil)
-            
+
             let emptyNoteDeterrentAlertViewController = CFAlertViewController.alertController(title: NSLocalizedString("Write Something", comment: ""),
                                                                                               message: NSLocalizedString("You aren't allowed to save an empty note.", comment: ""),
                                                                                               textAlignment: .left,
@@ -248,21 +238,11 @@ class NotesViewController: UIViewController {
     }
     
     fileprivate func presentShouldSaveAlertController() {
-        let shouldSaveAlertViewController = CFAlertViewController.alertController(title: NSLocalizedString("Unsaved Change", comment: ""),
-                                                                                  message: NSLocalizedString("Do you want to save or not save?", comment: ""),
+        let shouldSaveAlertViewController = CFAlertViewController.alertController(title: NSLocalizedString("There's Unsaved Change", comment: ""),
+                                                                                  message: NSLocalizedString("Please choose your action carefully.", comment: ""),
                                                                                   textAlignment: .center,
                                                                                   preferredStyle: .actionSheet,
                                                                                   didDismissAlertHandler: nil)
-        let saveAlertViewAction = CFAlertAction.action(title: NSLocalizedString("SAVE", comment: ""),
-                                                       style: .Default,
-                                                       alignment: .justified,
-                                                       backgroundColor: ColorThemeHelper.reederGray(),
-                                                       textColor: ColorThemeHelper.reederCream()) { [weak self] (_) in
-                                                        guard let weakSelf = self else { return }
-                                                        weakSelf.textView.endEditing(true)
-                                                        let _ = weakSelf.shouldPerformSegue(withIdentifier: NotesViewControllerSegue.unwindToNotesTableViewControllerFromNotesViewController.rawValue, sender: weakSelf)
-        }
-        
         let dontSaveAlertViewAction = CFAlertAction.action(title: NSLocalizedString("DON'T SAVE", comment: ""),
                                                            style: .Destructive,
                                                            alignment: .justified,
@@ -272,9 +252,28 @@ class NotesViewController: UIViewController {
                                                             weakSelf.doesTextViewNeedToBeSaved = false
                                                             weakSelf.cancelButtonDidTouch(sender: weakSelf.cancelButton)
         }
+        let saveAlertViewAction = CFAlertAction.action(title: NSLocalizedString("SAVE", comment: ""),
+                                                       style: .Default,
+                                                       alignment: .justified,
+                                                       backgroundColor: ColorThemeHelper.reederGray(),
+                                                       textColor: ColorThemeHelper.reederCream()) { [weak self] (_) in
+                                                        guard let weakSelf = self else { return }
+                                                        weakSelf.textView.endEditing(true)
+                                                        let _ = weakSelf.shouldPerformSegue(withIdentifier: NotesViewControllerSegue.unwindToNotesTableViewControllerFromNotesViewController.rawValue, sender: weakSelf)
+        }
+        let editAgainAlertViewAction = CFAlertAction.action(title: NSLocalizedString("EDIT AGAIN", comment: ""),
+                                                       style: .Default,
+                                                       alignment: .justified,
+                                                       backgroundColor: ColorThemeHelper.reederMud(),
+                                                       textColor: ColorThemeHelper.reederCream()) { [weak self] (_) in
+                                                        guard let weakSelf = self else { return }
+                                                        weakSelf.textView.becomeFirstResponder()
+        }
+        
         shouldSaveAlertViewController.shouldDismissOnBackgroundTap = false
-        shouldSaveAlertViewController.addAction(saveAlertViewAction)
         shouldSaveAlertViewController.addAction(dontSaveAlertViewAction)
+        shouldSaveAlertViewController.addAction(saveAlertViewAction)
+        shouldSaveAlertViewController.addAction(editAgainAlertViewAction)
         self.present(shouldSaveAlertViewController, animated: true, completion: nil)
 
     }
