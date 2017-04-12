@@ -145,6 +145,7 @@ class NotesViewController: UIViewController {
         if let validBarButtonItem = sender as? UIBarButtonItem, validBarButtonItem === self.saveButton {
             let entry = self.textView.text ?? ""
             self.note = Note(entry: entry, dateOfCreation: self.getCurrentDateAndTime())
+            self.textView.endEditing(true)
         }
         else if segue.identifier == NotesViewControllerSegue.showSegueToMarkdownNotesWebViewController.rawValue {
             guard let validMarkdownNotesWebViewController = segue.destination as? MarkdownNotesWebViewController, let validNote = self.note else { return }
@@ -153,6 +154,7 @@ class NotesViewController: UIViewController {
         else if segue.identifier == NotesViewControllerSegue.unwindToNotesTableViewControllerFromNotesViewController.rawValue {
             let entry = self.textView.text ?? ""
             self.note = Note(entry: entry, dateOfCreation: self.getCurrentDateAndTime())
+            self.textView.endEditing(true)
         }
     }
     
