@@ -1,7 +1,7 @@
 PODS:
   - CFAlertViewController (2.1.2)
   - HidingNavigationBar (1.0.0)
-  - IQKeyboardManagerSwift (4.0.8)
+  - IQKeyboardManagerSwift (4.0.9)
   - SwiftHEXColors (1.1.0)
 
 DEPENDENCIES:
@@ -13,9 +13,9 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   CFAlertViewController: 15692db82414cf9cbe6369ab81563caf57c9f6e7
   HidingNavigationBar: 170dd21df8e89c465c01f047d4306778d1ce304c
-  IQKeyboardManagerSwift: c04bc9f68473823f825eb44d958fce98d921bead
+  IQKeyboardManagerSwift: 2eefe6c429b86aa08bfbc1b5c891164d754adf91
   SwiftHEXColors: 8f7e364df7929e32cff9f9eeb044bb215167d6be
 
-PODFILE CHECKSUM: 8351bfc9dd96a785d6d3cb2612a4a56adcc0c22a
+PODFILE CHECKSUM: 972250d4221d7fed0209264fb8819ec4a37beddf
 
 COCOAPODS: 1.2.0
