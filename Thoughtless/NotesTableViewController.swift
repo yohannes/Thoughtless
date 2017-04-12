@@ -452,7 +452,7 @@ class NotesTableViewController: UITableViewController {
                 let deleteAlertViewAction = CFAlertAction.action(title: NSLocalizedString(Delete.yes.note, comment: ""),
                                                                  style: .Destructive,
                                                                  alignment: .justified,
-                                                                 backgroundColor: UIColor.red,
+                                                                 backgroundColor: ColorThemeHelper.vividRed(),
                                                                  textColor: ColorThemeHelper.reederCream(),
                                                                  handler: { (_) in
                                                                     weakSelf.deleteNote(at: indexPath)

@@ -246,7 +246,7 @@ class NotesViewController: UIViewController {
         let dontSaveAlertViewAction = CFAlertAction.action(title: NSLocalizedString("DON'T SAVE", comment: ""),
                                                            style: .Destructive,
                                                            alignment: .justified,
-                                                           backgroundColor: UIColor.red,
+                                                           backgroundColor: ColorThemeHelper.vividRed(),
                                                            textColor: ColorThemeHelper.reederCream()) { [weak self] (_) in
                                                             guard let weakSelf = self else { return }
                                                             weakSelf.doesTextViewNeedToBeSaved = false

@@ -25,4 +25,8 @@ struct ColorThemeHelper {
     static func reederMud(alpha value: Float = 1.0) -> UIColor {
         return UIColor(hex: 0x353535, alpha: value)!
     }
+    
+    static func vividRed(alpha value: Float = 1.0) -> UIColor {
+        return UIColor(hexString: "BF222F", alpha: value)!
+    }
 }
