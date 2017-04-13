@@ -106,8 +106,8 @@ class NotesViewController: UIViewController {
     
     @IBAction func markdownUserGuideButtonDidTouch(_ sender: UIButton) {
         guard let validURL = URL(string: "http://commonmark.org/help/") else { return }
-        let safariViewController = SFSafariViewController(url: validURL)
-        self.present(safariViewController, animated: true, completion: nil)
+        let noteSafariViewController = NoteSafariViewController(url: validURL)
+        self.present(noteSafariViewController, animated: true, completion: nil)
     }
     
     @IBAction func previewMarkdownButtonDidTouch(_ sender: UIButton) {
@@ -279,7 +279,6 @@ class NotesViewController: UIViewController {
         shouldSaveAlertViewController.addAction(saveAlertViewAction)
         shouldSaveAlertViewController.addAction(editAgainAlertViewAction)
         self.present(shouldSaveAlertViewController, animated: true, completion: nil)
-
     }
     
     fileprivate func setupKeyboardToolBarWithBarButtonItems() {
