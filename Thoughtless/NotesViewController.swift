@@ -126,7 +126,9 @@ class NotesViewController: UIViewController {
         self.textView.endEditing(true)
         
         if self.doesTextViewNeedToBeSaved == true {
-            self.presentShouldSaveAlertController()
+            if self.presentedViewController == nil {
+                self.presentShouldSaveAlertController()
+            }
         }
         else {
             self.doesTextViewNeedToBeSaved = false
