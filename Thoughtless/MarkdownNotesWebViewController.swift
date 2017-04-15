@@ -49,6 +49,8 @@ class MarkdownNotesWebViewController: UIViewController {
         self.webView?.scrollView.delegate = self
         self.view = self.webView
         
+        self.webView?.navigationDelegate = self
+        
         self.hidingNavigationBarManager = HidingNavigationBarManager(viewController: self, scrollView: self.webView!.scrollView)
     }
     
@@ -73,6 +75,21 @@ extension MarkdownNotesWebViewController: UIScrollViewDelegate {
     
     func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
         scrollView.pinchGestureRecognizer?.isEnabled = false
+    }
+}
+
+extension MarkdownNotesWebViewController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if navigationAction.navigationType == .linkActivated {
+            guard let validURL = navigationAction.request.url else { return }
+            let safariViewController = NoteSafariViewController(url: validURL)
+            self.present(safariViewController, animated: true, completion: { 
+                decisionHandler(WKNavigationActionPolicy.cancel)
+            })
+        }
+        else {
+            decisionHandler(WKNavigationActionPolicy.allow)
+        }
     }
 }
 
