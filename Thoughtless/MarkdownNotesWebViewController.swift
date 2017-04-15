@@ -82,8 +82,9 @@ extension MarkdownNotesWebViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if navigationAction.navigationType == .linkActivated {
             guard let validURL = navigationAction.request.url else { return }
-            let safariViewController = NoteSafariViewController(url: validURL)
-            self.present(safariViewController, animated: true, completion: { 
+            let noteSafariViewController = NoteSafariViewController(url: validURL)
+            noteSafariViewController.modalPresentationStyle = .overFullScreen
+            self.present(noteSafariViewController, animated: true, completion: {
                 decisionHandler(WKNavigationActionPolicy.cancel)
             })
         }

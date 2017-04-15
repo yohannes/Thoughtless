@@ -107,6 +107,7 @@ class NotesViewController: UIViewController {
     @IBAction func markdownUserGuideButtonDidTouch(_ sender: UIButton) {
         guard let validURL = URL(string: "http://commonmark.org/help/") else { return }
         let noteSafariViewController = NoteSafariViewController(url: validURL)
+        noteSafariViewController.modalPresentationStyle = .overFullScreen
         self.present(noteSafariViewController, animated: true, completion: nil)
     }
     
