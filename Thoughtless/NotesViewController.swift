@@ -233,7 +233,10 @@ class NotesViewController: UIViewController {
         guard let validButtonTitle = sender.title else { return }
         if case "➡️️" = validButtonTitle { self.moveCursor(.right) }
         else if case "⬅️️" = validButtonTitle { self.moveCursor(.left) }
-        else if case "⌨" = validButtonTitle { self.textView.endEditing(true) }
+        else if case "⌨" = validButtonTitle {
+            self.hidingNavigationBarManager?.expand()
+            self.textView.endEditing(true)
+        }
         else { self.textView.insertText(validButtonTitle) }
     }
     
