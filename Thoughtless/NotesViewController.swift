@@ -108,7 +108,11 @@ class NotesViewController: UIViewController {
         guard let validURL = URL(string: "http://commonmark.org/help/") else { return }
         let noteSafariViewController = NoteSafariViewController(url: validURL)
         noteSafariViewController.modalPresentationStyle = .overFullScreen
-        self.present(noteSafariViewController, animated: true, completion: nil)
+        self.present(noteSafariViewController, animated: true) {
+            let screenEdgePanGestureRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(self.handleScreenEdgePanGesture))
+            screenEdgePanGestureRecognizer.edges = .left
+            noteSafariViewController.edgeView?.addGestureRecognizer(screenEdgePanGestureRecognizer)
+        }
     }
     
     @IBAction func previewMarkdownButtonDidTouch(_ sender: UIButton) {
@@ -238,6 +242,12 @@ class NotesViewController: UIViewController {
             self.textView.endEditing(true)
         }
         else { self.textView.insertText(validButtonTitle) }
+    }
+    
+    func handleScreenEdgePanGesture(_ recognizer: UIScreenEdgePanGestureRecognizer) {
+        if recognizer.state == .changed {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     fileprivate func moveCursor(_ cursor: Cursor) {
