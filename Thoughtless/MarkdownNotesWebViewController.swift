@@ -21,6 +21,14 @@ class MarkdownNotesWebViewController: UIViewController {
     
     var hidingNavigationBarManager: HidingNavigationBarManager?
     
+    // MARK: -- Helper Methods
+    
+    func handleScreenEdgePanGesture(_ recognizer: UIScreenEdgePanGestureRecognizer) {
+        if recognizer.state == .changed {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
     // MARK: -- IBOutlet Properties
     
     @IBOutlet weak var containerView: UIView! = nil
@@ -86,6 +94,10 @@ extension MarkdownNotesWebViewController: WKNavigationDelegate {
             noteSafariViewController.modalPresentationStyle = .overFullScreen
             self.present(noteSafariViewController, animated: true, completion: {
                 decisionHandler(WKNavigationActionPolicy.cancel)
+                let screenEdgePanGestureRecognizer = UIScreenEdgePanGestureRecognizer(target: self,
+                                                                                      action: #selector(self.handleScreenEdgePanGesture))
+                screenEdgePanGestureRecognizer.edges = .left
+                noteSafariViewController.edgeView?.addGestureRecognizer(screenEdgePanGestureRecognizer)
             })
         }
         else {
