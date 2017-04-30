@@ -356,7 +356,6 @@ class NotesTableViewController: UITableViewController {
         self.tableViewRefreshControl = {
             let refreshControl = UIRefreshControl()
             refreshControl.tintColor = ColorThemeHelper.reederCream()
-            refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh notes", attributes: [NSForegroundColorAttributeName: ColorThemeHelper.reederCream()])
             refreshControl.addTarget(self, action: #selector(NotesTableViewController.refreshNoteListing), for: .valueChanged)
             return refreshControl
         }()
