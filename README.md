@@ -35,4 +35,4 @@
 - [SwiftHEXColors](https://github.com/thii/SwiftHEXColors) by [Thi](https://github.com/thii)
 
 Icon used in this app:
-- [Notepad](http://www.flaticon.com/free-icon/notepad_251998) by [Freepik](http://www.flaticon.com/authors/freepik)
+- [Voice Presentation](https://icons8.com/icon/7736/voice-presentation) by [Icons8](https://icons8.com/)
