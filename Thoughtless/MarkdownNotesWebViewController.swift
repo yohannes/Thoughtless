@@ -23,10 +23,14 @@ class MarkdownNotesWebViewController: UIViewController {
     
     // MARK: -- Helper Methods
     
-    func handleScreenEdgePanGesture(_ recognizer: UIScreenEdgePanGestureRecognizer) {
+    func handleScreenEdgePanGestureFromWebView(_ recognizer: UIScreenEdgePanGestureRecognizer) {
         if recognizer.state == .changed {
             self.dismiss(animated: true, completion: nil)
         }
+    }
+    
+    func dismissMarkdownNotesWebViewController() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     // MARK: -- IBOutlet Properties
@@ -60,6 +64,10 @@ class MarkdownNotesWebViewController: UIViewController {
         self.webView?.navigationDelegate = self
         
         self.hidingNavigationBarManager = HidingNavigationBarManager(viewController: self, scrollView: self.webView!.scrollView)
+        
+        let swipeRightFromLeftGestureToCancelOrSave = UISwipeGestureRecognizer(target: self, action: #selector(MarkdownNotesWebViewController.dismissMarkdownNotesWebViewController))
+        swipeRightFromLeftGestureToCancelOrSave.direction = .right
+        self.webView?.addGestureRecognizer(swipeRightFromLeftGestureToCancelOrSave)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -95,7 +103,7 @@ extension MarkdownNotesWebViewController: WKNavigationDelegate {
             self.present(noteSafariViewController, animated: true, completion: {
                 decisionHandler(WKNavigationActionPolicy.cancel)
                 let screenEdgePanGestureRecognizer = UIScreenEdgePanGestureRecognizer(target: self,
-                                                                                      action: #selector(self.handleScreenEdgePanGesture))
+                                                                                      action: #selector(MarkdownNotesWebViewController.handleScreenEdgePanGestureFromWebView(_:)))
                 screenEdgePanGestureRecognizer.edges = .left
                 noteSafariViewController.edgeView?.addGestureRecognizer(screenEdgePanGestureRecognizer)
             })

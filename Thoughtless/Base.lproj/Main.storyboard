@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12100" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="YYd-s9-v4p">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="YYd-s9-v4p">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12072"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -100,6 +100,8 @@
                                     <outletCollection property="gestureRecognizers" destination="6DS-0I-Qtm" appends="YES" id="7ch-pl-Ucr"/>
                                     <outletCollection property="gestureRecognizers" destination="2mU-4Z-SIO" appends="YES" id="rCD-FM-yXf"/>
                                     <outletCollection property="gestureRecognizers" destination="FNg-Kv-s1j" appends="YES" id="9FF-W9-F3c"/>
+                                    <outletCollection property="gestureRecognizers" destination="pHN-xS-5Yo" appends="YES" id="2yh-Gx-b53"/>
+                                    <outletCollection property="gestureRecognizers" destination="Q8n-IW-Anu" appends="YES" id="Eag-5N-yb1"/>
                                 </connections>
                             </textView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gUa-t2-oWD">
@@ -166,18 +168,28 @@
                 <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="6DS-0I-Qtm">
                     <rectEdge key="edges" right="YES"/>
                     <connections>
-                        <action selector="swipeLeftFromRightScreenEdgeGestureToShowMarkdown:" destination="WhK-6A-3pp" id="Wae-ay-dcj"/>
+                        <action selector="swipeLeftFromRightScreenEdgeGestureToShowMarkdown:" destination="WhK-6A-3pp" id="jTh-dN-lnj"/>
                     </connections>
                 </screenEdgePanGestureRecognizer>
                 <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="FNg-Kv-s1j">
                     <rectEdge key="edges" left="YES"/>
                     <connections>
-                        <action selector="swipeRightFromLeftScreenEdgeGestureToCancelOrSave:" destination="WhK-6A-3pp" id="dIs-Zj-gSP"/>
+                        <action selector="swipeRightFromLeftScreenEdgeGestureToCancelOrSave:" destination="WhK-6A-3pp" id="caC-Tf-I9B"/>
                     </connections>
                 </screenEdgePanGestureRecognizer>
                 <swipeGestureRecognizer direction="down" id="2mU-4Z-SIO">
                     <connections>
                         <action selector="swipeDownGestureToDismissKeyboard:" destination="WhK-6A-3pp" id="z8X-gf-pMj"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="pHN-xS-5Yo">
+                    <connections>
+                        <action selector="swipeLeftFromRightGestureToShowMarkdown:" destination="WhK-6A-3pp" id="EqS-yx-fbz"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="Q8n-IW-Anu">
+                    <connections>
+                        <action selector="swipeRightFromLeftGestureToCancelOrSave:" destination="WhK-6A-3pp" id="aka-XK-7gH"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
