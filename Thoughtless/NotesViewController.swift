@@ -121,7 +121,7 @@ class NotesViewController: UIViewController {
     }
     
     @IBAction func swipeLeftFromRightGestureToShowMarkdown(_ sender: UIGestureRecognizer) {
-        guard self.note != nil else { return }
+        guard self.note != nil && self.textView.isFirstResponder == false else { return }
         if sender.state == .ended {
             self.performSegue(withIdentifier: NotesViewControllerSegue.showSegueToMarkdownNotesWebViewController.rawValue, sender: self)
         }
