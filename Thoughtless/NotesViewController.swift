@@ -120,14 +120,14 @@ class NotesViewController: UIViewController {
         self.performSegue(withIdentifier: NotesViewControllerSegue.showSegueToMarkdownNotesWebViewController.rawValue, sender: self)
     }
     
-    @IBAction func swipeLeftFromRightGestureToShowMarkdown(_ sender: UISwipeGestureRecognizer) {
+    @IBAction func swipeLeftFromRightGestureToShowMarkdown(_ sender: UIGestureRecognizer) {
         guard self.note != nil else { return }
         if sender.state == .ended {
             self.performSegue(withIdentifier: NotesViewControllerSegue.showSegueToMarkdownNotesWebViewController.rawValue, sender: self)
         }
     }
     
-    @IBAction func swipeRightFromLeftGestureToCancelOrSave(_ sender: UISwipeGestureRecognizer) {
+    @IBAction func swipeRightFromLeftGestureToCancelOrSave(_ sender: UIGestureRecognizer) {
         self.textView.endEditing(true)
         
         if self.doesTextViewNeedToBeSaved == true {
@@ -139,28 +139,6 @@ class NotesViewController: UIViewController {
             self.doesTextViewNeedToBeSaved = false
             self.cancelButtonDidTouch(sender: self.cancelButton)
         }
-    }
-    
-    @IBAction func swipeLeftFromRightScreenEdgeGestureToShowMarkdown(_ sender: UIScreenEdgePanGestureRecognizer) {
-        guard self.note != nil else { return }
-        if sender.state == .ended {
-            self.performSegue(withIdentifier: NotesViewControllerSegue.showSegueToMarkdownNotesWebViewController.rawValue, sender: self)
-        }
-    }
-    
-    @IBAction func swipeRightFromLeftScreenEdgeGestureToCancelOrSave(_ sender: UIScreenEdgePanGestureRecognizer) {
-        self.textView.endEditing(true)
-        
-        if self.doesTextViewNeedToBeSaved == true {
-            if self.presentedViewController == nil {
-                self.presentShouldSaveAlertController()
-            }
-        }
-        else {
-            self.doesTextViewNeedToBeSaved = false
-            self.cancelButtonDidTouch(sender: self.cancelButton)
-        }
-        
     }
     
     @IBAction func swipeDownGestureToDismissKeyboard(_ sender: UISwipeGestureRecognizer) {

@@ -168,13 +168,13 @@
                 <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="6DS-0I-Qtm">
                     <rectEdge key="edges" right="YES"/>
                     <connections>
-                        <action selector="swipeLeftFromRightScreenEdgeGestureToShowMarkdown:" destination="WhK-6A-3pp" id="jTh-dN-lnj"/>
+                        <action selector="swipeLeftFromRightGestureToShowMarkdown:" destination="WhK-6A-3pp" id="Aes-ky-QT9"/>
                     </connections>
                 </screenEdgePanGestureRecognizer>
                 <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="FNg-Kv-s1j">
                     <rectEdge key="edges" left="YES"/>
                     <connections>
-                        <action selector="swipeRightFromLeftScreenEdgeGestureToCancelOrSave:" destination="WhK-6A-3pp" id="caC-Tf-I9B"/>
+                        <action selector="swipeRightFromLeftGestureToCancelOrSave:" destination="WhK-6A-3pp" id="THT-QM-9zm"/>
                     </connections>
                 </screenEdgePanGestureRecognizer>
                 <swipeGestureRecognizer direction="down" id="2mU-4Z-SIO">
