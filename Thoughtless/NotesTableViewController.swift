@@ -314,7 +314,7 @@ class NotesTableViewController: UITableViewController {
         self.searchController.hidesNavigationBarDuringPresentation = false
         self.searchController.dimsBackgroundDuringPresentation = false
         
-        self.searchController.searchBar.placeholder = NSLocalizedString("Search My Notes", comment: "")
+        self.searchController.searchBar.placeholder = NSLocalizedString("Search My Past Thoughts", comment: "")
         self.searchController.searchBar.searchBarStyle = .minimal
         guard let textFieldWithinSearchBar = self.searchController.searchBar.value(forKey: "searchField") as? UITextField else { return }
         textFieldWithinSearchBar.borderStyle = .none
