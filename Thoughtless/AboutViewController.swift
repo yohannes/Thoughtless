@@ -58,13 +58,13 @@ class AboutViewController: UIViewController {
         self.profilePicture.clipsToBounds = true
         
         self.personalNoteLabel.textColor = ColorThemeHelper.reederCream()
-        self.personalNoteLabel.text = "Crafted with countless hair-pulling & head-banging in Jakarta.\n---\nHuge love to my fiancée; Karina & big 4 to my Milestone L37 buddies; Adrian, Alan, Azi, Daniel, Douglas, Harvey, Ivan, May Leng, Rex, Roland, Shiyun, Vincent, Wei Lik, Yasha, & Zoey.\n---"
+        self.personalNoteLabel.text = "Crafted with countless hair-pulling & head-banging in Jakarta.\n---\nForemost gratitude to God, huge love to my fiancée; Karina & big 4 to my Milestone L37 buddies; Adrian, Alan, Azi, Daniel, Douglas, Harvey, Ivan, May Leng, Rex, Roland, Shiyun, Vincent, Wei Lik, Yasha, & Zoey.\n---"
         
         self.thirdPartyCreditsLabel.textColor = ColorThemeHelper.reederCream()
         self.thirdPartyCreditsLabel.text = "Credits to these awesome libraries & icon:\nCFAlertViewController by Crowdfire.\nHidingNavigationBar by Tristan Himmelman.\nIQKeyboardManager by Mohd Iftekhar Qurashi.\nSwiftHEXColors by Thi.\nThought Bubble icon by Freepik.\n---"
         
         self.copyrightLabel.textColor = ColorThemeHelper.reederCream()
-        self.copyrightLabel.text = "Copyright © 2017 Yohannes Wijaya. All rights reserved."
+        self.copyrightLabel.text = "Copyright © 2017 Yohannes Wijaya. All respective rights reserved."
     }
 
 }
