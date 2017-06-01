@@ -367,8 +367,6 @@ class NotesTableViewController: UITableViewController {
 
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: ColorThemeHelper.reederCream()]
         
-        self.navigationItem.leftBarButtonItem = self.editButtonItem
-        
         self.tableView.separatorColor = ColorThemeHelper.reederCream(alpha: 0.05)
         self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
         self.tableView.backgroundView = UIView()
@@ -421,8 +419,8 @@ class NotesTableViewController: UITableViewController {
                 let selectedIndexPath = self.tableView.indexPath(for: selectedNoteCell) else { return }
             let selectedNote = self.searchController.isActive && self.searchController.searchBar.text != "" ? self.filteredNoteDocuments[selectedIndexPath.row].note : self.noteDocuments[selectedIndexPath.row].note
             validNotesViewController.note = selectedNote
-        case .segueToNotesViewControllerFromAddButton:
-            print("adding new note")
+        default:
+            return
         }
     }
     
@@ -508,6 +506,7 @@ extension NotesTableViewController {
     enum NotesTableViewControllerSegue: String {
         case segueToNotesViewControllerFromCell
         case segueToNotesViewControllerFromAddButton
+        case segueToAboutViewController
     }
     
     enum Delete {

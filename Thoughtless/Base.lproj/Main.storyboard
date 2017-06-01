@@ -27,7 +27,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="97"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eFl-IN-2dj" id="TOn-ES-APC">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="97"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="96.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o4p-dn-tzR">
@@ -67,6 +67,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="EDG-hU-hLA">
+                        <barButtonItem key="leftBarButtonItem" title="About" id="QXE-iq-ITh">
+                            <connections>
+                                <segue destination="NOb-Yl-l7X" kind="presentation" identifier="segueToAboutViewController" id="m8q-3Z-36Z"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Juj-uJ-AjX">
                             <connections>
                                 <segue destination="9Kv-hq-KlY" kind="presentation" identifier="segueToNotesViewControllerFromAddButton" id="RfD-6n-6wB"/>
@@ -77,6 +82,31 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HVa-14-kR3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1453.5999999999999" y="529.38530734632684"/>
+        </scene>
+        <!--About View Controller-->
+        <scene sceneID="een-PX-YUp">
+            <objects>
+                <viewController id="okf-2B-G3g" customClass="AboutViewController" customModule="Thoughtless" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wOG-lS-30t"/>
+                        <viewControllerLayoutGuide type="bottom" id="pbF-H5-ey7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uke-yV-PdJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="pOp-vj-j9b">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="weB-6B-pgS">
+                            <connections>
+                                <action selector="doneButtonDidTouch:" destination="okf-2B-G3g" id="MBf-6V-Ry8"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XjR-jP-PKb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3031" y="-170"/>
         </scene>
         <!--Notes View Controller-->
         <scene sceneID="WZk-PW-ccX">
@@ -171,12 +201,6 @@
                         <action selector="swipeLeftFromRightGestureToShowMarkdown:" destination="WhK-6A-3pp" id="Aes-ky-QT9"/>
                     </connections>
                 </screenEdgePanGestureRecognizer>
-                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="FNg-Kv-s1j">
-                    <rectEdge key="edges" left="YES"/>
-                    <connections>
-                        <action selector="swipeRightFromLeftGestureToCancelOrSave:" destination="WhK-6A-3pp" id="THT-QM-9zm"/>
-                    </connections>
-                </screenEdgePanGestureRecognizer>
                 <swipeGestureRecognizer direction="down" id="2mU-4Z-SIO">
                     <connections>
                         <action selector="swipeDownGestureToDismissKeyboard:" destination="WhK-6A-3pp" id="z8X-gf-pMj"/>
@@ -192,8 +216,14 @@
                         <action selector="swipeRightFromLeftGestureToCancelOrSave:" destination="WhK-6A-3pp" id="aka-XK-7gH"/>
                     </connections>
                 </swipeGestureRecognizer>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="FNg-Kv-s1j">
+                    <rectEdge key="edges" left="YES"/>
+                    <connections>
+                        <action selector="swipeRightFromLeftGestureToCancelOrSave:" destination="WhK-6A-3pp" id="THT-QM-9zm"/>
+                    </connections>
+                </screenEdgePanGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3031.1999999999998" y="529.38530734632684"/>
+            <point key="canvasLocation" x="3030" y="554"/>
         </scene>
         <!--Markdown Notes Web View Controller-->
         <scene sceneID="xZ5-mf-pvS">
@@ -214,7 +244,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4GB-Fa-iR4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3950" y="529"/>
+            <point key="canvasLocation" x="3964" y="554"/>
         </scene>
         <!--Notes Navigation Controler-->
         <scene sceneID="dEf-0D-gLa">
@@ -252,8 +282,26 @@
             </objects>
             <point key="canvasLocation" x="2218" y="979"/>
         </scene>
+        <!--Notes Navigation Controler-->
+        <scene sceneID="54T-A8-W2Q">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NOb-Yl-l7X" customClass="NotesNavigationControler" customModule="Thoughtless" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Or2-Hb-zEJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="okf-2B-G3g" kind="relationship" relationship="rootViewController" id="7GE-mA-7lP"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Otd-E9-WPp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2217" y="-170"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="crw-Lv-jcW"/>
+        <segue reference="V5E-qJ-1hT"/>
     </inferredMetricsTieBreakers>
 </document>
