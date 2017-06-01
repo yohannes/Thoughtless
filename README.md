@@ -16,6 +16,24 @@
 ![EditNotesTableViewController](http://i.imgur.com/2btswPw.png)
 ![EmptyNotesViewController](http://i.imgur.com/m4zvZyP.png)
 
+### Description
+
+Perhaps you are often in a situation where you want to jot down a thought that crosses your mind as quickly as you can so that 
+
+1. You don't have to keep trying to remember it. 
+2. You can move on to anticipate the next thought. 
+
+In those cases, Thoughtless, as its name implies, can help you store your thoughts quickly if you have a busy mind.
+
+#### Features:
+
+- Immediate text entry mode every time you launch the app for a quick dump of thought.  
+- Text formatting via Markdown. 
+- Markdown's characters access on keyboard.  
+- Search your thoughts. 
+
+ps: Make sure your device has iCloud pre-enabled.
+
 ### Installation Instructions
 
 1. Install [Xcode 8](https://developer.apple.com/xcode/)
