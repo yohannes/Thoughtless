@@ -27,8 +27,18 @@
  */
 
 import UIKit
+import QuartzCore
 
 class AboutViewController: UIViewController {
+    
+    // MARK: - IBOutlet Properties
+    
+    @IBOutlet weak var profilePicture: UIImageView!
+    @IBOutlet weak var personalNoteLabel: UILabel!
+    @IBOutlet weak var thirdPartyCreditsLabel: UILabel!
+    @IBOutlet weak var copyrightLabel: UILabel!
+    
+    // MARK: - IBAction Methods
     
     @IBAction func doneButtonDidTouch(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
@@ -38,7 +48,23 @@ class AboutViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.view.backgroundColor = ColorThemeHelper.reederGray()
+        
+        self.profilePicture.image = UIImage(named: "profilePicture")
+        self.profilePicture.layer.cornerRadius = CGFloat(20)
+        self.profilePicture.layer.borderColor = ColorThemeHelper.reederCream().cgColor
+        self.profilePicture.layer.borderWidth = CGFloat(2)
+        self.profilePicture.clipsToBounds = true
+        
+        self.personalNoteLabel.textColor = ColorThemeHelper.reederCream()
+        self.personalNoteLabel.text = "Crafted with countless hair-pulling & head-banging in Jakarta.\n---\nHuge love to my fiancée; Karina & big 4 to my Milestone L37 buddies; Adrian, Alan, Azi, Daniel, Douglas, Harvey, Ivan, May Leng, Rex, Roland, Shiyun, Vincent, Wei Lik, Yasha, & Zoey.\n---"
+        
+        self.thirdPartyCreditsLabel.textColor = ColorThemeHelper.reederCream()
+        self.thirdPartyCreditsLabel.text = "Credits to these awesome libraries & icon:\nCFAlertViewController by Crowdfire.\nHidingNavigationBar by Tristan Himmelman.\nIQKeyboardManager by Mohd Iftekhar Qurashi.\nSwiftHEXColors by Thi.\nThought Bubble icon by Freepik.\n---"
+        
+        self.copyrightLabel.textColor = ColorThemeHelper.reederCream()
+        self.copyrightLabel.text = "Copyright © 2017 Yohannes Wijaya. All rights reserved."
     }
 
 }
