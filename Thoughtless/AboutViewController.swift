@@ -65,6 +65,16 @@ class AboutViewController: UIViewController {
         
         self.copyrightLabel.textColor = ColorThemeHelper.reederCream()
         self.copyrightLabel.text = "Copyright © 2017 Yohannes Wijaya. All respective rights reserved."
+        
+        let swipeDownGestureToDismissSelf = UISwipeGestureRecognizer(target: self, action: #selector(AboutViewController.dismissSelf))
+        swipeDownGestureToDismissSelf.direction = .down
+        self.view.addGestureRecognizer(swipeDownGestureToDismissSelf)
+    }
+    
+    // MARK: - Helper Methods
+    
+    func dismissSelf() {
+        self.dismiss(animated: true, completion: nil)
     }
 
 }
