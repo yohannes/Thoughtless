@@ -69,6 +69,10 @@ class AboutViewController: UIViewController {
         let swipeDownGestureToDismissSelf = UISwipeGestureRecognizer(target: self, action: #selector(AboutViewController.dismissSelf))
         swipeDownGestureToDismissSelf.direction = .down
         self.view.addGestureRecognizer(swipeDownGestureToDismissSelf)
+        
+        let swipeRightFromLeftGestureToDismissSelf = UISwipeGestureRecognizer(target: self, action: #selector(AboutViewController.dismissSelf))
+        swipeRightFromLeftGestureToDismissSelf.direction = .right
+        self.view.addGestureRecognizer(swipeRightFromLeftGestureToDismissSelf)
     }
     
     // MARK: - Helper Methods

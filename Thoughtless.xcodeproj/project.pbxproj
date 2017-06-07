@@ -121,18 +121,33 @@
 		651875151D53000F006C8D82 /* Thoughtless */ = {
 			isa = PBXGroup;
 			children = (
-				65B7DA7F1E3B081C006A1A87 /* Thoughtless.entitlements */,
 				651875161D53000F006C8D82 /* AppDelegate.swift */,
-				6518751A1D53000F006C8D82 /* Main.storyboard */,
-				651584961E6EB59300DA58F9 /* NotesNavigationControler.swift */,
-				656D3D2D1EDFD2D90023D9DD /* Helper */,
 				656D3D2E1EDFD2E70023D9DD /* Model */,
+				65267D5D1EE166720044BC31 /* View */,
 				656D3D2F1EDFD2F00023D9DD /* Controller */,
-				6518751D1D53000F006C8D82 /* Assets.xcassets */,
-				6518751F1D53000F006C8D82 /* LaunchScreen.storyboard */,
-				651875221D53000F006C8D82 /* Info.plist */,
+				656D3D2D1EDFD2D90023D9DD /* Helper */,
+				65267D5E1EE1BDD50044BC31 /* Supporting Files */,
 			);
 			path = Thoughtless;
+			sourceTree = "<group>";
+		};
+		65267D5D1EE166720044BC31 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6518751A1D53000F006C8D82 /* Main.storyboard */,
+				6518751F1D53000F006C8D82 /* LaunchScreen.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		65267D5E1EE1BDD50044BC31 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				65B7DA7F1E3B081C006A1A87 /* Thoughtless.entitlements */,
+				6518751D1D53000F006C8D82 /* Assets.xcassets */,
+				651875221D53000F006C8D82 /* Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		653519071D6BF72700294A64 /* NotesTests */ = {
@@ -168,6 +183,7 @@
 			children = (
 				656D3D2A1EDFD2620023D9DD /* AboutViewController.swift */,
 				650E47F61E87B9C7009585CA /* MarkdownNotesWebViewController.swift */,
+				651584961E6EB59300DA58F9 /* NotesNavigationControler.swift */,
 				6525A57A1E9F36F0005A9BCE /* NoteSafariViewController.swift */,
 				65610CC71D54667A003E0882 /* NotesTableViewCell.swift */,
 				651875281D53A354006C8D82 /* NotesTableViewController.swift */,
