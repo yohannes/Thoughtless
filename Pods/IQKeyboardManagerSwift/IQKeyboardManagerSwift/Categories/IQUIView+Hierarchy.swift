@@ -24,8 +24,6 @@
 
 import UIKit
 
-private var kIQIsAskingCanBecomeFirstResponder = "kIQIsAskingCanBecomeFirstResponder"
-
 /**
 UIView hierarchy category.
 */
@@ -38,13 +36,10 @@ public extension UIView {
     /**
     Returns YES if IQKeyboardManager asking for `canBecomeFirstResponder. Useful when doing custom work in `textFieldShouldBeginEditing:` delegate.
     */
+    @available(*,deprecated, message: "isAskingCanBecomeFirstResponder property was come to existence as a workaround to handle `textFieldShouldBeginEditing:` multiple call issue, but we removed `canBecomeFirstResponder` method call from library, now this property make no sense and will be removed in future releases. From now this property will always return false because of not calling `canBecomeFirstResponder` method. Please update your code/logic in `textFieldShouldBeginEditing:` method.")
     public var isAskingCanBecomeFirstResponder: Bool {
         
-        if let aValue = objc_getAssociatedObject(self, &kIQIsAskingCanBecomeFirstResponder) as? Bool {
-            return aValue
-        } else {
-            return false
-        }
+        return false
     }
 
     ///----------------------
@@ -114,26 +109,28 @@ public extension UIView {
     */
     public func superviewOfClassType(_ classType:UIView.Type)->UIView? {
 
-        struct InternalClass {
-            
-            static var UITableViewCellScrollViewClass: UIScrollView.Type?   =   NSClassFromString("UITableViewCellScrollView") as? UIScrollView.Type //UITableViewCell
-            static var UITableViewWrapperViewClass: UIView.Type?      =   NSClassFromString("UITableViewWrapperView") as? UIView.Type //UITableViewCell
-            static var UIQueuingScrollViewClass: UIScrollView.Type?         =   NSClassFromString("_UIQueuingScrollView") as? UIScrollView.Type //UIPageViewController
-        }
-
         var superView = superview
         
         while let unwrappedSuperView = superView {
             
-            if unwrappedSuperView.isKind(of: classType) &&
-                ((InternalClass.UITableViewCellScrollViewClass == nil || unwrappedSuperView.isKind(of: InternalClass.UITableViewCellScrollViewClass!) == false) &&
-                    (InternalClass.UITableViewWrapperViewClass == nil || unwrappedSuperView.isKind(of: InternalClass.UITableViewWrapperViewClass!) == false) &&
-                    (InternalClass.UIQueuingScrollViewClass == nil || unwrappedSuperView.isKind(of: InternalClass.UIQueuingScrollViewClass!) == false)) {
-                        return superView
-            } else {
+            if unwrappedSuperView.isKind(of: classType) {
                 
-                superView = unwrappedSuperView.superview
+                //If it's UIScrollView, then validating for special cases
+                if unwrappedSuperView.isKind(of: UIScrollView.self) {
+                    
+                    let classNameString = NSStringFromClass(type(of:unwrappedSuperView.self))
+
+                    //UITableViewCellScrollView, UITableViewWrapperView, _UIQueuingScrollView
+                    if ((classNameString.hasPrefix("UITableView") && (classNameString.hasSuffix("CellScrollView") || classNameString.hasSuffix("WrapperView"))) || classNameString.hasPrefix("_") == true) == false {
+                        return superView;
+                    }
+                }
+                else {
+                    return superView;
+                }
             }
+            
+            superView = unwrappedSuperView.superview
         }
         
         return nil
@@ -205,20 +202,18 @@ public extension UIView {
     
     fileprivate func _IQcanBecomeFirstResponder() -> Bool {
         
-        objc_setAssociatedObject(self, &kIQIsAskingCanBecomeFirstResponder, true, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        var _IQcanBecomeFirstResponder = false
         
-        var _IQcanBecomeFirstResponder = (canBecomeFirstResponder == true && isUserInteractionEnabled == true && isHidden == false && alpha != 0.0 && isAlertViewTextField() == false && isSearchBarTextField() == false) as Bool
-
-        if _IQcanBecomeFirstResponder == true {
-            //  Setting toolbar to keyboard.
-            if let textField = self as? UITextField {
-                _IQcanBecomeFirstResponder = textField.isEnabled
-            } else if let textView = self as? UITextView {
-                _IQcanBecomeFirstResponder = textView.isEditable
-            }
+        //  Setting toolbar to keyboard.
+        if let textField = self as? UITextField {
+            _IQcanBecomeFirstResponder = textField.isEnabled
+        } else if let textView = self as? UITextView {
+            _IQcanBecomeFirstResponder = textView.isEditable
         }
-
-        objc_setAssociatedObject(self, &kIQIsAskingCanBecomeFirstResponder, false, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        
+        if _IQcanBecomeFirstResponder == true {
+            _IQcanBecomeFirstResponder = (isUserInteractionEnabled == true && isHidden == false && alpha != 0.0 && isAlertViewTextField() == false && isSearchBarTextField() == false) as Bool
+        }
 
         return _IQcanBecomeFirstResponder
     }
@@ -232,12 +227,23 @@ public extension UIView {
     */
     public func isSearchBarTextField()-> Bool {
         
-        struct InternalClass {
+        var searchBar : UIResponder? = self.next
+        
+        var isSearchBarTextField = false
+        
+        while searchBar != nil && isSearchBarTextField == false {
             
-            static var UISearchBarTextFieldClass: UITextField.Type?        =   NSClassFromString("UISearchBarTextField") as? UITextField.Type//UISearchBar
+            if searchBar!.isKind(of: UISearchBar.self) {
+                isSearchBarTextField = true
+                break
+            } else if searchBar is UIViewController {
+                break
+            }
+            
+            searchBar = searchBar?.next
         }
-
-        return  (InternalClass.UISearchBarTextFieldClass != nil && isKind(of: InternalClass.UISearchBarTextFieldClass!)) || self is UISearchBar
+        
+        return isSearchBarTextField
     }
     
     /**
@@ -245,14 +251,21 @@ public extension UIView {
     */
     public func isAlertViewTextField()->Bool {
         
-        struct InternalClass {
+        var alertViewController : UIResponder? = self.viewController()
+        
+        var isAlertViewTextField = false
+        
+        while alertViewController != nil && isAlertViewTextField == false {
             
-            static var UIAlertSheetTextFieldClass: UITextField.Type?       =   NSClassFromString("UIAlertSheetTextField") as? UITextField.Type //UIAlertView
-            static var UIAlertSheetTextFieldClass_iOS8: UITextField.Type?  =   NSClassFromString("_UIAlertControllerTextField") as? UITextField.Type //UIAlertView
+            if alertViewController!.isKind(of: UIAlertController.self) {
+                isAlertViewTextField = true
+                break
+            }
+            
+            alertViewController = alertViewController?.next
         }
         
-        return (InternalClass.UIAlertSheetTextFieldClass != nil && isKind(of: InternalClass.UIAlertSheetTextFieldClass!)) ||
-            (InternalClass.UIAlertSheetTextFieldClass_iOS8 != nil && isKind(of: InternalClass.UIAlertSheetTextFieldClass_iOS8!))
+        return isAlertViewTextField
     }
     
 
