@@ -381,6 +381,11 @@ class NotesTableViewController: UITableViewController {
 
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: ColorThemeHelper.reederCream()]
         
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "",
+                                                                style: .plain,
+                                                                target: nil,
+                                                                action: nil)
+        
         self.tableView.separatorColor = ColorThemeHelper.reederCream(alpha: 0.05)
         self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
         self.tableView.backgroundView = UIView()

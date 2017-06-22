@@ -88,15 +88,15 @@ class NotesViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var previewButton: UIBarButtonItem!
-    @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var cancelBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak var previewBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak var saveBarButtonItem: UIBarButtonItem!
     
     @IBOutlet weak var toolbar: UIToolbar!
     
     // MARK: - IBAction Methods
     
-    @IBAction func cancelButtonDidTouch(_ sender: UIButton) {
+    @IBAction func cancelBarButtonItemDidTouch(_ sender: UIBarButtonItem) {
         self.textView.resignFirstResponder()
         
         // Check the type of an object #1. More: http://stackoverflow.com/a/25345480/2229062
@@ -150,7 +150,6 @@ class NotesViewController: UIViewController {
     
     @IBAction func swipeRightFromLeftGestureToCancelOrSave(_ sender: UIGestureRecognizer) {
         self.textView.endEditing(true)
-        
         if self.doesTextViewNeedToBeSaved == true {
             if self.presentedViewController == nil {
                 self.presentShouldSaveAlertController()
@@ -158,7 +157,7 @@ class NotesViewController: UIViewController {
         }
         else {
             self.doesTextViewNeedToBeSaved = false
-            self.cancelButtonDidTouch(self.cancelButton)
+            self.cancelBarButtonItemDidTouch(self.cancelBarButtonItem)
         }
     }
     
@@ -169,7 +168,7 @@ class NotesViewController: UIViewController {
     // MARK: - UIViewController Methods
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let validButtonItem = sender as? UIButton, validButtonItem === self.saveButton {
+        if let validButtonItem = sender as? UIBarButtonItem, validButtonItem === self.saveBarButtonItem {
             let entry = self.textView.text ?? ""
             self.note = Note(entry: entry, dateOfCreation: self.getCurrentDateAndTime())
             self.textView.endEditing(true)
@@ -219,10 +218,8 @@ class NotesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.isToolbarHidden = true
-        
         if self.presentingViewController is UINavigationController {
-            self.previewButton.isEnabled = false
+            self.previewBarButtonItem.isEnabled = false
         }
         
         self.view.backgroundColor = ColorThemeHelper.reederGray()
@@ -236,6 +233,8 @@ class NotesViewController: UIViewController {
         self.doesTextViewNeedToBeSaved = false
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: ColorThemeHelper.reederCream()]
+        
+        self.navigationController?.isToolbarHidden = true
         
         self.hidingNavigationBarManager = HidingNavigationBarManager(viewController: self, scrollView: self.textView)
         self.hidingNavigationBarManager?.manageBottomBar(self.toolbar)
@@ -253,7 +252,7 @@ class NotesViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+        print("viewwilldisappear")
         self.hidingNavigationBarManager?.viewWillDisappear(animated)
     }
     
@@ -294,7 +293,7 @@ class NotesViewController: UIViewController {
                                                            textColor: ColorThemeHelper.reederCream()) { [weak self] (_) in
                                                             guard let weakSelf = self else { return }
                                                             weakSelf.doesTextViewNeedToBeSaved = false
-                                                            weakSelf.cancelButtonDidTouch(weakSelf.cancelButton)
+                                                            weakSelf.cancelBarButtonItemDidTouch(weakSelf.cancelBarButtonItem)
         }
         let saveAlertViewAction = CFAlertAction.action(title: NSLocalizedString("SAVE", comment: ""),
                                                        style: .Default,
@@ -348,7 +347,7 @@ class NotesViewController: UIViewController {
     fileprivate func updateWordsCount() {
         let trimmedString = self.textView.text.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression, range: nil).trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .whitespacesAndNewlines)
         if trimmedString.count == 1 {
-            self.navigationItem.title = trimmedString.first!.characters.count > 1 ? "Word Count: \(trimmedString.count)" : ""
+            self.navigationItem.title = trimmedString.first!.characters.count > 1 ? "Word Count: \(trimmedString.count)" : "What's your thought?"
         }
         else {
             self.navigationItem.title = "Word Count: \(trimmedString.count)"
@@ -360,7 +359,6 @@ class NotesViewController: UIViewController {
 
 extension NotesViewController {
     enum NotesViewControllerSegue: String {
-        case showSegueToMarkdownNotesViewController
         case showSegueToMarkdownNotesWebViewController
         case unwindToNotesTableViewControllerFromNotesViewController
     }

@@ -75,7 +75,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="9Kv-hq-KlY" kind="presentation" identifier="segueToNotesViewControllerFromAddButton" id="5qN-hU-PTh"/>
+                        <segue destination="9Kv-hq-KlY" kind="presentation" identifier="segueToNotesViewControllerFromAddButton" id="XFV-Nj-O7y"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HVa-14-kR3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -183,26 +183,28 @@
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem style="plain" id="gru-JX-oGh">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Muy-2X-Reb">
-                                            <rect key="frame" x="16" y="11" width="22" height="22"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" image="icons8-Cancel-22"/>
-                                            <connections>
-                                                <action selector="cancelButtonDidTouch:" destination="WhK-6A-3pp" eventType="touchUpInside" id="zFE-8U-2P6"/>
-                                            </connections>
-                                        </button>
+                                    <barButtonItem image="icons8-Cancel-22" id="q6A-Zy-E5Q">
+                                        <connections>
+                                            <action selector="cancelBarButtonItemDidTouch:" destination="WhK-6A-3pp" id="nSP-6z-Wen"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="QGt-aX-7i5"/>
+                                    <barButtonItem image="icons8-Markdown-22" id="cCO-Kh-0E8">
+                                        <connections>
+                                            <action selector="markdownUserGuideButtonDidTouch:" destination="WhK-6A-3pp" id="fZm-2H-1kG"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="nzC-4S-omO"/>
+                                    <barButtonItem image="icons8-Preview-22" id="AHP-8b-Bl6">
+                                        <connections>
+                                            <action selector="previewMarkdownButtonDidTouch:" destination="WhK-6A-3pp" id="lI7-wX-JGI"/>
+                                        </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="yD8-sY-S1J"/>
-                                    <barButtonItem style="plain" id="FWy-lz-iu7">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wFX-HH-Hxd">
-                                            <rect key="frame" x="337" y="11" width="22" height="22"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" image="icons8-Save-22"/>
-                                            <connections>
-                                                <segue destination="X5L-cV-xLb" kind="unwind" unwindAction="unwindToNotesTableViewControllerWithSender:" id="Va8-5Q-tNS"/>
-                                            </connections>
-                                        </button>
+                                    <barButtonItem image="icons8-Save-22" id="Xzt-4h-0QB">
+                                        <connections>
+                                            <segue destination="X5L-cV-xLb" kind="unwind" unwindAction="unwindToNotesTableViewControllerWithSender:" id="Zq3-G3-g24"/>
+                                        </connections>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
@@ -215,22 +217,11 @@
                             <constraint firstAttribute="trailing" secondItem="35N-cw-Li1" secondAttribute="trailing" id="yWL-4Q-sWJ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="ZeZ-GY-Msr">
-                        <barButtonItem key="leftBarButtonItem" image="icons8-Markdown-22" id="2IJ-D7-niU" userLabel="Markdown">
-                            <connections>
-                                <action selector="markdownUserGuideButtonDidTouch:" destination="WhK-6A-3pp" id="znO-z1-XMq"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="icons8-Preview-22" id="DDE-H7-ADX">
-                            <connections>
-                                <action selector="previewMarkdownButtonDidTouch:" destination="WhK-6A-3pp" id="7j3-Xt-2ba"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="ZeZ-GY-Msr"/>
                     <connections>
-                        <outlet property="cancelButton" destination="Muy-2X-Reb" id="Ts9-mh-GTz"/>
-                        <outlet property="previewButton" destination="DDE-H7-ADX" id="wXP-ez-Xt0"/>
-                        <outlet property="saveButton" destination="wFX-HH-Hxd" id="2dY-La-ohY"/>
+                        <outlet property="cancelBarButtonItem" destination="q6A-Zy-E5Q" id="xDI-j4-YTF"/>
+                        <outlet property="previewBarButtonItem" destination="AHP-8b-Bl6" id="rUu-xl-phJ"/>
+                        <outlet property="saveBarButtonItem" destination="Xzt-4h-0QB" id="Zug-Mk-vD4"/>
                         <outlet property="textView" destination="35N-cw-Li1" id="WS3-bq-2hA"/>
                         <outlet property="toolbar" destination="gUa-t2-oWD" id="q6B-Im-fen"/>
                         <segue destination="X5L-cV-xLb" kind="unwind" identifier="unwindToNotesTableViewControllerFromNotesViewController" unwindAction="unwindToNotesTableViewControllerWithSender:" id="Axm-ms-hAK"/>
@@ -263,7 +254,7 @@
                 <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="FNg-Kv-s1j">
                     <rectEdge key="edges" left="YES"/>
                     <connections>
-                        <action selector="swipeRightFromLeftGestureToCancelOrSave:" destination="WhK-6A-3pp" id="THT-QM-9zm"/>
+                        <action selector="swipeRightFromLeftGestureToCancelOrSave:" destination="WhK-6A-3pp" id="91L-4n-laM"/>
                     </connections>
                 </screenEdgePanGestureRecognizer>
             </objects>
