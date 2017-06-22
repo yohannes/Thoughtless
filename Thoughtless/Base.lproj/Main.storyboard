@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="YYd-s9-v4p">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="YYd-s9-v4p">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -190,9 +190,9 @@
                                             <rect key="frame" x="16" y="7" width="85" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <state key="normal" title="Markdown"/>
+                                            <state key="normal" title="Cancel"/>
                                             <connections>
-                                                <action selector="markdownUserGuideButtonDidTouch:" destination="WhK-6A-3pp" eventType="touchUpInside" id="PbW-gW-5TY"/>
+                                                <action selector="cancelButtonDidTouch:" destination="WhK-6A-3pp" eventType="touchUpInside" id="zFE-8U-2P6"/>
                                             </connections>
                                         </button>
                                     </barButtonItem>
@@ -202,9 +202,9 @@
                                             <rect key="frame" x="294" y="7" width="65" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <state key="normal" title="Preview"/>
+                                            <state key="normal" title="Save"/>
                                             <connections>
-                                                <action selector="previewMarkdownButtonDidTouch:" destination="WhK-6A-3pp" eventType="touchUpInside" id="JUe-83-jDT"/>
+                                                <segue destination="X5L-cV-xLb" kind="unwind" unwindAction="unwindToNotesTableViewControllerWithSender:" id="Va8-5Q-tNS"/>
                                             </connections>
                                         </button>
                                     </barButtonItem>
@@ -220,20 +220,21 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ZeZ-GY-Msr">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="2IJ-D7-niU">
+                        <barButtonItem key="leftBarButtonItem" title="Markdown" id="2IJ-D7-niU" userLabel="Markdown">
                             <connections>
-                                <action selector="cancelButtonDidTouchWithSender:" destination="WhK-6A-3pp" id="cg1-41-nds"/>
+                                <action selector="markdownUserGuideButtonDidTouch:" destination="WhK-6A-3pp" id="znO-z1-XMq"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="DDE-H7-ADX">
+                        <barButtonItem key="rightBarButtonItem" title="Preview" id="DDE-H7-ADX">
                             <connections>
-                                <segue destination="X5L-cV-xLb" kind="unwind" identifier="unwindToNotesTableViewControllerFromSaveBarButtonItem" unwindAction="unwindToNotesTableViewControllerWithSender:" id="g9G-Tr-ZsK"/>
+                                <action selector="previewMarkdownButtonDidTouch:" destination="WhK-6A-3pp" id="7j3-Xt-2ba"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="cancelButton" destination="2IJ-D7-niU" id="Y4s-OY-Mz7"/>
-                        <outlet property="saveButton" destination="DDE-H7-ADX" id="GNZ-kP-i2R"/>
+                        <outlet property="cancelButton" destination="Muy-2X-Reb" id="Ts9-mh-GTz"/>
+                        <outlet property="previewButton" destination="DDE-H7-ADX" id="wXP-ez-Xt0"/>
+                        <outlet property="saveButton" destination="wFX-HH-Hxd" id="2dY-La-ohY"/>
                         <outlet property="textView" destination="35N-cw-Li1" id="WS3-bq-2hA"/>
                         <outlet property="toolbar" destination="gUa-t2-oWD" id="q6B-Im-fen"/>
                         <segue destination="X5L-cV-xLb" kind="unwind" identifier="unwindToNotesTableViewControllerFromNotesViewController" unwindAction="unwindToNotesTableViewControllerWithSender:" id="Axm-ms-hAK"/>

@@ -88,14 +88,15 @@ class NotesViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var saveButton: UIBarButtonItem!
-    @IBOutlet weak var cancelButton: UIBarButtonItem!
+    @IBOutlet weak var previewButton: UIBarButtonItem!
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     @IBOutlet weak var toolbar: UIToolbar!
     
     // MARK: - IBAction Methods
     
-    @IBAction func cancelButtonDidTouch(sender: UIBarButtonItem) {
+    @IBAction func cancelButtonDidTouch(_ sender: UIButton) {
         self.textView.resignFirstResponder()
         
         // Check the type of an object #1. More: http://stackoverflow.com/a/25345480/2229062
@@ -124,7 +125,7 @@ class NotesViewController: UIViewController {
         }
     }
     
-    @IBAction func markdownUserGuideButtonDidTouch(_ sender: UIButton) {
+    @IBAction func markdownUserGuideButtonDidTouch(_ sender: UIBarButtonItem) {
         guard let validURL = URL(string: "http://commonmark.org/help/") else { return }
         let noteSafariViewController = NoteSafariViewController(url: validURL)
         noteSafariViewController.modalPresentationStyle = .overFullScreen
@@ -135,7 +136,7 @@ class NotesViewController: UIViewController {
         }
     }
     
-    @IBAction func previewMarkdownButtonDidTouch(_ sender: UIButton) {
+    @IBAction func previewMarkdownButtonDidTouch(_ sender: UIBarButtonItem) {
         guard self.note != nil else { return }
         self.performSegue(withIdentifier: NotesViewControllerSegue.showSegueToMarkdownNotesWebViewController.rawValue, sender: self)
     }
@@ -157,7 +158,7 @@ class NotesViewController: UIViewController {
         }
         else {
             self.doesTextViewNeedToBeSaved = false
-            self.cancelButtonDidTouch(sender: self.cancelButton)
+            self.cancelButtonDidTouch(self.cancelButton)
         }
     }
     
@@ -168,7 +169,7 @@ class NotesViewController: UIViewController {
     // MARK: - UIViewController Methods
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let validBarButtonItem = sender as? UIBarButtonItem, validBarButtonItem === self.saveButton {
+        if let validButtonItem = sender as? UIButton, validButtonItem === self.saveButton {
             let entry = self.textView.text ?? ""
             self.note = Note(entry: entry, dateOfCreation: self.getCurrentDateAndTime())
             self.textView.endEditing(true)
@@ -217,6 +218,10 @@ class NotesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if self.presentingViewController is UINavigationController {
+            self.previewButton.isEnabled = false
+        }
         
         self.view.backgroundColor = ColorThemeHelper.reederGray()
         
@@ -287,7 +292,7 @@ class NotesViewController: UIViewController {
                                                            textColor: ColorThemeHelper.reederCream()) { [weak self] (_) in
                                                             guard let weakSelf = self else { return }
                                                             weakSelf.doesTextViewNeedToBeSaved = false
-                                                            weakSelf.cancelButtonDidTouch(sender: weakSelf.cancelButton)
+                                                            weakSelf.cancelButtonDidTouch(weakSelf.cancelButton)
         }
         let saveAlertViewAction = CFAlertAction.action(title: NSLocalizedString("SAVE", comment: ""),
                                                        style: .Default,
