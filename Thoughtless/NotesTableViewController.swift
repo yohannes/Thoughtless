@@ -110,6 +110,13 @@ class NotesTableViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
+    fileprivate func configureAddBarButtonItemOnToolbar() {
+        let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(NotesTableViewController.performSegueFromAddButtonToNotesViewController))
+        let flexibleSpaceBarButtonSystemItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        self.setToolbarItems([flexibleSpaceBarButtonSystemItem,addBarButtonItem, flexibleSpaceBarButtonSystemItem], animated: false)
+        self.navigationController?.isToolbarHidden = false
+    }
+    
     fileprivate func delayExecutionByMilliseconds(_ delay: Int, for anonFunc: @escaping () -> Void) {
         let when = DispatchTime.now() + .milliseconds(delay)
         DispatchQueue.main.asyncAfter(deadline: when, execute: anonFunc)
@@ -270,6 +277,10 @@ class NotesTableViewController: UITableViewController {
         metadataQuery.enableUpdates()
     }
     
+    func performSegueFromAddButtonToNotesViewController() {
+        self.performSegue(withIdentifier: NotesTableViewControllerSegue.segueToNotesViewControllerFromAddButton.rawValue, sender: self)
+    }
+    
     func refreshNoteListing() {
         self.delayExecutionByMilliseconds(375) {
             self.loadNotes()
@@ -395,7 +406,10 @@ class NotesTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.configureAddBarButtonItemOnToolbar()
+        
         self.searchController.searchBar.resignFirstResponder()
+        
         self.tableView.setContentOffset(CGPoint(x: 0, y: (self.tableView.tableHeaderView?.frame.size.height)!),
                                         animated: true)
     }

@@ -219,6 +219,8 @@ class NotesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.isToolbarHidden = true
+        
         if self.presentingViewController is UINavigationController {
             self.previewButton.isEnabled = false
         }

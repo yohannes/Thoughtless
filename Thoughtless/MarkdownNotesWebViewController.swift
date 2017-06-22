@@ -64,6 +64,8 @@ class MarkdownNotesWebViewController: UIViewController {
         
         self.navigationItem.title = "Markdown"
         
+        self.navigationController?.isToolbarHidden = true
+        
         let stylingSourceCode = "document.body.style.background = \"#4B4A47\"; document.body.style.fontFamily = \"AvenirNext-Regular\"; document.body.style.fontSize = \"3.0rem\"; document.body.style.color = \"#E1E0D9\"; document.body.style.margin = \"8px\";  document.body.style.padding = \"8px\";"
         let userScript = WKUserScript(source: stylingSourceCode, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
         let userContentController = WKUserContentController()
