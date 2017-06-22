@@ -33,6 +33,8 @@ import CFAlertViewController
 class NotesTableViewController: UITableViewController {
     
     // MARK: - Stored Properties
+    
+    let addButtonAssetName = "icons8-Add-22"
 
     var noteDocuments = [NoteDocument]() {
         didSet {
@@ -111,7 +113,8 @@ class NotesTableViewController: UITableViewController {
     }
     
     fileprivate func configureAddBarButtonItemOnToolbar() {
-        let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(NotesTableViewController.performSegueFromAddButtonToNotesViewController))
+//        let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(NotesTableViewController.performSegueFromAddButtonToNotesViewController))
+        let addBarButtonItem = UIBarButtonItem(image: UIImage(named: self.addButtonAssetName), style: .plain, target: self, action: #selector(NotesTableViewController.performSegueFromAddButtonToNotesViewController))
         let flexibleSpaceBarButtonSystemItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         self.setToolbarItems([flexibleSpaceBarButtonSystemItem,addBarButtonItem, flexibleSpaceBarButtonSystemItem], animated: false)
         self.navigationController?.isToolbarHidden = false

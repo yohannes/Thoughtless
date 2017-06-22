@@ -68,7 +68,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="EDG-hU-hLA">
-                        <barButtonItem key="leftBarButtonItem" title="About" id="QXE-iq-ITh">
+                        <barButtonItem key="leftBarButtonItem" image="icons8-More-22" id="QXE-iq-ITh">
                             <connections>
                                 <segue destination="NOb-Yl-l7X" kind="presentation" identifier="segueToAboutViewController" id="m8q-3Z-36Z"/>
                             </connections>
@@ -136,7 +136,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pOp-vj-j9b">
-                        <barButtonItem key="leftBarButtonItem" title="Close" id="weB-6B-pgS">
+                        <barButtonItem key="leftBarButtonItem" image="icons8-Cancel-22" id="weB-6B-pgS">
                             <connections>
                                 <action selector="doneButtonDidTouch:" destination="okf-2B-G3g" id="MBf-6V-Ry8"/>
                             </connections>
@@ -184,11 +184,10 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem style="plain" id="gru-JX-oGh">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Muy-2X-Reb">
-                                            <rect key="frame" x="16" y="7" width="85" height="30"/>
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Muy-2X-Reb">
+                                            <rect key="frame" x="16" y="11" width="22" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <state key="normal" title="Cancel"/>
+                                            <state key="normal" image="icons8-Cancel-22"/>
                                             <connections>
                                                 <action selector="cancelButtonDidTouch:" destination="WhK-6A-3pp" eventType="touchUpInside" id="zFE-8U-2P6"/>
                                             </connections>
@@ -196,11 +195,10 @@
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="yD8-sY-S1J"/>
                                     <barButtonItem style="plain" id="FWy-lz-iu7">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wFX-HH-Hxd">
-                                            <rect key="frame" x="294" y="7" width="65" height="30"/>
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wFX-HH-Hxd">
+                                            <rect key="frame" x="337" y="11" width="22" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <state key="normal" title="Save"/>
+                                            <state key="normal" image="icons8-Save-22"/>
                                             <connections>
                                                 <segue destination="X5L-cV-xLb" kind="unwind" unwindAction="unwindToNotesTableViewControllerWithSender:" id="Va8-5Q-tNS"/>
                                             </connections>
@@ -218,12 +216,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ZeZ-GY-Msr">
-                        <barButtonItem key="leftBarButtonItem" title="Markdown" id="2IJ-D7-niU" userLabel="Markdown">
+                        <barButtonItem key="leftBarButtonItem" image="icons8-Markdown-22" id="2IJ-D7-niU" userLabel="Markdown">
                             <connections>
                                 <action selector="markdownUserGuideButtonDidTouch:" destination="WhK-6A-3pp" id="znO-z1-XMq"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Preview" id="DDE-H7-ADX">
+                        <barButtonItem key="rightBarButtonItem" image="icons8-Preview-22" id="DDE-H7-ADX">
                             <connections>
                                 <action selector="previewMarkdownButtonDidTouch:" destination="WhK-6A-3pp" id="7j3-Xt-2ba"/>
                             </connections>
@@ -347,6 +345,13 @@
             <point key="canvasLocation" x="2217" y="-170"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icons8-Cancel-22" width="22" height="22"/>
+        <image name="icons8-Markdown-22" width="22" height="22"/>
+        <image name="icons8-More-22" width="22" height="22"/>
+        <image name="icons8-Preview-22" width="22" height="22"/>
+        <image name="icons8-Save-22" width="22" height="22"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="crw-Lv-jcW"/>
     </inferredMetricsTieBreakers>
