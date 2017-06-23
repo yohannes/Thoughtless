@@ -142,7 +142,7 @@ class NotesViewController: UIViewController {
     }
     
     @IBAction func swipeLeftFromRightGestureToShowMarkdown(_ sender: UIGestureRecognizer) {
-        guard self.note != nil && self.textView.isFirstResponder == false else { return }
+        guard self.note != nil && self.textView.isFirstResponder == false && self.previewBarButtonItem.isEnabled != false else { return }
         if sender.state == .ended {
             self.performSegue(withIdentifier: NotesViewControllerSegue.showSegueToMarkdownNotesWebViewController.rawValue, sender: self)
         }
@@ -386,5 +386,7 @@ extension NotesViewController: UITextViewDelegate {
         self.doesTextViewNeedToBeSaved = true
         
         self.updateWordsCount()
+        
+        self.previewBarButtonItem.isEnabled = false
     }
 }
