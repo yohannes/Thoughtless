@@ -34,7 +34,7 @@ class NotesTableViewController: UITableViewController {
     
     // MARK: - Stored Properties
     
-    let addButtonAssetName = "icons8-Add-22"
+    let addButtonAssetName = "icons8-Plus-22"
 
     var noteDocuments = [NoteDocument]() {
         didSet {
