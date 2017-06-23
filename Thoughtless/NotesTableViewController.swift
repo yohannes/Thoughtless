@@ -52,6 +52,8 @@ class NotesTableViewController: UITableViewController {
     
     let searchController = UISearchController(searchResultsController: nil)
     
+    var formerScrollingPosition: CGPoint = CGPoint(x: 0, y: 0)
+    
     // MARK: - IBAction Methods
     
     @IBAction func unwindToNotesTableViewController(sender: UIStoryboardSegue) {
@@ -417,14 +419,17 @@ class NotesTableViewController: UITableViewController {
         
         self.searchController.searchBar.resignFirstResponder()
         
-        self.tableView.setContentOffset(CGPoint(x: 0, y: (self.tableView.tableHeaderView?.frame.size.height)!),
-                                        animated: true)
+        // Scroll the 1st table view row to be just below the navigation bar when returning
+//        self.tableView.setContentOffset(CGPoint(x: 0, y: (self.tableView.tableHeaderView?.frame.size.height)!), animated: true)
+        self.tableView.setContentOffset(self.formerScrollingPosition, animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         self.searchController.isActive = false
+        
+        self.formerScrollingPosition = self.tableView.contentOffset
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
