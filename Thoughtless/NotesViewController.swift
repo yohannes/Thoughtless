@@ -66,7 +66,7 @@ class NotesViewController: UIViewController {
             case .rightBracket: return "]"
             case .grave: return "`"
             case .strikeThrough: return "~"
-            case .done: return "⌨"
+            case .done: return "🔽"
             case .moveRight: return "➡️️"
             }
         }
@@ -263,7 +263,7 @@ class NotesViewController: UIViewController {
         guard let validButtonTitle = sender.title else { return }
         if case "➡️️" = validButtonTitle { self.moveCursor(.right) }
         else if case "⬅️️" = validButtonTitle { self.moveCursor(.left) }
-        else if case "⌨" = validButtonTitle {
+        else if case "🔽" = validButtonTitle {
             self.hidingNavigationBarManager?.expand()
             self.textView.endEditing(true)
         }
@@ -348,7 +348,7 @@ class NotesViewController: UIViewController {
     fileprivate func updateWordsCount() {
         let trimmedString = self.textView.text.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression, range: nil).trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: .whitespacesAndNewlines)
         if trimmedString.count == 1 {
-            self.navigationItem.title = trimmedString.first!.characters.count > 1 ? "Word Count: \(trimmedString.count)" : "What's your thought?"
+            self.navigationItem.title = trimmedString.first!.characters.count > 1 ? "Word Count: \(trimmedString.count)" : "What do you have in mind?"
         }
         else {
             self.navigationItem.title = "Word Count: \(trimmedString.count)"
