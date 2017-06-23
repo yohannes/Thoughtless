@@ -233,8 +233,9 @@ class NotesViewController: UIViewController {
         self.doesTextViewNeedToBeSaved = false
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: ColorThemeHelper.reederCream()]
-        
         self.navigationController?.isToolbarHidden = true
+        
+        self.navigationItem.hidesBackButton = true
         
         self.hidingNavigationBarManager = HidingNavigationBarManager(viewController: self, scrollView: self.textView)
         self.hidingNavigationBarManager?.manageBottomBar(self.toolbar)
@@ -252,7 +253,7 @@ class NotesViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print("viewwilldisappear")
+
         self.hidingNavigationBarManager?.viewWillDisappear(animated)
     }
     

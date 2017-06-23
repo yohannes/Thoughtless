@@ -113,7 +113,6 @@ class NotesTableViewController: UITableViewController {
     }
     
     fileprivate func configureAddBarButtonItemOnToolbar() {
-//        let addBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(NotesTableViewController.performSegueFromAddButtonToNotesViewController))
         let addBarButtonItem = UIBarButtonItem(image: UIImage(named: self.addButtonAssetName), style: .plain, target: self, action: #selector(NotesTableViewController.performSegueFromAddButtonToNotesViewController))
         let flexibleSpaceBarButtonSystemItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         self.setToolbarItems([flexibleSpaceBarButtonSystemItem,addBarButtonItem, flexibleSpaceBarButtonSystemItem], animated: false)
