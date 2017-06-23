@@ -6,7 +6,7 @@
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/yoha/Notes/blob/master/LICENSE)
 [![Issues](https://img.shields.io/github/issues/yoha/Thoughtless.svg?style=flat)](https://github.com/yoha/Thoughtless/issues)
 
-### An iOS app that lets user quickly jot down thoughts with Markdown support.
+## An iOS app that lets user quickly jot down thoughts with Markdown support.
 
 ![NotesTableViewController](http://i.imgur.com/263faeN.png)
 ![NonEmptyNotesViewController](http://i.imgur.com/WP8NvB4.png)
@@ -16,7 +16,7 @@
 ![EditNotesTableViewController](http://i.imgur.com/2btswPw.png)
 ![EmptyNotesViewController](http://i.imgur.com/m4zvZyP.png)
 
-### Description
+## Description
 
 Perhaps you are often in a situation where you want to jot down a thought that crosses your mind as quickly as you can so that 
 
@@ -34,7 +34,7 @@ In those cases, Thoughtless, as its name implies, can help you store your though
 
 ps: Make sure your device has iCloud pre-enabled.
 
-### Installation Instructions
+## Installation Instructions
 
 1. Install [Xcode 8](https://developer.apple.com/xcode/)
 2. Download [Thoughtless source code](https://github.com/yoha/Thoughtless/releases/latest)
@@ -44,7 +44,7 @@ ps: Make sure your device has iCloud pre-enabled.
 6. Connect your iPhone or iPad and select it in Xcode's Product menu -> Destination
 7. Press CMD+R or Product -> Run to install Thoughtless
 
----
+## Credits
 
 3rd Party Libraries used in this app:
 - [CFAlertViewController](https://github.com/Codigami/CFAlertViewController) by [Crowdfire](https://github.com/Codigami)
@@ -52,5 +52,18 @@ ps: Make sure your device has iCloud pre-enabled.
 - [IQKeyboardManager](https://github.com/hackiftekhar/IQKeyboardManager) by [Mohd Iftekhar Qurashi](https://github.com/hackiftekhar)
 - [SwiftHEXColors](https://github.com/thii/SwiftHEXColors) by [Thi](https://github.com/thii)
 
-Icon used in this app:
+Icons used in this app:
 - [Thought Bubble](http://www.flaticon.com/free-icon/thought-bubble_65491) by [Freepik](http://www.flaticon.com/authors/freepik)
+- Icon pack by [Icons8](http://icons8.com)
+
+## License
+
+The MIT License (MIT)
+
+Copyright 2017 Yohannes Wijaya
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
