@@ -52,7 +52,8 @@ class NotesTableViewController: UITableViewController {
     
     let searchController = UISearchController(searchResultsController: nil)
     
-    var formerScrollingPosition: CGPoint = CGPoint(x: 0, y: 0)
+//    var formerScrollingPosition: CGPoint = CGPoint(x: 0, y: 0)
+    var correctScrollingPosition: CGPoint = CGPoint(x: 0, y: 0)
     
     // MARK: - IBAction Methods
     
@@ -73,6 +74,7 @@ class NotesTableViewController: UITableViewController {
                 weakSelf.save(validNote, at: newIndexPath)
             })
         }
+        self.correctScrollingPosition = CGPoint(x: 0, y: (self.tableView.tableHeaderView?.frame.size.height)!)
     }
     
     // MARK: - Helper Methods
@@ -421,7 +423,7 @@ class NotesTableViewController: UITableViewController {
         
         // Scroll the 1st table view row to be just below the navigation bar when returning
 //        self.tableView.setContentOffset(CGPoint(x: 0, y: (self.tableView.tableHeaderView?.frame.size.height)!), animated: true)
-        self.tableView.setContentOffset(self.formerScrollingPosition, animated: true)
+        self.tableView.setContentOffset(self.correctScrollingPosition, animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -429,7 +431,7 @@ class NotesTableViewController: UITableViewController {
         
         self.searchController.isActive = false
         
-        self.formerScrollingPosition = self.tableView.contentOffset
+        self.correctScrollingPosition = self.tableView.contentOffset
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
