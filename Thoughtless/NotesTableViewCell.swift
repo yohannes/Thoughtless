@@ -4,7 +4,7 @@
  * Thoughtless
  *
  * Created by Yohannes Wijaya on 8/5/16.
- * Copyright © 2016 Yohannes Wijaya. All rights reserved.
+ * Copyright © 2017 Yohannes Wijaya. All respective rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal

@@ -4,7 +4,7 @@
  * Thoughtless
  *
  * Created by Yohannes Wijaya on 3/4/17.
- * Copyright © 2017 Yohannes Wijaya. All rights reserved.
+ * Copyright © 2017 Yohannes Wijaya. All respective rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -61,7 +61,7 @@ class AboutViewController: UIViewController {
         self.personalNoteLabel.text = "Crafted with countless hair-pulling & head-banging in Jakarta.\n---\nForemost gratitude to God, huge love to my fiancée; Karina & big 4 to my Milestone L37 buddies; Adrian, Alan, Azi, Daniel, Douglas, Harvey, Ivan, May Leng, Rex, Roland, Shiyun, Vincent, Wei Lik, Yasha, & Zoey.\n---"
         
         self.thirdPartyCreditsLabel.textColor = ColorThemeHelper.reederCream()
-        self.thirdPartyCreditsLabel.text = "Credits to these awesome libraries & icon:\nCFAlertViewController by Crowdfire.\nHidingNavigationBar by Tristan Himmelman.\nIQKeyboardManager by Mohd Iftekhar Qurashi.\nSwiftHEXColors by Thi.\nApp icon by Freepik & In-app icons by Icons8.\n---"
+        self.thirdPartyCreditsLabel.text = "Credits to these awesome libraries & icons:\nCFAlertViewController by Crowdfire.\nHidingNavigationBar by Tristan Himmelman.\nIQKeyboardManager by Mohd Iftekhar Qurashi.\nSwiftHEXColors by Thi.\nApp icon by Freepik & In-app icons by Icons8.\n---"
         
         self.copyrightLabel.textColor = ColorThemeHelper.reederCream()
         self.copyrightLabel.text = "Copyright © 2017 Yohannes Wijaya. All respective rights reserved."

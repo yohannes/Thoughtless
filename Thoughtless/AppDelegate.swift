@@ -4,7 +4,7 @@
  * Thoughtless
  *
  * Created by Yohannes Wijaya on 8/4/16.
- * Copyright © 2016 Yohannes Wijaya. All rights reserved.
+ * Copyright © 2017 Yohannes Wijaya. All respective rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -108,14 +108,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                                     notesTableViewController.verifyiCloudAccount()
                                                                 }
                 })
-                let localChoiceAlertAction = UIAlertAction(title: NSLocalizedString("Store only in this device", comment: ""),
-                                                           style: .cancel,
-                                                           handler: { (_) in
-                                                                UserDefaults.standard.set(false, forKey: self.iCloudEnabledKey)
-                })
-                localChoiceAlertAction.isEnabled = false
+//                let localChoiceAlertAction = UIAlertAction(title: NSLocalizedString("Store only in this device", comment: ""),
+//                                                           style: .cancel,
+//                                                           handler: { (_) in
+//                                                                UserDefaults.standard.set(false, forKey: self.iCloudEnabledKey)
+//                })
+//                localChoiceAlertAction.isEnabled = false
                 storageChoiceAlertController.addAction(iCloudChoiceAlertAction)
-                storageChoiceAlertController.addAction(localChoiceAlertAction)
+//                storageChoiceAlertController.addAction(localChoiceAlertAction)
                 
                 topWindow.makeKeyAndVisible()
                 topWindow.rootViewController?.present(storageChoiceAlertController,
