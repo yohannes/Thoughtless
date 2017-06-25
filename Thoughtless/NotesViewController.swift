@@ -42,6 +42,9 @@ class NotesViewController: UIViewController {
     
     var hidingNavigationBarManager: HidingNavigationBarManager?
     
+    let dismissModallyIconName = "icons8-Cancel-22"
+    let popViewControllerIconName = "icons8-Return-22"
+    
     enum Cursor: String {
         case left, right
         
@@ -249,6 +252,8 @@ class NotesViewController: UIViewController {
         self.updateWordsCount()
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
+        self.toggleCancelBarButtonItemIcon()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -343,6 +348,13 @@ class NotesViewController: UIViewController {
     fileprivate func setupBarButtonItemOnKeyboardToolbarWith(title: String) -> UIBarButtonItem {
         let barButtonItem = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(NotesViewController.barButtonItemOnToolBarDidTouch(sender:)))
         return barButtonItem
+    }
+    
+    fileprivate func toggleCancelBarButtonItemIcon() {
+        let dismissModallyBarButtonItemIconImage = UIImage(named: self.dismissModallyIconName)
+        let popViewControllerBarButtonItemIconImage = UIImage(named: self.popViewControllerIconName)
+        
+        self.cancelBarButtonItem.image = self.presentingViewController is UINavigationController ? dismissModallyBarButtonItemIconImage : popViewControllerBarButtonItemIconImage
     }
     
     fileprivate func updateWordsCount() {

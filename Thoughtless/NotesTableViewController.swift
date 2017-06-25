@@ -52,7 +52,6 @@ class NotesTableViewController: UITableViewController {
     
     let searchController = UISearchController(searchResultsController: nil)
     
-//    var formerScrollingPosition: CGPoint = CGPoint(x: 0, y: 0)
     var correctScrollingPosition: CGPoint = CGPoint(x: 0, y: 0)
     
     // MARK: - IBAction Methods
