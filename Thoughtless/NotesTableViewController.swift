@@ -306,6 +306,18 @@ class NotesTableViewController: UITableViewController {
         }
     }
     
+    fileprivate func returnCorrectTableViewSCrollingPosition() {
+        // When UISearchController is visible, hide it upon return to UITableView
+        if self.tableView.contentOffset.y == 0 {
+            // Therefore, scroll the 1st table view row to be just below the navigation bar when returning.
+            self.tableView.setContentOffset(CGPoint(x: 0, y: (self.tableView.tableHeaderView?.frame.size.height)!), animated: true)
+        }
+        else {
+            // Return to the previous scrolling position
+            self.tableView.setContentOffset(self.correctScrollingPosition, animated: true)
+        }
+    }
+    
     fileprivate func save(_ note: Note, at indexPath: IndexPath) {
         guard let iCloudContainerURL = FileManager.default.url(forUbiquityContainerIdentifier: nil) else { return }
         let documentsDirectoryURL = iCloudContainerURL.appendingPathComponent("Documents")
@@ -420,9 +432,7 @@ class NotesTableViewController: UITableViewController {
         
         self.searchController.searchBar.resignFirstResponder()
         
-        // Scroll the 1st table view row to be just below the navigation bar when returning
-//        self.tableView.setContentOffset(CGPoint(x: 0, y: (self.tableView.tableHeaderView?.frame.size.height)!), animated: true)
-        self.tableView.setContentOffset(self.correctScrollingPosition, animated: true)
+        self.returnCorrectTableViewSCrollingPosition()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
